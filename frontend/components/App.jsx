@@ -1,18 +1,32 @@
 import React from 'react';
-import NavBarContainer from './greeting/nav_bar_container';
-import { Route, Redirect } from 'react-router';
-import LoginFormContainer from './greeting/login_form_container';
-import SignupFormContainer from './greeting/signup_form_container'
-import { AuthRoute } from '../util/route_util'
+import splashNavBarContainer from './nav_bar/splash_nav_bar_container';
+import { Switch, Route, Redirect } from 'react-router';
+import LoginPage from './session_form/login_page'
+import SignupFormContainer from './session_form/signup_form_container';
+import { AuthRoute, ProtectedRoute } from '../util/route_util';
+import GalleryIndexContainer from './gallery/gallery_index_container';
+
 const App = () => (
     <div>
-        <header>
-            <h1>Wet Wet Wetflix</h1>
-            <div className="navbar"><Route exact path="/" component={NavBarContainer} /></div>
-            
-        </header>
-        <AuthRoute exact path="/login" component={LoginFormContainer} />
+        <div className="splash_container">
+            <header >
+                <Route exact path="/"component={splashNavBarContainer} />
+            </header>
+            <h1 className="temp_title"><Route exact path="/" render={() => <div>Nom Nom Nomflix</div>} /></h1>
+            {/* <div>
+            <span><Link to="/signup">Sign Up</Link></span>
+        </div> */}
+            {/* need a container to render sign up on splash page*/}
+        </div>
+        <div className="login_page_mount">
+            <div className="login_page"><AuthRoute exact path="/login" component={LoginPage} /></div>
+        </div>
+
         <AuthRoute exact path="/signup" component={SignupFormContainer} />
+        
+        <div>
+            <ProtectedRoute exact path="/browse" component={GalleryIndexContainer} />
+        </div>
     </div>
 );
 

@@ -1,3 +1,37 @@
 .navbar {
-    
+    height: 40px;
+    width: 100%;
+    padding-top: 20px;
+    margin: 0px 0px 20px 0px;
 }
+
+.home_nav_bar_container {
+    height: 70px;
+}
+
+.splash_nav_bar_container {
+    height: 45px;
+    padding-top: 20px;
+}
+
+.splash_nav_bar_header {
+    position: relative;
+    margin: 0 45px;
+    height: 100%;
+}
+
+.splash_logo {
+    width: 108px;
+    padding-top: .5rem;
+    height: 32px;
+    font-size: 30px;
+    color: #e50914;
+    background-color: white;
+}
+
+.authLink {
+    margin-top: .5rem;
+    border-radius: 3px;
+    color: white;
+}
+

@@ -13,3 +13,27 @@
  *= require_tree .
  *= require_self
  */
+
+.splash_container {
+    width: 100%;
+    max-width: none;
+    overflow-x: hidden;
+    margin: 0 auto;
+}
+
+.temp_title {
+    font-size: 40px;
+    text-align: center;
+    
+}
+
+body {
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #f3f3f3;
+    color: #333;
+    font-size: 16px;
+    direction: ltr;
+}
+

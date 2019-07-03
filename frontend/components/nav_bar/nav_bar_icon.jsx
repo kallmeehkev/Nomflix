@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const NavBarItem = props => {
+const NavBarIcon = props => {
     if (props.currentUser) {
         return (
             <div>
@@ -19,4 +19,4 @@ const NavBarItem = props => {
     }
 }
 
-export default NavBarItem;
+export default NavBarIcon;
