@@ -101,6 +101,7 @@
     width: 100%;
     flex-direction: column;
     margin: 0;
+    opacity: .9;
 }
 
 .login_form_content {
@@ -109,6 +110,7 @@
     -moz-box-flex: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
+    opacity: 1;
 }
 
 .login_form_content h1 {
