@@ -14,8 +14,8 @@ const NavBar = props => {
             return (
                 <div className="splash_nav_bar_container">
                     <div className="splash_nav_bar_header">
-                        <span className="splash_logo">NOMFLIX</span>
-                        <span class="authLink login"><Link to="/login">Log In</Link></span>
+                        <span><img src="https://fontmeme.com/permalink/190703/a61ac8e10ea54d68646d1a85e71642ed.png" className="splash_logo" /></span>
+                        <span><Link to="/login"><span class="authLink login">Log In</span></Link></span>
                     </div>
                 </div>
             )
@@ -23,7 +23,7 @@ const NavBar = props => {
             return (
                 <div className="login_nav_bar_container">
                     <div className="login_nav_bar_header">
-                        <span className="login_splash_logo"><Link to="/">NOMFLIX</Link></span>
+                        <span><Link to="/"><img src="https://fontmeme.com/permalink/190703/a61ac8e10ea54d68646d1a85e71642ed.png" className="login_splash_logo"/></Link></span>
                     </div>
                 </div>
             )

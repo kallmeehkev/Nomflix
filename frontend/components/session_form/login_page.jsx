@@ -8,12 +8,12 @@ import LoginNavBarContainer from '../nav_bar/login_nav_bar_container'
 const LoginPage = props => {
 
     return (
-        <div>
-            <div className="login_wrapper_background">
-                <img src="https://www.backgroundcheckall.com/wp-content/uploads/2017/12/netflix-background-9.jpg"/>
-            </div>
-            <LoginNavBarContainer />
-            <div>
+        <div className="login_page_mount">
+            <div className="login_page">
+                <div className="login_wrapper_background">
+                    <img src="https://www.backgroundcheckall.com/wp-content/uploads/2017/12/netflix-background-9.jpg"/>
+                </div>
+                <LoginNavBarContainer />
                 <LoginFormContainer />
             </div>
         </div>

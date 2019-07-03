@@ -63,9 +63,8 @@
 }
 
 .login_splash_logo {
-    width: 108px;
-    padding-top: .5rem;
-    height: 32px;
+    width: 185px;
+    padding-top: 1rem;
     font-size: 42px;
     color: #e50914;
     font-weight: 500;
@@ -75,24 +74,24 @@
     margin: 0 auto -236px;
     min-height: 100vh;
     background-color: transparent;
-    max-width: 450px;
+    max-width: 400px;
     color: #333;
     padding: 0 5%;
 }
 .login_body:before {
     content: "";
-    height: 91px;
+    height: 100px;
     display: block;
 }
 .login_body:after {
     content: "";
-    height: 236px;
+    height: 150px;
     display: block;
 }
 
 .login_form {
     background-color: #000;
-    padding: 60px 68px 60px;
+    padding: 60px 60px 60px;
     margin-bottom: 90px;
     border-radius: 4px;
     box-sizing: border-box;
@@ -125,7 +124,8 @@
     height: var(--button_height,50px);
     padding: 15px;
     margin: 15px 0px;
-    vertical-align: 
+    color: white;
+    width: 100%;
 }
 
 .login_form_buttons {
@@ -146,5 +146,9 @@
 
 .demo_button {
     background-color: rgb(41, 136, 224);
+}
+
+.login_form_content ul {
+    color: white;
 }
 

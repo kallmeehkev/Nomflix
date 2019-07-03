@@ -11,6 +11,7 @@ class SessionForm extends React.Component {
             password: ""
         };
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.demoLogin = this.demoLogin.bind(this)
     }
 
     handleSubmit(e) {
@@ -21,6 +22,11 @@ class SessionForm extends React.Component {
 
     update(field) {
         return (e) => this.setState({[field]: e.target.value})
+    }
+
+    demoLogin(e) {
+        const demoUser = { username: "user2", password: "password" }
+        this.props.processForm(demoUser).then(() => this.props.history.push('/browse'));
     }
 
     render() {
@@ -38,17 +44,17 @@ class SessionForm extends React.Component {
             <div className="login_body">
                 <div className="login_form">
                     <div className="login_form_content">
-                        <h1>Log In</h1>
+                        <h1>{formType}</h1>
                         <form onSubmit={this.handleSubmit}>
-                            <div className="login_form_input">
-                                <input type="text" value={this.state.username} placeholder="Email" onChange={this.update('username')}/>
+                            <div >
+                                <input type="text" value={this.state.username} placeholder="Email" onChange={this.update('username')} className="login_form_input"/>
                             </div>
-                            <div className="login_form_input">
-                                <input type="password" value={this.state.password} placeholder="Password" onChange={this.update('password')}/>
+                            <div >
+                                <input type="password" value={this.state.password} placeholder="Password" onChange={this.update('password')} className="login_form_input"/>
                             </div>
                                 <input type="submit" value={formType} className="login_form_buttons not_demo_button"/>
-                                <input type="submit" value="Demo Login" className="login_form_buttons demo_button"/>
                         </form>
+                        <button className="login_form_buttons demo_button" onClick={this.demoLogin}>Demo Login</button>
                     <ul>
                         {errors}
                     </ul>
