@@ -5,7 +5,7 @@ const NavBarIcon = props => {
     if (props.currentUser) {
         return (
             <div>
-                Welcome {props.currentUser.username}
+                Welcome {props.currentUser.email}
                 <button onClick={() => props.logout(props.currentUser)}>Log Out</button>
             </div>
         )

@@ -6,9 +6,6 @@ import * as sessionAction from './actions/session_actions'
 
 document.addEventListener('DOMContentLoaded', () => {
     const root = document.getElementById('root');
-    window.signup = sessionAction.signup
-    window.login = sessionAction.login
-    window.logout = sessionAction.logout
     let store;
     if (window.currentUser) {
         const preloadedState = {
@@ -22,10 +19,5 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
         store = configureStore();
     }
-    // we don't put the store directly on the window because
-    // it can be confusing when debugging, sometimes giving you access to state
-    // when you shouldn't
-    window.getState = store.getState;
-    window.dispatch = store.dispatch; // just for testing!
     ReactDOM.render(<Root store={store} />, root);
 });

@@ -1,6 +1,8 @@
 import React from 'react'
 import SplashNavBarContainer from '../nav_bar/splash_nav_bar_container';
 import { Link } from 'react-router-dom';
+import * as Images from '../images';
+
 const SplashIndex = props => {
     return (
         <div className="splash_container">
@@ -8,7 +10,7 @@ const SplashIndex = props => {
             <div className="splash_body">
                 <div className="splash_body_top_sec">
                     <div className="splash_background">
-                        <img src="https://backgroundcheckall.com/wp-content/uploads/2017/12/netflix-background-8.jpg" className="splash_background_image"/>
+                        <img src={Images.netflix_background_8_URL} className="splash_background_image"/>
                         <div className="splash_background_gradient"></div>
                     </div>
                     <div className="splash_text">

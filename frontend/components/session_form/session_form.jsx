@@ -7,7 +7,7 @@ class SessionForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            username: "",
+            email: "",
             password: ""
         };
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -25,7 +25,7 @@ class SessionForm extends React.Component {
     }
 
     demoLogin() {
-        const demoUser = { username: "user2", password: "password" }
+        const demoUser = { email: "user@email.com", password: "password" }
         this.props.login(demoUser).then(() => this.props.history.push('/browse'));
     }
 
@@ -55,7 +55,7 @@ class SessionForm extends React.Component {
                         <h1>{formType}</h1>
                         <form onSubmit={this.handleSubmit}>
                             <div >
-                                <input type="text" value={this.state.username} placeholder="Email" onChange={this.update('username')} className="login_form_input a" />
+                                <input type="text" value={this.state.email} placeholder="Email" onChange={this.update('email')} className="login_form_input a" />
                             </div>
                             <div >
                                 <input type="password" value={this.state.password} placeholder="Password" onChange={this.update('password')} className="login_form_input b" />
@@ -77,7 +77,7 @@ class SessionForm extends React.Component {
         )
         let signupForm = (
             <div className="signup_body">
-                <button className="signup_form_buttons demo_button" onClick={this.demoLogin}>Don't want to enter CC info? <strong>Click here.</strong></button>
+                <button className="signup_form_buttons demo_button" onClick={this.demoLogin}>Don't want to enter your CC info? <strong className="strong">Click here.</strong></button>
                 <div className="signup_form">
                     <div className="login_form_content">
                         <h1>Sign up to start watching</h1>
@@ -86,7 +86,7 @@ class SessionForm extends React.Component {
                         <h2>Create your account.</h2>
                         <form onSubmit={this.handleSubmit}>
                             <div >
-                                <input type="text" value={this.state.username} placeholder="Email" onChange={this.update('username')} className="signup_form_input a" />
+                                <input type="text" value={this.state.email} placeholder="Email" onChange={this.update('email')} className="signup_form_input a" />
                             </div>
                             <div >
                                 <input type="password" value={this.state.password} placeholder="Password" onChange={this.update('password')} className="signup_form_input b" />

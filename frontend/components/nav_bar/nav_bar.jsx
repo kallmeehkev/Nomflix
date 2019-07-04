@@ -1,11 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import NavBarIcon from './nav_bar_icon'
+import * as Images from '../images';
 
 const NavBar = props => {
     if (props.currentUser) { //logged in
         return (
-            <div className="home_nav_bar_container">
+            <div className="browse_nav_bar_container">
+                <div className="browse_pinning_nav_bar">
+                    <div >
+
+                    </div>
+                </div>
                 <button onClick={() => props.logout(props.currentUser)}>Log Out</button>
             </div>
         )
@@ -15,7 +21,7 @@ const NavBar = props => {
                 return (
                     <div className="login_nav_bar_container">
                         <div className="login_nav_bar_header">
-                            <span><Link to="/"><img src="https://fontmeme.com/permalink/190703/a61ac8e10ea54d68646d1a85e71642ed.png" className="login_splash_logo" /></Link></span>
+                            <span><Link to="/"><img src={Images.nomflix_logo_URL} className="login_splash_logo" /></Link></span>
                         </div>
                     </div>
                 )
@@ -23,7 +29,7 @@ const NavBar = props => {
                 return (
                     <div className="signup_nav_bar_container">
                         <div className="login_nav_bar_header">
-                            <span><Link to="/"><img src="https://fontmeme.com/permalink/190703/a61ac8e10ea54d68646d1a85e71642ed.png" className="login_splash_logo" /></Link></span>
+                            <span><Link to="/"><img src={Images.nomflix_logo_URL} className="login_splash_logo" /></Link></span>
                         </div>
                         <Link to="/login"><span className='signup_redirect'>Log In</span></Link>
                     </div>
@@ -32,8 +38,8 @@ const NavBar = props => {
                 return (
                     <div className="splash_nav_bar_container">
                         <div className="splash_nav_bar_header">
-                            <span><img src="https://fontmeme.com/permalink/190703/a61ac8e10ea54d68646d1a85e71642ed.png" className="splash_logo" /></span>
-                            <span><Link to="/login"><span class="authLink login">Log In</span></Link></span>
+                            <span><img src={Images.nomflix_logo_URL} className="splash_logo" /></span>
+                            <span><Link to="/login"><span className="authLink login">Log In</span></Link></span>
                         </div>
                     </div>
                 )

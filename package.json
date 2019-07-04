@@ -1,5 +1,5 @@
 {
-  "name": "Wetflix",
+  "name": "Nomflix",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.4.5",

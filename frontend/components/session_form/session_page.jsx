@@ -7,13 +7,14 @@ import LoginFormContainer from './login_form_container';
 import LoginNavBarContainer from '../nav_bar/login_nav_bar_container'
 import SignupNavBarContainer from '../nav_bar/signup_nav_bar_container'
 import SignupFormContainer from './signup_form_container';
+import * as Images from '../images';
 
 const LoginPage = props => {
     let background = <div></div>;
     let navbar = <div></div>
     if (props.match.path === '/login') {
         background = <div className="login_wrapper_background">
-            <img src="https://www.backgroundcheckall.com/wp-content/uploads/2017/12/netflix-background-9.jpg" />
+            <img src={Images.netflix_background_9_URL} />
         </div>;
         navbar = <LoginNavBarContainer />;
     } else {
