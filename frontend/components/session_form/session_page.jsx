@@ -2,8 +2,10 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Route, Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
+import { AuthRoute, ProtectedRoute } from '../../util/route_util';
 import LoginFormContainer from './login_form_container';
 import LoginNavBarContainer from '../nav_bar/login_nav_bar_container'
+import SignupFormContainer from './signup_form_container';
 
 const LoginPage = props => {
 
@@ -14,7 +16,8 @@ const LoginPage = props => {
                     <img src="https://www.backgroundcheckall.com/wp-content/uploads/2017/12/netflix-background-9.jpg"/>
                 </div>
                 <LoginNavBarContainer />
-                <LoginFormContainer />
+                <AuthRoute exact path="/signup" component={SignupFormContainer} />
+                <AuthRoute exact path="/login" component={LoginFormContainer} />
             </div>
         </div>
     );

@@ -74,7 +74,7 @@
     margin: 0 auto -236px;
     min-height: 100vh;
     background-color: transparent;
-    max-width: 400px;
+    max-width: 450px;
     color: #333;
     padding: 0 5%;
 }
@@ -85,12 +85,12 @@
 }
 .login_body:after {
     content: "";
-    height: 150px;
+    height: 100px;
     display: block;
 }
 
 .login_form {
-    background-color: #000;
+    background-color:rgba(0,0,0,.75);
     padding: 60px 60px 60px;
     margin-bottom: 90px;
     border-radius: 4px;
@@ -101,7 +101,7 @@
     width: 100%;
     flex-direction: column;
     margin: 0;
-    opacity: .9;
+    height: 100%;
 }
 
 .login_form_content {
@@ -110,14 +110,13 @@
     -moz-box-flex: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
-    opacity: 1;
 }
 
 .login_form_content h1 {
     color: #fff;
     font-size: 32px;
     font-weight: 700;
-    margin: 10px 0px 40px 0px;
+    margin: 0px 0px 30px 0px;
 }
 
 .login_form_input {
@@ -125,32 +124,57 @@
     border-radius: 3px;
     height: var(--button_height,50px);
     padding: 15px;
-    margin: 15px 0px;
     color: white;
     width: 100%;
+    opacity: 1;
+}
+.a{
+    margin: 0px 0px 10px 0px;
+}
+.b{
+    margin: 10px 0px 0px 0px;
 }
 
 .login_form_buttons {
     border-radius: 3px;
     height: var(--button_height,50px);
     padding: 8px;
-    margin: 25px 0px 10px 0px;
+
     text-align: center;
     font-size: 18px;
     font-weight: 600;
     color: white;
     width: 100%;
+    opacity: 1;
 }
 
 .not_demo_button {
     background-color: #e50914;
+    margin: 25px 0px 10px 0px;
 }
 
 .demo_button {
     background-color: rgb(41, 136, 224);
+    margin: 10px 0px 25px 0px;
 }
 
 .login_form_content ul {
     color: white;
+    color: orange;
+    font-size: .9rem;
 }
 
+.login_errors {
+    margin: 5px 0px 0px 0px;
+    height: 30px;
+}
+
+.login_redirect {
+    text-align: center;
+    padding: 10px;
+    border-radius: 3px;
+    background-color: #e50914;
+    color: white;
+    font-size: .9rem;
+    font-weight: 500;
+}

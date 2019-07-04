@@ -26,17 +26,22 @@ class SessionForm extends React.Component {
 
     demoLogin(e) {
         const demoUser = { username: "user2", password: "password" }
-        this.props.processForm(demoUser).then(() => this.props.history.push('/browse'));
+        this.props.login(demoUser).then(() => this.props.history.push('/browse'));
+    }
+
+    componentWillUnmount() {
+        this.props.clearErrors();
     }
 
     render() {
         let {currentUser, formType} = this.props;
-        // if (currentUser) {
-        //     return <Redirect to="/" />
-        // }
-        //Will either use this redirect or history.push to redirect after logging or signing up
-        let status = this.props.match.path === '/login' ? 
-            <Link to='/signup'>Sign Up</Link> : <Link to="/login">Log In</Link>;
+        let authRouteText = this.props.match.path === '/login' ?
+            "Not signed up?" : "Already a user?"
+        let authRoute = this.props.match.path === '/login' ? 
+            <Link to='/signup'><div className="login_redirect">{authRouteText}</div></Link> 
+            : <Link to="/login"><div className="login_redirect">{authRouteText}</div></Link>;
+
+
         let errors = this.props.errors.map( (error, i) => {
             return (<li key={i}>{error}</li>)
         })
@@ -47,17 +52,20 @@ class SessionForm extends React.Component {
                         <h1>{formType}</h1>
                         <form onSubmit={this.handleSubmit}>
                             <div >
-                                <input type="text" value={this.state.username} placeholder="Email" onChange={this.update('username')} className="login_form_input"/>
+                                <input type="text" value={this.state.username} placeholder="Email" onChange={this.update('username')} className="login_form_input a"/>
                             </div>
                             <div >
-                                <input type="password" value={this.state.password} placeholder="Password" onChange={this.update('password')} className="login_form_input"/>
+                                <input type="password" value={this.state.password} placeholder="Password" onChange={this.update('password')} className="login_form_input b"/>
                             </div>
                                 <input type="submit" value={formType} className="login_form_buttons not_demo_button"/>
                         </form>
                         <button className="login_form_buttons demo_button" onClick={this.demoLogin}>Demo Login</button>
-                    <ul>
-                        {errors}
-                    </ul>
+                        {authRoute}
+                        <div className="login_errors">
+                                <ul>
+                                    {errors}
+                                </ul>
+                        </div>
                     </div>
                 </div>
             </div>
