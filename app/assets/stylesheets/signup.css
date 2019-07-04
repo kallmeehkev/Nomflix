@@ -1,0 +1,120 @@
+.signup_wrapper {
+    background-size: cover;
+    display: block;
+    height: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+    background-color: white;
+}
+
+.signup_nav_bar_header {
+    margin-left: 3%;
+    text-decoration: none;
+    vertical-align: middle;
+    fill: #e50914;
+    display: inline-block;
+    line-height: 90px;
+}
+
+.signup_redirect {
+    margin: 0 3%;
+    float: right;
+    color: #333;
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 90px;
+}
+.signup_redirect:hover {
+    text-decoration: underline;
+}
+
+.signup_nav_bar_container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border-bottom: transparent;
+    height: 90px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.signup_body {
+    margin: 0 auto -236px;
+    min-height: 100vh;
+    background-color: transparent;
+    max-width: 450px;
+    color: #333;
+    padding: 0 5%;
+}
+.signup_body:before {
+    content: "";
+    height: 90px;
+    display: block;
+}
+
+.signup_form_buttons {
+    width: 100%;
+    height: var(--button_height,50px);
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    text-align: center;
+    margin: 20px auto;
+    padding: 5px 0;
+    color: #fff;
+}
+
+.signup_form {
+    margin-bottom: 90px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    width: 100%;
+    flex-direction: column;
+    margin: 0;
+    height: 100%;
+}
+
+.signup_form h1 {
+    color: black;
+    font-size: 23px;
+    font-weight: 500;
+    margin: 30px 0px 7px 0px;
+}
+
+.signup_form h2 {
+    color: black;
+    font-size: 19px;
+    font-weight: 500;
+    margin: 12px 0px 10px 0px;
+}
+
+
+.signup_form h3 {
+    color: black;
+    font-size: 19px;
+    font-weight: 400;
+    margin: 0px 0px 0px 0px;
+}
+
+.signup_form_input {
+    border-radius: 3px;
+    height: 59px;
+    padding: 15px;
+    color: #333;
+    width: 100%;
+    border: solid 1px #8c8c8c;
+}
+
+.signup_errors ul {
+    color: red;
+    font-size: 1rem;
+}

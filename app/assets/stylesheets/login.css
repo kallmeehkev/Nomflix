@@ -139,9 +139,8 @@
     border-radius: 3px;
     height: var(--button_height,50px);
     padding: 8px;
-
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     color: white;
     width: 100%;
@@ -154,27 +153,31 @@
 }
 
 .demo_button {
-    background-color: rgb(41, 136, 224);
-    margin: 10px 0px 25px 0px;
-}
-
-.login_form_content ul {
-    color: white;
-    color: orange;
-    font-size: .9rem;
+    background-color: #0071eb;
+    margin: 10px 0px 10px 0px;
 }
 
 .login_errors {
-    margin: 5px 0px 0px 0px;
+    margin: 5px 0px 60px 0px;
     height: 30px;
+}
+
+.login_errors ul {
+    color: orange;
+    font-size: 1rem;
 }
 
 .login_redirect {
     text-align: center;
-    padding: 10px;
-    border-radius: 3px;
-    background-color: #e50914;
-    color: white;
-    font-size: .9rem;
+    /* padding: 10px; */
+    /* border-radius: 3px;
+    background-color: #e50914; */
+    color: rgb(121, 121, 121);
+    font-size: 1rem;
     font-weight: 500;
+}
+
+.login_redirect span {
+    text-decoration: underline;
+    color: white;
 }

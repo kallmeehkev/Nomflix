@@ -10,23 +10,33 @@ const NavBar = props => {
             </div>
         )
     } else {
-        if (props.navType === 'splash') {//not logged in and on splash page
-            return (
-                <div className="splash_nav_bar_container">
-                    <div className="splash_nav_bar_header">
-                        <span><img src="https://fontmeme.com/permalink/190703/a61ac8e10ea54d68646d1a85e71642ed.png" className="splash_logo" /></span>
-                        <span><Link to="/login"><span class="authLink login">Log In</span></Link></span>
+        switch (props.navType) {
+            case 'login':
+                return (
+                    <div className="login_nav_bar_container">
+                        <div className="login_nav_bar_header">
+                            <span><Link to="/"><img src="https://fontmeme.com/permalink/190703/a61ac8e10ea54d68646d1a85e71642ed.png" className="login_splash_logo" /></Link></span>
+                        </div>
                     </div>
-                </div>
-            )
-        } else { //not logged in and on login page
-            return (
-                <div className="login_nav_bar_container">
-                    <div className="login_nav_bar_header">
-                        <span><Link to="/"><img src="https://fontmeme.com/permalink/190703/a61ac8e10ea54d68646d1a85e71642ed.png" className="login_splash_logo"/></Link></span>
+                )
+            case 'signup':
+                return (
+                    <div className="signup_nav_bar_container">
+                        <div className="login_nav_bar_header">
+                            <span><Link to="/"><img src="https://fontmeme.com/permalink/190703/a61ac8e10ea54d68646d1a85e71642ed.png" className="login_splash_logo" /></Link></span>
+                        </div>
+                        <Link to="/login"><span className='signup_redirect'>Log In</span></Link>
                     </div>
-                </div>
-            )
+                )
+            default: //just the splash nav
+                return (
+                    <div className="splash_nav_bar_container">
+                        <div className="splash_nav_bar_header">
+                            <span><img src="https://fontmeme.com/permalink/190703/a61ac8e10ea54d68646d1a85e71642ed.png" className="splash_logo" /></span>
+                            <span><Link to="/login"><span class="authLink login">Log In</span></Link></span>
+                        </div>
+                    </div>
+                )
         }
     }
 }

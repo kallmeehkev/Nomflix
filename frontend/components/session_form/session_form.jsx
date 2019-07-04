@@ -24,7 +24,7 @@ class SessionForm extends React.Component {
         return (e) => this.setState({[field]: e.target.value})
     }
 
-    demoLogin(e) {
+    demoLogin() {
         const demoUser = { username: "user2", password: "password" }
         this.props.login(demoUser).then(() => this.props.history.push('/browse'));
     }
@@ -35,40 +35,79 @@ class SessionForm extends React.Component {
 
     render() {
         let {currentUser, formType} = this.props;
-        let authRouteText = this.props.match.path === '/login' ?
-            "Not signed up?" : "Already a user?"
-        let authRoute = this.props.match.path === '/login' ? 
-            <Link to='/signup'><div className="login_redirect">{authRouteText}</div></Link> 
-            : <Link to="/login"><div className="login_redirect">{authRouteText}</div></Link>;
-
-
-        let errors = this.props.errors.map( (error, i) => {
+        let authRouteText, authRoute, form;
+        let errors = this.props.errors.map((error, i) => {
             return (<li key={i}>{error}</li>)
         })
-        return (
+        if (this.props.match.path === '/login') {
+            authRouteText = "Not signed up?";
+            authRoute = <Link to='/signup'>Sign up here</Link>;
+        } else {
+            authRouteText = "Already a user?";
+            authRoute = <Link to="/login">Log in here</Link>;
+        }
+
+
+        let loginForm = (
             <div className="login_body">
                 <div className="login_form">
                     <div className="login_form_content">
                         <h1>{formType}</h1>
                         <form onSubmit={this.handleSubmit}>
                             <div >
-                                <input type="text" value={this.state.username} placeholder="Email" onChange={this.update('username')} className="login_form_input a"/>
+                                <input type="text" value={this.state.username} placeholder="Email" onChange={this.update('username')} className="login_form_input a" />
                             </div>
                             <div >
-                                <input type="password" value={this.state.password} placeholder="Password" onChange={this.update('password')} className="login_form_input b"/>
+                                <input type="password" value={this.state.password} placeholder="Password" onChange={this.update('password')} className="login_form_input b" />
                             </div>
-                                <input type="submit" value={formType} className="login_form_buttons not_demo_button"/>
+                            <input type="submit" value={formType} className="login_form_buttons not_demo_button" />
                         </form>
                         <button className="login_form_buttons demo_button" onClick={this.demoLogin}>Demo Login</button>
-                        {authRoute}
                         <div className="login_errors">
-                                <ul>
-                                    {errors}
-                                </ul>
+                            <ul>
+                                {errors}
+                            </ul>
+                        </div>
+                        <div>
+                            <span className="login_redirect">{authRouteText} <span>{authRoute}</span></span>
                         </div>
                     </div>
                 </div>
             </div>
+        )
+        let signupForm = (
+            <div className="signup_body">
+                <button className="signup_form_buttons demo_button" onClick={this.demoLogin}>Don't want to enter CC info? <strong>Click here.</strong></button>
+                <div className="signup_form">
+                    <div className="login_form_content">
+                        <h1>Sign up to start watching</h1>
+                        <h3>One more step and you can Nom!</h3>
+                        <h3>You know you want to.</h3>
+                        <h2>Create your account.</h2>
+                        <form onSubmit={this.handleSubmit}>
+                            <div >
+                                <input type="text" value={this.state.username} placeholder="Email" onChange={this.update('username')} className="signup_form_input a" />
+                            </div>
+                            <div >
+                                <input type="password" value={this.state.password} placeholder="Password" onChange={this.update('password')} className="signup_form_input b" />
+                            </div>
+                            <input type="submit" value={formType} className="login_form_buttons not_demo_button" />
+                        </form>
+                        <div className="signup_errors">
+                            <ul>
+                                {errors}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+
+
+
+        form = (this.props.match.path === '/login' ? loginForm : signupForm);
+        return (
+            <div>{form}</div>
         )
     }
 

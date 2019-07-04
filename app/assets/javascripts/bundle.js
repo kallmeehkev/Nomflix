@@ -432,32 +432,49 @@ var NavBar = function NavBar(props) {
       }
     }, "Log Out"));
   } else {
-    if (props.navType === 'splash') {
-      //not logged in and on splash page
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "splash_nav_bar_container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "splash_nav_bar_header"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "https://fontmeme.com/permalink/190703/a61ac8e10ea54d68646d1a85e71642ed.png",
-        className: "splash_logo"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/login"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        "class": "authLink login"
-      }, "Log In")))));
-    } else {
-      //not logged in and on login page
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "login_nav_bar_container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "login_nav_bar_header"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "https://fontmeme.com/permalink/190703/a61ac8e10ea54d68646d1a85e71642ed.png",
-        className: "login_splash_logo"
-      })))));
+    switch (props.navType) {
+      case 'login':
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "login_nav_bar_container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "login_nav_bar_header"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: "/"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: "https://fontmeme.com/permalink/190703/a61ac8e10ea54d68646d1a85e71642ed.png",
+          className: "login_splash_logo"
+        })))));
+
+      case 'signup':
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "signup_nav_bar_container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "login_nav_bar_header"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: "/"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: "https://fontmeme.com/permalink/190703/a61ac8e10ea54d68646d1a85e71642ed.png",
+          className: "login_splash_logo"
+        })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: "/login"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "signup_redirect"
+        }, "Log In")));
+
+      default:
+        //just the splash nav
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "splash_nav_bar_container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "splash_nav_bar_header"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: "https://fontmeme.com/permalink/190703/a61ac8e10ea54d68646d1a85e71642ed.png",
+          className: "splash_logo"
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: "/login"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          "class": "authLink login"
+        }, "Log In")))));
     }
   }
 };
@@ -498,6 +515,39 @@ var NavBarIcon = function NavBarIcon(props) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (NavBarIcon);
+
+/***/ }),
+
+/***/ "./frontend/components/nav_bar/signup_nav_bar_container.js":
+/*!*****************************************************************!*\
+  !*** ./frontend/components/nav_bar/signup_nav_bar_container.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _nav_bar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./nav_bar */ "./frontend/components/nav_bar/nav_bar.jsx");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+
+
+
+
+var msp = function msp(_ref) {
+  var entities = _ref.entities,
+      session = _ref.session;
+  return {
+    currentUser: entities.users[session.id],
+    navType: 'signup'
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {};
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_nav_bar__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -692,7 +742,7 @@ function (_React$Component) {
     }
   }, {
     key: "demoLogin",
-    value: function demoLogin(e) {
+    value: function demoLogin() {
       var _this4 = this;
 
       var demoUser = {
@@ -714,22 +764,26 @@ function (_React$Component) {
       var _this$props = this.props,
           currentUser = _this$props.currentUser,
           formType = _this$props.formType;
-      var authRouteText = this.props.match.path === '/login' ? "Not signed up?" : "Already a user?";
-      var authRoute = this.props.match.path === '/login' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/signup"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "login_redirect"
-      }, authRouteText)) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/login"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "login_redirect"
-      }, authRouteText));
+      var authRouteText, authRoute, form;
       var errors = this.props.errors.map(function (error, i) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: i
         }, error);
       });
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+
+      if (this.props.match.path === '/login') {
+        authRouteText = "Not signed up?";
+        authRoute = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: "/signup"
+        }, "Sign up here");
+      } else {
+        authRouteText = "Already a user?";
+        authRoute = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: "/login"
+        }, "Log in here");
+      }
+
+      var loginForm = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "login_body"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "login_form"
@@ -756,9 +810,43 @@ function (_React$Component) {
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "login_form_buttons demo_button",
         onClick: this.demoLogin
-      }, "Demo Login"), authRoute, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Demo Login"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "login_errors"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, errors)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "login_redirect"
+      }, authRouteText, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, authRoute))))));
+      var signupForm = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "signup_body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "signup_form_buttons demo_button",
+        onClick: this.demoLogin
+      }, "Don't want to enter CC info? ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Click here.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "signup_form"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "login_form_content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Sign up to start watching"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "One more step and you can Nom!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "You know you want to."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Create your account."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        value: this.state.username,
+        placeholder: "Email",
+        onChange: this.update('username'),
+        className: "signup_form_input a"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "password",
+        value: this.state.password,
+        placeholder: "Password",
+        onChange: this.update('password'),
+        className: "signup_form_input b"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "submit",
+        value: formType,
+        className: "login_form_buttons not_demo_button"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "signup_errors"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, errors)))));
+      form = this.props.match.path === '/login' ? loginForm : signupForm;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, form);
     }
   }]);
 
@@ -785,7 +873,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/route_util */ "./frontend/util/route_util.jsx");
 /* harmony import */ var _login_form_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./login_form_container */ "./frontend/components/session_form/login_form_container.js");
 /* harmony import */ var _nav_bar_login_nav_bar_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../nav_bar/login_nav_bar_container */ "./frontend/components/nav_bar/login_nav_bar_container.js");
-/* harmony import */ var _signup_form_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./signup_form_container */ "./frontend/components/session_form/signup_form_container.js");
+/* harmony import */ var _nav_bar_signup_nav_bar_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../nav_bar/signup_nav_bar_container */ "./frontend/components/nav_bar/signup_nav_bar_container.js");
+/* harmony import */ var _signup_form_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./signup_form_container */ "./frontend/components/session_form/signup_form_container.js");
+
 
 
 
@@ -796,18 +886,31 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var LoginPage = function LoginPage(props) {
+  var background = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+  var navbar = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+
+  if (props.match.path === '/login') {
+    background = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "login_wrapper_background"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      src: "https://www.backgroundcheckall.com/wp-content/uploads/2017/12/netflix-background-9.jpg"
+    }));
+    navbar = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_login_nav_bar_container__WEBPACK_IMPORTED_MODULE_5__["default"], null);
+  } else {
+    background = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "signup_wrapper"
+    });
+    navbar = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_signup_nav_bar_container__WEBPACK_IMPORTED_MODULE_6__["default"], null);
+  }
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "login_page_mount"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "login_page"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "login_wrapper_background"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "https://www.backgroundcheckall.com/wp-content/uploads/2017/12/netflix-background-9.jpg"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_login_nav_bar_container__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
+  }, background, navbar, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
     exact: true,
     path: "/signup",
-    component: _signup_form_container__WEBPACK_IMPORTED_MODULE_6__["default"]
+    component: _signup_form_container__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
     exact: true,
     path: "/login",
