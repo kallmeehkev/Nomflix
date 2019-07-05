@@ -18,11 +18,14 @@ export const receiveSessionErrors = (errors) => ({
 })
 
 export const login = (user) => dispatch => (
-    sessionApiUtil.login(user).then((user) => dispatch(receiveCurrentUser(user)), (errors) => dispatch(receiveSessionErrors(Object.values(errors.responseJSON))))
+    sessionApiUtil.login(user).then((user) => dispatch(receiveCurrentUser(user)), 
+    (errors) => dispatch(receiveSessionErrors(Object.values(errors.responseJSON))))
 )
 export const signup = (user) => dispatch => (
-    sessionApiUtil.signup(user).then((user) => dispatch(receiveCurrentUser(user)), (errors) => dispatch(receiveSessionErrors(Object.values(errors.responseJSON))))
+    sessionApiUtil.signup(user).then((user) => dispatch(receiveCurrentUser(user)), 
+    (errors) => dispatch(receiveSessionErrors(Object.values(errors.responseJSON))))
 )
 export const logout = (user) => dispatch => (
-    sessionApiUtil.logout(user).then(() => dispatch(logoutCurrentUser()), (errors) => dispatch(receiveSessionErrors(Object.values(errors.responseJSON))))
+    sessionApiUtil.logout(user).then(() => dispatch(logoutCurrentUser()), 
+    (errors) => dispatch(receiveSessionErrors(Object.values(errors.responseJSON))))
 )

@@ -101,10 +101,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_root_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/root.jsx */ "./frontend/components/root.jsx");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var _util_profile_api_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./util/profile_api_util */ "./frontend/util/profile_api_util.js");
+/* harmony import */ var _actions_profile_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/profile_actions */ "./frontend/actions/profile_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -128,12 +126,15 @@ document.addEventListener('DOMContentLoaded', function () {
     delete window.currentUser;
   } else {
     store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])();
-  }
+  } // window.fetchProfiles = profileActions.fetchProfiles
+  // window.fetchProfile = profileActions.fetchProfile
+  // window.createProfile = profileActions.createProfile
+  // window.updateProfile = profileActions.updateProfile
+  // window.deleteProfile = profileActions.deleteProfile
+  // window.dispatch = store.dispatch;
+  // window.getState = store.getState;
 
-  window.fetchProfile = _util_profile_api_util__WEBPACK_IMPORTED_MODULE_5__["fetchProfile"];
-  window.createProfile = _util_profile_api_util__WEBPACK_IMPORTED_MODULE_5__["createProfile"];
-  window.updateProfile = _util_profile_api_util__WEBPACK_IMPORTED_MODULE_5__["updateProfile"];
-  window.deleteProfile = _util_profile_api_util__WEBPACK_IMPORTED_MODULE_5__["deleteProfile"];
+
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
     store: store
   }), root);
@@ -157,6 +158,106 @@ var clearErrors = function clearErrors() {
   return function (dispatch) {
     return dispatch({
       type: CLEAR_ERRORS
+    });
+  };
+};
+
+/***/ }),
+
+/***/ "./frontend/actions/profile_actions.js":
+/*!*********************************************!*\
+  !*** ./frontend/actions/profile_actions.js ***!
+  \*********************************************/
+/*! exports provided: RECEIVE_PROFILES, RECEIVE_PROFILE, RECEIVE_PROFILE_ERRORS, REMOVE_PROFILE, receiveProfiles, receiveProfile, removeProfile, receiveProfileErrors, fetchProfiles, fetchProfile, createProfile, updateProfile, deleteProfile */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_PROFILES", function() { return RECEIVE_PROFILES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_PROFILE", function() { return RECEIVE_PROFILE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_PROFILE_ERRORS", function() { return RECEIVE_PROFILE_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_PROFILE", function() { return REMOVE_PROFILE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveProfiles", function() { return receiveProfiles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveProfile", function() { return receiveProfile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeProfile", function() { return removeProfile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveProfileErrors", function() { return receiveProfileErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchProfiles", function() { return fetchProfiles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchProfile", function() { return fetchProfile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createProfile", function() { return createProfile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateProfile", function() { return updateProfile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteProfile", function() { return deleteProfile; });
+/* harmony import */ var _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/profile_api_util */ "./frontend/util/profile_api_util.js");
+
+var RECEIVE_PROFILES = "RECEIVE_PROFILES";
+var RECEIVE_PROFILE = "RECEIVE_PROFILE";
+var RECEIVE_PROFILE_ERRORS = "RECEIVE_PROFILE_ERRORS";
+var REMOVE_PROFILE = "REMOVE_PROFILE";
+var receiveProfiles = function receiveProfiles(profiles) {
+  return {
+    type: RECEIVE_PROFILES,
+    profiles: profiles
+  };
+};
+var receiveProfile = function receiveProfile(profile) {
+  return {
+    type: RECEIVE_PROFILE,
+    profile: profile
+  };
+};
+var removeProfile = function removeProfile(profileId) {
+  return {
+    type: REMOVE_PROFILE,
+    profileId: profileId
+  };
+};
+var receiveProfileErrors = function receiveProfileErrors(errors) {
+  return {
+    type: RECEIVE_PROFILE_ERRORS,
+    errors: errors
+  };
+};
+var fetchProfiles = function fetchProfiles() {
+  return function (dispatch) {
+    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchProfiles"]().then(function (profiles) {
+      return dispatch(receiveProfiles(profiles));
+    }, function (errors) {
+      return dispatch(receiveSessionErrors(Object.values(errors.responseJSON)));
+    });
+  };
+};
+var fetchProfile = function fetchProfile(id) {
+  return function (dispatch) {
+    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchProfile"](id).then(function (profile) {
+      return dispatch(receiveProfile(profile));
+    }, function (errors) {
+      return dispatch(receiveSessionErrors(Object.values(errors.responseJSON)));
+    });
+  };
+};
+var createProfile = function createProfile(profile) {
+  return function (dispatch) {
+    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["createProfile"](profile).then(function (profile) {
+      return dispatch(receiveProfile(profile));
+    }, function (errors) {
+      return dispatch(receiveSessionErrors(Object.values(errors.responseJSON)));
+    });
+  };
+};
+var updateProfile = function updateProfile(profile) {
+  return function (dispatch) {
+    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["updateProfile"](profile).then(function (profile) {
+      return dispatch(receiveProfile(profile));
+    }, function (errors) {
+      return dispatch(receiveSessionErrors(Object.values(errors.responseJSON)));
+    });
+  };
+};
+var deleteProfile = function deleteProfile(id) {
+  return function (dispatch) {
+    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["deleteProfile"](id).then(function (profile) {
+      return dispatch(removeProfile(profile.id));
+    }, function (errors) {
+      return dispatch(receiveSessionErrors(Object.values(errors.responseJSON)));
     });
   };
 };
@@ -1453,13 +1554,19 @@ var createProfile = function createProfile(profile) {
 var updateProfile = function updateProfile(profile) {
   return $.ajax({
     method: 'PATCH',
-    url: "api/profiles/".concat(profile.id)
+    url: "api/profiles/".concat(profile.id),
+    data: {
+      profile: profile
+    }
   });
 };
 var deleteProfile = function deleteProfile(id) {
   return $.ajax({
     method: 'DELETE',
-    url: "api/profiles/".concat(id)
+    url: "api/profiles/".concat(id),
+    data: {
+      id: id
+    }
   });
 };
 

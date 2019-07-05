@@ -20,12 +20,14 @@ export const createProfile = (profile) => (
 export const updateProfile = (profile) => (
     $.ajax({
         method: 'PATCH',
-        url: `api/profiles/${profile.id}`
+        url: `api/profiles/${profile.id}`,
+        data: { profile }
     })
 )
 export const deleteProfile = (id) => (
     $.ajax({
         method: 'DELETE',
-        url: `api/profiles/${id}`
+        url: `api/profiles/${id}`,
+        data: {id}
     })
 )

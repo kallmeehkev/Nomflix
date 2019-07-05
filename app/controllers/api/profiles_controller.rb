@@ -23,17 +23,21 @@ class Api::ProfilesController < ApplicationController
 
     def update
         @profile = Profile.find(params[:id])
-        if @profile.user_id == current_user.id && @profile.update_attributes(profile_params)
+        @profile.user_id = current_user.id
+        if @profile.update_attributes(profile_params)
             render :show
         else
             render json: @profile.errors.full_messages, status: 400
         end
     end
 
-    def delete
+    def destroy
         @profile = Profile.find(params[:id])
-        @profile.destroy
-        render json: {}
+        if @profile.destroy
+            render :show
+        else
+            render json: @profile.errors.full_messages, status: 422
+        end
     end
 
 private

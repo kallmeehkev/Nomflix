@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './components/root.jsx';
 import configureStore from './store/store'
-import * as sessionAction from './actions/session_actions'
-import * as profileApiUtil from './util/profile_api_util'
+import * as profileActions from './actions/profile_actions'
 
 document.addEventListener('DOMContentLoaded', () => {
     const root = document.getElementById('root');
@@ -20,9 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
         store = configureStore();
     }
-    window.fetchProfile = profileApiUtil.fetchProfile;
-    window.createProfile = profileApiUtil.createProfile;
-    window.updateProfile = profileApiUtil.updateProfile;
-    window.deleteProfile = profileApiUtil.deleteProfile;
+    // window.fetchProfiles = profileActions.fetchProfiles
+    // window.fetchProfile = profileActions.fetchProfile
+    // window.createProfile = profileActions.createProfile
+    // window.updateProfile = profileActions.updateProfile
+    // window.deleteProfile = profileActions.deleteProfile
+    // window.dispatch = store.dispatch;
+    // window.getState = store.getState;
     ReactDOM.render(<Root store={store} />, root);
 });
