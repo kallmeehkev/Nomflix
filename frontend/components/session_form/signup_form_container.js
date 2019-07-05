@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
 import SessionForm from './session_form';
 import { signup, login } from '../../actions/session_actions';
-import { clearErrors } from '../../actions/errors_actions';
+import { clearSessionErrors } from '../../actions/errors_actions';
+import { setCurrentProfile } from '../../actions/profile_actions'
+
 
 
 const msp = (state, ownProps) => ({
@@ -13,7 +15,8 @@ const msp = (state, ownProps) => ({
 const mdp = dispatch => ({
     processForm: (user) => dispatch(signup(user)),
     login: (user) => dispatch(login(user)),
-    clearErrors: () => dispatch(clearErrors())
+    clearSessionErrors: () => dispatch(clearSessionErrors()),
+    setCurrentProfile: (profileId) => dispatch(setCurrentProfile(profileId))
 })
 
 export default connect(msp, mdp)(SessionForm)

@@ -1,8 +1,15 @@
-        <% if logged_in? %>
-    <script type="text/javascript">
+    <% if logged_in? %>
+        <script type="text/javascript">
         window.currentUser = <%= render(
         "api/users/user.json.jbuilder",
         user: current_user
+        ).html_safe %></script>
+    <% end %>
+    <% if current_profile? %>
+        <script type="text/javascript">
+        window.currentProfile = <%= render(
+        "api/profiles/profile.json.jbuilder",
+        profile: current_profile
         ).html_safe %></script>
     <% end %>
 

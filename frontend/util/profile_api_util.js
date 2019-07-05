@@ -31,3 +31,18 @@ export const deleteProfile = (id) => (
         data: {id}
     })
 )
+
+export const setCurrentProfile = (id) => (
+    $.ajax({
+        method: 'GET',
+        url: `api/profiles/${id}`,
+        data: {profile: {set: true}}
+    })
+)
+export const unSetCurrentProfile = (id) => (
+    $.ajax({
+        method: 'GET',
+        url: `api/profiles/${id}`,
+        data: {profile: {unset: true}}
+    })
+)

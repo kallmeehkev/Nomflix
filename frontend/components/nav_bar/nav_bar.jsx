@@ -10,6 +10,7 @@ class NavBar extends React.Component  {
         super(props)
         this.debounce = this.debounce.bind(this);
         this.storeScroll = this.storeScroll.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
     debounce(fn) {
@@ -39,6 +40,11 @@ class NavBar extends React.Component  {
         document.removeEventListener('scroll', this.debounce(this.storeScroll), { passive: true });
     }
 
+    logout() {
+        this.props.unSetCurrentProfile(this.props.currentProfileId)
+        this.props.logout(this.props.currentUser);
+    }
+
     render() {
         if (this.props.currentUser) { //logged in
 
@@ -48,7 +54,7 @@ class NavBar extends React.Component  {
                     <div className="browse_pinning_nav_bar">
                         <div className="main_browse_nav_bar">
                             <div><Link to="/browse"><img src={Images.nomflix_logo_URL} className="browse_splash_logo" /></Link></div>
-                            <div className="browse_logout"><button onClick={() => this.props.logout(this.props.currentUser)}>Log Out</button></div>
+                            <div className="browse_logout"><button onClick={this.logout}>Log Out</button></div>
                         </div>
                     </div>
                     

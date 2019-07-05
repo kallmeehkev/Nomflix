@@ -122,19 +122,32 @@ document.addEventListener('DOMContentLoaded', function () {
         id: window.currentUser.id
       }
     };
+
+    if (window.currentProfile) {
+      preloadedState["ui"] = {};
+      preloadedState["ui"]["currentProfileId"] = window.currentProfile.id;
+    }
+
     store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])(preloadedState);
     delete window.currentUser;
+
+    if (window.currentProfile) {
+      delete window.currentProfile;
+    }
   } else {
     store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])();
-  } // window.fetchProfiles = profileActions.fetchProfiles
-  // window.fetchProfile = profileActions.fetchProfile
-  // window.createProfile = profileActions.createProfile
-  // window.updateProfile = profileActions.updateProfile
-  // window.deleteProfile = profileActions.deleteProfile
-  // window.dispatch = store.dispatch;
-  // window.getState = store.getState;
+  }
 
-
+  window.fetchProfiles = _actions_profile_actions__WEBPACK_IMPORTED_MODULE_4__["fetchProfiles"];
+  window.fetchProfile = _actions_profile_actions__WEBPACK_IMPORTED_MODULE_4__["fetchProfile"];
+  window.createProfile = _actions_profile_actions__WEBPACK_IMPORTED_MODULE_4__["createProfile"];
+  window.updateProfile = _actions_profile_actions__WEBPACK_IMPORTED_MODULE_4__["updateProfile"];
+  window.deleteProfile = _actions_profile_actions__WEBPACK_IMPORTED_MODULE_4__["deleteProfile"];
+  window.receiveCurrentProfile = _actions_profile_actions__WEBPACK_IMPORTED_MODULE_4__["receiveCurrentProfile"];
+  window.removeCurrentProfile = _actions_profile_actions__WEBPACK_IMPORTED_MODULE_4__["removeCurrentProfile"];
+  window.setCurrentProfile = _actions_profile_actions__WEBPACK_IMPORTED_MODULE_4__["setCurrentProfile"];
+  window.dispatch = store.dispatch;
+  window.getState = store.getState;
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
     store: store
   }), root);
@@ -146,18 +159,28 @@ document.addEventListener('DOMContentLoaded', function () {
 /*!********************************************!*\
   !*** ./frontend/actions/errors_actions.js ***!
   \********************************************/
-/*! exports provided: CLEAR_ERRORS, clearErrors */
+/*! exports provided: CLEAR_SESSION_ERRORS, CLEAR_PROFILE_ERRORS, clearSessionErrors, clearProfileErrors */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_ERRORS", function() { return CLEAR_ERRORS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearErrors", function() { return clearErrors; });
-var CLEAR_ERRORS = "CLEAR_ERRORS";
-var clearErrors = function clearErrors() {
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_SESSION_ERRORS", function() { return CLEAR_SESSION_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_PROFILE_ERRORS", function() { return CLEAR_PROFILE_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearSessionErrors", function() { return clearSessionErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearProfileErrors", function() { return clearProfileErrors; });
+var CLEAR_SESSION_ERRORS = "CLEAR_SESSION_ERRORS";
+var CLEAR_PROFILE_ERRORS = "CLEAR_PROFILE_ERRORS";
+var clearSessionErrors = function clearSessionErrors() {
   return function (dispatch) {
     return dispatch({
-      type: CLEAR_ERRORS
+      type: CLEAR_SESSION_ERRORS
+    });
+  };
+};
+var clearProfileErrors = function clearProfileErrors() {
+  return function (dispatch) {
+    return dispatch({
+      type: CLEAR_PROFILE_ERRORS
     });
   };
 };
@@ -168,7 +191,7 @@ var clearErrors = function clearErrors() {
 /*!*********************************************!*\
   !*** ./frontend/actions/profile_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_PROFILES, RECEIVE_PROFILE, RECEIVE_PROFILE_ERRORS, REMOVE_PROFILE, receiveProfiles, receiveProfile, removeProfile, receiveProfileErrors, fetchProfiles, fetchProfile, createProfile, updateProfile, deleteProfile */
+/*! exports provided: RECEIVE_PROFILES, RECEIVE_PROFILE, RECEIVE_PROFILE_ERRORS, REMOVE_PROFILE, REMOVE_CURRENT_PROFILE, RECEIVE_CURRENT_PROFILE, receiveProfiles, receiveProfile, removeProfile, receiveProfileErrors, receiveCurrentProfile, removeCurrentProfile, fetchProfiles, fetchProfile, createProfile, updateProfile, deleteProfile, setCurrentProfile, unSetCurrentProfile */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -177,21 +200,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_PROFILE", function() { return RECEIVE_PROFILE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_PROFILE_ERRORS", function() { return RECEIVE_PROFILE_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_PROFILE", function() { return REMOVE_PROFILE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_CURRENT_PROFILE", function() { return REMOVE_CURRENT_PROFILE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CURRENT_PROFILE", function() { return RECEIVE_CURRENT_PROFILE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveProfiles", function() { return receiveProfiles; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveProfile", function() { return receiveProfile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeProfile", function() { return removeProfile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveProfileErrors", function() { return receiveProfileErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveCurrentProfile", function() { return receiveCurrentProfile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeCurrentProfile", function() { return removeCurrentProfile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchProfiles", function() { return fetchProfiles; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchProfile", function() { return fetchProfile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createProfile", function() { return createProfile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateProfile", function() { return updateProfile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteProfile", function() { return deleteProfile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCurrentProfile", function() { return setCurrentProfile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unSetCurrentProfile", function() { return unSetCurrentProfile; });
 /* harmony import */ var _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/profile_api_util */ "./frontend/util/profile_api_util.js");
 
 var RECEIVE_PROFILES = "RECEIVE_PROFILES";
 var RECEIVE_PROFILE = "RECEIVE_PROFILE";
 var RECEIVE_PROFILE_ERRORS = "RECEIVE_PROFILE_ERRORS";
 var REMOVE_PROFILE = "REMOVE_PROFILE";
+var REMOVE_CURRENT_PROFILE = "REMOVE_CURRENT_PROFILE";
+var RECEIVE_CURRENT_PROFILE = "RECEIVE_CURRENT_PROFILE";
 var receiveProfiles = function receiveProfiles(profiles) {
   return {
     type: RECEIVE_PROFILES,
@@ -216,12 +247,24 @@ var receiveProfileErrors = function receiveProfileErrors(errors) {
     errors: errors
   };
 };
+var receiveCurrentProfile = function receiveCurrentProfile(profileId) {
+  return {
+    type: RECEIVE_CURRENT_PROFILE,
+    profileId: profileId
+  };
+};
+var removeCurrentProfile = function removeCurrentProfile(profileId) {
+  return {
+    type: REMOVE_CURRENT_PROFILE,
+    profileId: profileId
+  };
+};
 var fetchProfiles = function fetchProfiles() {
   return function (dispatch) {
     return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchProfiles"]().then(function (profiles) {
       return dispatch(receiveProfiles(profiles));
     }, function (errors) {
-      return dispatch(receiveSessionErrors(Object.values(errors.responseJSON)));
+      return dispatch(receiveProfileErrors(Object.values(errors.responseJSON)));
     });
   };
 };
@@ -230,16 +273,17 @@ var fetchProfile = function fetchProfile(id) {
     return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchProfile"](id).then(function (profile) {
       return dispatch(receiveProfile(profile));
     }, function (errors) {
-      return dispatch(receiveSessionErrors(Object.values(errors.responseJSON)));
+      return dispatch(receiveProfileErrors(Object.values(errors.responseJSON)));
     });
   };
 };
 var createProfile = function createProfile(profile) {
   return function (dispatch) {
     return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["createProfile"](profile).then(function (profile) {
-      return dispatch(receiveProfile(profile));
+      dispatch(receiveProfile(profile));
+      dispatch(receiveCurrentProfile(profile));
     }, function (errors) {
-      return dispatch(receiveSessionErrors(Object.values(errors.responseJSON)));
+      return dispatch(receiveProfileErrors(Object.values(errors.responseJSON)));
     });
   };
 };
@@ -248,7 +292,7 @@ var updateProfile = function updateProfile(profile) {
     return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["updateProfile"](profile).then(function (profile) {
       return dispatch(receiveProfile(profile));
     }, function (errors) {
-      return dispatch(receiveSessionErrors(Object.values(errors.responseJSON)));
+      return dispatch(receiveProfileErrors(Object.values(errors.responseJSON)));
     });
   };
 };
@@ -257,7 +301,25 @@ var deleteProfile = function deleteProfile(id) {
     return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["deleteProfile"](id).then(function (profile) {
       return dispatch(removeProfile(profile.id));
     }, function (errors) {
-      return dispatch(receiveSessionErrors(Object.values(errors.responseJSON)));
+      return dispatch(receiveProfileErrors(Object.values(errors.responseJSON)));
+    });
+  };
+};
+var setCurrentProfile = function setCurrentProfile(id) {
+  return function (dispatch) {
+    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["setCurrentProfile"](id).then(function (profile) {
+      return dispatch(receiveCurrentProfile(profile.id));
+    }, function (errors) {
+      return dispatch(receiveProfileErrors(Object.values(errors.responseJSON)));
+    });
+  };
+};
+var unSetCurrentProfile = function unSetCurrentProfile(id) {
+  return function (dispatch) {
+    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["unSetCurrentProfile"](id).then(function (profile) {
+      return dispatch(removeCurrentProfile(profile.id));
+    }, function (errors) {
+      return dispatch(receiveProfileErrors(Object.values(errors.responseJSON)));
     });
   };
 };
@@ -506,16 +568,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _nav_bar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./nav_bar */ "./frontend/components/nav_bar/nav_bar.jsx");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _actions_profile_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/profile_actions */ "./frontend/actions/profile_actions.js");
+
 
 
 
 
 var msp = function msp(_ref) {
   var entities = _ref.entities,
-      session = _ref.session;
+      session = _ref.session,
+      ui = _ref.ui;
   return {
     currentUser: entities.users[session.id],
-    navType: 'gallery'
+    navType: 'gallery',
+    currentProfileId: ui.currentProfileId
   };
 };
 
@@ -523,6 +589,9 @@ var mdp = function mdp(dispatch) {
   return {
     logout: function logout(user) {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["logout"])(user));
+    },
+    unSetCurrentProfile: function unSetCurrentProfile(profileId) {
+      return dispatch(Object(_actions_profile_actions__WEBPACK_IMPORTED_MODULE_3__["unSetCurrentProfile"])(profileId));
     }
   };
 };
@@ -614,6 +683,7 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(NavBar).call(this, props));
     _this.debounce = _this.debounce.bind(_assertThisInitialized(_this));
     _this.storeScroll = _this.storeScroll.bind(_assertThisInitialized(_this));
+    _this.logout = _this.logout.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -658,10 +728,14 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "logout",
+    value: function logout() {
+      this.props.unSetCurrentProfile(this.props.currentProfileId);
+      this.props.logout(this.props.currentUser);
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       if (this.props.currentUser) {
         //logged in
         //need logic for classNames browse nav bar.  if on profile page or not.  apply on pinning and main
@@ -679,9 +753,7 @@ function (_React$Component) {
         }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_logout"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          onClick: function onClick() {
-            return _this2.props.logout(_this2.props.currentUser);
-          }
+          onClick: this.logout
         }, "Log Out")))));
       } else {
         switch (this.props.navType) {
@@ -886,7 +958,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _session_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_form */ "./frontend/components/session_form/session_form.jsx");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var _actions_errors_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/errors_actions */ "./frontend/actions/errors_actions.js");
+/* harmony import */ var _actions_profile_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/profile_actions */ "./frontend/actions/profile_actions.js");
+/* harmony import */ var _actions_errors_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/errors_actions */ "./frontend/actions/errors_actions.js");
+
 
 
 
@@ -908,8 +982,11 @@ var mdp = function mdp(dispatch) {
     login: function login(user) {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["login"])(user));
     },
-    clearErrors: function clearErrors() {
-      return dispatch(Object(_actions_errors_actions__WEBPACK_IMPORTED_MODULE_3__["clearErrors"])());
+    clearSessionErrors: function clearSessionErrors() {
+      return dispatch(Object(_actions_errors_actions__WEBPACK_IMPORTED_MODULE_4__["clearSessionErrors"])());
+    },
+    setCurrentProfile: function setCurrentProfile(profileId) {
+      return dispatch(Object(_actions_profile_actions__WEBPACK_IMPORTED_MODULE_3__["setCurrentProfile"])(profileId));
     }
   };
 };
@@ -1006,13 +1083,15 @@ function (_React$Component) {
         password: "password"
       };
       this.props.login(demoUser).then(function () {
+        return _this4.props.setCurrentProfile(1);
+      }).then(function () {
         return _this4.props.history.push('/browse');
       });
     }
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
-      this.props.clearErrors();
+      this.props.clearSessionErrors();
     }
   }, {
     key: "render",
@@ -1195,6 +1274,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _session_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_form */ "./frontend/components/session_form/session_form.jsx");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var _actions_errors_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/errors_actions */ "./frontend/actions/errors_actions.js");
+/* harmony import */ var _actions_profile_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/profile_actions */ "./frontend/actions/profile_actions.js");
+
 
 
 
@@ -1216,8 +1297,11 @@ var mdp = function mdp(dispatch) {
     login: function login(user) {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["login"])(user));
     },
-    clearErrors: function clearErrors() {
-      return dispatch(Object(_actions_errors_actions__WEBPACK_IMPORTED_MODULE_3__["clearErrors"])());
+    clearSessionErrors: function clearSessionErrors() {
+      return dispatch(Object(_actions_errors_actions__WEBPACK_IMPORTED_MODULE_3__["clearSessionErrors"])());
+    },
+    setCurrentProfile: function setCurrentProfile(profileId) {
+      return dispatch(Object(_actions_profile_actions__WEBPACK_IMPORTED_MODULE_4__["setCurrentProfile"])(profileId));
     }
   };
 };
@@ -1313,10 +1397,13 @@ var SplashIndex = function SplashIndex(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
+/* harmony import */ var _profiles_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./profiles_reducer */ "./frontend/reducers/profiles_reducer.js");
+
 
 
 var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  profiles: _profiles_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (entitiesReducer);
 
@@ -1333,12 +1420,100 @@ var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_errors_reducer */ "./frontend/reducers/session_errors_reducer.js");
+/* harmony import */ var _profile_errors_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./profile_errors_reducer */ "./frontend/reducers/profile_errors_reducer.js");
+
 
 
 var errorsReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  profile: _profile_errors_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (errorsReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/profile_errors_reducer.js":
+/*!*****************************************************!*\
+  !*** ./frontend/reducers/profile_errors_reducer.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_profile_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/profile_actions */ "./frontend/actions/profile_actions.js");
+/* harmony import */ var _actions_errors_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/errors_actions */ "./frontend/actions/errors_actions.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+
+var profileErrorsReducer = function profileErrorsReducer() {
+  var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(oldState);
+  var newState = Object(lodash__WEBPACK_IMPORTED_MODULE_2__["merge"])({}, oldState);
+
+  switch (action.type) {
+    case _actions_errors_actions__WEBPACK_IMPORTED_MODULE_1__["CLEAR_PROFILE_ERRORS"]:
+      return [];
+
+    case _actions_profile_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_PROFILE_ERRORS"]:
+      newState = action.errors;
+      return newState;
+
+    case _actions_profile_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_PROFILE"]:
+      return [];
+
+    default:
+      return oldState;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (profileErrorsReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/profiles_reducer.js":
+/*!***********************************************!*\
+  !*** ./frontend/reducers/profiles_reducer.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions_profile_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/profile_actions */ "./frontend/actions/profile_actions.js");
+
+
+
+var profilesReducer = function profilesReducer() {
+  var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(oldState);
+  var newState = Object(lodash__WEBPACK_IMPORTED_MODULE_0__["merge"])({}, oldState);
+
+  switch (action.type) {
+    case _actions_profile_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_PROFILES"]:
+      return action.profiles;
+
+    case _actions_profile_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_PROFILE"]:
+      newState[action.profile.id] = action.profile;
+      return newState;
+
+    case _actions_profile_actions__WEBPACK_IMPORTED_MODULE_1__["REMOVE_PROFILE"]:
+      delete newState[action.profileId];
+      return newState;
+
+    default:
+      return oldState;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (profilesReducer);
 
 /***/ }),
 
@@ -1355,6 +1530,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _session_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_reducer */ "./frontend/reducers/session_reducer.js");
 /* harmony import */ var _entities_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./entities_reducer */ "./frontend/reducers/entities_reducer.js");
 /* harmony import */ var _errors_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./errors_reducer */ "./frontend/reducers/errors_reducer.js");
+/* harmony import */ var _ui_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ui_reducer */ "./frontend/reducers/ui_reducer.js");
+
 
 
 
@@ -1362,6 +1539,7 @@ __webpack_require__.r(__webpack_exports__);
 var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   session: _session_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
   entities: _entities_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  ui: _ui_reducer__WEBPACK_IMPORTED_MODULE_4__["default"],
   errors: _errors_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
@@ -1392,7 +1570,7 @@ var sessionErrorsReducer = function sessionErrorsReducer() {
   var newState = Object(lodash__WEBPACK_IMPORTED_MODULE_2__["merge"])({}, oldState);
 
   switch (action.type) {
-    case _actions_errors_actions__WEBPACK_IMPORTED_MODULE_1__["CLEAR_ERRORS"]:
+    case _actions_errors_actions__WEBPACK_IMPORTED_MODULE_1__["CLEAR_SESSION_ERRORS"]:
       return [];
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SESSION_ERRORS"]:
@@ -1449,6 +1627,47 @@ var sessionReducer = function sessionReducer() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (sessionReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/ui_reducer.js":
+/*!*****************************************!*\
+  !*** ./frontend/reducers/ui_reducer.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_profile_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/profile_actions */ "./frontend/actions/profile_actions.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var uiReducer = function uiReducer() {
+  var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+    currentProfileId: null
+  };
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(oldState);
+  var newState = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["merge"])({}, oldState);
+
+  switch (action.type) {
+    case _actions_profile_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_PROFILE"]:
+      newState.currentProfileId = action.profileId;
+      return newState;
+
+    case _actions_profile_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_CURRENT_PROFILE"]:
+      newState.currentProfileId = null;
+      return newState;
+
+    default:
+      return oldState;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (uiReducer);
 
 /***/ }),
 
@@ -1520,7 +1739,7 @@ var configureStore = function configureStore() {
 /*!*******************************************!*\
   !*** ./frontend/util/profile_api_util.js ***!
   \*******************************************/
-/*! exports provided: fetchProfiles, fetchProfile, createProfile, updateProfile, deleteProfile */
+/*! exports provided: fetchProfiles, fetchProfile, createProfile, updateProfile, deleteProfile, setCurrentProfile, unSetCurrentProfile */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1530,6 +1749,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createProfile", function() { return createProfile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateProfile", function() { return updateProfile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteProfile", function() { return deleteProfile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCurrentProfile", function() { return setCurrentProfile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unSetCurrentProfile", function() { return unSetCurrentProfile; });
 var fetchProfiles = function fetchProfiles() {
   return $.ajax({
     method: 'GET',
@@ -1566,6 +1787,28 @@ var deleteProfile = function deleteProfile(id) {
     url: "api/profiles/".concat(id),
     data: {
       id: id
+    }
+  });
+};
+var setCurrentProfile = function setCurrentProfile(id) {
+  return $.ajax({
+    method: 'GET',
+    url: "api/profiles/".concat(id),
+    data: {
+      profile: {
+        set: true
+      }
+    }
+  });
+};
+var unSetCurrentProfile = function unSetCurrentProfile(id) {
+  return $.ajax({
+    method: 'GET',
+    url: "api/profiles/".concat(id),
+    data: {
+      profile: {
+        unset: true
+      }
     }
   });
 };

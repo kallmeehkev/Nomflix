@@ -26,11 +26,11 @@ class SessionForm extends React.Component {
 
     demoLogin() {
         const demoUser = { email: "user@email.com", password: "password" }
-        this.props.login(demoUser).then(() => this.props.history.push('/browse'));
+        this.props.login(demoUser).then(() => this.props.setCurrentProfile(1)).then(() => this.props.history.push('/browse'));
     }
 
     componentWillUnmount() {
-        this.props.clearErrors();
+        this.props.clearSessionErrors();
     }
 
     render() {

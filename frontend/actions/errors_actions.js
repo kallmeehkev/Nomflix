@@ -1,6 +1,11 @@
-export const CLEAR_ERRORS = "CLEAR_ERRORS"
+export const CLEAR_SESSION_ERRORS = "CLEAR_SESSION_ERRORS"
+export const CLEAR_PROFILE_ERRORS = "CLEAR_PROFILE_ERRORS"
 
-export const clearErrors = () => dispatch => (
+export const clearSessionErrors = () => dispatch => (
     dispatch({
-    type: CLEAR_ERRORS
+    type: CLEAR_SESSION_ERRORS
+}))
+export const clearProfileErrors = () => dispatch => (
+    dispatch({
+    type: CLEAR_PROFILE_ERRORS
 }))

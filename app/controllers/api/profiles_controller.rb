@@ -5,6 +5,7 @@ class Api::ProfilesController < ApplicationController
         @profile = Profile.new(profile_params)
         @profile.user_id = current_user.id
         if @profile.save
+            set_current_profile(@profile)
             render :show
         else
             render json: @profile.errors.full_messages, status: 400
@@ -18,6 +19,11 @@ class Api::ProfilesController < ApplicationController
 
     def show
         @profile = Profile.find(params[:id])
+        if profile_params[:set]
+            set_current_profile(@profile)
+        elsif profile_params[:unset]
+            unset_current_profile(@profile)
+        end
         render :show
     end
 
@@ -42,6 +48,6 @@ class Api::ProfilesController < ApplicationController
 
 private
     def profile_params
-        params.require(:profile).permit(:name, :maturity_preference)
+        params.require(:profile).permit(:name, :maturity_preference, :set, :unset)
     end
 end
