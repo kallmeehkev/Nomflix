@@ -7,9 +7,10 @@ class GalleryIndex extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div className="browse_body">
                 <GalleryNavBarContainer />
-                Gallery
+                
+                <div className="huge">Gallery</div> 
             </div>
         )
     }

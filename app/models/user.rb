@@ -18,6 +18,11 @@ validates :password_digest, presence: true
   after_initialize :ensure_session_token
   attr_reader :password
 
+  has_many :profiles,
+  foreign_key: :user_id,
+  class_name: :Profile,
+  dependent: :destroy
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)

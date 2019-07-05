@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Root from './components/root.jsx';
 import configureStore from './store/store'
 import * as sessionAction from './actions/session_actions'
+import * as profileApiUtil from './util/profile_api_util'
 
 document.addEventListener('DOMContentLoaded', () => {
     const root = document.getElementById('root');
@@ -19,5 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
         store = configureStore();
     }
+    window.fetchProfile = profileApiUtil.fetchProfile;
+    window.createProfile = profileApiUtil.createProfile;
+    window.updateProfile = profileApiUtil.updateProfile;
+    window.deleteProfile = profileApiUtil.deleteProfile;
     ReactDOM.render(<Root store={store} />, root);
 });

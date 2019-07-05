@@ -102,7 +102,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_root_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/root.jsx */ "./frontend/components/root.jsx");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _util_profile_api_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./util/profile_api_util */ "./frontend/util/profile_api_util.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -128,6 +130,10 @@ document.addEventListener('DOMContentLoaded', function () {
     store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])();
   }
 
+  window.fetchProfile = _util_profile_api_util__WEBPACK_IMPORTED_MODULE_5__["fetchProfile"];
+  window.createProfile = _util_profile_api_util__WEBPACK_IMPORTED_MODULE_5__["createProfile"];
+  window.updateProfile = _util_profile_api_util__WEBPACK_IMPORTED_MODULE_5__["updateProfile"];
+  window.deleteProfile = _util_profile_api_util__WEBPACK_IMPORTED_MODULE_5__["deleteProfile"];
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
     store: store
   }), root);
@@ -325,7 +331,11 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), "Gallery");
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "browse_body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "huge"
+      }, "Gallery"));
     }
   }]);
 
@@ -467,70 +477,162 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _nav_bar_icon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./nav_bar_icon */ "./frontend/components/nav_bar/nav_bar_icon.jsx");
 /* harmony import */ var _images__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../images */ "./frontend/components/images.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
 
+ //source for scrolling effect: https://pqina.nl/blog/applying-styles-based-on-the-user-scroll-position-with-smart-css/
 
-var NavBar = function NavBar(props) {
-  if (props.currentUser) {
-    //logged in
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "browse_nav_bar_container"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "browse_pinning_nav_bar"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      onClick: function onClick() {
-        return props.logout(props.currentUser);
-      }
-    }, "Log Out"));
-  } else {
-    switch (props.navType) {
-      case 'login':
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "login_nav_bar_container"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "login_nav_bar_header"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: _images__WEBPACK_IMPORTED_MODULE_3__["nomflix_logo_URL"],
-          className: "login_splash_logo"
-        })))));
+var NavBar =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(NavBar, _React$Component);
 
-      case 'signup':
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "signup_nav_bar_container"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "login_nav_bar_header"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: _images__WEBPACK_IMPORTED_MODULE_3__["nomflix_logo_URL"],
-          className: "login_splash_logo"
-        })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/login"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "signup_redirect"
-        }, "Log In")));
+  function NavBar(props) {
+    var _this;
 
-      default:
-        //just the splash nav
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "splash_nav_bar_container"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "splash_nav_bar_header"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: _images__WEBPACK_IMPORTED_MODULE_3__["nomflix_logo_URL"],
-          className: "splash_logo"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/login"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "authLink login"
-        }, "Log In")))));
-    }
+    _classCallCheck(this, NavBar);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(NavBar).call(this, props));
+    _this.debounce = _this.debounce.bind(_assertThisInitialized(_this));
+    _this.storeScroll = _this.storeScroll.bind(_assertThisInitialized(_this));
+    return _this;
   }
-};
+
+  _createClass(NavBar, [{
+    key: "debounce",
+    value: function debounce(fn) {
+      var frame;
+      return function () {
+        for (var _len = arguments.length, params = new Array(_len), _key = 0; _key < _len; _key++) {
+          params[_key] = arguments[_key];
+        }
+
+        if (frame) {
+          cancelAnimationFrame(frame);
+        }
+
+        frame = requestAnimationFrame(function () {
+          fn.apply(void 0, params);
+        });
+      };
+    }
+  }, {
+    key: "storeScroll",
+    value: function storeScroll() {
+      document.documentElement.dataset.scroll = window.scrollY;
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      if (this.props.currentUser) {
+        document.addEventListener('scroll', this.debounce(this.storeScroll), {
+          passive: true
+        });
+        this.storeScroll();
+      }
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      document.removeEventListener('scroll', this.debounce(this.storeScroll), {
+        passive: true
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      if (this.props.currentUser) {
+        //logged in
+        //need logic for classNames browse nav bar.  if on profile page or not.  apply on pinning and main
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_nav_bar_container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_pinning_nav_bar"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "main_browse_nav_bar"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: "/browse"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: _images__WEBPACK_IMPORTED_MODULE_3__["nomflix_logo_URL"],
+          className: "browse_splash_logo"
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_logout"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            return _this2.props.logout(_this2.props.currentUser);
+          }
+        }, "Log Out")))));
+      } else {
+        switch (this.props.navType) {
+          case 'login':
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "login_nav_bar_container"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "login_nav_bar_header"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+              to: "/"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+              src: _images__WEBPACK_IMPORTED_MODULE_3__["nomflix_logo_URL"],
+              className: "login_splash_logo"
+            })))));
+
+          case 'signup':
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "signup_nav_bar_container"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "login_nav_bar_header"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+              to: "/"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+              src: _images__WEBPACK_IMPORTED_MODULE_3__["nomflix_logo_URL"],
+              className: "login_splash_logo"
+            })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+              to: "/login"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+              className: "signup_redirect"
+            }, "Log In")));
+
+          default:
+            //just the splash nav
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "splash_nav_bar_container"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "splash_nav_bar_header"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+              src: _images__WEBPACK_IMPORTED_MODULE_3__["nomflix_logo_URL"],
+              className: "splash_logo"
+            })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+              to: "/login"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+              className: "authLink login"
+            }, "Log In")))));
+        }
+      }
+    }
+  }]);
+
+  return NavBar;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (NavBar);
 
@@ -1310,6 +1412,56 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/util/profile_api_util.js":
+/*!*******************************************!*\
+  !*** ./frontend/util/profile_api_util.js ***!
+  \*******************************************/
+/*! exports provided: fetchProfiles, fetchProfile, createProfile, updateProfile, deleteProfile */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchProfiles", function() { return fetchProfiles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchProfile", function() { return fetchProfile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createProfile", function() { return createProfile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateProfile", function() { return updateProfile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteProfile", function() { return deleteProfile; });
+var fetchProfiles = function fetchProfiles() {
+  return $.ajax({
+    method: 'GET',
+    url: 'api/profiles'
+  });
+};
+var fetchProfile = function fetchProfile(id) {
+  return $.ajax({
+    method: 'GET',
+    url: "api/profiles/".concat(id)
+  });
+};
+var createProfile = function createProfile(profile) {
+  return $.ajax({
+    method: 'POST',
+    url: "api/profiles",
+    data: {
+      profile: profile
+    }
+  });
+};
+var updateProfile = function updateProfile(profile) {
+  return $.ajax({
+    method: 'PATCH',
+    url: "api/profiles/".concat(profile.id)
+  });
+};
+var deleteProfile = function deleteProfile(id) {
+  return $.ajax({
+    method: 'DELETE',
+    url: "api/profiles/".concat(id)
+  });
+};
 
 /***/ }),
 

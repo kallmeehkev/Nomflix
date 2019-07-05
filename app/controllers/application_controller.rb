@@ -15,4 +15,8 @@ class ApplicationController < ActionController::Base
     @current_user = user
   end
 
+  def require_login
+    render json: {errors: "must be logged in to do this"}, :status => :unauthorized unless logged_in?
+  end
+
 end
