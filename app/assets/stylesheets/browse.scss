@@ -1,7 +1,7 @@
 .browse_nav_bar_container {
     height: 70px;
     z-index: 0;
-    overflow: hidden;
+    // overflow: hidden;
 }
 
 .browse_pinning_nav_bar {
@@ -80,3 +80,48 @@ html:not([data-scroll='0']) {
     justify-content: flex-end;
     color: white;
 }
+
+.browse_nav_bar_profile_pic {
+    height: 32px;
+    width: 32px;
+}
+
+.browse_dropbtn {
+  border: none;
+}
+
+.browse_dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.browse_dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: black;
+  min-width: 160px;
+  z-index: 1;
+  right: 0;
+  min-height: 100px;
+}
+
+.browse_dropdown-content button {
+  color: white;
+  padding: 12px 16px;
+  display: block;
+  font-size: .85rem;
+  width: fit-content;
+  font-weight: 550;
+  bottom: 0;
+  margin-top: 50px;
+}
+
+.browse_dropdown-content button:hover {
+  text-decoration: underline;
+}
+
+
+.browse_dropdown:hover .browse_dropdown-content {
+    display: block;
+}
+

@@ -581,7 +581,8 @@ var msp = function msp(_ref) {
   return {
     currentUser: entities.users[session.id],
     navType: 'gallery',
-    currentProfileId: ui.currentProfileId
+    currentProfileId: ui.currentProfileId,
+    fetchedProfile: entities.profiles[ui.currentProfileId] || {}
   };
 };
 
@@ -592,6 +593,9 @@ var mdp = function mdp(dispatch) {
     },
     unSetCurrentProfile: function unSetCurrentProfile(profileId) {
       return dispatch(Object(_actions_profile_actions__WEBPACK_IMPORTED_MODULE_3__["unSetCurrentProfile"])(profileId));
+    },
+    fetchProfile: function fetchProfile(profileId) {
+      return dispatch(Object(_actions_profile_actions__WEBPACK_IMPORTED_MODULE_3__["fetchProfile"])(profileId));
     }
   };
 };
@@ -718,6 +722,7 @@ function (_React$Component) {
           passive: true
         });
         this.storeScroll();
+        this.props.fetchProfile(this.props.currentProfileId);
       }
     }
   }, {
@@ -751,10 +756,15 @@ function (_React$Component) {
           src: _images__WEBPACK_IMPORTED_MODULE_3__["nomflix_logo_URL"],
           className: "browse_splash_logo"
         }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "browse_logout"
+          className: "browse_nav_bar_profile_pic browse_dropdown"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: this.props.fetchedProfile.photoUrl,
+          className: "browse_dropbtn"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_dropdown-content"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: this.logout
-        }, "Log Out")))));
+        }, "Sign out of Nomflix"))))));
       } else {
         switch (this.props.navType) {
           case 'login':
@@ -1084,9 +1094,7 @@ function (_React$Component) {
       };
       this.props.login(demoUser).then(function () {
         return _this4.props.setCurrentProfile(1);
-      }).then(function () {
-        return _this4.props.history.push('/browse');
-      });
+      }); //.then(() => this.props.history.push('/browse'));
     }
   }, {
     key: "componentWillUnmount",
@@ -1760,7 +1768,13 @@ var fetchProfiles = function fetchProfiles() {
 var fetchProfile = function fetchProfile(id) {
   return $.ajax({
     method: 'GET',
-    url: "api/profiles/".concat(id)
+    url: "api/profiles/".concat(id),
+    data: {
+      profile: {
+        set: false,
+        unset: false
+      }
+    }
   });
 };
 var createProfile = function createProfile(profile) {

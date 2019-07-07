@@ -33,6 +33,7 @@ class NavBar extends React.Component  {
         if (this.props.currentUser) {
             document.addEventListener('scroll', this.debounce(this.storeScroll), { passive: true });
             this.storeScroll();
+            this.props.fetchProfile(this.props.currentProfileId);
         }
     }
 
@@ -54,7 +55,11 @@ class NavBar extends React.Component  {
                     <div className="browse_pinning_nav_bar">
                         <div className="main_browse_nav_bar">
                             <div><Link to="/browse"><img src={Images.nomflix_logo_URL} className="browse_splash_logo" /></Link></div>
-                            <div className="browse_logout"><button onClick={this.logout}>Log Out</button></div>
+                            <div className="browse_nav_bar_profile_pic browse_dropdown">
+                                <img src={this.props.fetchedProfile.photoUrl} className="browse_dropbtn"/>
+                                <div className="browse_dropdown-content"><button onClick={this.logout}>Sign out of Nomflix</button></div>
+                            </div>
+                            
                         </div>
                     </div>
                     

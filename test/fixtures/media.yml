@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  duration: 1
+  description: MyString
+  maturity_rating: MyString
+
+two:
+  title: MyString
+  duration: 1
+  description: MyString
+  maturity_rating: MyString
