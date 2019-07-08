@@ -631,7 +631,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../nav_bar/gallery_nav_bar_container */ "./frontend/components/nav_bar/gallery_nav_bar_container.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _gallery_show_row__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gallery_show_row */ "./frontend/components/gallery/gallery_show_row.jsx");
+/* harmony import */ var _gallery_show_row_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gallery_show_row_container */ "./frontend/components/gallery/gallery_show_row_container.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -671,31 +671,36 @@ function (_React$Component) {
     value: function componentDidMount() {
       this.props.fetchGenres();
       this.props.fetchMediaGenres();
-      this.props.fetchGenre(1);
-      this.props.fetchGenre(2);
-      this.props.fetchGenre(3);
-      this.props.fetchGenre(4);
-      this.props.fetchGenre(5);
-      this.props.fetchGenre(6);
     }
   }, {
     key: "render",
     value: function render() {
-      if (this.props.firstGenreMedia[0]) {
+      if (this.props.genres[12] && this.props.mediaGenres[140]) {
+        var genresArr = Object.values(this.props.genres);
+        var genresArrlimit6 = genresArr.filter(function (genre, i) {
+          return i < 6;
+        });
+        var showRowsFirstSix = genresArrlimit6.map(function (genre) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            genre: genre,
+            key: genre.id
+          });
+        });
+        var showOneRow = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          genre: this.props.genres[4],
+          key: 1
+        });
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_body"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_fp_video_container"
-        }, "Gallery frontpage vid"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          firstGenreMedia: this.props.firstGenreMedia,
-          genres: this.props.genres
-        }));
+        }, "Gallery frontpage vid"), showOneRow);
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_body"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_fp_video_container"
-        }, "Gallery frontpage vid"));
+        }, "Gallery frontpage vid"), "Gallery Index");
       }
     }
   }]);
@@ -730,31 +735,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state) {
-  // let firstTenVideos = (Selectors.firstTenVideos(state)[0]) ? Selectors.firstTenVideos(state) : Selectors.defaultTenVideos(state)
-  var firstSixGenresMedia = []; //may want to refactor gallery show row to have its own container
+  //may want to refactor gallery show row to have its own container
   //each show row should do the fetch for videos of a genre
   //so each show row has an array of videos for that genre
-
   return {
-    // firstTenVideos: firstTenVideos,
     genres: state.entities.genres,
-    firstGenreMedia: _reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["genreMedia"](state, 1)
+    mediaGenres: state.entities.mediaGenres
   };
 };
 
 var mdp = function mdp(dispatch) {
   return {
-    fetchMedia: function fetchMedia() {
-      return dispatch(Object(_actions_medium_actions__WEBPACK_IMPORTED_MODULE_2__["fetchMedia"])());
-    },
     fetchGenres: function fetchGenres() {
       return dispatch(Object(_actions_genre_actions__WEBPACK_IMPORTED_MODULE_4__["fetchGenres"])());
     },
     fetchMediaGenres: function fetchMediaGenres() {
       return dispatch(Object(_actions_media_genre_actions__WEBPACK_IMPORTED_MODULE_5__["fetchMediaGenres"])());
-    },
-    fetchGenre: function fetchGenre(id) {
-      return dispatch(Object(_actions_genre_actions__WEBPACK_IMPORTED_MODULE_4__["fetchGenre"])(id));
     }
   };
 };
@@ -789,15 +785,25 @@ var GalleryShowItem = function GalleryShowItem(props) {
     mediaUrl: ""
   };
   var video = props.video ? props.video : defaultVideo;
+  var style = {
+    backgroundImage: 'url(' + video.thumbnailUrl + ')'
+  };
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "browse_row_item"
+    className: "browse_row_item_container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "browse_row_item_content",
+    style: style
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "a"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "b"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/watch/".concat(video.id)
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "browse_row_item_content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: video.thumbnailUrl
-  }))));
+    className: "browse_row_item_link"
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "c"
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (GalleryShowItem);
@@ -816,31 +822,113 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _gallery_show_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gallery_show_item */ "./frontend/components/gallery/gallery_show_item.jsx");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
-var GalleryShowRow = function GalleryShowRow(props) {
-  var videos = props.firstGenreMedia.map(function (video, i) {
-    // debugger
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
-      video: video,
-      key: i
-    });
-  });
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "browse_row_container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "browse_row_title"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, props.genres[1].name))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "browse_row_content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "browse_row_slider"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "browse_row_slider_wrapper"
-  }, videos))));
-};
+
+var GalleryShowRow =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(GalleryShowRow, _React$Component);
+
+  function GalleryShowRow() {
+    _classCallCheck(this, GalleryShowRow);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(GalleryShowRow).apply(this, arguments));
+  }
+
+  _createClass(GalleryShowRow, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchGenre(this.props.genre.id);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this = this;
+
+      if (this.props.genreVideos[this.props.genreVideos.length - 1]) {
+        // console.log(this.props.genreVideos)
+        // console.log(this.props.genre)
+        var videos = this.props.genreVideos.map(function (video, i) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            video: video,
+            key: i + _this.props.genre.id * 10
+          });
+        });
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_row_container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "browse_row_title"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.genre.name))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_row_content"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_row_slider_wrapper"
+        }, videos)));
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "GalleryShowRow");
+      }
+    }
+  }]);
+
+  return GalleryShowRow;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (GalleryShowRow);
+
+/***/ }),
+
+/***/ "./frontend/components/gallery/gallery_show_row_container.jsx":
+/*!********************************************************************!*\
+  !*** ./frontend/components/gallery/gallery_show_row_container.jsx ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _gallery_show_row__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gallery_show_row */ "./frontend/components/gallery/gallery_show_row.jsx");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+/* harmony import */ var _actions_genre_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/genre_actions */ "./frontend/actions/genre_actions.js");
+
+
+
+
+
+var msp = function msp(state, ownProps) {
+  return {
+    genreVideos: _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["genreVideos"](state, ownProps.genre),
+    genre: ownProps.genre
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    fetchGenre: function fetchGenre(id) {
+      return dispatch(Object(_actions_genre_actions__WEBPACK_IMPORTED_MODULE_3__["fetchGenre"])(id));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_gallery_show_row__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -2150,14 +2238,14 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 /*!****************************************!*\
   !*** ./frontend/reducers/selectors.js ***!
   \****************************************/
-/*! exports provided: defaultTenVideos, firstTenVideos, genreMedia */
+/*! exports provided: defaultTenVideos, firstTenVideos, genreVideos */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultTenVideos", function() { return defaultTenVideos; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "firstTenVideos", function() { return firstTenVideos; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "genreMedia", function() { return genreMedia; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "genreVideos", function() { return genreVideos; });
 var defaultTenVideos = function defaultTenVideos(state) {
   var newArr = [];
   var defaultVideo = {};
@@ -2187,15 +2275,15 @@ var firstTenVideos = function firstTenVideos(state) {
 
   return newArr;
 };
-var genreMedia = function genreMedia(state, genreId) {
+var genreVideos = function genreVideos(state, genre) {
   var mediaGenres = Object.values(state.entities.mediaGenres).filter(function (mediaGenre) {
-    return mediaGenre.genreId === genreId;
-  }); // debugger
-
-  return mediaGenres.map(function (mediaGenre, i) {
-    if (mediaGenre) {
+    return mediaGenre.genreId === genre.id;
+  });
+  var genreVideos = mediaGenres.map(function (mediaGenre, i) {
+    if (state.entities.media[mediaGenre.mediaId]) {
       return state.entities.media[mediaGenre.mediaId];
     } else {
+      // debugger
       return {
         id: i,
         description: "",
@@ -2207,6 +2295,7 @@ var genreMedia = function genreMedia(state, genreId) {
       };
     }
   });
+  return genreVideos;
 };
 
 /***/ }),
