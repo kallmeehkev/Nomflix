@@ -42,8 +42,7 @@ class NavBar extends React.Component  {
     }
 
     logout() {
-        this.props.unSetCurrentProfile(this.props.currentProfileId)
-        this.props.logout(this.props.currentUser);
+        this.props.unSetCurrentProfile(this.props.currentProfileId).then(() => this.props.logout(this.props.currentUser))
     }
 
     render() {

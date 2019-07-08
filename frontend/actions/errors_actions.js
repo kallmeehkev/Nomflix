@@ -1,5 +1,6 @@
 export const CLEAR_SESSION_ERRORS = "CLEAR_SESSION_ERRORS"
 export const CLEAR_PROFILE_ERRORS = "CLEAR_PROFILE_ERRORS"
+export const CLEAR_MEDIUM_ERRORS = "CLEAR_MEDIUM_ERRORS"
 
 export const clearSessionErrors = () => dispatch => (
     dispatch({
@@ -8,4 +9,8 @@ export const clearSessionErrors = () => dispatch => (
 export const clearProfileErrors = () => dispatch => (
     dispatch({
     type: CLEAR_PROFILE_ERRORS
+}))
+export const clearMediumErrors = () => dispatch => (
+    dispatch({
+    type: CLEAR_MEDIUM_ERRORS
 }))
