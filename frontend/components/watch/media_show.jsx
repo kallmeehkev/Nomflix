@@ -8,7 +8,7 @@ class MediaShow extends React.Component {
 
     render () {
         return (
-            <div>
+            <div className="media_show">
                 <video src={this.props.video.mediaFileUrl} autoPlay controls muted></video>
             </div>
         )

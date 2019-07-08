@@ -1,0 +1,1 @@
+json.extract! media_genre, :id, :media_id, :genre_id

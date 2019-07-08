@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: media_genres
+#
+#  id         :bigint           not null, primary key
+#  media_id   :integer          not null
+#  genre_id   :integer          not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  media_id: 1
+  genre_id: 1
+
+two:
+  media_id: 1
+  genre_id: 1

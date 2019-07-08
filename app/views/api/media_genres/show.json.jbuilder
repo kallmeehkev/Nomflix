@@ -1,0 +1,1 @@
+json.partial! "api/media_genres/media_genre", media_genre: @media_genre
