@@ -694,7 +694,7 @@ function (_React$Component) {
           className: "browse_body"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_fp_video_container"
-        }, "Gallery frontpage vid"), showOneRow);
+        }, "Gallery frontpage vid"), showRowsFirstSix);
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_body"
@@ -794,16 +794,12 @@ var GalleryShowItem = function GalleryShowItem(props) {
     className: "browse_row_item_content",
     style: style
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "a"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "b"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/watch/".concat(video.id)
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "browse_row_item_link"
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "c"
-  })));
+  })))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (GalleryShowItem);

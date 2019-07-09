@@ -186,10 +186,11 @@ html:not([data-scroll='0']) {
     align-content: center;
     // margin-left: 5vw;
     padding: 0 4%;
-    -webkit-transition: transform 400ms ease-in-out;
-    -moz-transition: transform 400ms ease-in-out;
-    -o-transition: transform 400ms ease-in-out;
-    transition: transform 400ms ease-in-out;
+    // -webkit-transition: transform 400ms ease-in-out;
+    // -moz-transition: transform 400ms ease-in-out;
+    // -o-transition: transform 400ms ease-in-out;
+    // transition: transform 400ms ease-in-out;
+    overflow: overlay;
 }
 
 // .browse_row_slider {
@@ -203,19 +204,20 @@ html:not([data-scroll='0']) {
 // }
 
 .browse_row_slider_wrapper {
-  overflow-x: visible;
+  // overflow-x: hidden;
   padding-bottom: 1px;
   height: 15vw;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  overflow: visible;
 }
 
 .browse_row_item_container {
   -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    z-index: 1;
+    box-sizing: content-box;
+    z-index: 0;
     box-sizing: border-box;
     display: inline-block;
     position: relative;
@@ -223,11 +225,11 @@ html:not([data-scroll='0']) {
     vertical-align: top;
     padding: 0 2px;
     width: 18.4vw;
+    overflow: visible;
 }
 
 .browse_row_item_content {
   position: relative;
-  z-index: 1;
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -236,6 +238,16 @@ html:not([data-scroll='0']) {
   flex-direction: column;
   justify-content: space-between;
 }
+.browse_row_item_content:hover {
+  transform: scale(1.5);
+  -webkit-transition: transform 400ms ease-in-out;
+    -moz-transition: transform 400ms ease-in-out;
+    -o-transition: transform 400ms ease-in-out;
+    transition: transform 400ms ease-in-out;
+    z-index: 4;
+    position: absolute;
+}
+
 
 .browse_row_item_content .a {
   width: 100%;
@@ -259,7 +271,9 @@ html:not([data-scroll='0']) {
   background-color: transparent;
   height: 72%;
   margin: 0;
+  z-index: 1;
 }
+
 
 .browse_row_item_link {
   width: 100%;

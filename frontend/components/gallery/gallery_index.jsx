@@ -21,8 +21,8 @@ class GalleryIndex extends React.Component {
                 <div className="browse_body">
                     <GalleryNavBarContainer />
                     <div className="browse_fp_video_container">Gallery frontpage vid</div> 
-                    {/* {showRowsFirstSix} */}
-                    {showOneRow}
+                    {showRowsFirstSix}
+                    {/* {showOneRow} */}
                 </div>
             )
         } else {
