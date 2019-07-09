@@ -671,6 +671,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       this.props.fetchGenres();
       this.props.fetchMediaGenres();
+      this.props.fetchMedium(14);
     }
   }, {
     key: "render",
@@ -690,11 +691,37 @@ function (_React$Component) {
           genre: this.props.genres[4],
           key: 1
         });
+        var fpVideoStyle = {
+          backgroundImage: 'url(' + this.props.fpVideo.thumbnailUrl + ')'
+        };
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_body"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_fp_video_container"
-        }, "Gallery frontpage vid"), showRowsFirstSix);
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_fp_video",
+          style: fpVideoStyle
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_fp_background_gradient"
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "browse_fp_video_maturity_rating"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "browse_fp_video_maturity_rating_text"
+        }, this.props.fpVideo.maturityRating)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_fp_video_side_section"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_side_section_controls"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "play_button_container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "link"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+          to: "/watch/".concat(this.props.fpVideo.id)
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "play_button"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "play_button_text"
+        }, "Play")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null)))), showOneRow);
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_body"
@@ -740,7 +767,8 @@ var msp = function msp(state) {
   //so each show row has an array of videos for that genre
   return {
     genres: state.entities.genres,
-    mediaGenres: state.entities.mediaGenres
+    mediaGenres: state.entities.mediaGenres,
+    fpVideo: state.entities.media[14] || {}
   };
 };
 
@@ -751,6 +779,9 @@ var mdp = function mdp(dispatch) {
     },
     fetchMediaGenres: function fetchMediaGenres() {
       return dispatch(Object(_actions_media_genre_actions__WEBPACK_IMPORTED_MODULE_5__["fetchMediaGenres"])());
+    },
+    fetchMedium: function fetchMedium(id) {
+      return dispatch(Object(_actions_medium_actions__WEBPACK_IMPORTED_MODULE_2__["fetchMedium"])(id));
     }
   };
 };
@@ -771,36 +802,95 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
-var GalleryShowItem = function GalleryShowItem(props) {
-  var defaultVideo = {
-    id: 0,
-    description: "",
-    title: "",
-    duration: 0,
-    maturityRating: "PG",
-    thumbnailUrl: "",
-    mediaUrl: ""
-  };
-  var video = props.video ? props.video : defaultVideo;
-  var style = {
-    backgroundImage: 'url(' + video.thumbnailUrl + ')'
-  };
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "browse_row_item_container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "browse_row_item_content",
-    style: style
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "b"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/watch/".concat(video.id)
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "browse_row_item_link"
-  })))));
-};
+
+var GalleryShowItem =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(GalleryShowItem, _React$Component);
+
+  function GalleryShowItem(props) {
+    var _this;
+
+    _classCallCheck(this, GalleryShowItem);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GalleryShowItem).call(this, props));
+    _this.state = {
+      isMouseInside: false
+    };
+    _this.mouseEnter = _this.mouseEnter.bind(_assertThisInitialized(_this));
+    _this.mouseLeave = _this.mouseLeave.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(GalleryShowItem, [{
+    key: "mouseEnter",
+    value: function mouseEnter() {
+      this.setState({
+        isMouseInside: true
+      });
+    }
+  }, {
+    key: "mouseLeave",
+    value: function mouseLeave() {
+      this.setState({
+        isMouseInside: false
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var defaultVideo = {
+        id: 0,
+        description: "",
+        title: "",
+        duration: 0,
+        maturityRating: "PG",
+        thumbnailUrl: "",
+        mediaUrl: ""
+      };
+      var video = this.props.video ? this.props.video : defaultVideo;
+      var style = {
+        backgroundImage: 'url(' + video.thumbnailUrl + ')'
+      };
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "browse_row_item_container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onMouseEnter: this.mouseEnter,
+        onMouseLeave: this.mouseLeave,
+        className: "browse_row_item_content " + (this.state.isMouseInside ? 'browse_row_transform' : ''),
+        style: style
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "b"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/watch/".concat(video.id)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "browse_row_item_link"
+      })))));
+    }
+  }]);
+
+  return GalleryShowItem;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (GalleryShowItem);
 
@@ -844,31 +934,40 @@ var GalleryShowRow =
 function (_React$Component) {
   _inherits(GalleryShowRow, _React$Component);
 
-  function GalleryShowRow() {
+  function GalleryShowRow(props) {
     _classCallCheck(this, GalleryShowRow);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(GalleryShowRow).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(GalleryShowRow).call(this, props)); // this.state = {
+    //     isMouseInside: false
+    // }
+    // this.mouseEnter = this.mouseEnter.bind(this)
+    // this.mouseLeave = this.mouseLeave.bind(this)
   }
 
   _createClass(GalleryShowRow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchGenre(this.props.genre.id);
-    }
+    } // mouseEnter() {
+    //     this.setState({ isMouseInside: true });
+    // }
+    // mouseLeave() {
+    //     this.setState({ isMouseInside: false });
+    // }
+
   }, {
     key: "render",
     value: function render() {
       var _this = this;
 
       if (this.props.genreVideos[this.props.genreVideos.length - 1]) {
-        // console.log(this.props.genreVideos)
-        // console.log(this.props.genre)
         var videos = this.props.genreVideos.map(function (video, i) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
             video: video,
             key: i + _this.props.genre.id * 10
           });
-        });
+        }); // let containerClass = this.state.isMouseInside ? "browse_row_slider_wrapper browse_row_transform" : "browse_row_transform"
+
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_row_container"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -876,8 +975,10 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.genre.name))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_row_content"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_row_slider"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_row_slider_wrapper"
-        }, videos)));
+        }, videos))));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "GalleryShowRow");
       }
