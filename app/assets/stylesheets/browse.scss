@@ -72,7 +72,7 @@ html:not([data-scroll='0']) {
 		background-color: black;
     box-shadow: 0 0 .5em rgba(0, 0, 0, .5);
     transition: background-color .25s;
-    
+    z-index: 5;
     }
 
 }
@@ -127,12 +127,12 @@ html:not([data-scroll='0']) {
 }
 
 .browse_fp_video_container{
-  height: 102vh;
+  height: 70vw;
   display: flex;
   margin-bottom: 20px;
   margin-top: -70px;
   position: relative;
-  margin-bottom: -10vh;
+  margin-bottom: -20vh;
 
 }
 
@@ -149,7 +149,7 @@ html:not([data-scroll='0']) {
 .browse_fp_background_gradient {
     position: absolute;
     height: 100px;
-    bottom: -50px;
+    bottom: 0px;
     right: 0;
     left: 0;
     background: rgba(0,0,0,0.01);
@@ -202,16 +202,26 @@ html:not([data-scroll='0']) {
 .browse_side_section_controls {
   width: 100%;
   height: 100px;
-  padding:  35vh 10px 0px;
+  padding-top:  20vh;
   // box-sizing: border-box;
   display: flex;
   position: relative;
-  flex-direction: row;
-  justify-content: space-evenly;
+  flex-direction: column;
+  justify-content: flex-start;
 }
+
+.browse_fp_video_title {
+  padding-right: 16vw;
+  margin-bottom: 2vh;
+  font-size: 2.5vw;
+  font-weight: 700;
+  color: rgb(6,25,34);
+
+}
+
 .play_button_container {
   height: 2.8vw;
-  width: 21%;
+  width: 23%;
   display: flex;
   justify-content: flex-start;
   text-align: center;
@@ -231,11 +241,22 @@ html:not([data-scroll='0']) {
   width: 100%;
 }
 .play_button_container a {
-  // width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.play_button_container .link:hover {
+  box-shadow: 0 0.6vw 1vw -0.4vw rgba(0,0,0,.35);
+    background-color: #e6e6e6;
+    color: #000;
+    // height: 1.2vw;
+    border-radius: .2vw;
 }
 
 .play_button_text {
+  display: flex;
   width: 50%;
+  background: transparent;
 }
 
 .play_button_container .play_button {
@@ -243,6 +264,14 @@ html:not([data-scroll='0']) {
   height: 2.8vw;
   width: 2.8vw;
   background-size: cover;
+  display: flex;
+}
+
+.browse_fp_video_description {
+  padding-right: 16vw;
+  margin-top: 2vh;
+  font-size: 1.2vw;
+  color: rgb(206,17,65);
 }
 
 .browse_row_container {

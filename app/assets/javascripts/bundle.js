@@ -711,7 +711,9 @@ function (_React$Component) {
           className: "browse_fp_video_side_section"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_side_section_controls"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_fp_video_title"
+        }, this.props.fpVideo.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "play_button_container"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "link"
@@ -721,7 +723,9 @@ function (_React$Component) {
           className: "play_button"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "play_button_text"
-        }, "Play")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null)))), showOneRow);
+        }, "Play"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_fp_video_description"
+        }, this.props.fpVideo.description)))), showOneRow);
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_body"

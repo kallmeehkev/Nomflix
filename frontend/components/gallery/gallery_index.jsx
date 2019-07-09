@@ -10,6 +10,8 @@ class GalleryIndex extends React.Component {
         this.props.fetchMedium(14);
     }
 
+
+
     render() {
         if (this.props.genres[12] && this.props.mediaGenres[140]) {
             let genresArr = Object.values(this.props.genres);
@@ -31,13 +33,18 @@ class GalleryIndex extends React.Component {
                         </span>
                         <div className="browse_fp_video_side_section">
                             <div className="browse_side_section_controls">
+                                <div className="browse_fp_video_title">
+                                    {this.props.fpVideo.title}
+                                </div>
                                 <span className="play_button_container"><div className="link"><Link to={`/watch/${this.props.fpVideo.id}`}>
                                     <div className="play_button"></div><div className="play_button_text">Play</div></Link></div>
-                                    </span>
-                                <span></span>
+                                    <div></div>
+                                </span>
+                                <div className="browse_fp_video_description" >
+                                    {this.props.fpVideo.description}
+                                </div>
                             </div>
-                        </div>
-                        
+                        </div>    
                     </div> 
                     {/* {showRowsFirstSix} */}
                     {showOneRow}
