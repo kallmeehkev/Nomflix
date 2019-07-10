@@ -73,24 +73,24 @@ class NavBar extends React.Component  {
                                 {logo}
                                 <div className="main_nav_bar_left_controls">{home}</div>
                                 <div className="main_nav_bar_left_controls">Genres
-                                <div className="browse_dropdown-content_genre">
-                                <div className="browse_dropdown_content_genre_container">
-                                    <div className="genres_vertical_container">
-                                        {firstFourGenres}
+                                    <div className="browse_dropdown-content_genre">
+                                        <div className="browse_dropdown_content_genre_container">
+                                            <div className="genres_vertical_container">{firstFourGenres}</div>
+                                            <div className="genres_vertical_container">{secondFourGenres}</div>
+                                            <div className="genres_vertical_container">{thirdFourGenres}</div>
+                                        </div>
                                     </div>
-                                    <div className="genres_vertical_container">
-                                        {secondFourGenres}
-                                    </div>
-                                    <div className="genres_vertical_container">
-                                        {thirdFourGenres}
-                                    </div>
-                                </div>
-                                </div>
                                 </div>
                             </div>
                             <div className="browse_nav_bar_profile_pic browse_dropdown">
                                 <img src={this.props.fetchedProfile.photoUrl} className="browse_dropbtn"/>
-                                <div className="browse_dropdown-content"><button onClick={this.logout}>Sign out of Nomflix</button></div>
+                                <i className="fas fa-caret-down"></i>
+                                <div className="browse_dropdown-content">
+                                    <div className="browse_dropdown-arrow"><div><i className="fas fa-caret-up"></i></div></div>
+                                    <div className="browse_dropdown-list">
+                                        <button onClick={this.logout}>Sign out of Nomflix</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>  

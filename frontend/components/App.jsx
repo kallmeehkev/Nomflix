@@ -6,16 +6,18 @@ import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import GalleryIndexContainer from './gallery/gallery_index_container';
 import SplashContainer from './splash/splash_container';
 import MediaShowContainer from './watch/media_show_container';
+import GenreShowContainer from './genre/genre_show_container';
 
 const App = () => (
     <div>
-        <AuthRoute exact path="/" component={SplashContainer} />
-        <AuthRoute exact path="/login" component={SessionPage} />
-        <AuthRoute exact path="/signup" component={SessionPage} />
-        <ProtectedRoute path="/browse" component={GalleryIndexContainer} />
         <Switch>
-            <Route exact path="/watch" render={ () => (<Redirect to="/browse" />) } />
+            <AuthRoute exact path="/" component={SplashContainer} />
+            <AuthRoute exact path="/login" component={SessionPage} />
+            <AuthRoute exact path="/signup" component={SessionPage} />
             <ProtectedRoute path="/watch/:mediaId" component={MediaShowContainer} />
+            <ProtectedRoute path="/browse/genre/:genreId" component={GenreShowContainer} />
+            <ProtectedRoute exact path="/browse" component={GalleryIndexContainer} />
+            <Route render={ () => (<Redirect to="/browse" />) } />
         </Switch>
     </div>
 );

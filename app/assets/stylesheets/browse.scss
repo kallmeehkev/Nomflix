@@ -121,8 +121,19 @@ html:not([data-scroll='0']) {
 }
 
 .browse_nav_bar_profile_pic {
+  display: flex;
+  width: 60px;
+  height: 32px;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+}
+
+.browse_nav_bar_profile_pic img {
     height: 32px;
     width: 32px;
+    display: inline;
+    padding-right: 8px;
 }
 
 .browse_dropbtn {
@@ -140,23 +151,55 @@ html:not([data-scroll='0']) {
 .browse_dropdown-content {
   display: none;
   position: absolute;
-  background-color: black;
-  min-width: 160px;
+  min-width: 150px;
   z-index: 10;
   right: 0;
-  top: 40px;
   min-height: 100px;
+  max-width: 25vw;
+}
+
+.browse_dropdown-arrow {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+  background: transparent;
+  padding-right: 4vw;
+  height: 3vh;
+  box-sizing: border-box;
+}
+
+.browse_dropdown-arrow div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.browse_dropdown-list {
+  display: flex;
+  background-color: black;
+  min-height: 15vh;
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  bottom: 6px;
+  border: 1px solid rgb(119, 119, 119);
+  box-sizing: content-box;
 }
 
 .browse_dropdown-content button {
   color: white;
   padding: 12px 16px;
-  display: block;
-  font-size: .85rem;
+  display: flex;
+  font-size: 1.9vh;
   width: fit-content;
   font-weight: 550;
-  bottom: 0;
-  margin-top: 50px;
+}
+
+.browse_dropdown:hover .browse_dropdown-content {
+    display: block;
+    transition: .4s;
 }
 
 .browse_dropdown-content button:hover {
@@ -170,7 +213,7 @@ html:not([data-scroll='0']) {
   width: 22vw;
   z-index: 10;
   top: 40px;
-  height: 18vh;
+  height: 19vh;
   opacity: .7;
   cursor: default;
 
@@ -211,13 +254,6 @@ html:not([data-scroll='0']) {
 }
 
 
-
-.browse_dropdown:hover .browse_dropdown-content {
-    display: block;
-    padding-top: 10px;
-    transition: .4s;
-}
-
 .browse_fp_video_container{
   height: 70vw;
   display: flex;
@@ -249,7 +285,7 @@ html:not([data-scroll='0']) {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 4.2vw;
+    bottom: 4vw;
     background: rgba(0,0,0,0.01);
     background-image: -webkit-gradient(linear,left top,left bottom,from(rgba(20,20,20,0)),color-stop(15%,rgba(20,20,20,.15)),color-stop(29%,rgba(20,20,20,.35)),color-stop(44%,rgba(20,20,20,.58)),color-stop(68%,#141414),to(#141414));
     background-image: -webkit-linear-gradient(top,rgba(20,20,20,0) 0,rgba(20,20,20,.15) 15%,rgba(20,20,20,.35) 29%,rgba(20,20,20,.58) 44%,#141414 68%,#141414 100%);
@@ -289,9 +325,9 @@ html:not([data-scroll='0']) {
 
 .browse_fp_video_side_section {
   position: absolute;
-  top: 25vh;
+  top: 18vw;
   width: 30%;
-  height: 100%;
+  height: 40vh;
   left: 0;
   padding-left: 4%;
   z-index:2;
@@ -354,16 +390,17 @@ html:not([data-scroll='0']) {
 
 .play_button_text {
   display: flex;
-  width: 50%;
   background: transparent;
 }
 
 .play_button_container .play_button {
-  background-image: url('play_icon_3000.png');
+  // background-image: url('play_icon_3000.png');
   height: 2.8vw;
   width: 2.8vw;
-  background-size: cover;
+  // background-size: cover;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .browse_fp_video_description {

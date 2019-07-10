@@ -5,7 +5,7 @@ class Api::SessionsController < ApplicationController
             log_in(@user)
             render '/api/users/show.json.jbuilder'
         else
-            render json: {errors: "invalid credentials"}, :status => :unauthorized
+            render json: {errors: "Invalid credentials"}, :status => :unauthorized
         end
     end
 
@@ -15,7 +15,7 @@ class Api::SessionsController < ApplicationController
             session[:session_token] = nil
             render json: {}
         else
-            render json: {errors: "nobody logged in"}, :status => :not_found
+            render json: {errors: "Nobody logged in"}, :status => :not_found
         end
     end
 end

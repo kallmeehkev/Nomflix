@@ -24,16 +24,15 @@ export const firstTenVideos = state => {
     return newArr;
 }
 
-export const genreVideos = (state, genre) => {
+export const genreVideos = (state, genreId) => {
     let mediaGenres = Object.values(state.entities.mediaGenres).filter( (mediaGenre) => {
-        return mediaGenre.genreId === genre.id;
+        return mediaGenre.genreId === genreId;
     })
     let genreVideos= mediaGenres.map( (mediaGenre, i) => {
         if (state.entities.media[mediaGenre.mediaId]) {
-        return state.entities.media[mediaGenre.mediaId]
+            return state.entities.media[mediaGenre.mediaId]
         } 
         else {
-            // debugger
             return {
                 id: i,
                 description: "",
@@ -46,4 +45,15 @@ export const genreVideos = (state, genre) => {
         }
     });
     return genreVideos;
+}
+
+export const randGenreVideo = genreVideos => {
+    return genreVideos[Math.floor(Math.random() * genreVideos.length)]
+}
+
+export const randGenreVideoId = (state, genreId) => {
+    let mediaGenres = Object.values(state.entities.mediaGenres).filter((mediaGenre) => {
+        return mediaGenre.genreId == genreId;
+    })
+    return mediaGenres[Math.floor(Math.random() * mediaGenres.length)].mediaId
 }

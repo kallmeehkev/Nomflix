@@ -5,7 +5,7 @@ import { fetchGenre } from '../../actions/genre_actions';
 
 const msp = (state, ownProps) => {
     return {
-        genreVideos: Selectors.genreVideos(state, ownProps.genre),
+        genreVideos: Selectors.genreVideos(state, ownProps.genre.id),
         genre: ownProps.genre
     }
 }

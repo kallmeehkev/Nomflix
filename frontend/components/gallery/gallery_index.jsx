@@ -36,7 +36,6 @@ class GalleryIndex extends React.Component {
                 backgroundImage: 'url(' + this.props.fpVideo.thumbnailUrl + ')',
             };
             let description = document.getElementsByClassName("browse_fp_video_description")[0]
-            console.log(description)
             if (description) {
                 description.addEventListener('click', this.fadeOutEffect);
             }
@@ -54,7 +53,7 @@ class GalleryIndex extends React.Component {
                                     {this.props.fpVideo.title}
                                 </div>
                                 <span className="play_button_container"><div className="link"><Link to={`/watch/${this.props.fpVideo.id}`}>
-                                    <div className="play_button"></div><div className="play_button_text">Play</div></Link></div>
+                                    <div className="play_button"><i className="fas fa-play"></i></div><div className="play_button_text">Play</div></Link></div>
                                     <div></div>
                                 </span>
                                 <div className="browse_fp_video_description" onLoad={this.fadeOut}>

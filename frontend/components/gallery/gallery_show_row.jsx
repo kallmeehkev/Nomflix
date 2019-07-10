@@ -11,9 +11,10 @@ class GalleryShowRow extends React.Component {
         // this.mouseLeave = this.mouseLeave.bind(this)
     }    
 
-
     componentDidMount() {
-        this.props.fetchGenre(this.props.genre.id)
+        if (this.props.genreVideos[0].duration === 0) {
+            this.props.fetchGenre(this.props.genre.id)
+        }
     }
         
     // mouseEnter() {
@@ -29,9 +30,10 @@ class GalleryShowRow extends React.Component {
                 return <GalleryShowItem video={video} key={i + (this.props.genre.id * 10)} />
             })
             // let containerClass = this.state.isMouseInside ? "browse_row_slider_wrapper browse_row_transform" : "browse_row_transform"
+            let rowTitle = this.props.genreShow ? <div>Trending Now for {this.props.genre.name}</div> : <div>{this.props.genre.name}</div>
             return (
                 <div className="browse_row_container">
-                    <h2><span className="browse_row_title"><div>{this.props.genre.name}</div></span></h2>
+                    <h2><span className="browse_row_title">{rowTitle}</span></h2>
                     <div className="browse_row_content">
                         <div className="browse_row_slider">
                             <div className="browse_row_slider_wrapper">

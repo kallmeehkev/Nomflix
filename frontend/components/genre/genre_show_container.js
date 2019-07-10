@@ -1,22 +1,23 @@
 import { connect } from 'react-redux';
-import GalleryIndex from './gallery_index';
 import * as Selectors from '../../reducers/selectors';
-import { fetchMedia, fetchMedium } from '../../actions/medium_actions';
+import GenreShow from './genre_show';
 import { fetchGenres, fetchGenre } from '../../actions/genre_actions';
 import { fetchMediaGenres } from '../../actions/media_genre_actions';
 
-const msp = state => {
+const msp = (state, ownProps) => {
     return {
         genres: state.entities.genres,
         mediaGenres: state.entities.mediaGenres,
-        fpVideo: state.entities.media[14] || {}
+        genre: state.entities.genres[ownProps.match.params.genreId],
+        // genreVideos: Selectors.genreVideos(state, ownProps.match.params.genreId),
     }
+    //need children components to render page after genres and mediaGenres have been fetched
 }
 
 const mdp = dispatch => ({
     fetchGenres: () => dispatch(fetchGenres()),
     fetchMediaGenres: () => dispatch(fetchMediaGenres()),
-    fetchMedium: (id) => dispatch(fetchMedium(id))
+    fetchGenre: (id) => dispatch(fetchGenre(id)),
 })
 
-export default connect(msp, mdp)(GalleryIndex);
+export default connect(msp, mdp)(GenreShow);

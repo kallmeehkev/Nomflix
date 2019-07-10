@@ -578,6 +578,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _gallery_gallery_index_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./gallery/gallery_index_container */ "./frontend/components/gallery/gallery_index_container.js");
 /* harmony import */ var _splash_splash_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./splash/splash_container */ "./frontend/components/splash/splash_container.js");
 /* harmony import */ var _watch_media_show_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./watch/media_show_container */ "./frontend/components/watch/media_show_container.js");
+/* harmony import */ var _genre_genre_show_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./genre/genre_show_container */ "./frontend/components/genre/genre_show_container.js");
+
 
 
 
@@ -588,7 +590,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_4__["AuthRoute"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_4__["AuthRoute"], {
     exact: true,
     path: "/",
     component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_6__["default"]
@@ -601,23 +603,163 @@ var App = function App() {
     path: "/signup",
     component: _session_form_session_page__WEBPACK_IMPORTED_MODULE_3__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_4__["ProtectedRoute"], {
+    path: "/watch/:mediaId",
+    component: _watch_media_show_container__WEBPACK_IMPORTED_MODULE_7__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_4__["ProtectedRoute"], {
+    path: "/browse/genre/:genreId",
+    component: _genre_genre_show_container__WEBPACK_IMPORTED_MODULE_8__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_4__["ProtectedRoute"], {
+    exact: true,
     path: "/browse",
     component: _gallery_gallery_index_container__WEBPACK_IMPORTED_MODULE_5__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-    exact: true,
-    path: "/watch",
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     render: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
         to: "/browse"
       });
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_4__["ProtectedRoute"], {
-    path: "/watch/:mediaId",
-    component: _watch_media_show_container__WEBPACK_IMPORTED_MODULE_7__["default"]
   })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
+
+/***/ }),
+
+/***/ "./frontend/components/gallery/gallery_fp_video.jsx":
+/*!**********************************************************!*\
+  !*** ./frontend/components/gallery/gallery_fp_video.jsx ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var GalleryFPVideo =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(GalleryFPVideo, _React$Component);
+
+  function GalleryFPVideo() {
+    _classCallCheck(this, GalleryFPVideo);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(GalleryFPVideo).apply(this, arguments));
+  }
+
+  _createClass(GalleryFPVideo, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchMedium(this.props.genreId);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (this.props.fpVideo.id !== 0) {
+        var fpVideoStyle = {
+          backgroundImage: 'url(' + this.props.fpVideo.thumbnailUrl + ')'
+        };
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_fp_video_container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_fp_video",
+          style: fpVideoStyle
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_fp_background_gradient"
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "browse_fp_video_maturity_rating"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "browse_fp_video_maturity_rating_text"
+        }, this.props.fpVideo.maturityRating)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_fp_video_side_section"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_side_section_controls"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_fp_video_title"
+        }, this.props.fpVideo.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "play_button_container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "link"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: "/watch/".concat(this.props.fpVideo.id)
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "play_button"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "play_button_text"
+        }, "Play"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_fp_video_description",
+          onLoad: this.fadeOut
+        }, this.props.fpVideo.description))));
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "fpVideoShow");
+      }
+    }
+  }]);
+
+  return GalleryFPVideo;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (GalleryFPVideo);
+
+/***/ }),
+
+/***/ "./frontend/components/gallery/gallery_fp_video_container.js":
+/*!*******************************************************************!*\
+  !*** ./frontend/components/gallery/gallery_fp_video_container.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_medium_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/medium_actions */ "./frontend/actions/medium_actions.js");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+/* harmony import */ var _gallery_fp_video__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gallery_fp_video */ "./frontend/components/gallery/gallery_fp_video.jsx");
+
+
+
+
+
+var msp = function msp(state, ownProps) {
+  return {
+    fpVideo: state.entities.media[_reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["randGenreVideoId"](state, ownProps.genreId)] || {
+      id: 0
+    }
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    fetchMedium: function fetchMedium(id) {
+      return dispatch(Object(_actions_medium_actions__WEBPACK_IMPORTED_MODULE_1__["fetchMedium"])(id));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_gallery_fp_video__WEBPACK_IMPORTED_MODULE_3__["default"]));
 
 /***/ }),
 
@@ -715,7 +857,6 @@ function (_React$Component) {
           backgroundImage: 'url(' + this.props.fpVideo.thumbnailUrl + ')'
         };
         var description = document.getElementsByClassName("browse_fp_video_description")[0];
-        console.log(description);
 
         if (description) {
           description.addEventListener('click', this.fadeOutEffect);
@@ -750,7 +891,9 @@ function (_React$Component) {
           to: "/watch/".concat(this.props.fpVideo.id)
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "play_button"
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-play"
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "play_button_text"
         }, "Play"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_fp_video_description",
@@ -784,8 +927,8 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _gallery_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gallery_index */ "./frontend/components/gallery/gallery_index.jsx");
-/* harmony import */ var _actions_medium_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/medium_actions */ "./frontend/actions/medium_actions.js");
-/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+/* harmony import */ var _actions_medium_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/medium_actions */ "./frontend/actions/medium_actions.js");
 /* harmony import */ var _actions_genre_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/genre_actions */ "./frontend/actions/genre_actions.js");
 /* harmony import */ var _actions_media_genre_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/media_genre_actions */ "./frontend/actions/media_genre_actions.js");
 
@@ -796,9 +939,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state) {
-  //may want to refactor gallery show row to have its own container
-  //each show row should do the fetch for videos of a genre
-  //so each show row has an array of videos for that genre
   return {
     genres: state.entities.genres,
     mediaGenres: state.entities.mediaGenres,
@@ -815,7 +955,7 @@ var mdp = function mdp(dispatch) {
       return dispatch(Object(_actions_media_genre_actions__WEBPACK_IMPORTED_MODULE_5__["fetchMediaGenres"])());
     },
     fetchMedium: function fetchMedium(id) {
-      return dispatch(Object(_actions_medium_actions__WEBPACK_IMPORTED_MODULE_2__["fetchMedium"])(id));
+      return dispatch(Object(_actions_medium_actions__WEBPACK_IMPORTED_MODULE_3__["fetchMedium"])(id));
     }
   };
 };
@@ -981,7 +1121,9 @@ function (_React$Component) {
   _createClass(GalleryShowRow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchGenre(this.props.genre.id);
+      if (this.props.genreVideos[0].duration === 0) {
+        this.props.fetchGenre(this.props.genre.id);
+      }
     } // mouseEnter() {
     //     this.setState({ isMouseInside: true });
     // }
@@ -1002,11 +1144,12 @@ function (_React$Component) {
           });
         }); // let containerClass = this.state.isMouseInside ? "browse_row_slider_wrapper browse_row_transform" : "browse_row_transform"
 
+        var rowTitle = this.props.genreShow ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Trending Now for ", this.props.genre.name) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.genre.name);
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_row_container"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "browse_row_title"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.genre.name))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, rowTitle)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_row_content"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_row_slider"
@@ -1046,7 +1189,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var msp = function msp(state, ownProps) {
   return {
-    genreVideos: _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["genreVideos"](state, ownProps.genre),
+    genreVideos: _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["genreVideos"](state, ownProps.genre.id),
     genre: ownProps.genre
   };
 };
@@ -1063,11 +1206,156 @@ var mdp = function mdp(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/genre/genre_show.jsx":
+/*!**************************************************!*\
+  !*** ./frontend/components/genre/genre_show.jsx ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../nav_bar/gallery_nav_bar_container */ "./frontend/components/nav_bar/gallery_nav_bar_container.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _gallery_gallery_show_row_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../gallery/gallery_show_row_container */ "./frontend/components/gallery/gallery_show_row_container.jsx");
+/* harmony import */ var _gallery_gallery_fp_video_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../gallery/gallery_fp_video_container */ "./frontend/components/gallery/gallery_fp_video_container.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+var GenreShow =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(GenreShow, _React$Component);
+
+  function GenreShow() {
+    _classCallCheck(this, GenreShow);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(GenreShow).apply(this, arguments));
+  }
+
+  _createClass(GenreShow, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchGenres();
+      this.props.fetchMediaGenres();
+      this.props.fetchGenre(this.props.match.params.genreId);
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.match.params.genreId !== this.props.match.params.genreId) {
+        this.props.fetchGenre(this.props.match.params.genreId);
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (this.props.genres[12] && this.props.mediaGenres[140]) {
+        var showOneRow = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_gallery_show_row_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          genre: this.props.genre,
+          key: 1,
+          genreShow: true
+        });
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_body"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          path: this.props.match.path
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_gallery_fp_video_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          genreId: Number(this.props.match.params.genreId)
+        }), showOneRow);
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_body"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_fp_video_container"
+        }, "Genre frontpage vid"), "Genre Show");
+      }
+    }
+  }]);
+
+  return GenreShow;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (GenreShow);
+
+/***/ }),
+
+/***/ "./frontend/components/genre/genre_show_container.js":
+/*!***********************************************************!*\
+  !*** ./frontend/components/genre/genre_show_container.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+/* harmony import */ var _genre_show__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./genre_show */ "./frontend/components/genre/genre_show.jsx");
+/* harmony import */ var _actions_genre_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/genre_actions */ "./frontend/actions/genre_actions.js");
+/* harmony import */ var _actions_media_genre_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/media_genre_actions */ "./frontend/actions/media_genre_actions.js");
+
+
+
+
+
+
+var msp = function msp(state, ownProps) {
+  return {
+    genres: state.entities.genres,
+    mediaGenres: state.entities.mediaGenres,
+    genre: state.entities.genres[ownProps.match.params.genreId] // genreVideos: Selectors.genreVideos(state, ownProps.match.params.genreId),
+    //need children components to render page after genres and mediaGenres have been fetched
+
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    fetchGenres: function fetchGenres() {
+      return dispatch(Object(_actions_genre_actions__WEBPACK_IMPORTED_MODULE_3__["fetchGenres"])());
+    },
+    fetchMediaGenres: function fetchMediaGenres() {
+      return dispatch(Object(_actions_media_genre_actions__WEBPACK_IMPORTED_MODULE_4__["fetchMediaGenres"])());
+    },
+    fetchGenre: function fetchGenre(id) {
+      return dispatch(Object(_actions_genre_actions__WEBPACK_IMPORTED_MODULE_3__["fetchGenre"])(id));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_genre_show__WEBPACK_IMPORTED_MODULE_2__["default"]));
+
+/***/ }),
+
 /***/ "./frontend/components/images.js":
 /*!***************************************!*\
   !*** ./frontend/components/images.js ***!
   \***************************************/
-/*! exports provided: netflix_background_8_URL, netflix_background_9_URL, nomflix_logo_URL */
+/*! exports provided: netflix_background_8_URL, netflix_background_9_URL, nomflix_logo_URL, nineteen_URL */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1075,10 +1363,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "netflix_background_8_URL", function() { return netflix_background_8_URL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "netflix_background_9_URL", function() { return netflix_background_9_URL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "nomflix_logo_URL", function() { return nomflix_logo_URL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "nineteen_URL", function() { return nineteen_URL; });
 //setting local variables as images so they dont persist to the window
 var netflix_background_8_URL = window.netflix_background_8_URL || "https://backgroundcheckall.com/wp-content/uploads/2017/12/netflix-background-8.jpg";
 var netflix_background_9_URL = window.netflix_background_9_URL || "https://www.backgroundcheckall.com/wp-content/uploads/2017/12/netflix-background-9.jpg";
-var nomflix_logo_URL = window.nomflix_logo_URL || "https://fontmeme.com/permalink/190703/a61ac8e10ea54d68646d1a85e71642ed.png"; // delete window.netflix_background_8_URL;
+var nomflix_logo_URL = window.nomflix_logo_URL || "https://fontmeme.com/permalink/190703/a61ac8e10ea54d68646d1a85e71642ed.png";
+var nineteen_URL = window.nineteenURL; // delete window.netflix_background_8_URL;
 // delete window.netflix_background_9_URL;
 // delete window.nomflix_logo_URL;
 
@@ -1337,11 +1627,19 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: this.props.fetchedProfile.photoUrl,
           className: "browse_dropbtn"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-caret-down"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_dropdown-content"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_dropdown-arrow"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-caret-up"
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_dropdown-list"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: this.logout
-        }, "Sign out of Nomflix"))))));
+        }, "Sign out of Nomflix")))))));
       } else {
         switch (this.props.navType) {
           case 'login':
@@ -1648,7 +1946,7 @@ function (_React$Component) {
       e.preventDefault();
       var user = Object.assign({}, this.state);
       this.props.processForm(user).then(function () {
-        return _this2.props.history.push('/browse');
+        return _this2.props.setCurrentProfile(1);
       });
     }
   }, {
@@ -1712,7 +2010,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, formType), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
+        type: "email",
         value: this.state.email,
         placeholder: "Email",
         onChange: this.update('email'),
@@ -1749,7 +2047,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Sign up to start watching"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "One more step and you can Nom!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "You know you want to."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Create your account."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
+        type: "email",
         value: this.state.email,
         placeholder: "Email",
         onChange: this.update('email'),
@@ -2415,7 +2713,7 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 /*!****************************************!*\
   !*** ./frontend/reducers/selectors.js ***!
   \****************************************/
-/*! exports provided: defaultTenVideos, firstTenVideos, genreVideos */
+/*! exports provided: defaultTenVideos, firstTenVideos, genreVideos, randGenreVideo, randGenreVideoId */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2423,6 +2721,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultTenVideos", function() { return defaultTenVideos; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "firstTenVideos", function() { return firstTenVideos; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "genreVideos", function() { return genreVideos; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "randGenreVideo", function() { return randGenreVideo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "randGenreVideoId", function() { return randGenreVideoId; });
 var defaultTenVideos = function defaultTenVideos(state) {
   var newArr = [];
   var defaultVideo = {};
@@ -2452,15 +2752,14 @@ var firstTenVideos = function firstTenVideos(state) {
 
   return newArr;
 };
-var genreVideos = function genreVideos(state, genre) {
+var genreVideos = function genreVideos(state, genreId) {
   var mediaGenres = Object.values(state.entities.mediaGenres).filter(function (mediaGenre) {
-    return mediaGenre.genreId === genre.id;
+    return mediaGenre.genreId === genreId;
   });
   var genreVideos = mediaGenres.map(function (mediaGenre, i) {
     if (state.entities.media[mediaGenre.mediaId]) {
       return state.entities.media[mediaGenre.mediaId];
     } else {
-      // debugger
       return {
         id: i,
         description: "",
@@ -2473,6 +2772,15 @@ var genreVideos = function genreVideos(state, genre) {
     }
   });
   return genreVideos;
+};
+var randGenreVideo = function randGenreVideo(genreVideos) {
+  return genreVideos[Math.floor(Math.random() * genreVideos.length)];
+};
+var randGenreVideoId = function randGenreVideoId(state, genreId) {
+  var mediaGenres = Object.values(state.entities.mediaGenres).filter(function (mediaGenre) {
+    return mediaGenre.genreId == genreId;
+  });
+  return mediaGenres[Math.floor(Math.random() * mediaGenres.length)].mediaId;
 };
 
 /***/ }),

@@ -17,7 +17,7 @@ class SessionForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         const user = Object.assign({}, this.state);
-        this.props.processForm(user).then( () => this.props.history.push('/browse'));
+        this.props.processForm(user).then(() => this.props.setCurrentProfile(1));
     }
 
     update(field) {
@@ -55,7 +55,7 @@ class SessionForm extends React.Component {
                         <h1>{formType}</h1>
                         <form onSubmit={this.handleSubmit}>
                             <div >
-                                <input type="text" value={this.state.email} placeholder="Email" onChange={this.update('email')} className="login_form_input a" />
+                                <input type="email" value={this.state.email} placeholder="Email" onChange={this.update('email')} className="login_form_input a" />
                             </div>
                             <div >
                                 <input type="password" value={this.state.password} placeholder="Password" onChange={this.update('password')} className="login_form_input b" />
@@ -86,7 +86,7 @@ class SessionForm extends React.Component {
                         <h2>Create your account.</h2>
                         <form onSubmit={this.handleSubmit}>
                             <div >
-                                <input type="text" value={this.state.email} placeholder="Email" onChange={this.update('email')} className="signup_form_input a" />
+                                <input type="email" value={this.state.email} placeholder="Email" onChange={this.update('email')} className="signup_form_input a" />
                             </div>
                             <div >
                                 <input type="password" value={this.state.password} placeholder="Password" onChange={this.update('password')} className="signup_form_input b" />
