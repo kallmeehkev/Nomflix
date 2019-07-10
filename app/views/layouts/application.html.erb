@@ -12,15 +12,11 @@
       window.netflix_background_9_URL = "<%= image_url('netflix-background-9.jpg') %>"
       window.nomflix_logo_URL = "<%= image_url('Nomflix-logo.png') %>"
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
   </head>
 
   <body>
     <%= yield %>
-
-    <script>
-      setTimeout( () => {$('.browse_fp_video_description').fadeOut('slow');}, 5000)
-    </script>
   </body>
+  
 </html>

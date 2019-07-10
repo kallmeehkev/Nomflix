@@ -12,10 +12,10 @@ export const login = (user) => (
         data: { user: user }
     })
 )
-export const logout = (user) => (
-    $.ajax({
+export const logout = (user) => {
+    return $.ajax({
         method: 'DELETE',
         url: 'api/session',
         data: { user: user }
     })
-)
+}

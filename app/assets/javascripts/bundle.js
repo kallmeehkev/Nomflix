@@ -102,7 +102,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_root_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/root.jsx */ "./frontend/components/root.jsx");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
 /* harmony import */ var _actions_medium_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/medium_actions */ "./frontend/actions/medium_actions.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./actions/session_actions */ "./frontend/actions/session_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -140,6 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   window.fetchMedia = _actions_medium_actions__WEBPACK_IMPORTED_MODULE_4__["fetchMedia"];
   window.fetchMedium = _actions_medium_actions__WEBPACK_IMPORTED_MODULE_4__["fetchMedium"];
+  window.logout = _actions_session_actions__WEBPACK_IMPORTED_MODULE_5__["logout"];
   window.dispatch = store.dispatch;
   window.getState = store.getState;
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -672,6 +675,23 @@ function (_React$Component) {
       this.props.fetchGenres();
       this.props.fetchMediaGenres();
       this.props.fetchMedium(14);
+      this.fadeOutEffect = this.fadeOutEffect.bind(this);
+    }
+  }, {
+    key: "fadeOutEffect",
+    value: function fadeOutEffect() {
+      var fadeTarget = document.getElementsByClassName("browse_fp_video_description")[0];
+      var fadeEffect = setInterval(function () {
+        if (!fadeTarget.style.opacity) {
+          fadeTarget.style.opacity = 1;
+        }
+
+        if (fadeTarget.style.opacity > 0) {
+          fadeTarget.style.opacity -= 0.01;
+        } else {
+          clearInterval(fadeEffect);
+        }
+      }, 1);
     }
   }, {
     key: "render",
@@ -694,9 +714,18 @@ function (_React$Component) {
         var fpVideoStyle = {
           backgroundImage: 'url(' + this.props.fpVideo.thumbnailUrl + ')'
         };
+        var description = document.getElementsByClassName("browse_fp_video_description")[0];
+        console.log(description);
+
+        if (description) {
+          description.addEventListener('click', this.fadeOutEffect);
+        }
+
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_body"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          path: this.props.match.path
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_fp_video_container"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_fp_video",
@@ -724,7 +753,8 @@ function (_React$Component) {
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "play_button_text"
         }, "Play"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "browse_fp_video_description"
+          className: "browse_fp_video_description",
+          onLoad: this.fadeOut
         }, this.props.fpVideo.description)))), showOneRow);
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1080,7 +1110,8 @@ var msp = function msp(_ref) {
     currentUser: entities.users[session.id],
     navType: 'gallery',
     currentProfileId: ui.currentProfileId || 1,
-    fetchedProfile: entities.profiles[ui.currentProfileId] || {}
+    fetchedProfile: entities.profiles[ui.currentProfileId] || {},
+    genres: Object.values(entities.genres)
   };
 };
 
@@ -1236,7 +1267,7 @@ function (_React$Component) {
       var _this2 = this;
 
       this.props.unSetCurrentProfile(this.props.currentProfileId).then(function () {
-        return _this2.props.logout(_this2.props.currentUser);
+        return _this2.props.logout();
       });
     }
   }, {
@@ -1244,19 +1275,64 @@ function (_React$Component) {
     value: function render() {
       if (this.props.currentUser) {
         //logged in
-        //need logic for classNames browse nav bar.  if on profile page or not.  apply on pinning and main
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "browse_nav_bar_container"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "browse_pinning_nav_bar"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "main_browse_nav_bar"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        var logo = this.props.path === "/browse" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: _images__WEBPACK_IMPORTED_MODULE_3__["nomflix_logo_URL"],
+          className: "browse_splash_logo"
+        }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/browse"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: _images__WEBPACK_IMPORTED_MODULE_3__["nomflix_logo_URL"],
           className: "browse_splash_logo"
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }));
+        var home = this.props.path === "/browse" ? "Home" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: "/browse"
+        }, "Home"); //need logic for classNames browse nav bar.  if on profile page or not.  apply on pinning and main
+
+        var genres = this.props.genres;
+        var firstFourGenres = [];
+        var secondFourGenres = [];
+        var thirdFourGenres = [];
+        genres.forEach(function (genre, i) {
+          var genreEle = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "genres_vertical_container_item",
+            key: i
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+            to: "/browse/genre/".concat(genre.id)
+          }, genre.name));
+
+          if (i < 4) {
+            firstFourGenres.push(genreEle);
+          } else if (i > 3 && i < 8) {
+            secondFourGenres.push(genreEle);
+          } else {
+            thirdFourGenres.push(genreEle);
+          }
+        });
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_nav_bar_container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_nav_bar_container_gradient"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_pinning_nav_bar"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "main_browse_nav_bar"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "main_browse_nav_bar_left"
+        }, logo, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "main_nav_bar_left_controls"
+        }, home), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "main_nav_bar_left_controls"
+        }, "Genres", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_dropdown-content_genre"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_dropdown_content_genre_container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "genres_vertical_container"
+        }, firstFourGenres), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "genres_vertical_container"
+        }, secondFourGenres), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "genres_vertical_container"
+        }, thirdFourGenres))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_nav_bar_profile_pic browse_dropdown"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: this.props.fetchedProfile.photoUrl,

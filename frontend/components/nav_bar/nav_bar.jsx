@@ -42,26 +42,58 @@ class NavBar extends React.Component  {
     }
 
     logout() {
-        this.props.unSetCurrentProfile(this.props.currentProfileId).then(() => this.props.logout(this.props.currentUser))
+        this.props.unSetCurrentProfile(this.props.currentProfileId).then(() => this.props.logout())
     }
 
     render() {
         if (this.props.currentUser) { //logged in
-
+            let logo = this.props.path === "/browse" ? <img src={Images.nomflix_logo_URL} className="browse_splash_logo" /> : <Link to="/browse"><img src={Images.nomflix_logo_URL} className="browse_splash_logo" /></Link>
+            let home = this.props.path === "/browse" ? "Home" : <Link to="/browse">Home</Link>
             //need logic for classNames browse nav bar.  if on profile page or not.  apply on pinning and main
+            let {genres} = this.props
+            let firstFourGenres = [];
+            let secondFourGenres = []; 
+            let thirdFourGenres = [];
+            genres.forEach( (genre, i) => {
+                let genreEle = <div className="genres_vertical_container_item" key={i}><Link to={`/browse/genre/${genre.id}`}>{genre.name}</Link></div>;
+                if (i < 4) {
+                    firstFourGenres.push(genreEle)
+                } else if (i > 3 && i < 8) {
+                    secondFourGenres.push(genreEle)
+                } else {
+                    thirdFourGenres.push(genreEle)
+                }
+            })
             return (
                 <div className="browse_nav_bar_container">
+                    <div className="browse_nav_bar_container_gradient"></div>
                     <div className="browse_pinning_nav_bar">
                         <div className="main_browse_nav_bar">
-                            <div><Link to="/browse"><img src={Images.nomflix_logo_URL} className="browse_splash_logo" /></Link></div>
+                            <div className="main_browse_nav_bar_left">
+                                {logo}
+                                <div className="main_nav_bar_left_controls">{home}</div>
+                                <div className="main_nav_bar_left_controls">Genres
+                                <div className="browse_dropdown-content_genre">
+                                <div className="browse_dropdown_content_genre_container">
+                                    <div className="genres_vertical_container">
+                                        {firstFourGenres}
+                                    </div>
+                                    <div className="genres_vertical_container">
+                                        {secondFourGenres}
+                                    </div>
+                                    <div className="genres_vertical_container">
+                                        {thirdFourGenres}
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+                            </div>
                             <div className="browse_nav_bar_profile_pic browse_dropdown">
                                 <img src={this.props.fetchedProfile.photoUrl} className="browse_dropbtn"/>
                                 <div className="browse_dropdown-content"><button onClick={this.logout}>Sign out of Nomflix</button></div>
                             </div>
-                            
                         </div>
-                    </div>
-                    
+                    </div>  
                 </div>
             )
         } else {

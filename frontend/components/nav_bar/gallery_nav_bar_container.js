@@ -7,7 +7,8 @@ const msp = ({ entities, session, ui }) => ({
     currentUser: entities.users[session.id],
     navType: 'gallery',
     currentProfileId: ui.currentProfileId || 1,
-    fetchedProfile: entities.profiles[ui.currentProfileId] || {}
+    fetchedProfile: entities.profiles[ui.currentProfileId] || {},
+    genres: Object.values(entities.genres)
 })
 
 const mdp = dispatch => ({

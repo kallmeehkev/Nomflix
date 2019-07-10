@@ -8,9 +8,21 @@ class GalleryIndex extends React.Component {
         this.props.fetchGenres();
         this.props.fetchMediaGenres();
         this.props.fetchMedium(14);
+        this.fadeOutEffect = this.fadeOutEffect.bind(this);
     }
-
-
+    fadeOutEffect() {
+            let fadeTarget = document.getElementsByClassName("browse_fp_video_description")[0];
+            let fadeEffect = setInterval(function () {
+                if (!fadeTarget.style.opacity) {
+                    fadeTarget.style.opacity = 1;
+                }
+                if (fadeTarget.style.opacity > 0) {
+                    fadeTarget.style.opacity -= 0.01;
+                } else {
+                    clearInterval(fadeEffect);
+                }
+            }, 1);
+    }
 
     render() {
         if (this.props.genres[12] && this.props.mediaGenres[140]) {
@@ -23,9 +35,14 @@ class GalleryIndex extends React.Component {
             let fpVideoStyle = {
                 backgroundImage: 'url(' + this.props.fpVideo.thumbnailUrl + ')',
             };
+            let description = document.getElementsByClassName("browse_fp_video_description")[0]
+            console.log(description)
+            if (description) {
+                description.addEventListener('click', this.fadeOutEffect);
+            }
             return (
                 <div className="browse_body">
-                    <GalleryNavBarContainer />
+                    <GalleryNavBarContainer path={this.props.match.path}/>
                     <div className="browse_fp_video_container">
                         <div className="browse_fp_video" style={fpVideoStyle}><div className="browse_fp_background_gradient"></div></div>
                         <span className="browse_fp_video_maturity_rating">
@@ -40,7 +57,7 @@ class GalleryIndex extends React.Component {
                                     <div className="play_button"></div><div className="play_button_text">Play</div></Link></div>
                                     <div></div>
                                 </span>
-                                <div className="browse_fp_video_description" >
+                                <div className="browse_fp_video_description" onLoad={this.fadeOut}>
                                     {this.props.fpVideo.description}
                                 </div>
                             </div>
