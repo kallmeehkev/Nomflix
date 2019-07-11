@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import * as Selectors from '../../reducers/selectors';
-
+import GalleryAnimateLoad from './gallery_animate_load';
 
 class GalleryFPVideo extends React.Component {
 
@@ -18,9 +18,19 @@ class GalleryFPVideo extends React.Component {
                     <div className="genre_tag_title">{this.props.genre.name}</div>
                     </div>)
             }
+            let description;
+            if (video.description) {
+                description = video.description.split(' ')
+                description = description.length > 25 ? description.slice(0, 25).join(' ').concat('...') : description = description.join(' ')
+            } else {
+                description = ""
+            }
             return (
                 <div className="browse_fp_video_container">
-                    <div className="browse_fp_video" style={fpVideoStyle}><div className="browse_fp_background_gradient"></div></div>
+                    <div className="browse_fp_video" style={fpVideoStyle}>
+                        <div className="browse_fp_background_gradient"></div>
+                        <div className="browse_fp_topleft_gradient"></div>
+                    </div>
                     <span className="browse_fp_video_maturity_rating">
                         <span className="browse_fp_video_maturity_rating_text">{video.maturityRating}</span>
                     </span>
@@ -34,9 +44,9 @@ class GalleryFPVideo extends React.Component {
                                 <div className="play_button"><i className="fas fa-play"></i></div><div className="play_button_text">Play</div></Link></div>
                                 <div></div>
                             </span>
-                            <p className="browse_fp_video_description" onLoad={this.fadeOut}>
-                                {video.description}
-                            </p>
+                            <div className="browse_fp_video_description">
+                                <GalleryAnimateLoad description={description} />
+                            </div>
                         </div>
                     </div>
                 </div>

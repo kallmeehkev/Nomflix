@@ -1,5 +1,16 @@
 .media_show {
     height: 99vh;
+    position: relative;
+}
+
+.media_back_button {
+    position: absolute;
+    width: 5vw;
+    left: 5vw;
+    top: 5vw;
+    height: 10vw;
+    z-index: 1;
+    font-size: 3.2vw;
 }
 
 .media_show video {

@@ -47,13 +47,13 @@ medium_file3 = Medium.create!(
     duration: 761861,
     description: "Food lovers Steven Lim and Andrew, along with their cameraman Adam, embark on the ultimate food adventure in BuzzFeed’s hit series, Worth It, trying delicious foods at three price points: affordable, middle tier, and luxury. At the end of the episode, the gang decides which item is the most “worth it” at its given price."
     )
-# media_file3 = open(
-# 'https://nomflix-seed.s3-us-west-1.amazonaws.com/videos/%242+Bacon+Vs.+%24100+Bacon.mp4'
-# )
+media_file3 = open(
+'https://nomflix-seed.s3-us-west-1.amazonaws.com/videos/%242+Bacon+Vs.+%24100+Bacon.mp4'
+)
 thumbnail_file3 = open(
 'https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/3.jpg'
 )
-# medium_file3.media_file.attach(io: media_file3, filename: "$2 Bacon Vs. $100 Bacon.mp4")
+medium_file3.media_file.attach(io: media_file3, filename: "$2 Bacon Vs. $100 Bacon.mp4")
 medium_file3.thumbnail.attach(io: thumbnail_file3, filename: "3.jpg")
 
 
@@ -62,13 +62,13 @@ medium_file4 = Medium.create!(
     duration: 297341,
     description: "Tenderising chicken breast and cooking it very fast means that it stays moist - perfect for this dish. This recipe cooks literally cooks in minutes - a healthy, affordable and fast weekday meal with simple flavours."
     )
-# media_file4 = open(
-# "https://nomflix-seed.s3-us-west-1.amazonaws.com/videos/Egg-Fried+Rice+Noodles+with+Chicken+-+Gordon+Ramsay.mp4"
-# )
+media_file4 = open(
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/videos/Egg-Fried+Rice+Noodles+with+Chicken+-+Gordon+Ramsay.mp4"
+)
 thumbnail_file4 = open(
 "https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/4.jpg"
 )
-# medium_file4.media_file.attach(io: media_file4, filename: "Egg-Fried Rice Noodles with Chicken - Gordon Ramsay.mp4")
+medium_file4.media_file.attach(io: media_file4, filename: "Egg-Fried Rice Noodles with Chicken - Gordon Ramsay.mp4")
 medium_file4.thumbnail.attach(io: thumbnail_file4, filename: "4.jpg")
 
 
@@ -77,13 +77,13 @@ medium_file5 = Medium.create!(
     duration: 470661,
     description: "A Christmas take on a classic dish."
     )
-# media_file5 = open(
-# "https://nomflix-seed.s3-us-west-1.amazonaws.com/videos/CHRISTMAS+RECIPE+Christmas+Beef+Wellington.mp4"
-# )
+media_file5 = open(
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/videos/CHRISTMAS+RECIPE+Christmas+Beef+Wellington.mp4"
+)
 thumbnail_file5 = open(
 "https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/5.jpg"
 )
-# medium_file5.media_file.attach(io: media_file5, filename: "CHRISTMAS RECIPE: Christmas Beef Wellington - Gordon Ramsay.mp4")
+medium_file5.media_file.attach(io: media_file5, filename: "CHRISTMAS RECIPE: Christmas Beef Wellington - Gordon Ramsay.mp4")
 medium_file5.thumbnail.attach(io: thumbnail_file5, filename: "5.jpg")
 
 
@@ -262,10 +262,10 @@ medium_file17 = Medium.create!(
 # "https://nomflix-seed.s3-us-west-1.amazonaws.com/videos/How+to+Make+Ebi+Fry+(Deep+Fried+Breaded+Prawn+Recipe)++Cooking+with+Dog.mp4"
 # )
 thumbnail_file17 = open(
-"https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/17.jpg"
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/17_2.jpg"
 )
 # medium_file17.media_file.attach(io: media_file17, filename: "How to Make Ebi Fry (Deep Fried Breaded Prawn Recipe) | Cooking with Dog.mp4")
-medium_file17.thumbnail.attach(io: thumbnail_file17, filename: "17.jpg")
+medium_file17.thumbnail.attach(io: thumbnail_file17, filename: "17_2.jpg")
 
 
 medium_file18 = Medium.create!(
@@ -292,10 +292,10 @@ medium_file19 = Medium.create!(
 # "https://nomflix-seed.s3-us-west-1.amazonaws.com/videos/How+to+Make+Mapo+Tofu+(Mabo+Dofu+Recipe)++Cooking+with+Dog.mp4"
 # )
 thumbnail_file19 = open(
-"https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/19.jpg"
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/19_2.jpg"
 )
 # medium_file19.media_file.attach(io: media_file19, filename: "How to Make Mapo Tofu (Mabo Dofu Recipe) | Cooking with Dog.mp4")
-medium_file19.thumbnail.attach(io: thumbnail_file19, filename: "19.jpg")
+medium_file19.thumbnail.attach(io: thumbnail_file19, filename: "19_2.jpg")
 
 
 medium_file20 = Medium.create!(
@@ -307,10 +307,10 @@ medium_file20 = Medium.create!(
 # "https://nomflix-seed.s3-us-west-1.amazonaws.com/videos/How+to+Make+Takoyaki+(Japanese+Octopus+Ball+Recipe+)+%E3%81%9F%E3%81%93%E7%84%BC%E3%81%8D+%E4%BD%9C%E3%82%8A%E6%96%B9%E3%83%AC%E3%82%B7%E3%83%94.mp4"
 # )
 thumbnail_file20 = open(
-"https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/20.jpg"
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/20_2.jpg"
 )
 # medium_file20.media_file.attach(io: media_file20, filename: "How to Make Takoyaki.mp4")
-medium_file20.thumbnail.attach(io: thumbnail_file20, filename: "20.jpg")
+medium_file20.thumbnail.attach(io: thumbnail_file20, filename: "20_2.jpg")
 
 
 medium_file21 = Medium.create!(
@@ -337,10 +337,10 @@ medium_file22 = Medium.create!(
 # "https://nomflix-seed.s3-us-west-1.amazonaws.com/videos/Menchi-katsu+Recipe+(Deep-Fried+Breaded+Ground+Meat)++Cooking+with+Dog.mp4"
 # )
 thumbnail_file22 = open(
-"https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/22.jpg"
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/22_2.jpg"
 )
 # medium_file22.media_file.attach(io: media_file22, filename: "Menchi-katsu Recipe (Deep-Fried Breaded Ground Meat) | Cooking with Dog.mp4")
-medium_file22.thumbnail.attach(io: thumbnail_file22, filename: "22.jpg")
+medium_file22.thumbnail.attach(io: thumbnail_file22, filename: "22_2.jpg")
 
 
 medium_file23 = Medium.create!(
@@ -352,10 +352,10 @@ medium_file23 = Medium.create!(
 # "https://nomflix-seed.s3-us-west-1.amazonaws.com/videos/How+to+Make+Fruit+Cream+Anmitsu+(Recipe)+%E3%83%95%E3%83%AB%E3%83%BC%E3%83%84%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%A0%E3%81%82%E3%82%93%E3%81%BF%E3%81%A4+%E4%BD%9C%E3%82%8A%E6%96%B9%E3%83%AC%E3%82%B7%E3%83%94.mp4"
 # )
 thumbnail_file23 = open(
-"https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/23.jpg"
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/23_2.jpg"
 )
 # medium_file23.media_file.attach(io: media_file23, filename: "How to Make Fruit Cream Anmitsu (Recipe).mp4")
-medium_file23.thumbnail.attach(io: thumbnail_file23, filename: "23.jpg")
+medium_file23.thumbnail.attach(io: thumbnail_file23, filename: "23_2.jpg")
 
 
 medium_file24 = Medium.create!(
@@ -367,10 +367,10 @@ medium_file24 = Medium.create!(
 # "https://nomflix-seed.s3-us-west-1.amazonaws.com/videos/How+to+Make+Strawberry+Daifuku+(Ichigo+Daifuku+Recipe)+%E3%81%84%E3%81%A1%E3%81%94%E5%A4%A7%E7%A6%8F+%E4%BD%9C%E3%82%8A%E6%96%B9%E3%83%AC%E3%82%B7%E3%83%94.mp4"
 # )
 thumbnail_file24 = open(
-"https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/24.jpg"
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/24_2.jpg"
 )
 # medium_file24.media_file.attach(io: media_file24, filename: "How to Make Strawberry Daifuku (Ichigo Daifuku Recipe).mp4")
-medium_file24.thumbnail.attach(io: thumbnail_file24, filename: "24.jpg")
+medium_file24.thumbnail.attach(io: thumbnail_file24, filename: "24_2.jpg")
 
 
 medium_file25 = Medium.create!(
@@ -382,10 +382,10 @@ medium_file25 = Medium.create!(
 # "https://nomflix-seed.s3-us-west-1.amazonaws.com/videos/How+to+Make+Christmas+Cake+(Strawberry+Sponge+Cake+Recipe)++Cooking+with+Dog.mp4"
 # )
 thumbnail_file25 = open(
-"https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/25.jpg"
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/25_2.jpg"
 )
 # medium_file25.media_file.attach(io: media_file25, filename: "How to Make Christmas Cake (Strawberry Sponge Cake Recipe) | Cooking with Dog.mp4")
-medium_file25.thumbnail.attach(io: thumbnail_file25, filename: "25.jpg")
+medium_file25.thumbnail.attach(io: thumbnail_file25, filename: "25_2.jpg")
 
 
 medium_file26 = Medium.create!(
@@ -397,10 +397,10 @@ medium_file26 = Medium.create!(
 # "https://nomflix-seed.s3-us-west-1.amazonaws.com/videos/How+to+Make+Bento+(Perfectly+Balanced+Bento+Recipe+for+Lunch+Box+Meal)++Cooking+with+Dog.mp4"
 # )
 thumbnail_file26 = open(
-"https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/26.jpg"
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/26_2.jpg"
 )
 # medium_file26.media_file.attach(io: media_file26, filename: "How to Make Bento (Perfectly Balanced Bento Recipe for Lunch Box Meal) | Cooking with Dog.mp4")
-medium_file26.thumbnail.attach(io: thumbnail_file26, filename: "26.jpg")
+medium_file26.thumbnail.attach(io: thumbnail_file26, filename: "26_2.jpg")
 
 
 medium_file27 = Medium.create!(
@@ -412,10 +412,10 @@ medium_file27 = Medium.create!(
 # "https://nomflix-seed.s3-us-west-1.amazonaws.com/videos/How+to+Make+Custard+Pudding+(Easy+Custard+Pudding+Recipe++Egg+Pudding)++Cooking+with+Dog.mp4"
 # )
 thumbnail_file27 = open(
-"https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/27.jpg"
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/27_2.jpg"
 )
 # medium_file27.media_file.attach(io: media_file27, filename: "How to Make Custard Pudding (Easy Custard Pudding Recipe | Egg Pudding) | Cooking with Dog.mp4")
-medium_file27.thumbnail.attach(io: thumbnail_file27, filename: "27.jpg")
+medium_file27.thumbnail.attach(io: thumbnail_file27, filename: "27_2.jpg")
 
 
 medium_file28 = Medium.create!(
@@ -607,10 +607,10 @@ medium_file40 = Medium.create!(
 # "https://nomflix-seed.s3-us-west-1.amazonaws.com/videos/The+MASSIVE+Pho+Noodle+Soup+Challenge!!!.mp4"
 # )
 thumbnail_file40 = open(
-"https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/40.jpg"
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/40_2.jpg"
 )
 # medium_file40.media_file.attach(io: media_file40, filename: "The MASSIVE Pho Noodle Soup Challenge!!!.mp4")
-medium_file40.thumbnail.attach(io: thumbnail_file40, filename: "40.jpg")
+medium_file40.thumbnail.attach(io: thumbnail_file40, filename: "40_2.jpg")
 
 
 medium_file41 = Medium.create!(
@@ -622,10 +622,10 @@ medium_file41 = Medium.create!(
 # "https://nomflix-seed.s3-us-west-1.amazonaws.com/videos/PERFECT+Ramen+Noodles+in+Osaka+Japan+Ichiran+Ramen.mp4"
 # )
 thumbnail_file41 = open(
-"https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/41.jpg"
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/thumbnails/41_2.jpg"
 )
 # medium_file41.media_file.attach(io: media_file41, filename: "PERFECT Ramen Noodles in Osaka Japan: Ichiran Ramen.mp4")
-medium_file41.thumbnail.attach(io: thumbnail_file41, filename: "41.jpg")
+medium_file41.thumbnail.attach(io: thumbnail_file41, filename: "41_2.jpg")
 
 
 medium_file42 = Medium.create!(
