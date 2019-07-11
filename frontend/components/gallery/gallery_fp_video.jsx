@@ -4,8 +4,23 @@ import * as Selectors from '../../reducers/selectors';
 import GalleryAnimateLoad from './gallery_animate_load';
 
 class GalleryFPVideo extends React.Component {
+    constructor(props) {
+        super(props)
+        // this.state = {video: null}
+    }
 
-    
+    // componentDidMount() {
+    //     this.setState({ video: this.props.fetchRandVideo(this.props.genreId) })
+    // }
+
+    // componentDidUpdate(prevProps) {
+    //     if (prevProps.genreId !== this.props.genreId ) {
+    //         let video = this.props.fetchRandVideo(this.props.genreId)
+    //     this.setState({video: video})
+    //     }
+    // }
+
+
     render() {
         if (this.props.randFPVideo.id !== 0 || this.props.browseVid.id !== 0) {
             let video = this.props.pageType === 'genreShow' ? this.props.randFPVideo : this.props.browseVid

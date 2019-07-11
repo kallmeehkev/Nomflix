@@ -897,11 +897,20 @@ var GalleryFPVideo =
 function (_React$Component) {
   _inherits(GalleryFPVideo, _React$Component);
 
-  function GalleryFPVideo() {
+  function GalleryFPVideo(props) {
     _classCallCheck(this, GalleryFPVideo);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(GalleryFPVideo).apply(this, arguments));
-  }
+    return _possibleConstructorReturn(this, _getPrototypeOf(GalleryFPVideo).call(this, props)); // this.state = {video: null}
+  } // componentDidMount() {
+  //     this.setState({ video: this.props.fetchRandVideo(this.props.genreId) })
+  // }
+  // componentDidUpdate(prevProps) {
+  //     if (prevProps.genreId !== this.props.genreId ) {
+  //         let video = this.props.fetchRandVideo(this.props.genreId)
+  //     this.setState({video: video})
+  //     }
+  // }
+
 
   _createClass(GalleryFPVideo, [{
     key: "render",
@@ -1012,7 +1021,11 @@ var msp = function msp(state, ownProps) {
     browseVid: ownProps.browseVid || {
       id: 0
     },
-    genre: state.entities.genres[ownProps.genreId]
+    genre: state.entities.genres[ownProps.genreId],
+    media: state.entities.media,
+    fetchRandVideo: function fetchRandVideo(genreId) {
+      return _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["randVideo"](state, genreId);
+    }
   };
 };
 
@@ -1111,7 +1124,7 @@ function (_React$Component) {
           genreId: 5,
           pageType: "browse",
           browseVid: this.props.fpVideo
-        }), showOneRow);
+        }), showRowsFirstSix);
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_body"
@@ -2942,7 +2955,7 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 /*!****************************************!*\
   !*** ./frontend/reducers/selectors.js ***!
   \****************************************/
-/*! exports provided: defaultTenVideos, firstTenVideos, genreVideos, randGenreVideo, randGenreVideoId */
+/*! exports provided: defaultTenVideos, firstTenVideos, genreVideos, randGenreVideo, randGenreVideoId, randVideo */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2952,6 +2965,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "genreVideos", function() { return genreVideos; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "randGenreVideo", function() { return randGenreVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "randGenreVideoId", function() { return randGenreVideoId; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "randVideo", function() { return randVideo; });
 var defaultTenVideos = function defaultTenVideos(state) {
   var newArr = [];
   var defaultVideo = {};
@@ -3011,6 +3025,13 @@ var randGenreVideoId = function randGenreVideoId(state, genreId) {
   });
   if (mediaGenres.length === 0) return 0;
   return mediaGenres[Math.floor(Math.random() * mediaGenres.length)].mediaId;
+};
+var randVideo = function randVideo(state, genreId) {
+  var mediaGenres = Object.values(state.entities.mediaGenres).filter(function (mediaGenre) {
+    return mediaGenre.genreId == genreId;
+  });
+  if (mediaGenres.length === 0) return 0;
+  return state.entities.media[mediaGenres[Math.floor(Math.random() * mediaGenres.length)].mediaId];
 };
 
 /***/ }),

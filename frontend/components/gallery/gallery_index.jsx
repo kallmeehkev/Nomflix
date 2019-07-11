@@ -24,8 +24,8 @@ class GalleryIndex extends React.Component {
                     <GalleryNavBarContainer path={this.props.match.path}/>
                     <GalleryFPVideoContainer genreId={5} pageType="browse" browseVid={this.props.fpVideo} />
 
-                    {/* {showRowsFirstSix} */}
-                    {showOneRow}
+                    {showRowsFirstSix}
+                    {/* {showOneRow} */}
                 </div>
             )
         } else {

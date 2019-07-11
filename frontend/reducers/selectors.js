@@ -58,3 +58,11 @@ export const randGenreVideoId = (state, genreId) => {
     if (mediaGenres.length === 0) return 0;
     return mediaGenres[Math.floor(Math.random() * mediaGenres.length)].mediaId;
 }
+
+export const randVideo = (state, genreId) => {
+    let mediaGenres = Object.values(state.entities.mediaGenres).filter((mediaGenre) => {
+        return mediaGenre.genreId == genreId;
+    })
+    if (mediaGenres.length === 0) return 0;
+    return state.entities.media[mediaGenres[Math.floor(Math.random() * mediaGenres.length)].mediaId];
+}
