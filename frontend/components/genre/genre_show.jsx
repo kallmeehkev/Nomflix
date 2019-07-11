@@ -6,8 +6,8 @@ import GalleryFPVideoContainer from '../gallery/gallery_fp_video_container';
 class GenreShow extends React.Component {
 
     componentDidMount() {
-        this.props.fetchGenres();
-        this.props.fetchMediaGenres();
+        // this.props.fetchGenres();
+        // this.props.fetchMediaGenres();
         this.props.fetchGenre(this.props.match.params.genreId);
     }
 

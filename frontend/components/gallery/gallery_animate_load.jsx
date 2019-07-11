@@ -1,5 +1,6 @@
 import React from 'react';
 import GalleryDescription from './gallery_description';
+//source for animating loading https://tech.gadventures.com/simple-react-transitions-a5f6bbb680a9
 
 const GalleryAnimateLoad = (WrappedComponent) => {
     return class extends React.Component {
