@@ -7,23 +7,27 @@ class GalleryFPVideo extends React.Component {
     constructor(props) {
         super(props)
         // this.state = {video: null}
+        this.state = {randId: this.props.randId}
     }
 
     // componentDidMount() {
     //     this.setState({ video: this.props.fetchRandVideo(this.props.genreId) })
     // }
 
-    // componentDidUpdate(prevProps) {
-    //     if (prevProps.genreId !== this.props.genreId ) {
-    //         let video = this.props.fetchRandVideo(this.props.genreId)
-    //     this.setState({video: video})
-    //     }
-    // }
+    componentDidUpdate(prevProps) {
+        if (prevProps.genreId !== this.props.genreId ) {
+            // let video = this.props.fetchRandVideo(this.props.genreId)
+            // this.setState({video: video})
+            this.setState({randId: this.props.randId})
+        }
+    }
 
 
     render() {
-        if (this.props.randFPVideo.id !== 0 || this.props.browseVid.id !== 0) {
-            let video = this.props.pageType === 'genreShow' ? this.props.randFPVideo : this.props.browseVid
+        const randFPVideo = this.props.media[this.state.randId];
+        if (randFPVideo === undefined) return null;
+        if (randFPVideo.id !== 0 || this.props.browseVid.id !== 0) {
+            let video = this.props.pageType === 'genreShow' ? randFPVideo : this.props.browseVid
             let fpVideoStyle = { backgroundImage: 'url(' + video.thumbnailUrl + ')' };
             let genreTag = "";
             if (this.props.pageType === 'genreShow') {

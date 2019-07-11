@@ -898,25 +898,40 @@ function (_React$Component) {
   _inherits(GalleryFPVideo, _React$Component);
 
   function GalleryFPVideo(props) {
+    var _this;
+
     _classCallCheck(this, GalleryFPVideo);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(GalleryFPVideo).call(this, props)); // this.state = {video: null}
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GalleryFPVideo).call(this, props)); // this.state = {video: null}
+
+    _this.state = {
+      randId: _this.props.randId
+    };
+    return _this;
   } // componentDidMount() {
   //     this.setState({ video: this.props.fetchRandVideo(this.props.genreId) })
-  // }
-  // componentDidUpdate(prevProps) {
-  //     if (prevProps.genreId !== this.props.genreId ) {
-  //         let video = this.props.fetchRandVideo(this.props.genreId)
-  //     this.setState({video: video})
-  //     }
   // }
 
 
   _createClass(GalleryFPVideo, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.genreId !== this.props.genreId) {
+        // let video = this.props.fetchRandVideo(this.props.genreId)
+        // this.setState({video: video})
+        this.setState({
+          randId: this.props.randId
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      if (this.props.randFPVideo.id !== 0 || this.props.browseVid.id !== 0) {
-        var video = this.props.pageType === 'genreShow' ? this.props.randFPVideo : this.props.browseVid;
+      var randFPVideo = this.props.media[this.state.randId];
+      if (randFPVideo === undefined) return null;
+
+      if (randFPVideo.id !== 0 || this.props.browseVid.id !== 0) {
+        var video = this.props.pageType === 'genreShow' ? randFPVideo : this.props.browseVid;
         var fpVideoStyle = {
           backgroundImage: 'url(' + video.thumbnailUrl + ')'
         };
@@ -1014,18 +1029,15 @@ __webpack_require__.r(__webpack_exports__);
 
 var msp = function msp(state, ownProps) {
   return {
-    randFPVideo: state.entities.media[_reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["randGenreVideoId"](state, ownProps.genreId)] || {
-      id: 0
-    },
+    randId: _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["randGenreVideoId"](state, ownProps.genreId) || 0,
+    // randFPVideo: state.entities.media[Selectors.randGenreVideoId(state, ownProps.genreId)] || {id: 0},
     pageType: ownProps.pageType,
     browseVid: ownProps.browseVid || {
       id: 0
     },
     genre: state.entities.genres[ownProps.genreId],
-    media: state.entities.media,
-    fetchRandVideo: function fetchRandVideo(genreId) {
-      return _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["randVideo"](state, genreId);
-    }
+    media: state.entities.media // fetchRandVideo: (genreId) => Selectors.randVideo(state, genreId)
+
   };
 };
 
