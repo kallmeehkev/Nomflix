@@ -22,7 +22,6 @@ class GalleryFPVideo extends React.Component {
         }
     }
 
-
     render() {
         const randFPVideo = this.props.media[this.state.randId];
         if (randFPVideo === undefined) return null;

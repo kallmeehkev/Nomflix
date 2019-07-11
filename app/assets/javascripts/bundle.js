@@ -799,7 +799,8 @@ var GalleryAnimateLoad = function GalleryAnimateLoad(WrappedComponent) {
 
         _this = _possibleConstructorReturn(this, _getPrototypeOf(_class).call(this, props));
         _this.state = {
-          didMount: false
+          didMount: false,
+          description: _this.props.description
         };
         return _this;
       }
@@ -814,6 +815,16 @@ var GalleryAnimateLoad = function GalleryAnimateLoad(WrappedComponent) {
               didMount: true
             });
           }, 5000);
+        }
+      }, {
+        key: "componentDidUpdate",
+        value: function componentDidUpdate(prevProps) {
+          if (prevProps.description !== this.props.description) {
+            this.setState({
+              didMount: false,
+              description: this.props.description
+            });
+          }
         }
       }, {
         key: "render",
@@ -1297,7 +1308,19 @@ function (_React$Component) {
         to: "/watch/".concat(video.id)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "browse_row_item_link"
-      })))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "overlay_darken"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row_item_overlay"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row_item_play_button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "far fa-play-circle"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row_item_overlay_title"
+      }, video.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row_item_overlay_mat_rating"
+      }, video.maturityRating))))))));
     }
   }]);
 

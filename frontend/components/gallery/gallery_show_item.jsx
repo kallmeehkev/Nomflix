@@ -36,12 +36,24 @@ class GalleryShowItem extends React.Component {
 
         return (
             <div className="browse_row_item_container">
+                {/* <div className="side_block"></div> */}
                 <div onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} className={"browse_row_item_content " + (this.state.isMouseInside ? 'browse_row_transform' : '')} style={style}>
-                        {/* <div className="a"></div> */}
-                        <div className="b"><Link to={`/watch/${video.id}`}><div className="browse_row_item_link"></div></Link></div>
-                        {/* <div className="c"></div> */}
-                        {/* <img src={video.thumbnailUrl}/> */}
-                    </div>
+                        <div className="b">
+                            <Link to={`/watch/${video.id}`}>
+                                <div className="browse_row_item_link">
+                                    <div className="overlay_darken">
+                                        <div className="row_item_overlay">
+                                            <button></button>
+                                            <div className="row_item_play_button"><i class="far fa-play-circle"></i></div>
+                                            <div className="row_item_overlay_title">{video.title}</div>
+                                            <div className="row_item_overlay_mat_rating">{video.maturityRating}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
+                </div>
+                {/* <div className="side_block"></div> */}
             </div>
         )
     }

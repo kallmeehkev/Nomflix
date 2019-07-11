@@ -6,12 +6,19 @@ const GalleryAnimateLoad = (WrappedComponent) => {
     return class extends React.Component {
         constructor(props) {
             super(props)
-            this.state = { didMount: false }
+            this.state = { didMount: false,
+            description: this.props.description }
         }
         componentDidMount() {
             setTimeout(() => {
                 this.setState({ didMount: true })
             }, 5000)
+        }
+
+        componentDidUpdate(prevProps) {
+            if (prevProps.description !== this.props.description) {
+                this.setState({didMount: false, description: this.props.description})
+            }
         }
         render() {
             const { didMount } = this.state
