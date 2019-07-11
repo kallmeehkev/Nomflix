@@ -72,16 +72,17 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  width: 35%;
 }
 
 .main_nav_bar_left_controls {
   margin: auto;
-  padding-left: 2vw;
   font-size: 1.4vw;
   cursor: pointer;
   box-sizing: content-box;
   padding-bottom: 10px;
   padding-top: 10px;
+  font-weight: 550;
 }
 
 .browse_splash_logo {
@@ -330,10 +331,40 @@ html:not([data-scroll='0']) {
     border-width: 0;
 }
 
+.genre_tag_container {
+    padding-left: 4%;
+    width: 25%;
+    position: absolute;
+    top: 7vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.genre_tag_text {
+  font-size: 1.6vw;
+  opacity: 0.8;
+  padding-right: 1vw;
+  padding-bottom: 0.5vh;
+}
+
+.genre_tag_arrow {
+  font-size: 1.6vw;
+  opacity: 0.8;
+}
+
+.genre_tag_title {
+  font-size: 2vw;
+  font-weight: 600;
+  padding-left: 1vw;
+  padding-bottom: 0.5vh;
+}
+
 .browse_fp_video_side_section {
   position: absolute;
   top: 18vw;
-  width: 30%;
+  width: 25%;
   height: 40vh;
   left: 0;
   padding-left: 4%;
@@ -353,7 +384,6 @@ html:not([data-scroll='0']) {
 }
 
 .browse_fp_video_title {
-  padding-right: 6vw;
   margin-bottom: 2vh;
   font-size: 3vw;
   font-weight: 700;
@@ -412,7 +442,6 @@ html:not([data-scroll='0']) {
 }
 
 .browse_fp_video_description {
-  padding-right: 6vw;
   margin-top: 2vh;
   font-size: 1.4vw;
   font-weight: 500;

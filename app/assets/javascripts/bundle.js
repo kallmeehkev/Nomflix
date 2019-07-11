@@ -665,24 +665,36 @@ var GalleryFPVideo =
 function (_React$Component) {
   _inherits(GalleryFPVideo, _React$Component);
 
-  function GalleryFPVideo(props) {
-    var _this;
-
+  function GalleryFPVideo() {
     _classCallCheck(this, GalleryFPVideo);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(GalleryFPVideo).call(this, props));
-    _this.state = _this.props.randFPVideo;
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(GalleryFPVideo).apply(this, arguments));
   }
 
   _createClass(GalleryFPVideo, [{
     key: "render",
     value: function render() {
       if (this.props.randFPVideo.id !== 0 || this.props.browseVid.id !== 0) {
-        var video = this.props.pageType === 'genreShow' ? this.state : this.props.browseVid;
+        var video = this.props.pageType === 'genreShow' ? this.props.randFPVideo : this.props.browseVid;
         var fpVideoStyle = {
           backgroundImage: 'url(' + video.thumbnailUrl + ')'
         };
+        var genreTag = "";
+
+        if (this.props.pageType === 'genreShow') {
+          genreTag = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "genre_tag_container"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "genre_tag_text"
+          }, "Genre"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "genre_tag_arrow"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "fas fa-angle-right"
+          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "genre_tag_title"
+          }, this.props.genre.name));
+        }
+
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_fp_video_container"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -694,7 +706,7 @@ function (_React$Component) {
           className: "browse_fp_video_maturity_rating"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "browse_fp_video_maturity_rating_text"
-        }, video.maturityRating)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, video.maturityRating)), genreTag, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_fp_video_side_section"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_side_section_controls"
@@ -755,7 +767,8 @@ var msp = function msp(state, ownProps) {
     pageType: ownProps.pageType,
     browseVid: ownProps.browseVid || {
       id: 0
-    }
+    },
+    genre: state.entities.genres[ownProps.genreId]
   };
 };
 
