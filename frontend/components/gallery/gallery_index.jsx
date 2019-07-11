@@ -2,7 +2,7 @@ import React from 'react';
 import GalleryNavBarContainer from '../nav_bar/gallery_nav_bar_container';
 import { Link } from 'react-router-dom';
 import GalleryShowRowContainer from './gallery_show_row_container';
-
+import GalleryFPVideoContainer from './gallery_fp_video_container';
 class GalleryIndex extends React.Component {
     componentDidMount() {
         this.props.fetchGenres();
@@ -42,26 +42,8 @@ class GalleryIndex extends React.Component {
             return (
                 <div className="browse_body">
                     <GalleryNavBarContainer path={this.props.match.path}/>
-                    <div className="browse_fp_video_container">
-                        <div className="browse_fp_video" style={fpVideoStyle}><div className="browse_fp_background_gradient"></div></div>
-                        <span className="browse_fp_video_maturity_rating">
-                            <span className="browse_fp_video_maturity_rating_text">{this.props.fpVideo.maturityRating}</span>
-                        </span>
-                        <div className="browse_fp_video_side_section">
-                            <div className="browse_side_section_controls">
-                                <div className="browse_fp_video_title">
-                                    {this.props.fpVideo.title}
-                                </div>
-                                <span className="play_button_container"><div className="link"><Link to={`/watch/${this.props.fpVideo.id}`}>
-                                    <div className="play_button"><i className="fas fa-play"></i></div><div className="play_button_text">Play</div></Link></div>
-                                    <div></div>
-                                </span>
-                                <div className="browse_fp_video_description" onLoad={this.fadeOut}>
-                                    {this.props.fpVideo.description}
-                                </div>
-                            </div>
-                        </div>    
-                    </div> 
+                    <GalleryFPVideoContainer genreId={5} pageType="browse" browseVid={this.props.fpVideo} />
+
                     {/* {showRowsFirstSix} */}
                     {showOneRow}
                 </div>

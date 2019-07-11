@@ -55,5 +55,6 @@ export const randGenreVideoId = (state, genreId) => {
     let mediaGenres = Object.values(state.entities.mediaGenres).filter((mediaGenre) => {
         return mediaGenre.genreId == genreId;
     })
-    return mediaGenres[Math.floor(Math.random() * mediaGenres.length)].mediaId
+    if (mediaGenres.length === 0) return 0;
+    return mediaGenres[Math.floor(Math.random() * mediaGenres.length)].mediaId;
 }

@@ -637,6 +637,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -658,28 +659,29 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var GalleryFPVideo =
 /*#__PURE__*/
 function (_React$Component) {
   _inherits(GalleryFPVideo, _React$Component);
 
-  function GalleryFPVideo() {
+  function GalleryFPVideo(props) {
+    var _this;
+
     _classCallCheck(this, GalleryFPVideo);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(GalleryFPVideo).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GalleryFPVideo).call(this, props));
+    _this.state = _this.props.randFPVideo;
+    return _this;
   }
 
   _createClass(GalleryFPVideo, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.fetchMedium(this.props.genreId);
-    }
-  }, {
     key: "render",
     value: function render() {
-      if (this.props.fpVideo.id !== 0) {
+      if (this.props.randFPVideo.id !== 0 || this.props.browseVid.id !== 0) {
+        var video = this.props.pageType === 'genreShow' ? this.state : this.props.browseVid;
         var fpVideoStyle = {
-          backgroundImage: 'url(' + this.props.fpVideo.thumbnailUrl + ')'
+          backgroundImage: 'url(' + video.thumbnailUrl + ')'
         };
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_fp_video_container"
@@ -692,26 +694,28 @@ function (_React$Component) {
           className: "browse_fp_video_maturity_rating"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "browse_fp_video_maturity_rating_text"
-        }, this.props.fpVideo.maturityRating)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, video.maturityRating)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_fp_video_side_section"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_side_section_controls"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_fp_video_title"
-        }, this.props.fpVideo.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        }, video.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "play_button_container"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "link"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/watch/".concat(this.props.fpVideo.id)
+          to: "/watch/".concat(video.id)
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "play_button"
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-play"
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "play_button_text"
-        }, "Play"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "Play"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: "browse_fp_video_description",
           onLoad: this.fadeOut
-        }, this.props.fpVideo.description))));
+        }, video.description))));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "fpVideoShow");
       }
@@ -745,7 +749,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var msp = function msp(state, ownProps) {
   return {
-    fpVideo: state.entities.media[_reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["randGenreVideoId"](state, ownProps.genreId)] || {
+    randFPVideo: state.entities.media[_reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["randGenreVideoId"](state, ownProps.genreId)] || {
+      id: 0
+    },
+    pageType: ownProps.pageType,
+    browseVid: ownProps.browseVid || {
       id: 0
     }
   };
@@ -777,6 +785,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../nav_bar/gallery_nav_bar_container */ "./frontend/components/nav_bar/gallery_nav_bar_container.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _gallery_show_row_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gallery_show_row_container */ "./frontend/components/gallery/gallery_show_row_container.jsx");
+/* harmony import */ var _gallery_fp_video_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./gallery_fp_video_container */ "./frontend/components/gallery/gallery_fp_video_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -794,6 +803,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -866,39 +876,11 @@ function (_React$Component) {
           className: "browse_body"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
           path: this.props.match.path
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "browse_fp_video_container"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "browse_fp_video",
-          style: fpVideoStyle
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "browse_fp_background_gradient"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "browse_fp_video_maturity_rating"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "browse_fp_video_maturity_rating_text"
-        }, this.props.fpVideo.maturityRating)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "browse_fp_video_side_section"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "browse_side_section_controls"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "browse_fp_video_title"
-        }, this.props.fpVideo.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "play_button_container"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "link"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-          to: "/watch/".concat(this.props.fpVideo.id)
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "play_button"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-          className: "fas fa-play"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "play_button_text"
-        }, "Play"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "browse_fp_video_description",
-          onLoad: this.fadeOut
-        }, this.props.fpVideo.description)))), showOneRow);
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_fp_video_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          genreId: 5,
+          pageType: "browse",
+          browseVid: this.props.fpVideo
+        }), showOneRow);
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_body"
@@ -1284,7 +1266,8 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
           path: this.props.match.path
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_gallery_fp_video_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
-          genreId: Number(this.props.match.params.genreId)
+          genreId: Number(this.props.match.params.genreId),
+          pageType: "genreShow"
         }), showOneRow);
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1531,7 +1514,7 @@ function (_React$Component) {
   }, {
     key: "storeScroll",
     value: function storeScroll() {
-      document.documentElement.dataset.scroll = window.scrollY;
+      document.documentElement.dataset.scroll = window.scrollY ? window.scrollY : 0;
     }
   }, {
     key: "componentDidMount",
@@ -1628,7 +1611,7 @@ function (_React$Component) {
           src: this.props.fetchedProfile.photoUrl,
           className: "browse_dropbtn"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-          className: "fas fa-caret-down"
+          className: "fas fa-caret-down down"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_dropdown-content"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2780,6 +2763,7 @@ var randGenreVideoId = function randGenreVideoId(state, genreId) {
   var mediaGenres = Object.values(state.entities.mediaGenres).filter(function (mediaGenre) {
     return mediaGenre.genreId == genreId;
   });
+  if (mediaGenres.length === 0) return 0;
   return mediaGenres[Math.floor(Math.random() * mediaGenres.length)].mediaId;
 };
 

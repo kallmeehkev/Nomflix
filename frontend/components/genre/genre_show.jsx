@@ -23,7 +23,7 @@ class GenreShow extends React.Component {
             return (
                 <div className="browse_body">
                     <GalleryNavBarContainer path={this.props.match.path} />
-                    <GalleryFPVideoContainer genreId={Number(this.props.match.params.genreId)} />
+                    <GalleryFPVideoContainer genreId={Number(this.props.match.params.genreId)} pageType="genreShow"/>
                     {showOneRow}
                 </div>
             ) 

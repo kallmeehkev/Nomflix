@@ -26,7 +26,7 @@ class NavBar extends React.Component  {
     }
 
     storeScroll() {
-        document.documentElement.dataset.scroll = window.scrollY;
+        document.documentElement.dataset.scroll = window.scrollY ? window.scrollY : 0;
     }
 
     componentDidMount() {
@@ -84,7 +84,7 @@ class NavBar extends React.Component  {
                             </div>
                             <div className="browse_nav_bar_profile_pic browse_dropdown">
                                 <img src={this.props.fetchedProfile.photoUrl} className="browse_dropbtn"/>
-                                <i className="fas fa-caret-down"></i>
+                                <i className="fas fa-caret-down down"></i>
                                 <div className="browse_dropdown-content">
                                     <div className="browse_dropdown-arrow"><div><i className="fas fa-caret-up"></i></div></div>
                                     <div className="browse_dropdown-list">

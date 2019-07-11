@@ -129,12 +129,19 @@ html:not([data-scroll='0']) {
   align-content: center;
 }
 
+.browse_nav_bar_profile_pic .down {
+  margin-bottom: 5px;
+  position: relative;
+  bottom: 7px;
+}
+
 .browse_nav_bar_profile_pic img {
     height: 32px;
     width: 32px;
     display: inline;
     padding-right: 8px;
 }
+
 
 .browse_dropbtn {
   border: none;
@@ -164,7 +171,7 @@ html:not([data-scroll='0']) {
   justify-content: flex-end;
   width: 100%;
   background: transparent;
-  padding-right: 4vw;
+  padding-right: 25%;
   height: 3vh;
   box-sizing: border-box;
 }
@@ -348,10 +355,11 @@ html:not([data-scroll='0']) {
 .browse_fp_video_title {
   padding-right: 6vw;
   margin-bottom: 2vh;
-  font-size: 2.5vw;
+  font-size: 3vw;
   font-weight: 700;
   color: rgb(6,25,34);
-
+  font-family: 'Pathway Gothic One', sans-serif;
+  text-shadow: -1px -1px 3px white, 1px -1px 3px white, -1px 1px 3px white, 1px 1px 3px white;
 }
 
 .play_button_container {
@@ -408,8 +416,8 @@ html:not([data-scroll='0']) {
   margin-top: 2vh;
   font-size: 1.4vw;
   font-weight: 500;
-  color: rgb(206,17,65);
-  text-shadow: -1px -1px 3px bisque, 1px -1px 3px bisque, -1px 1px 3px bisque, 1px 1px 3px bisque;
+  color: white;
+  text-shadow: -1px -1px 3px black, 1px -1px 3px black, -1px 1px 3px black, 1px 1px 3px black;
 }
 
 .browse_row_container {

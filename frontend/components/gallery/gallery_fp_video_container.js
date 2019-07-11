@@ -5,7 +5,9 @@ import GalleryFPVideo from './gallery_fp_video';
 
 const msp = (state, ownProps) => {
     return {
-        fpVideo: state.entities.media[Selectors.randGenreVideoId(state, ownProps.genreId)] || {id: 0}
+        randFPVideo: state.entities.media[Selectors.randGenreVideoId(state, ownProps.genreId)] || {id: 0},
+        pageType: ownProps.pageType,
+        browseVid: ownProps.browseVid || { id: 0 },
     }
 }
 
