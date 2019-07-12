@@ -75,6 +75,12 @@
   width: 35%;
 }
 
+.main_browse_nav_bar_left a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .main_nav_bar_left_controls_home {
   margin: auto;
   font-size: 1.4vw;
@@ -476,6 +482,7 @@ html:not([data-scroll='0']) {
     color: #000;
     // height: 1.2vw;
     border-radius: .2vw;
+    transform: scale(1.1);
 }
 
 .play_button_text {
@@ -511,14 +518,12 @@ html:not([data-scroll='0']) {
 
 
 .browse_row_container {
-  padding: 3vw 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5vw 0;
   margin: 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
   position: relative;
   z-index: 1;
-  max-height: 30vh;
   height: auto;
 }
 
@@ -558,7 +563,8 @@ html:not([data-scroll='0']) {
     // -moz-transition: transform 400ms ease-in-out;
     // -o-transition: transform 400ms ease-in-out;
     // transition: transform 400ms ease-in-out;
-    overflow: overlay;
+    overflow-x: overlay;
+    overflow-y: visible;
 }
 
 .browse_row_slider {
@@ -573,6 +579,7 @@ html:not([data-scroll='0']) {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: center;
 }
 
 .browse_row_item_container {
@@ -580,12 +587,11 @@ html:not([data-scroll='0']) {
   -moz-box-sizing: border-box;
   box-sizing: content-box;
   z-index: 2;
-  box-sizing: border-box;
   display: flex;
   position: relative;
   white-space: normal;
   vertical-align: top;
-  padding: 0 2px;
+  margin: 0 2px;
   width: 18.4vw;
   overflow: visible;
   flex-direction: row;
@@ -607,7 +613,7 @@ html:not([data-scroll='0']) {
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .browse_row_item_content_expanded {
@@ -621,6 +627,8 @@ html:not([data-scroll='0']) {
     -o-transition: transform 400ms ease-in-out;
     transition: transform 400ms ease-in-out;
     z-index: 3;
+    border: 3px solid white;
+
 }
 
 .browse_row_item_container:hover .side_block {
@@ -631,7 +639,7 @@ html:not([data-scroll='0']) {
 .browse_row_item_content .b {
   width: 100%;
   background-color: transparent;
-  height: 100%;
+  height: 65%;
   margin: 0;
   z-index: 2;
 }
@@ -680,7 +688,6 @@ html:not([data-scroll='0']) {
 .row_item_overlay_details {
   display: flex;
   width: 5vw;
-  margin-bottom: 3vw;
   justify-content: flex-start;
   background: rgba(0, 0, 0, 0.2);
   border-radius: 1px;
@@ -710,3 +717,190 @@ html:not([data-scroll='0']) {
   border-radius: 1px;
 }
 
+.row_item_drop_down {
+  display: flex;
+  height: 40%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3));
+}
+
+.browse_row_item_container:hover .row_item_drop_down i {
+  display: block;
+}
+
+.browse_row_item_container.active {
+  border: 2px solid white;
+}
+
+.row_item_drop_down i {
+  font-size: 1.8vw;
+  display: none;
+}
+
+.row_item_drop_down:hover i {
+  background-color: #e50914;
+}
+
+.show_row_item_content {
+  display: none;
+  width: 100%;
+  height: 35vw;
+}
+
+.show_row_item_content.active {
+  display: flex;
+}
+
+.item_content_container {
+  height: 100%;
+  width: 100%;
+  padding-left: 4%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.item_content_details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: black;
+  width: 50%;
+  z-index: 2;
+}
+
+.item_content_title {
+  font-size: 3vw;
+  font-weight: 700;
+  color: white;
+  font-family: 'Pathway Gothic One', sans-serif;
+  padding-right: 10vw;
+  box-sizing: border-box;
+  margin: 4.4vw 0 2vw 0;
+}
+
+.item_content_MR_duration {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-bottom: 1.5vw;
+}
+
+.item_content_MR {
+  width: 3vw;
+  border: 1px solid whitesmoke;
+  font-size: 1.3vw;
+  text-align: center;
+  font-weight: 700;
+  border-radius: 1px;
+  color: white;
+}
+
+.item_content_duration {
+  font-size: 1.5vw;
+  text-align: center;
+  padding: 0 2vw 0 2vw;
+  font-weight: 700;
+  color: white;
+}
+
+.item_content_description {
+  color: rgb(196, 193, 193);
+  font-size: 1.5vw;
+  font-weight: 550;
+  margin-bottom: 1.5vw;
+  padding-right: 1vw;
+}
+
+.item_content_play_button_container {
+  height: 2.8vw;
+  width: 10vw;
+  display: flex;
+  justify-content: flex-start;
+  text-align: center;
+  line-height: 1.9em;
+  background-color: rgba(229,9,20, 0.85);
+    border-width: 0;
+    border-radius: .2vw;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    box-sizing: border-box;
+    font-size: 1.5vw;
+    cursor: pointer;
+    color: white;
+}
+
+// .item_content_play_button_container .link {
+//   width: 100%;
+// }
+.item_content_play_button_container a {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.item_content_play_button_container a:hover {
+  box-shadow: 0 0.6vw 1vw -0.4vw rgba(0,0,0,.35);
+  background-color: rgba(229,9,20, 1);
+    color: white;
+    // height: 1.2vw;
+    border-radius: .2vw;
+    transform: scale(1.1);
+}
+
+.item_content_play_button_text {
+  display: flex;
+  background: transparent;
+}
+
+.item_content_play_button_container .item_content_play_button {
+  // background-image: url('play_icon_3000.png');
+  height: 2.8vw;
+  width: 2.8vw;
+  // background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item_content_gradient {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0));
+    height: 100%;
+    width: 20%;
+    position: absolute;
+    left: 43%;
+    z-index: 1;
+}
+
+.item_content_image {
+  height: 100%;
+  width: 70%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.item_content_image a {
+  width: 100%;
+  height: 100%;
+}
+
+.item_content_image button {
+  position: absolute;
+  right: 3vw;
+  top: 3vw;
+}
+
+.item_content_image i {
+  font-size: 2vw;
+}
+
+.item_content_image .link {
+  width: 100%;
+  height: 100%;
+}

@@ -35,7 +35,7 @@ class GalleryShowItem extends React.Component {
         };
 
         return (
-            <div className="browse_row_item_container">
+            <div className={`browse_row_item_container ${this.props.active}`}>
                 {/* <div className="side_block"></div> */}
                 <div onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} className={"browse_row_item_content " + (this.state.isMouseInside ? 'browse_row_transform' : '')} style={style}>
                         <div className="b">
@@ -43,7 +43,6 @@ class GalleryShowItem extends React.Component {
                                 <div className="browse_row_item_link">
                                     <div className="overlay_darken">
                                         <div className="row_item_overlay">
-                                            <button></button>
                                             <div className="row_item_play_button"><i className="far fa-play-circle"></i></div>
                                             <div className="row_item_overlay_title">{video.title}</div>
                                             <div className="row_item_overlay_details">
@@ -55,6 +54,7 @@ class GalleryShowItem extends React.Component {
                                 </div>
                             </Link>
                         </div>
+                        <button onClick={this.props.handleOpen}className="row_item_drop_down"><i className="fas fa-chevron-down"></i></button>
                 </div>
                 {/* <div className="side_block"></div> */}
             </div>

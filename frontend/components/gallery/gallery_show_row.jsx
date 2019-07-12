@@ -1,5 +1,6 @@
-import React from 'react'
-import GalleryShowItem from './gallery_show_item'
+import React from 'react';
+import GalleryShowItem from './gallery_show_item';
+import GalleryShowRowItemContent from './gallery_show_row_item_content';
 
 class GalleryShowRow extends React.Component {
     constructor(props) {
@@ -9,6 +10,12 @@ class GalleryShowRow extends React.Component {
         // }
         // this.mouseEnter = this.mouseEnter.bind(this)
         // this.mouseLeave = this.mouseLeave.bind(this)
+        this.state = {
+            videoIdx: 0,
+            open: false,
+        }
+        this.handleOpen = this.handleOpen.bind(this)
+        this.handleClose = this.handleClose.bind(this)
     }    
 
     componentDidMount() {
@@ -16,7 +23,7 @@ class GalleryShowRow extends React.Component {
             this.props.fetchGenre(this.props.genre.id)
         }
     }
-        
+    
     // mouseEnter() {
     //     this.setState({ isMouseInside: true });
     // }
@@ -24,10 +31,19 @@ class GalleryShowRow extends React.Component {
     //     this.setState({ isMouseInside: false });
     // }
 
+    handleOpen(i) {
+        this.setState({videoIdx: i, open: true})
+    }
+
+    handleClose() {
+        this.setState({open: false})
+    }
+
     render() {
         if (this.props.genreVideos[this.props.genreVideos.length-1]) {
             let videos = this.props.genreVideos.map((video, i) => {
-                return <GalleryShowItem video={video} key={i + (this.props.genre.id * 10)} />
+                let active = (this.state.open && this.state.videoIdx === i) ? "active" : ""
+                return <GalleryShowItem video={video} key={i + (this.props.genre.id * 10)} handleOpen={() => this.handleOpen(i)} active={active}/>
             })
             // let containerClass = this.state.isMouseInside ? "browse_row_slider_wrapper browse_row_transform" : "browse_row_transform"
             let rowTitle = this.props.genreShow ? <div>Trending Now for {this.props.genre.name}</div> : <div>{this.props.genre.name}</div>
@@ -40,6 +56,9 @@ class GalleryShowRow extends React.Component {
                                 {videos}
                             </div>
                         </div>
+                    </div>
+                    <div className={this.state.open ? "show_row_item_content active" : "show_row_item_content"}>
+                        <GalleryShowRowItemContent content={this.props.genreVideos[this.state.videoIdx]} handleClose={this.handleClose}/>
                     </div>
                 </div>
             )

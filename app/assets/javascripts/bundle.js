@@ -1296,7 +1296,7 @@ function (_React$Component) {
         backgroundImage: 'url(' + video.thumbnailUrl + ')'
       };
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "browse_row_item_container"
+        className: "browse_row_item_container ".concat(this.props.active)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onMouseEnter: this.mouseEnter,
         onMouseLeave: this.mouseLeave,
@@ -1312,7 +1312,7 @@ function (_React$Component) {
         className: "overlay_darken"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row_item_overlay"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row_item_play_button"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "far fa-play-circle"
@@ -1324,7 +1324,12 @@ function (_React$Component) {
         className: "row_item_overlay_mat_rating"
       }, video.maturityRating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row_item_overlay_duration"
-      }, Math.floor(video.duration / 60000), "m")))))))));
+      }, Math.floor(video.duration / 60000), "m"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.props.handleOpen,
+        className: "row_item_drop_down"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-chevron-down"
+      }))));
     }
   }]);
 
@@ -1347,6 +1352,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _gallery_show_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gallery_show_item */ "./frontend/components/gallery/gallery_show_item.jsx");
+/* harmony import */ var _gallery_show_row_item_content__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./gallery_show_row_item_content */ "./frontend/components/gallery/gallery_show_row_item_content.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1357,13 +1363,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1374,13 +1381,23 @@ function (_React$Component) {
   _inherits(GalleryShowRow, _React$Component);
 
   function GalleryShowRow(props) {
+    var _this;
+
     _classCallCheck(this, GalleryShowRow);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(GalleryShowRow).call(this, props)); // this.state = {
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GalleryShowRow).call(this, props)); // this.state = {
     //     isMouseInside: false
     // }
     // this.mouseEnter = this.mouseEnter.bind(this)
     // this.mouseLeave = this.mouseLeave.bind(this)
+
+    _this.state = {
+      videoIdx: 0,
+      open: false
+    };
+    _this.handleOpen = _this.handleOpen.bind(_assertThisInitialized(_this));
+    _this.handleClose = _this.handleClose.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(GalleryShowRow, [{
@@ -1397,15 +1414,35 @@ function (_React$Component) {
     // }
 
   }, {
+    key: "handleOpen",
+    value: function handleOpen(i) {
+      this.setState({
+        videoIdx: i,
+        open: true
+      });
+    }
+  }, {
+    key: "handleClose",
+    value: function handleClose() {
+      this.setState({
+        open: false
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this2 = this;
 
       if (this.props.genreVideos[this.props.genreVideos.length - 1]) {
         var videos = this.props.genreVideos.map(function (video, i) {
+          var active = _this2.state.open && _this2.state.videoIdx === i ? "active" : "";
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
             video: video,
-            key: i + _this.props.genre.id * 10
+            key: i + _this2.props.genre.id * 10,
+            handleOpen: function handleOpen() {
+              return _this2.handleOpen(i);
+            },
+            active: active
           });
         }); // let containerClass = this.state.isMouseInside ? "browse_row_slider_wrapper browse_row_transform" : "browse_row_transform"
 
@@ -1420,7 +1457,12 @@ function (_React$Component) {
           className: "browse_row_slider"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_row_slider_wrapper"
-        }, videos))));
+        }, videos))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: this.state.open ? "show_row_item_content active" : "show_row_item_content"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row_item_content__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          content: this.props.genreVideos[this.state.videoIdx],
+          handleClose: this.handleClose
+        })));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "GalleryShowRow");
       }
@@ -1468,6 +1510,69 @@ var mdp = function mdp(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_gallery_show_row__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/gallery/gallery_show_row_item_content.jsx":
+/*!***********************************************************************!*\
+  !*** ./frontend/components/gallery/gallery_show_row_item_content.jsx ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+var GalleryShowRowItemContent = function GalleryShowRowItemContent(props) {
+  var style = {
+    backgroundImage: 'url(' + props.content.thumbnailUrl + ')'
+  };
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "item_content_container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "item_content_details"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "item_content_title"
+  }, props.content.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "item_content_MR_duration"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "item_content_MR"
+  }, props.content.maturityRating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "item_content_duration"
+  }, Math.floor(props.content.duration / 60000), "m")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "item_content_description"
+  }, props.content.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "item_content_play_button_container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/watch/".concat(props.content.id)
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "item_content_play_button"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fas fa-play"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "item_content_play_button_text"
+  }, "Play"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "item_content_gradient"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "item_content_image",
+    style: style
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/watch/".concat(props.content.id)
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "link"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: props.handleClose
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fas fa-times"
+  }))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (GalleryShowRowItemContent);
 
 /***/ }),
 
