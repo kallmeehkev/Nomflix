@@ -2707,13 +2707,14 @@ function (_React$Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "media_show"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "media_back_button"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.goBack
+        onClick: this.goBack,
+        className: "media_back_button"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-arrow-left"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "media_back_text"
+      }, "Back to Browse")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
         src: this.props.video.mediaFileUrl,
         autoPlay: true,
         controls: true,

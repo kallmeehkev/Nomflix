@@ -17,7 +17,7 @@ class MediaShow extends React.Component {
     render () {
         return (
             <div className="media_show">
-                <div className="media_back_button"><button onClick={this.goBack}><i className="fas fa-arrow-left"></i></button></div>
+                <button onClick={this.goBack} className="media_back_button"><i className="fas fa-arrow-left"></i><div className="media_back_text">Back to Browse</div></button>
                 <video src={this.props.video.mediaFileUrl} autoPlay controls muted></video>
             </div>
         )
