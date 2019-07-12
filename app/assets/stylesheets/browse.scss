@@ -75,7 +75,7 @@
   width: 35%;
 }
 
-.main_nav_bar_left_controls {
+.main_nav_bar_left_controls_home {
   margin: auto;
   font-size: 1.4vw;
   cursor: pointer;
@@ -84,6 +84,22 @@
   padding-top: 10px;
   font-weight: 550;
 }
+.main_nav_bar_left_controls_genre {
+  margin: auto;
+  font-size: 1.4vw;
+  cursor: default;
+  box-sizing: content-box;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-weight: 550;
+}
+.main_nav_bar_left_controls_genre .down {
+  padding-left: 0.6vw;
+  font-size: 1.6vw;
+  position: relative;
+  top: 0.15vw;
+}
+
 
 .browse_splash_logo {
     width: 100px;
@@ -217,29 +233,45 @@ html:not([data-scroll='0']) {
 .browse_dropdown-content_genre {
   display: none;
   position: absolute;
-  background-color: black;
   width: 28vw;
   z-index: 10;
   top: 40px;
-  height: 12vw;
-  opacity: .85;
+  height: 14vw;
   cursor: default;
 }
+.browse_dropdown-arrow_genre i {
+  font-size: 1.6vw;
+  bottom: -0.7vw;
+  position: relative;
+}
 
-.main_nav_bar_left_controls:hover .browse_dropdown-content_genre {
+.main_nav_bar_left_controls_genre:hover .browse_dropdown-content_genre {
   display: block;
   padding: 20px, 0px, 20px, 0;
   transition: .4s;
 }
 
+.browse_dropdown-arrow_genre {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  background: transparent;
+  padding-left: 7%;
+  height: 3vh;
+  box-sizing: border-box;
+}
+
 .browse_dropdown_content_genre_container {
   display: flex;
   position: absolute;
-  height: 100%;
+  height: 82%;
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
-  bottom: 0;
+  bottom: 10px;
+  background-color: black;
+  opacity: .85;
 }
 
 .genres_vertical_container {
@@ -636,19 +668,38 @@ html:not([data-scroll='0']) {
   flex-direction: column;
   justify-content: flex-end;
 }
+.row_item_play_button {
+  display: flex;
+    margin-bottom: 0.5vw;
+}
 
 .row_item_play_button i{
   font-size: 1.4vw;
 }
 
+.row_item_overlay_details {
+  display: flex;
+  width: 5vw;
+  margin-bottom: 3vw;
+  justify-content: flex-start;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 1px;
+}
+
 .row_item_overlay_mat_rating {
-  width: 15%;
+  width: 3vw;
   border: 1px solid whitesmoke;
   font-size: 0.7vw;
   text-align: center;
-  margin-bottom: 3vw;
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 2px;
+  font-weight: 500;
+  border-radius: 1px;
+}
+
+.row_item_overlay_duration {
+  font-size: 0.8vw;
+  text-align: center;
+  padding: 0 0.5vw 0 1vw;
+  font-weight: 500;
 }
 
 .row_item_overlay_title {
@@ -656,6 +707,6 @@ html:not([data-scroll='0']) {
   font-weight: 500;
   margin-bottom: 0.5vw;
   background: rgba(0, 0, 0, 0.15);
-  border-radius: 2px;
+  border-radius: 1px;
 }
 

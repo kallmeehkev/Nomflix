@@ -1315,12 +1315,16 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row_item_play_button"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        "class": "far fa-play-circle"
+        className: "far fa-play-circle"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row_item_overlay_title"
       }, video.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row_item_overlay_details"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row_item_overlay_mat_rating"
-      }, video.maturityRating))))))));
+      }, video.maturityRating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row_item_overlay_duration"
+      }, Math.floor(video.duration / 60000), "m")))))))));
     }
   }]);
 
@@ -1871,12 +1875,18 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "main_browse_nav_bar_left"
         }, logo, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "main_nav_bar_left_controls"
+          className: "main_nav_bar_left_controls_home"
         }, home), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "main_nav_bar_left_controls"
-        }, "Genres", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "main_nav_bar_left_controls_genre"
+        }, "Genres", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-caret-down down"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_dropdown-content_genre"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_dropdown-arrow_genre"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-caret-up"
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_dropdown_content_genre_container"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "genres_vertical_container"

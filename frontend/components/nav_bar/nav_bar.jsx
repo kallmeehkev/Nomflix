@@ -71,9 +71,10 @@ class NavBar extends React.Component  {
                         <div className="main_browse_nav_bar">
                             <div className="main_browse_nav_bar_left">
                                 {logo}
-                                <div className="main_nav_bar_left_controls">{home}</div>
-                                <div className="main_nav_bar_left_controls">Genres
+                                <div className="main_nav_bar_left_controls_home">{home}</div>
+                                <div className="main_nav_bar_left_controls_genre">Genres<i className="fas fa-caret-down down"></i>
                                     <div className="browse_dropdown-content_genre">
+                                        <div className="browse_dropdown-arrow_genre"><div><i className="fas fa-caret-up"></i></div></div>
                                         <div className="browse_dropdown_content_genre_container">
                                             <div className="genres_vertical_container">{firstFourGenres}</div>
                                             <div className="genres_vertical_container">{secondFourGenres}</div>
