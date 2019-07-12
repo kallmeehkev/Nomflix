@@ -57,6 +57,7 @@ class GalleryShowItem extends React.Component {
                         <button onClick={this.props.handleOpen}className="row_item_drop_down"><i className="fas fa-chevron-down"></i></button>
                 </div>
                 {/* <div className="side_block"></div> */}
+                <div className="row_item_border_arrow"><i className="fas fa-caret-down"></i></div>
             </div>
         )
     }

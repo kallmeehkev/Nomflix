@@ -563,7 +563,7 @@ html:not([data-scroll='0']) {
     // -moz-transition: transform 400ms ease-in-out;
     // -o-transition: transform 400ms ease-in-out;
     // transition: transform 400ms ease-in-out;
-    overflow-x: overlay;
+    overflow-x: scroll;
     overflow-y: visible;
 }
 
@@ -726,6 +726,9 @@ html:not([data-scroll='0']) {
   align-items: center;
   background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.3));
   z-index: 2;
+  bottom: 0.1vw;
+  position: absolute;
+  width: 100%;
 }
 
 .browse_row_item_container:hover .row_item_drop_down i {
@@ -734,7 +737,30 @@ html:not([data-scroll='0']) {
 
 .browse_row_item_container.active {
   border: 2px solid white;
+  transform: translateY(-1vw);
+  transition: transform 0.5s;
 }
+
+.row_item_border_arrow {
+    display: none;
+    width: 100%;
+    position: absolute;
+    bottom: -1.4vw;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 2;
+    background-color: rgba(0,0,0,0.3);
+}
+
+.browse_row_item_container.active .row_item_border_arrow {
+  display: flex;
+}
+
+.row_item_border_arrow i {
+  font-size: 2vw;
+}
+
 
 .row_item_drop_down i {
   font-size: 1.8vw;

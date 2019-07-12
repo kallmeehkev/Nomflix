@@ -1329,7 +1329,11 @@ function (_React$Component) {
         className: "row_item_drop_down"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-chevron-down"
-      }))));
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row_item_border_arrow"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-caret-down"
+      })));
     }
   }]);
 
