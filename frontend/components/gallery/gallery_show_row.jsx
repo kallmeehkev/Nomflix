@@ -45,7 +45,6 @@ class GalleryShowRow extends React.Component {
                 let active = (this.state.open && this.state.videoIdx === i) ? "active" : ""
                 return <GalleryShowItem video={video} key={i + (this.props.genre.id * 10)} handleOpen={() => this.handleOpen(i)} active={active}/>
             })
-            // let containerClass = this.state.isMouseInside ? "browse_row_slider_wrapper browse_row_transform" : "browse_row_transform"
             let rowTitle = this.props.genreShow ? <div>Trending Now for {this.props.genre.name}</div> : <div>{this.props.genre.name}</div>
             return (
                 <div className="browse_row_container">

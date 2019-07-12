@@ -639,9 +639,10 @@ html:not([data-scroll='0']) {
 .browse_row_item_content .b {
   width: 100%;
   background-color: transparent;
-  height: 65%;
+  height: 70%;
   margin: 0;
   z-index: 2;
+  padding-bottom: 2vw;
 }
 
 .browse_row_item_link {
@@ -720,7 +721,7 @@ html:not([data-scroll='0']) {
 
 .row_item_drop_down {
   display: flex;
-  height: 40%;
+  height: 30%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
