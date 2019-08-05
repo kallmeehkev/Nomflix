@@ -20,6 +20,14 @@ class Profile < ApplicationRecord
     foreign_key: :user_id,
     class_name: :User
 
+    has_many :my_lists,
+    foreign_key: :profile_id,
+    class_name: :MyList
+
+    has_many :listed_media,
+    through: :my_lists,
+    source: :medium
+
     has_one_attached :photo
 
 end

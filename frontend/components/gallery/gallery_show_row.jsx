@@ -46,16 +46,20 @@ class GalleryShowRow extends React.Component {
                 return <GalleryShowItem video={video} key={i + (this.props.genre.id * 10)} handleOpen={() => this.handleOpen(i)} active={active}/>
             })
             let rowTitle = this.props.genreShow ? <div>Trending Now for {this.props.genre.name}</div> : <div>{this.props.genre.name}</div>
+            let style = {
+                width: `${videos.length*18.4}vw`
+                // width: `300%`,
+            }
             return (
                 <div className="browse_row_container">
                     <h2><span className="browse_row_title">{rowTitle}</span></h2>
-                    <div className="browse_row_content">
-                        <div className="browse_row_slider">
+                    {/* <div className="browse_row_content"> */}
+                        <div className="browse_row_slider" style={style}>
                             <div className="browse_row_slider_wrapper">
                                 {videos}
                             </div>
                         </div>
-                    </div>
+                    {/* </div> */}
                     <div className={this.state.open ? "show_row_item_content active" : "show_row_item_content"}>
                         <GalleryShowRowItemContent content={this.props.genreVideos[this.state.videoIdx]} handleClose={this.handleClose}/>
                     </div>

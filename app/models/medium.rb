@@ -25,6 +25,10 @@ class Medium < ApplicationRecord
     through: :media_genres,
     source: :genre
 
+    has_many :my_lists,
+    foreign_key: :media_id,
+    class_name: :MyList
+
     has_one_attached :thumbnail
 
     has_one_attached :media_file

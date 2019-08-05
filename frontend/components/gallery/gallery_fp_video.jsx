@@ -10,10 +10,6 @@ class GalleryFPVideo extends React.Component {
         this.state = {randId: this.props.randId}
     }
 
-    // componentDidMount() {
-    //     this.setState({ video: this.props.fetchRandVideo(this.props.genreId) })
-    // }
-
     componentDidUpdate(prevProps) {
         if (prevProps.genreId !== this.props.genreId ) {
             // let video = this.props.fetchRandVideo(this.props.genreId)

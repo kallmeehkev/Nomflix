@@ -569,7 +569,7 @@ html:not([data-scroll='0']) {
 
 .browse_row_slider {
   z-index: 0;
-  position: relative;
+  position: static;
   margin: 0;
   padding: 0 4%;
   height: 100%;
@@ -580,6 +580,7 @@ html:not([data-scroll='0']) {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  // width: 300%;
 }
 
 .browse_row_item_container {
@@ -593,8 +594,6 @@ html:not([data-scroll='0']) {
   vertical-align: top;
   margin: 0 2px;
   width: 18.4vw;
-  overflow: visible;
-  flex-direction: row;
   height: 15vw;
 }
 
@@ -621,14 +620,14 @@ html:not([data-scroll='0']) {
 }
 
 .browse_row_item_container:hover {
-  transform: scale(1.5);
+  transform: scale(1.4);
   -webkit-transition: transform 400ms ease-in-out;
     -moz-transition: transform 400ms ease-in-out;
     -o-transition: transform 400ms ease-in-out;
     transition: transform 400ms ease-in-out;
     z-index: 3;
-    border: 3px solid white;
-
+    border: 2.5px solid white;
+  position: relative;
 }
 
 .browse_row_item_container:hover .side_block {
@@ -670,7 +669,7 @@ html:not([data-scroll='0']) {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.2);
-  padding-bottom: 5vw;
+  padding-bottom: 2.8vw;
 }
 
 .browse_row_item_container:hover .row_item_overlay {
@@ -731,7 +730,7 @@ html:not([data-scroll='0']) {
   position: absolute;
   width: 100%;
 }
-
+// 
 .browse_row_item_container:hover .row_item_drop_down i {
   display: block;
 }
@@ -751,7 +750,7 @@ html:not([data-scroll='0']) {
     justify-content: flex-start;
     align-items: center;
     z-index: 2;
-    background-color: rgba(0,0,0,0.3);
+    // background-color: rgba(0,0,0,0.3);
 }
 
 .browse_row_item_container.active .row_item_border_arrow {

@@ -11,7 +11,6 @@ const msp = (state, ownProps) => {
         browseVid: ownProps.browseVid || { id: 0 },
         genre: state.entities.genres[ownProps.genreId],
         media: state.entities.media,
-        // fetchRandVideo: (genreId) => Selectors.randVideo(state, genreId)
     }
 }
 
