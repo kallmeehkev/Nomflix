@@ -1,5 +1,5 @@
 import React from 'react';
-import GalleryShowItem from './gallery_show_item';
+import GalleryShowItemContainer from './gallery_show_item_container';
 import GalleryShowRowItemContent from './gallery_show_row_item_content';
 
 class GalleryShowRow extends React.Component {
@@ -43,7 +43,7 @@ class GalleryShowRow extends React.Component {
         if (this.props.genreVideos[this.props.genreVideos.length-1]) {
             let videos = this.props.genreVideos.map((video, i) => {
                 let active = (this.state.open && this.state.videoIdx === i) ? "active" : ""
-                return <GalleryShowItem video={video} key={i + (this.props.genre.id * 10)} handleOpen={() => this.handleOpen(i)} active={active}/>
+                return <GalleryShowItemContainer video={video} key={i + (this.props.genre.id * 10)} handleOpen={() => this.handleOpen(i)} active={active}/>
             })
             let rowTitle = this.props.genreShow ? <div>Trending Now for {this.props.genre.name}</div> : <div>{this.props.genre.name}</div>
             let style = {

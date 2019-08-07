@@ -1414,6 +1414,45 @@ function (_React$Component) {
 
 /***/ }),
 
+/***/ "./frontend/components/gallery/gallery_show_item_container.js":
+/*!********************************************************************!*\
+  !*** ./frontend/components/gallery/gallery_show_item_container.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _gallery_show_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gallery_show_item */ "./frontend/components/gallery/gallery_show_item.jsx");
+/* harmony import */ var _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/my_list_actions */ "./frontend/actions/my_list_actions.js");
+
+
+
+
+var msp = function msp(state, ownProps) {
+  var video = ownProps.video,
+      handleOpen = ownProps.handleOpen,
+      active = ownProps.active;
+  return {
+    video: video,
+    handleOpen: handleOpen,
+    active: active
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    deleteMylist: function deleteMylist(id) {
+      return dispatch(Object(_actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__["deleteMyList"])(id));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_gallery_show_item__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
 /***/ "./frontend/components/gallery/gallery_show_row.jsx":
 /*!**********************************************************!*\
   !*** ./frontend/components/gallery/gallery_show_row.jsx ***!
@@ -1425,7 +1464,7 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _gallery_show_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gallery_show_item */ "./frontend/components/gallery/gallery_show_item.jsx");
+/* harmony import */ var _gallery_show_item_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gallery_show_item_container */ "./frontend/components/gallery/gallery_show_item_container.js");
 /* harmony import */ var _gallery_show_row_item_content__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./gallery_show_row_item_content */ "./frontend/components/gallery/gallery_show_row_item_content.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -1510,7 +1549,7 @@ function (_React$Component) {
       if (this.props.genreVideos[this.props.genreVideos.length - 1]) {
         var videos = this.props.genreVideos.map(function (video, i) {
           var active = _this2.state.open && _this2.state.videoIdx === i ? "active" : "";
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_item_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
             video: video,
             key: i + _this2.props.genre.id * 10,
             handleOpen: function handleOpen() {
@@ -1565,8 +1604,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _gallery_show_row__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gallery_show_row */ "./frontend/components/gallery/gallery_show_row.jsx");
 /* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
 /* harmony import */ var _actions_genre_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/genre_actions */ "./frontend/actions/genre_actions.js");
-!(function webpackMissingModule() { var e = new Error("Cannot find module '../'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-
 
 
 
@@ -1823,14 +1860,61 @@ var nineteen_URL = window.nineteenURL; // delete window.netflix_background_8_URL
 
 /***/ }),
 
-/***/ "./frontend/components/mylist/mylist_index.js":
-/*!****************************************************!*\
-  !*** ./frontend/components/mylist/mylist_index.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ "./frontend/components/mylist/mylist_index.jsx":
+/*!*****************************************************!*\
+  !*** ./frontend/components/mylist/mylist_index.jsx ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
+
+
+var MyListIndex =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(MyListIndex, _React$Component);
+
+  function MyListIndex() {
+    _classCallCheck(this, MyListIndex);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(MyListIndex).apply(this, arguments));
+  }
+
+  _createClass(MyListIndex, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " ");
+    }
+  }]);
+
+  return MyListIndex;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (MyListIndex);
 
 /***/ }),
 
@@ -1844,8 +1928,7 @@ var nineteen_URL = window.nineteenURL; // delete window.netflix_background_8_URL
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _mylist_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mylist_index */ "./frontend/components/mylist/mylist_index.js");
-/* harmony import */ var _mylist_index__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_mylist_index__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _mylist_index_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mylist_index.jsx */ "./frontend/components/mylist/mylist_index.jsx");
 /* harmony import */ var _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/my_list_actions */ "./frontend/actions/my_list_actions.js");
 
 
@@ -1865,7 +1948,7 @@ var mdp = function mdp(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_mylist_index__WEBPACK_IMPORTED_MODULE_1___default.a));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_mylist_index_jsx__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 

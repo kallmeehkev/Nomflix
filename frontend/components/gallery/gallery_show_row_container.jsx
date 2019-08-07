@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import GalleryShowRow from './gallery_show_row';
 import * as Selectors from '../../reducers/selectors';
 import { fetchGenre } from '../../actions/genre_actions';
-import { deleteMyList } from '../'
 
 const msp = (state, ownProps) => {
     return {
@@ -13,7 +12,6 @@ const msp = (state, ownProps) => {
 
 const mdp = dispatch => ({
     fetchGenre: (id) => dispatch(fetchGenre(id)),
-
 })
 
 export default connect(msp, mdp)(GalleryShowRow);

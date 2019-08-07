@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import MyListIndex from './mylist_index';
+import MyListIndex from './mylist_index.jsx';
 import { deleteMyList } from '../../actions/my_list_actions';
 
 const msp = (state, ownProps) => {
