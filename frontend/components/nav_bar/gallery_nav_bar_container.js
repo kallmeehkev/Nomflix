@@ -6,7 +6,7 @@ import { unSetCurrentProfile, fetchProfile } from '../../actions/profile_actions
 const msp = ({ entities, session, ui }) => ({
     currentUser: entities.users[session.id],
     navType: 'gallery',
-    currentProfileId: ui.currentProfileId || 1,
+    currentProfileId: ui.currentProfileId || 2,
     fetchedProfile: entities.profiles[ui.currentProfileId] || {},
     genres: Object.values(entities.genres)
 })

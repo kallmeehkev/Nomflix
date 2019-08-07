@@ -1,1 +1,1 @@
-json.extract! @my_list, :profile_id, :media_id
+json.extract! @my_list, :id, :profile_id, :media_id

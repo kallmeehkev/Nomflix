@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './components/root.jsx';
-import configureStore from './store/store'
+import configureStore from './store/store';
+import {createMyList, deleteMyList} from './actions/my_list_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
     const root = document.getElementById('root');
@@ -25,6 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
         store = configureStore();
     }
-
+    window.getState = store.getState;
+    window.dispatch = store.dispatch;
+    window.createMyList = createMyList;
+    window.deleteMyList = deleteMyList;
     ReactDOM.render(<Root store={store} />, root);
 });

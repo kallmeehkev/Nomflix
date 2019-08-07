@@ -1,4 +1,4 @@
-import { merge } from 'lodash'
+import { merge } from 'lodash';
 import { RECEIVE_PROFILES, RECEIVE_PROFILE, REMOVE_PROFILE } from '../actions/profile_actions'
 
 const profilesReducer = (oldState = {}, action) => {
