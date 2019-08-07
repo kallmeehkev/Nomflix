@@ -1,6 +1,6 @@
 import React from 'react';
 import GalleryShowItemContainer from './gallery_show_item_container';
-import GalleryShowRowItemContent from './gallery_show_row_item_content';
+import GalleryShowRowItemContentContainer from './gallery_show_row_item_content_container';
 
 class GalleryShowRow extends React.Component {
     constructor(props) {
@@ -61,7 +61,7 @@ class GalleryShowRow extends React.Component {
                         </div>
                     {/* </div> */}
                     <div className={this.state.open ? "show_row_item_content active" : "show_row_item_content"}>
-                        <GalleryShowRowItemContent content={this.props.genreVideos[this.state.videoIdx]} handleClose={this.handleClose}/>
+                        <GalleryShowRowItemContentContainer content={this.props.genreVideos[this.state.videoIdx]} handleClose={this.handleClose}/>
                     </div>
                 </div>
             )

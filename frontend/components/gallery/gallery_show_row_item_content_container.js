@@ -1,13 +1,12 @@
 import { connect } from 'react-redux';
-import GalleryShowItem from './gallery_show_item';
+import GalleryShowItemContent from './gallery_show_row_item_content';
 import { createMyList, deleteMyList } from '../../actions/my_list_actions';
 
 const msp = (state, ownProps) => {
-    let { video, handleOpen, active } = ownProps;
+    let { content, handleClose } = ownProps;
     return {
-        video: video,
-        handleOpen: handleOpen,
-        active: active,
+        content: content,
+        handleClose: handleClose
     }
 }
 
@@ -16,4 +15,4 @@ const mdp = dispatch => ({
     deleteMylist: (id) => dispatch(deleteMyList(id))
 })
 
-export default connect(msp, mdp)(GalleryShowItem);
+export default connect(msp, mdp)(GalleryShowItemContent);
