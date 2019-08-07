@@ -83,27 +83,29 @@
 
 .main_nav_bar_left_controls_home {
   margin: auto;
-  font-size: 1.4vw;
+  font-size: 1.2vw;
   cursor: pointer;
   box-sizing: content-box;
   padding-bottom: 10px;
   padding-top: 10px;
-  font-weight: 550;
+  font-weight: 600;
 }
 .main_nav_bar_left_controls_genre {
   margin: auto;
-  font-size: 1.4vw;
+  font-size: 1.2vw;
   cursor: default;
   box-sizing: content-box;
   padding-bottom: 10px;
   padding-top: 10px;
-  font-weight: 550;
+  font-weight: 600;
 }
 .main_nav_bar_left_controls_genre .down {
   padding-left: 0.6vw;
   font-size: 1.6vw;
   position: relative;
   top: 0.15vw;
+  font-weight: 600;
+
 }
 
 
@@ -275,9 +277,10 @@ html:not([data-scroll='0']) {
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
-  bottom: 10px;
+  bottom: 6px;
   background-color: black;
   opacity: .85;
+  border: 1px solid #333;
 }
 
 .genres_vertical_container {
@@ -293,7 +296,7 @@ html:not([data-scroll='0']) {
   display: flex;
   padding-top: 5px;
   padding-bottom: 5px;
-  font-weight: 400;
+  font-weight: 600;
 }
 .genres_vertical_container_item:hover {
   text-decoration: underline;
@@ -550,7 +553,7 @@ html:not([data-scroll='0']) {
 .browse_row_title div {
   display: table-cell;
   vertical-align: bottom;
-  font-size: 1.6vw;
+  font-size: 1.5vw;
 }
 
 .browse_row_content {

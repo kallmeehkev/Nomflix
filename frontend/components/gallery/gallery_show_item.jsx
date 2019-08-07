@@ -48,6 +48,7 @@ class GalleryShowItem extends React.Component {
                                             <div className="row_item_overlay_details">
                                                 <div className="row_item_overlay_mat_rating">{video.maturityRating}</div>
                                                 <div className="row_item_overlay_duration">{Math.floor(video.duration/60000)}m</div>
+                                                
                                             </div>
                                         </div>
                                     </div>
