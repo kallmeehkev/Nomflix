@@ -8,6 +8,8 @@ const msp = (state, ownProps) => {
         video: video,
         handleOpen: handleOpen,
         active: active,
+        profileId: state.ui.currentProfileId,
+        addedToMyList: !!state.entities.myLists[video.id],
     }
 }
 

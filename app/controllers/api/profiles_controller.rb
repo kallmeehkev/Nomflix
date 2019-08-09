@@ -18,7 +18,7 @@ class Api::ProfilesController < ApplicationController
     end
 
     def show
-        @profile = Profile.find(params[:id])
+        @profile = Profile.includes(:my_lists).find(params[:id])
         if profile_params[:set]
             set_current_profile(@profile)
         elsif profile_params[:unset]

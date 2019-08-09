@@ -7,20 +7,29 @@ class GalleryFPVideo extends React.Component {
     constructor(props) {
         super(props)
         // this.state = {video: null}
-        this.state = {randId: this.props.randId}
+        this.state = {
+            randId: this.props.randId,
+        }
+    }
+
+    componentDidMount() {
+        this._isMounted = true;
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.genreId !== this.props.genreId ) {
+        if (prevProps.genreId !== this.props.genreId && prevProps.pageType === 'genreShow') {
             // let video = this.props.fetchRandVideo(this.props.genreId)
             // this.setState({video: video})
             this.setState({randId: this.props.randId})
         }
     }
 
+    componentWillUnmount() {
+        this._isMounted = false
+    }
+
     render() {
-        const randFPVideo = this.props.media[this.state.randId];
-        if (randFPVideo === undefined) return null;
+        const randFPVideo = this.props.media[this.state.randId] || {id: 0};
         if (randFPVideo.id !== 0 || this.props.browseVid.id !== 0) {
             let video = this.props.pageType === 'genreShow' ? randFPVideo : this.props.browseVid
             let fpVideoStyle = { backgroundImage: 'url(' + video.thumbnailUrl + ')' };
@@ -66,6 +75,7 @@ class GalleryFPVideo extends React.Component {
                 </div>
             )
         } else {
+
             return (
                 <div>
                     fpVideoShow

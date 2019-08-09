@@ -7,8 +7,21 @@ class GalleryShowItem extends React.Component {
         this.state = {
             isMouseInside: false
         }
-        this.mouseEnter = this.mouseEnter.bind(this)
-        this.mouseLeave = this.mouseLeave.bind(this)
+        this.mouseEnter = this.mouseEnter.bind(this);
+        this.mouseLeave = this.mouseLeave.bind(this);
+        this.addToMyList = this.addToMyList.bind(this);
+        this.removeFromMyList = this.removeFromMyList.bind(this);
+    }
+
+    addToMyList() {
+        this.props.createMyList({
+            profile_id: this.props.profileId,
+            media_id: this.props.video.id,
+        });
+    }
+
+    removeFromMyList() {
+        this.props.deleteMyList(this.props.video.id);
     }
 
     mouseEnter() {
@@ -28,11 +41,17 @@ class GalleryShowItem extends React.Component {
             thumbnailUrl: "",
             mediaUrl: ""
         }
-
         let video = this.props.video ? this.props.video : defaultVideo;
         const style = {
             backgroundImage: 'url(' + video.thumbnailUrl + ')',
         };
+        let addVideo = <button onClick={this.addToMyList}>
+            <div className="myList_button"><i className="fas fa-plus-circle"></i>
+                <div className="myList_status_dropdown">ADD TO MY LIST</div>
+            </div>
+            </button>;
+        let removeVideo = <button onClick={this.removeFromMyList}><div><i className="far fa-check-circle"></i></div></button>;
+        let myListStatus = this.props.addedToMyList ? removeVideo : addVideo;
 
         return (
             <div className={`browse_row_item_container ${this.props.active}`}>
@@ -48,12 +67,14 @@ class GalleryShowItem extends React.Component {
                                             <div className="row_item_overlay_details">
                                                 <div className="row_item_overlay_mat_rating">{video.maturityRating}</div>
                                                 <div className="row_item_overlay_duration">{Math.floor(video.duration/60000)}m</div>
-                                                
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </Link>
+                            <div className="myList_container">
+                                {myListStatus}
+                            </div>
                         </div>
                         <button onClick={this.props.handleOpen}className="row_item_drop_down"><i className="fas fa-chevron-down"></i></button>
                 </div>

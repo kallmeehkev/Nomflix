@@ -4,15 +4,25 @@ import { Link } from 'react-router-dom';
 import GalleryShowRowContainer from '../gallery/gallery_show_row_container';
 import GalleryFPVideoContainer from '../gallery/gallery_fp_video_container';
 class GenreShow extends React.Component {
-
+    constructor(props) {
+        super(props)
+        this.state = {genreId: this.props.match.params.genreId}
+    }
     componentDidMount() {
-        // this.props.fetchGenres();
-        // this.props.fetchMediaGenres();
-        this.props.fetchGenre(this.props.match.params.genreId);
+        let videosFetched = !!this.props.genreVideos[0]
+        if (!videosFetched) {
+            this.props.fetchGenre(this.props.match.params.genreId);
+        }
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.match.params.genreId !== this.props.match.params.genreId) {
+        let isNewGenre = prevProps.match.params.genreId !== this.props.match.params.genreId
+        if (isNewGenre) {
+            // this.props.fetchGenre(this.props.match.params.genreId);
+            this.setState({ genreId: this.props.match.params.genreId});
+        }
+        let videosFetched = !!this.props.genreVideos[0]
+        if (!videosFetched && isNewGenre) {
             this.props.fetchGenre(this.props.match.params.genreId);
         }
     }

@@ -31,7 +31,7 @@ class GalleryIndex extends React.Component {
         } else {
             return (
                 <div className="browse_body">
-                    <GalleryNavBarContainer />
+                    {/* <GalleryNavBarContainer /> */}
                     <div className="browse_fp_video_container">Gallery frontpage vid</div>
                     Gallery Index
                 </div>

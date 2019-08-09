@@ -23,7 +23,7 @@ export const createMyList = myList => dispatch => (
     myListApiUtil.createMyList(myList)
         .then(
             myList => dispatch(receiveMyList(myList)), 
-            errors => dispatch(receiveMyListErrors(lues(errors.responseJSON)))
+            errors => dispatch(receiveMyListErrors(Object.values(errors.responseJSON)))
         )
 )
 
@@ -31,6 +31,6 @@ export const deleteMyList = id => dispatch => (
     myListApiUtil.deleteMyList(id)
         .then(
             myList => dispatch(removeMyList(myList.id)),
-            errors => dispatch(receiveMyListErrors(lues(errors.responseJSON)))
+            errors => dispatch(receiveMyListErrors(Object.values(errors.responseJSON)))
         )
 )

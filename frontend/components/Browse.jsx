@@ -11,18 +11,13 @@ import MyListIndexContainer from './mylist/mylist_index_container';
 class Browse extends React.Component {
     constructor(props) {
         super(props)
-        this.state = this.props.media
-    }
-
-    componentDidMount() {
         this.props.fetchGenres();
         this.props.fetchMediaGenres();
-        this.setState(this.props.media)
     }
 
     render() {
-        if (this.props.media[12] || this.props.mediaGenres[140]) {
-            let {genres, mediaGenres} = this.props;
+        // if (this.props.media[12] || this.props.mediaGenres[140]) {
+        //     let {genres, mediaGenres} = this.props;
             return (
                 <div>
                     <Switch>
@@ -37,15 +32,15 @@ class Browse extends React.Component {
                     </Switch>
                 </div>
             )
-        } 
+        // } 
         
-        else {
-            return (
-                <div>
-                    Welcome to Nomflix
-                </div>
-            )
-        }
+        // else {
+        //     return (
+        //         <div>
+        //             Welcome to Nomflix
+        //         </div>
+        //     )
+        // }
             
     }
 }

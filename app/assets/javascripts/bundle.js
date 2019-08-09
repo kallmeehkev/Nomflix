@@ -403,7 +403,7 @@ var createMyList = function createMyList(myList) {
     return _util_my_list_api_util__WEBPACK_IMPORTED_MODULE_0__["createMyList"](myList).then(function (myList) {
       return dispatch(receiveMyList(myList));
     }, function (errors) {
-      return dispatch(receiveMyListErrors(lues(errors.responseJSON)));
+      return dispatch(receiveMyListErrors(Object.values(errors.responseJSON)));
     });
   };
 };
@@ -412,7 +412,7 @@ var deleteMyList = function deleteMyList(id) {
     return _util_my_list_api_util__WEBPACK_IMPORTED_MODULE_0__["deleteMyList"](id).then(function (myList) {
       return dispatch(removeMyList(myList.id));
     }, function (errors) {
-      return dispatch(receiveMyListErrors(lues(errors.responseJSON)));
+      return dispatch(receiveMyListErrors(Object.values(errors.responseJSON)));
     });
   };
 };
@@ -723,60 +723,59 @@ function (_React$Component) {
     _classCallCheck(this, Browse);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Browse).call(this, props));
-    _this.state = _this.props.media;
+
+    _this.props.fetchGenres();
+
+    _this.props.fetchMediaGenres();
+
     return _this;
   }
 
   _createClass(Browse, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.fetchGenres();
-      this.props.fetchMediaGenres();
-      this.setState(this.props.media);
-    }
-  }, {
     key: "render",
     value: function render() {
-      if (this.props.media[12] || this.props.mediaGenres[140]) {
-        var _this$props = this.props,
-            genres = _this$props.genres,
-            mediaGenres = _this$props.mediaGenres;
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
-          exact: true,
-          path: "/",
-          component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_5__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
-          exact: true,
-          path: "/login",
-          component: _session_form_session_page__WEBPACK_IMPORTED_MODULE_2__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
-          exact: true,
-          path: "/signup",
-          component: _session_form_session_page__WEBPACK_IMPORTED_MODULE_2__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
-          path: "/watch/:mediaId",
-          component: _watch_media_show_container__WEBPACK_IMPORTED_MODULE_6__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
-          path: "/browse/genre/:genreId",
-          component: _genre_genre_show_container__WEBPACK_IMPORTED_MODULE_7__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
-          exact: true,
-          path: "/browse",
-          component: _gallery_gallery_index_container__WEBPACK_IMPORTED_MODULE_4__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
-          exact: true,
-          path: "/browse/my-list",
-          component: _mylist_mylist_index_container__WEBPACK_IMPORTED_MODULE_8__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-          render: function render() {
-            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
-              to: "/browse"
-            });
-          }
-        })));
-      } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Welcome to Nomflix");
-      }
+      // if (this.props.media[12] || this.props.mediaGenres[140]) {
+      //     let {genres, mediaGenres} = this.props;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
+        exact: true,
+        path: "/",
+        component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_5__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
+        exact: true,
+        path: "/login",
+        component: _session_form_session_page__WEBPACK_IMPORTED_MODULE_2__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
+        exact: true,
+        path: "/signup",
+        component: _session_form_session_page__WEBPACK_IMPORTED_MODULE_2__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
+        path: "/watch/:mediaId",
+        component: _watch_media_show_container__WEBPACK_IMPORTED_MODULE_6__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
+        path: "/browse/genre/:genreId",
+        component: _genre_genre_show_container__WEBPACK_IMPORTED_MODULE_7__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
+        exact: true,
+        path: "/browse",
+        component: _gallery_gallery_index_container__WEBPACK_IMPORTED_MODULE_4__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
+        exact: true,
+        path: "/browse/my-list",
+        component: _mylist_mylist_index_container__WEBPACK_IMPORTED_MODULE_8__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        render: function render() {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+            to: "/browse"
+          });
+        }
+      }))); // } 
+      // else {
+      //     return (
+      //         <div>
+      //             Welcome to Nomflix
+      //         </div>
+      //     )
+      // }
     }
   }]);
 
@@ -996,9 +995,14 @@ function (_React$Component) {
   }
 
   _createClass(GalleryFPVideo, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this._isMounted = true;
+    }
+  }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      if (prevProps.genreId !== this.props.genreId) {
+      if (prevProps.genreId !== this.props.genreId && prevProps.pageType === 'genreShow') {
         // let video = this.props.fetchRandVideo(this.props.genreId)
         // this.setState({video: video})
         this.setState({
@@ -1007,10 +1011,16 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this._isMounted = false;
+    }
+  }, {
     key: "render",
     value: function render() {
-      var randFPVideo = this.props.media[this.state.randId];
-      if (randFPVideo === undefined) return null;
+      var randFPVideo = this.props.media[this.state.randId] || {
+        id: 0
+      };
 
       if (randFPVideo.id !== 0 || this.props.browseVid.id !== 0) {
         var video = this.props.pageType === 'genreShow' ? randFPVideo : this.props.browseVid;
@@ -1221,7 +1231,7 @@ function (_React$Component) {
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_body"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_fp_video_container"
         }, "Gallery frontpage vid"), "Gallery Index");
       }
@@ -1332,10 +1342,25 @@ function (_React$Component) {
     };
     _this.mouseEnter = _this.mouseEnter.bind(_assertThisInitialized(_this));
     _this.mouseLeave = _this.mouseLeave.bind(_assertThisInitialized(_this));
+    _this.addToMyList = _this.addToMyList.bind(_assertThisInitialized(_this));
+    _this.removeFromMyList = _this.removeFromMyList.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(GalleryShowItem, [{
+    key: "addToMyList",
+    value: function addToMyList() {
+      this.props.createMyList({
+        profile_id: this.props.profileId,
+        media_id: this.props.video.id
+      });
+    }
+  }, {
+    key: "removeFromMyList",
+    value: function removeFromMyList() {
+      this.props.deleteMyList(this.props.video.id);
+    }
+  }, {
     key: "mouseEnter",
     value: function mouseEnter() {
       this.setState({
@@ -1365,6 +1390,21 @@ function (_React$Component) {
       var style = {
         backgroundImage: 'url(' + video.thumbnailUrl + ')'
       };
+      var addVideo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.addToMyList
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "myList_button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-plus-circle"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "myList_status_dropdown"
+      }, "ADD TO MY LIST")));
+      var removeVideo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.removeFromMyList
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far fa-check-circle"
+      })));
+      var myListStatus = this.props.addedToMyList ? removeVideo : addVideo;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "browse_row_item_container ".concat(this.props.active)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1394,7 +1434,9 @@ function (_React$Component) {
         className: "row_item_overlay_mat_rating"
       }, video.maturityRating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row_item_overlay_duration"
-      }, Math.floor(video.duration / 60000), "m"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, Math.floor(video.duration / 60000), "m")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "myList_container"
+      }, myListStatus)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.props.handleOpen,
         className: "row_item_drop_down"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
@@ -1437,7 +1479,9 @@ var msp = function msp(state, ownProps) {
   return {
     video: video,
     handleOpen: handleOpen,
-    active: active
+    active: active,
+    profileId: state.ui.currentProfileId,
+    addedToMyList: !!state.entities.myLists[video.id]
   };
 };
 
@@ -1778,23 +1822,42 @@ var GenreShow =
 function (_React$Component) {
   _inherits(GenreShow, _React$Component);
 
-  function GenreShow() {
+  function GenreShow(props) {
+    var _this;
+
     _classCallCheck(this, GenreShow);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(GenreShow).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GenreShow).call(this, props));
+    _this.state = {
+      genreId: _this.props.match.params.genreId
+    };
+    return _this;
   }
 
   _createClass(GenreShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      // this.props.fetchGenres();
-      // this.props.fetchMediaGenres();
-      this.props.fetchGenre(this.props.match.params.genreId);
+      var videosFetched = !!this.props.genreVideos[0];
+
+      if (!videosFetched) {
+        this.props.fetchGenre(this.props.match.params.genreId);
+      }
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      if (prevProps.match.params.genreId !== this.props.match.params.genreId) {
+      var isNewGenre = prevProps.match.params.genreId !== this.props.match.params.genreId;
+
+      if (isNewGenre) {
+        // this.props.fetchGenre(this.props.match.params.genreId);
+        this.setState({
+          genreId: this.props.match.params.genreId
+        });
+      }
+
+      var videosFetched = !!this.props.genreVideos[0];
+
+      if (!videosFetched && isNewGenre) {
         this.props.fetchGenre(this.props.match.params.genreId);
       }
     }
@@ -1856,8 +1919,8 @@ var msp = function msp(state, ownProps) {
   return {
     genres: state.entities.genres,
     mediaGenres: state.entities.mediaGenres,
-    genre: state.entities.genres[ownProps.match.params.genreId] // genreVideos: Selectors.genreVideos(state, ownProps.match.params.genreId),
-    //need children components to render page after genres and mediaGenres have been fetched
+    genre: state.entities.genres[ownProps.match.params.genreId],
+    genreVideos: _reducers_selectors__WEBPACK_IMPORTED_MODULE_1__["genreVideos"](state, ownProps.match.params.genreId) || [] //need children components to render page after genres and mediaGenres have been fetched
 
   };
 };
@@ -2573,7 +2636,7 @@ function (_React$Component) {
       e.preventDefault();
       var user = Object.assign({}, this.state);
       this.props.processForm(user).then(function () {
-        return _this2.props.setCurrentProfile(1);
+        return _this2.props.setCurrentProfile(2);
       });
     }
   }, {
