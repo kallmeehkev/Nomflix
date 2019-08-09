@@ -11,7 +11,7 @@
 
 class MyList < ApplicationRecord
     validates :profile_id, :media_id, presence: true
-    validates :profile_id, uniqueness: { scope: :media_id }
+    # validates :profile_id, uniqueness: { scope: :media_id }
 
     belongs_to :profile,
     foreign_key: :profile_id,

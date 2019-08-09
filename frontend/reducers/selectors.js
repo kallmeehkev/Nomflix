@@ -66,3 +66,11 @@ export const randVideo = (state, genreId) => {
     if (mediaGenres.length === 0) return 0;
     return state.entities.media[mediaGenres[Math.floor(Math.random() * mediaGenres.length)].mediaId];
 }
+
+export const myListsHashByMediaId = (state) => {
+    let hash = {};
+    Object.values(state.entities.myLists).forEach( myList => {
+        hash[myList.mediaId] = myList;
+    })
+    return hash;
+}

@@ -21,7 +21,7 @@ class GalleryShowItem extends React.Component {
     }
 
     removeFromMyList() {
-        this.props.deleteMyList(this.props.video.id);
+        this.props.deleteMyList(this.props.myList.id);
     }
 
     mouseEnter() {

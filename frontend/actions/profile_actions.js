@@ -11,9 +11,9 @@ export const receiveProfiles = profiles => ({
     type: RECEIVE_PROFILES,
     profiles
 })
-export const receiveProfile = profile => ({
+export const receiveProfile = payload => ({
     type: RECEIVE_PROFILE,
-    profile
+    payload
 })
 export const removeProfile = profileId => ({
     type: REMOVE_PROFILE,
@@ -38,17 +38,17 @@ export const fetchProfiles = () => dispatch => (
     (errors) => dispatch(receiveProfileErrors(Object.values(errors.responseJSON))))
 )
 export const fetchProfile = (id) => dispatch => (
-    profileApiUtil.fetchProfile(id).then((profile) => dispatch(receiveProfile(profile)), 
+    profileApiUtil.fetchProfile(id).then((payload) => dispatch(receiveProfile(payload)), 
     (errors) => dispatch(receiveProfileErrors(Object.values(errors.responseJSON))))
 )
 export const createProfile = (profile) => dispatch => (
-    profileApiUtil.createProfile(profile).then((profile) => { 
-        dispatch(receiveProfile(profile));
-        dispatch(receiveCurrentProfile(profile))}, 
+    profileApiUtil.createProfile(profile).then((payload) => { 
+        dispatch(receiveProfile(payload));
+        dispatch(receiveCurrentProfile(payload.profile.id))}, 
     (errors) => dispatch(receiveProfileErrors(Object.values(errors.responseJSON))))
 )
 export const updateProfile = (profile) => dispatch => (
-    profileApiUtil.updateProfile(profile).then((profile) => dispatch(receiveProfile(profile)), 
+    profileApiUtil.updateProfile(profile).then((payload) => dispatch(receiveProfile(payload)), 
     (errors) => dispatch(receiveProfileErrors(Object.values(errors.responseJSON))))
 )
 export const deleteProfile = (id) => dispatch => (
@@ -56,11 +56,11 @@ export const deleteProfile = (id) => dispatch => (
     (errors) => dispatch(receiveProfileErrors(Object.values(errors.responseJSON))))
 )
 export const setCurrentProfile = (id) => dispatch => (
-    profileApiUtil.setCurrentProfile(id).then((profile) => dispatch(receiveCurrentProfile(profile.id)), 
+    profileApiUtil.setCurrentProfile(id).then((payload) => dispatch(receiveCurrentProfile(payload.profile.id)), 
     (errors) => dispatch(receiveProfileErrors(Object.values(errors.responseJSON))))
 )
 export const unSetCurrentProfile = (id) => dispatch => (
-    profileApiUtil.unSetCurrentProfile(id).then((profile) => dispatch(removeCurrentProfile(profile.id)), 
+    profileApiUtil.unSetCurrentProfile(id).then((payload) => dispatch(removeCurrentProfile(payload.profile.id)), 
     (errors) => dispatch(receiveProfileErrors(Object.values(errors.responseJSON))))
 )
 

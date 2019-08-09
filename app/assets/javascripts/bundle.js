@@ -461,10 +461,10 @@ var receiveProfiles = function receiveProfiles(profiles) {
     profiles: profiles
   };
 };
-var receiveProfile = function receiveProfile(profile) {
+var receiveProfile = function receiveProfile(payload) {
   return {
     type: RECEIVE_PROFILE,
-    profile: profile
+    payload: payload
   };
 };
 var removeProfile = function removeProfile(profileId) {
@@ -502,8 +502,8 @@ var fetchProfiles = function fetchProfiles() {
 };
 var fetchProfile = function fetchProfile(id) {
   return function (dispatch) {
-    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchProfile"](id).then(function (profile) {
-      return dispatch(receiveProfile(profile));
+    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchProfile"](id).then(function (payload) {
+      return dispatch(receiveProfile(payload));
     }, function (errors) {
       return dispatch(receiveProfileErrors(Object.values(errors.responseJSON)));
     });
@@ -511,9 +511,9 @@ var fetchProfile = function fetchProfile(id) {
 };
 var createProfile = function createProfile(profile) {
   return function (dispatch) {
-    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["createProfile"](profile).then(function (profile) {
-      dispatch(receiveProfile(profile));
-      dispatch(receiveCurrentProfile(profile));
+    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["createProfile"](profile).then(function (payload) {
+      dispatch(receiveProfile(payload));
+      dispatch(receiveCurrentProfile(payload.profile.id));
     }, function (errors) {
       return dispatch(receiveProfileErrors(Object.values(errors.responseJSON)));
     });
@@ -521,8 +521,8 @@ var createProfile = function createProfile(profile) {
 };
 var updateProfile = function updateProfile(profile) {
   return function (dispatch) {
-    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["updateProfile"](profile).then(function (profile) {
-      return dispatch(receiveProfile(profile));
+    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["updateProfile"](profile).then(function (payload) {
+      return dispatch(receiveProfile(payload));
     }, function (errors) {
       return dispatch(receiveProfileErrors(Object.values(errors.responseJSON)));
     });
@@ -539,8 +539,8 @@ var deleteProfile = function deleteProfile(id) {
 };
 var setCurrentProfile = function setCurrentProfile(id) {
   return function (dispatch) {
-    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["setCurrentProfile"](id).then(function (profile) {
-      return dispatch(receiveCurrentProfile(profile.id));
+    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["setCurrentProfile"](id).then(function (payload) {
+      return dispatch(receiveCurrentProfile(payload.profile.id));
     }, function (errors) {
       return dispatch(receiveProfileErrors(Object.values(errors.responseJSON)));
     });
@@ -548,8 +548,8 @@ var setCurrentProfile = function setCurrentProfile(id) {
 };
 var unSetCurrentProfile = function unSetCurrentProfile(id) {
   return function (dispatch) {
-    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["unSetCurrentProfile"](id).then(function (profile) {
-      return dispatch(removeCurrentProfile(profile.id));
+    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["unSetCurrentProfile"](id).then(function (payload) {
+      return dispatch(removeCurrentProfile(payload.profile.id));
     }, function (errors) {
       return dispatch(receiveProfileErrors(Object.values(errors.responseJSON)));
     });
@@ -1358,7 +1358,7 @@ function (_React$Component) {
   }, {
     key: "removeFromMyList",
     value: function removeFromMyList() {
-      this.props.deleteMyList(this.props.video.id);
+      this.props.deleteMyList(this.props.myList.id);
     }
   }, {
     key: "mouseEnter",
@@ -1468,6 +1468,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _gallery_show_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gallery_show_item */ "./frontend/components/gallery/gallery_show_item.jsx");
 /* harmony import */ var _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/my_list_actions */ "./frontend/actions/my_list_actions.js");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+
 
 
 
@@ -1481,7 +1483,8 @@ var msp = function msp(state, ownProps) {
     handleOpen: handleOpen,
     active: active,
     profileId: state.ui.currentProfileId,
-    addedToMyList: !!state.entities.myLists[video.id]
+    addedToMyList: !!Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["myListsHashByMediaId"])(state)[video.id],
+    myList: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["myListsHashByMediaId"])(state)[video.id] || {}
   };
 };
 
@@ -1490,7 +1493,7 @@ var mdp = function mdp(dispatch) {
     createMyList: function createMyList(myList) {
       return dispatch(Object(_actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__["createMyList"])(myList));
     },
-    deleteMylist: function deleteMylist(id) {
+    deleteMyList: function deleteMyList(id) {
       return dispatch(Object(_actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__["deleteMyList"])(id));
     }
   };
@@ -3359,6 +3362,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/my_list_actions */ "./frontend/actions/my_list_actions.js");
+/* harmony import */ var _actions_profile_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/profile_actions */ "./frontend/actions/profile_actions.js");
+
 
 
 
@@ -3369,6 +3374,10 @@ var myListsReducer = function myListsReducer() {
   var newState = Object(lodash__WEBPACK_IMPORTED_MODULE_0__["merge"])({}, oldState);
 
   switch (action.type) {
+    case _actions_profile_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_PROFILE"]:
+      if (action.payload.myLists) return action.payload.myLists;
+      return oldState;
+
     case _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_MYLIST"]:
       newState[action.myList.id] = action.myList;
 
@@ -3454,7 +3463,7 @@ var profilesReducer = function profilesReducer() {
       return action.profiles;
 
     case _actions_profile_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_PROFILE"]:
-      newState[action.profile.id] = action.profile;
+      newState[action.payload.profile.id] = action.payload.profile;
       return newState;
 
     case _actions_profile_actions__WEBPACK_IMPORTED_MODULE_1__["REMOVE_PROFILE"]:
@@ -3503,7 +3512,7 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 /*!****************************************!*\
   !*** ./frontend/reducers/selectors.js ***!
   \****************************************/
-/*! exports provided: defaultTenVideos, firstTenVideos, genreVideos, randGenreVideo, randGenreVideoId, randVideo */
+/*! exports provided: defaultTenVideos, firstTenVideos, genreVideos, randGenreVideo, randGenreVideoId, randVideo, myListsHashByMediaId */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3514,6 +3523,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "randGenreVideo", function() { return randGenreVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "randGenreVideoId", function() { return randGenreVideoId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "randVideo", function() { return randVideo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "myListsHashByMediaId", function() { return myListsHashByMediaId; });
 var defaultTenVideos = function defaultTenVideos(state) {
   var newArr = [];
   var defaultVideo = {};
@@ -3580,6 +3590,13 @@ var randVideo = function randVideo(state, genreId) {
   });
   if (mediaGenres.length === 0) return 0;
   return state.entities.media[mediaGenres[Math.floor(Math.random() * mediaGenres.length)].mediaId];
+};
+var myListsHashByMediaId = function myListsHashByMediaId(state) {
+  var hash = {};
+  Object.values(state.entities.myLists).forEach(function (myList) {
+    hash[myList.mediaId] = myList;
+  });
+  return hash;
 };
 
 /***/ }),

@@ -8,7 +8,7 @@ const profilesReducer = (oldState = {}, action) => {
         case RECEIVE_PROFILES:
             return action.profiles;
         case RECEIVE_PROFILE:
-            newState[action.profile.id] = action.profile;
+            newState[action.payload.profile.id] = action.payload.profile;
             return newState;
         case REMOVE_PROFILE:
             delete(newState[action.profileId]);
