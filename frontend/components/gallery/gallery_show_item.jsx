@@ -48,9 +48,11 @@ class GalleryShowItem extends React.Component {
         let addVideo = <button onClick={this.addToMyList}>
             <div className="myList_button"><i className="fas fa-plus-circle"></i>
                 <div className="myList_status_dropdown">ADD TO MY LIST</div>
-            </div>
-            </button>;
-        let removeVideo = <button onClick={this.removeFromMyList}><div><i className="far fa-check-circle"></i></div></button>;
+            </div></button>;
+        let removeVideo = <button onClick={this.removeFromMyList}>
+            <div className="myList_button"><i className="far fa-check-circle"></i>
+                <div className="myList_status_dropdown">REMOVE FROM MY LIST</div>
+            </div></button>;
         let myListStatus = this.props.addedToMyList ? removeVideo : addVideo;
 
         return (

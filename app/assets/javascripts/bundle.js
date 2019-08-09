@@ -1401,9 +1401,13 @@ function (_React$Component) {
       }, "ADD TO MY LIST")));
       var removeVideo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.removeFromMyList
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "myList_button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "far fa-check-circle"
-      })));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "myList_status_dropdown"
+      }, "REMOVE FROM MY LIST")));
       var myListStatus = this.props.addedToMyList ? removeVideo : addVideo;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "browse_row_item_container ".concat(this.props.active)

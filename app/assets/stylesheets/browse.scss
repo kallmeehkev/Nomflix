@@ -249,7 +249,7 @@ html:not([data-scroll='0']) {
 }
 .browse_dropdown-arrow_genre i {
   font-size: 1.6vw;
-  bottom: -0.7vw;
+  height: 1vw;
   position: relative;
 }
 
@@ -266,8 +266,13 @@ html:not([data-scroll='0']) {
   width: 100%;
   background: transparent;
   padding-left: 7%;
-  height: 3vh;
   box-sizing: border-box;
+}
+
+.browse_dropdown-arrow_genre div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .browse_dropdown_content_genre_container {
@@ -277,7 +282,6 @@ html:not([data-scroll='0']) {
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
-  bottom: 6px;
   background-color: black;
   opacity: .85;
   border: 1px solid #333;
@@ -365,6 +369,7 @@ html:not([data-scroll='0']) {
     border-style: none none none solid;
     background-color: rgba(51,51,51,.6);
     font-size: 1.1vw;
+    font-weight: 600;
     padding: .5vw 3.5vw .5vw .8vw;
     display: -webkit-box;
     display: -webkit-flex;
@@ -683,10 +688,18 @@ html:not([data-scroll='0']) {
   transition: font-size 1s;
 }
 
+.myList_container button {
+  height: 100%;
+  width: 100%;
+}
+
 .myList_button {
+  display: flex;
   height: 100%;
   width: 100%;
   position: relative;
+  justify-content: center;
+  align-content: center;
 }
 
 .myList_status_dropdown {
@@ -695,13 +708,15 @@ html:not([data-scroll='0']) {
   width: 7vw;
   background-color: white;
   font-size: 0.7vw;
-  height: 1.2vw;
+  min-height: 1.2vw;
   text-align: center;
   align-content: center;
   color: black;
-  padding: 0.1vw;
   box-sizing: border-box;
-  left: -2vw;
+  left: -2.5vw;
+  top: 2.2vw;
+  font-weight: 600;
+  padding: 0.2vw 0;
 }
 
 .myList_container:hover i{
@@ -710,7 +725,7 @@ html:not([data-scroll='0']) {
 }
 
 .myList_container:hover .myList_status_dropdown {
-  display: flex;
+  display: block;
 }
 
 .overlay_darken {
