@@ -2067,18 +2067,16 @@ function (_React$Component) {
       var container = [];
 
       for (var i = 0; i < videos.length; i++) {
-        if (container.length < 5) {
-          container.push(videos[i]);
-        } else {
+        container.push(videos[i]);
+
+        if (container.length === 5) {
           rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
             myListVideos: container,
             key: i,
             pageType: "myList"
           }));
           container = [];
-        }
-
-        if (i === videos.length - 1) {
+        } else if (i === videos.length - 1) {
           rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
             myListVideos: container,
             key: i,
@@ -2088,7 +2086,6 @@ function (_React$Component) {
         }
       }
 
-      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "browse_body"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
