@@ -1,7 +1,7 @@
 import React from 'react';
 import GalleryNavBarContainer from '../nav_bar/gallery_nav_bar_container';
 import { Link } from 'react-router-dom';
-import GalleryShowRowContainer from '../gallery/gallery_show_row_container';
+import GalleryShowRowContainer from '../gallery/gallery_show_row_container.js';
 import GalleryFPVideoContainer from '../gallery/gallery_fp_video_container';
 class GenreShow extends React.Component {
     constructor(props) {
@@ -29,7 +29,7 @@ class GenreShow extends React.Component {
 
     render() {
         if (this.props.genres[12] && this.props.mediaGenres[140]) {
-            let showOneRow = <GalleryShowRowContainer genre={this.props.genre} key={1} genreShow={true}/>
+            let showOneRow = <GalleryShowRowContainer genre={this.props.genre} key={1} genreShow={true} pageType="genre"/>
             return (
                 <div className="browse_body">
                     <GalleryNavBarContainer path={this.props.match.path} />

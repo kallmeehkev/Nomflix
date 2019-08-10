@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
 import MyListIndex from './mylist_index.jsx';
 import { deleteMyList } from '../../actions/my_list_actions';
+import * as Selectors from '../../reducers/selectors';
 
 const msp = (state, ownProps) => {
     return {
-        myLists: state.entities.myLists,
+        videos: Selectors.myListsVideos(state),
     }
 }
 

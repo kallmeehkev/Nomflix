@@ -1,7 +1,7 @@
 import React from 'react';
 import GalleryNavBarContainer from '../nav_bar/gallery_nav_bar_container';
 import { Link } from 'react-router-dom';
-import GalleryShowRowContainer from './gallery_show_row_container';
+import GalleryShowRowContainer from './gallery_show_row_container.js';
 import GalleryFPVideoContainer from './gallery_fp_video_container';
 
 class GalleryIndex extends React.Component {
@@ -16,8 +16,9 @@ class GalleryIndex extends React.Component {
             let genresArr = Object.values(this.props.genres);
             let genresArrlimit6 = genresArr.filter( (genre, i) => i < 6) 
             let showRowsFirstSix = genresArrlimit6.map( (genre) => {
-                return <GalleryShowRowContainer genre={genre} key={genre.id}/> 
+                return <GalleryShowRowContainer genre={genre} key={genre.id} pageType="genre"/> 
             })
+            debugger
             let showOneRow = <GalleryShowRowContainer genre={this.props.genres[4]} key={1} />
             return (
                 <div className="browse_body">

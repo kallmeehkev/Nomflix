@@ -74,3 +74,11 @@ export const myListsHashByMediaId = (state) => {
     })
     return hash;
 }
+
+export const myListsVideos = (state) => {
+    let myListsHash = myListsHashByMediaId(state);
+    let videos = Object.keys(myListsHash).map( mediaId => {
+        return state.entities.media[mediaId];
+    })
+    return videos;
+}

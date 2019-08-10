@@ -11,7 +11,7 @@ class Api::MyListsController < ApplicationController
     end
     
     # def index
-    #     @my_lists = Profile.all.where("profile_id = ?", my_list_params[:profile_id])
+    #     @my_lists = MyList.all.where("profile_id = ?", current_profile.id).includes(:)
     #     render :index
     # end
 

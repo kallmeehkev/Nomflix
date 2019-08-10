@@ -19,7 +19,7 @@ class GalleryShowRow extends React.Component {
     }    
 
     componentDidMount() {
-        if (this.props.genreVideos[0].duration === 0) {
+        if (this.props.pageType === "genre" && this.props.genreVideos[0].duration === 0) {
             this.props.fetchGenre(this.props.genre.id)
         }
     }
@@ -40,15 +40,27 @@ class GalleryShowRow extends React.Component {
     }
 
     render() {
-        if (this.props.genreVideos[this.props.genreVideos.length-1]) {
-            let videos = this.props.genreVideos.map((video, i) => {
-                let active = (this.state.open && this.state.videoIdx === i) ? "active" : ""
-                return <GalleryShowItemContainer video={video} key={i + (this.props.genre.id * 10)} handleOpen={() => this.handleOpen(i)} active={active}/>
-            })
-            let rowTitle = this.props.genreShow ? <div>Trending Now for {this.props.genre.name}</div> : <div>{this.props.genre.name}</div>
+        let videosExist = !!this.props.genreVideos.length || !!this.props.myListVideos.length;
+        if (videosExist) {
+            let displayVideos;
+            let rowTitle;
+            let content;
+            if (this.props.pageType === "genre") {
+                displayVideos = this.props.genreVideos.map((video, i) => {
+                    let active = (this.state.open && this.state.videoIdx === i) ? "active" : ""
+                    return <GalleryShowItemContainer video={video} key={i + (this.props.genre.id * 10)} handleOpen={() => this.handleOpen(i)} active={active} />
+                })
+                rowTitle = this.props.genreShow ? <div>Trending Now for {this.props.genre.name}</div> : <div>{this.props.genre.name}</div>
+                content = this.props.genreVideos[this.state.videoIdx];
+            } else if (this.props.pageType === "myList") {
+                displayVideos = this.props.myListVideos.map((video, i) => {
+                    let active = (this.state.open && this.state.videoIdx === i) ? "active" : ""
+                    return <GalleryShowItemContainer video={video} key={i} handleOpen={() => this.handleOpen(i)} active={active} />
+                })
+                content = this.props.myListVideos[this.state.videoIdx];
+            }
             let style = {
-                width: `${videos.length*18.4}vw`
-                // width: `300%`,
+                width: `${displayVideos.length*18.4}vw`
             }
             return (
                 <div className="browse_row_container">
@@ -56,15 +68,16 @@ class GalleryShowRow extends React.Component {
                     {/* <div className="browse_row_content"> */}
                         <div className="browse_row_slider" style={style}>
                             <div className="browse_row_slider_wrapper">
-                                {videos}
+                            {displayVideos}
                             </div>
                         </div>
                     {/* </div> */}
                     <div className={this.state.open ? "show_row_item_content active" : "show_row_item_content"}>
-                        <GalleryShowRowItemContentContainer content={this.props.genreVideos[this.state.videoIdx]} handleClose={this.handleClose}/>
+                        <GalleryShowRowItemContentContainer content={content} handleClose={this.handleClose}/>
                     </div>
                 </div>
             )
+            
         }
         else {
             return (
