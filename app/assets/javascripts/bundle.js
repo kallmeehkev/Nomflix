@@ -1219,7 +1219,6 @@ function (_React$Component) {
             pageType: "genre"
           });
         });
-        debugger;
         var showOneRow = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
           genre: this.props.genres[4],
           key: 1
@@ -1731,52 +1730,133 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
-var GalleryShowRowItemContent = function GalleryShowRowItemContent(props) {
-  var style = {
-    backgroundImage: 'url(' + props.content.thumbnailUrl + ')'
-  };
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_details"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_title"
-  }, props.content.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_MR_duration"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_MR"
-  }, props.content.maturityRating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_duration"
-  }, Math.floor(props.content.duration / 60000), "m")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_description"
-  }, props.content.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_play_button_container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/watch/".concat(props.content.id)
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_play_button"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fas fa-play"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_play_button_text"
-  }, "Play"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_gradient"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_image",
-    style: style
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/watch/".concat(props.content.id)
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "link"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    onClick: props.handleClose
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fas fa-times"
-  }))));
-};
+
+var GalleryShowRowItemContent =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(GalleryShowRowItemContent, _React$Component);
+
+  function GalleryShowRowItemContent(props) {
+    var _this;
+
+    _classCallCheck(this, GalleryShowRowItemContent);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GalleryShowRowItemContent).call(this, props));
+    _this.addToMyList = _this.addToMyList.bind(_assertThisInitialized(_this));
+    _this.removeFromMyList = _this.removeFromMyList.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(GalleryShowRowItemContent, [{
+    key: "addToMyList",
+    value: function addToMyList() {
+      this.props.createMyList({
+        profile_id: this.props.profileId,
+        media_id: this.props.content.id
+      });
+    }
+  }, {
+    key: "removeFromMyList",
+    value: function removeFromMyList() {
+      this.props.deleteMyList(this.props.myList.id);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          content = _this$props.content,
+          handleClose = _this$props.handleClose;
+      var style = {
+        backgroundImage: 'url(' + content.thumbnailUrl + ')'
+      };
+      var addVideo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_myList_button_container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.addToMyList
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-plus"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button_text"
+      }, "MY LIST")));
+      var removeVideo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_myList_button_container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.removeFromMyList
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-check"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button_text"
+      }, "MY LIST")));
+      var myListStatus = this.props.addedToMyList ? removeVideo : addVideo;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_details"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_title"
+      }, content.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_MR_duration"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_MR"
+      }, content.maturityRating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_duration"
+      }, Math.floor(content.duration / 60000), "m")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_description"
+      }, content.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_buttons_container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button_container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/watch/".concat(content.id)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-play"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button_text"
+      }, "PLAY"))), myListStatus)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_gradient"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_image",
+        style: style
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/watch/".concat(content.id)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "link"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: handleClose
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-times"
+      }))));
+    }
+  }]);
+
+  return GalleryShowRowItemContent;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (GalleryShowRowItemContent);
 
@@ -1794,6 +1874,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _gallery_show_row_item_content__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gallery_show_row_item_content */ "./frontend/components/gallery/gallery_show_row_item_content.jsx");
 /* harmony import */ var _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/my_list_actions */ "./frontend/actions/my_list_actions.js");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+
 
 
 
@@ -1803,7 +1885,10 @@ var msp = function msp(state, ownProps) {
       handleClose = ownProps.handleClose;
   return {
     content: content,
-    handleClose: handleClose
+    handleClose: handleClose,
+    addedToMyList: !!Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["myListsHashByMediaId"])(state)[content.id],
+    myList: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["myListsHashByMediaId"])(state)[content.id] || {},
+    profileId: state.ui.currentProfileId
   };
 };
 
@@ -1812,7 +1897,7 @@ var mdp = function mdp(dispatch) {
     createMyList: function createMyList(myList) {
       return dispatch(Object(_actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__["createMyList"])(myList));
     },
-    deleteMylist: function deleteMylist(id) {
+    deleteMyList: function deleteMyList(id) {
       return dispatch(Object(_actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__["deleteMyList"])(id));
     }
   };

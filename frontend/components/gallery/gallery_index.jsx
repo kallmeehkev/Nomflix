@@ -18,7 +18,6 @@ class GalleryIndex extends React.Component {
             let showRowsFirstSix = genresArrlimit6.map( (genre) => {
                 return <GalleryShowRowContainer genre={genre} key={genre.id} pageType="genre"/> 
             })
-            debugger
             let showOneRow = <GalleryShowRowContainer genre={this.props.genres[4]} key={1} />
             return (
                 <div className="browse_body">
