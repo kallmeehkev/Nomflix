@@ -9,7 +9,7 @@ const msp = (state, ownProps) => {
         genres: state.entities.genres,
         mediaGenres: state.entities.mediaGenres,
         genre: state.entities.genres[ownProps.match.params.genreId],
-        // genreVideos: Selectors.genreVideos(state, ownProps.match.params.genreId),
+        genreVideos: Selectors.genreVideos(state, ownProps.match.params.genreId) || [],
     }
     //need children components to render page after genres and mediaGenres have been fetched
 }

@@ -1,25 +1,35 @@
 import React from 'react';
 import GalleryNavBarContainer from '../nav_bar/gallery_nav_bar_container';
 import { Link } from 'react-router-dom';
-import GalleryShowRowContainer from '../gallery/gallery_show_row_container';
+import GalleryShowRowContainer from '../gallery/gallery_show_row_container.js';
 import GalleryFPVideoContainer from '../gallery/gallery_fp_video_container';
 class GenreShow extends React.Component {
-
+    constructor(props) {
+        super(props)
+        this.state = {genreId: this.props.match.params.genreId}
+    }
     componentDidMount() {
-        // this.props.fetchGenres();
-        // this.props.fetchMediaGenres();
-        this.props.fetchGenre(this.props.match.params.genreId);
+        let videosFetched = !!this.props.genreVideos[0]
+        if (!videosFetched) {
+            this.props.fetchGenre(this.props.match.params.genreId);
+        }
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.match.params.genreId !== this.props.match.params.genreId) {
+        let isNewGenre = prevProps.match.params.genreId !== this.props.match.params.genreId
+        if (isNewGenre) {
+            // this.props.fetchGenre(this.props.match.params.genreId);
+            this.setState({ genreId: this.props.match.params.genreId});
+        }
+        let videosFetched = !!this.props.genreVideos[0]
+        if (!videosFetched && isNewGenre) {
             this.props.fetchGenre(this.props.match.params.genreId);
         }
     }
 
     render() {
         if (this.props.genres[12] && this.props.mediaGenres[140]) {
-            let showOneRow = <GalleryShowRowContainer genre={this.props.genre} key={1} genreShow={true}/>
+            let showOneRow = <GalleryShowRowContainer genre={this.props.genre} key={1} genreShow={true} pageType="genre"/>
             return (
                 <div className="browse_body">
                     <GalleryNavBarContainer path={this.props.match.path} />

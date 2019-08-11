@@ -83,35 +83,36 @@
 
 .main_nav_bar_left_controls_home {
   margin: auto;
-  font-size: 1.4vw;
+  font-size: 1.2vw;
   cursor: pointer;
   box-sizing: content-box;
   padding-bottom: 10px;
   padding-top: 10px;
-  font-weight: 550;
+  font-weight: 600;
 }
 .main_nav_bar_left_controls_genre {
   margin: auto;
-  font-size: 1.4vw;
+  font-size: 1.2vw;
   cursor: default;
   box-sizing: content-box;
   padding-bottom: 10px;
   padding-top: 10px;
-  font-weight: 550;
+  font-weight: 600;
 }
 .main_nav_bar_left_controls_genre .down {
   padding-left: 0.6vw;
   font-size: 1.6vw;
   position: relative;
   top: 0.15vw;
-}
+  font-weight: 600;
 
+}
 
 .browse_splash_logo {
     width: 100px;
     font-size: 42px;
     color: #e50914;
-    font-weight: 500;
+    font-weight: 600;
     vertical-align: middle;
     cursor: pointer;
 }
@@ -224,7 +225,7 @@ html:not([data-scroll='0']) {
   display: flex;
   font-size: 1.9vh;
   width: fit-content;
-  font-weight: 550;
+  font-weight: 600;
 }
 
 .browse_dropdown:hover .browse_dropdown-content {
@@ -247,7 +248,7 @@ html:not([data-scroll='0']) {
 }
 .browse_dropdown-arrow_genre i {
   font-size: 1.6vw;
-  bottom: -0.7vw;
+  height: 1vw;
   position: relative;
 }
 
@@ -264,8 +265,13 @@ html:not([data-scroll='0']) {
   width: 100%;
   background: transparent;
   padding-left: 7%;
-  height: 3vh;
   box-sizing: border-box;
+}
+
+.browse_dropdown-arrow_genre div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .browse_dropdown_content_genre_container {
@@ -275,9 +281,9 @@ html:not([data-scroll='0']) {
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
-  bottom: 10px;
   background-color: black;
   opacity: .85;
+  border: 1px solid #333;
 }
 
 .genres_vertical_container {
@@ -293,7 +299,7 @@ html:not([data-scroll='0']) {
   display: flex;
   padding-top: 5px;
   padding-bottom: 5px;
-  font-weight: 400;
+  font-weight: 600;
 }
 .genres_vertical_container_item:hover {
   text-decoration: underline;
@@ -362,6 +368,7 @@ html:not([data-scroll='0']) {
     border-style: none none none solid;
     background-color: rgba(51,51,51,.6);
     font-size: 1.1vw;
+    font-weight: 600;
     padding: .5vw 3.5vw .5vw .8vw;
     display: -webkit-box;
     display: -webkit-flex;
@@ -464,7 +471,8 @@ html:not([data-scroll='0']) {
     -moz-box-shadow: none;
     box-shadow: none;
     box-sizing: border-box;
-    font-size: 1.5vw;
+    font-size: 1.2vw;
+    font-weight: 600;
     cursor: pointer;
 }
 
@@ -482,12 +490,14 @@ html:not([data-scroll='0']) {
     color: #000;
     // height: 1.2vw;
     border-radius: .2vw;
-    transform: scale(1.1);
+    transform: scale(1.07);
+    transition: transform 0.2s;
 }
 
 .play_button_text {
   display: flex;
   background: transparent;
+  align-items: center;
 }
 
 .play_button_container .play_button {
@@ -503,7 +513,7 @@ html:not([data-scroll='0']) {
 .browse_fp_video_description {
   margin-top: 2vh;
   font-size: 1.4vw;
-  font-weight: 500;
+  font-weight: 600;
   color: white;
   text-shadow: -1px -1px 3px black, 1px -1px 3px black, -1px 1px 3px black, 1px 1px 3px black;
 }
@@ -550,7 +560,7 @@ html:not([data-scroll='0']) {
 .browse_row_title div {
   display: table-cell;
   vertical-align: bottom;
-  font-size: 1.6vw;
+  font-size: 1.5vw;
 }
 
 .browse_row_content {
@@ -620,7 +630,7 @@ html:not([data-scroll='0']) {
 }
 
 .browse_row_item_container:hover {
-  transform: scale(1.4);
+  transform: scale(1.35);
   -webkit-transition: transform 400ms ease-in-out;
     -moz-transition: transform 400ms ease-in-out;
     -o-transition: transform 400ms ease-in-out;
@@ -665,6 +675,58 @@ html:not([data-scroll='0']) {
   opacity: 1;
 }
 
+.myList_container {
+  display: none;
+  position: absolute;
+  right: 0;
+  bottom: 8.35vw;
+  padding-right: 5%;
+  font-size: 1.7vw;
+  height: 2vw;
+  width: 2vw;
+  transition: font-size 1s;
+}
+
+.myList_container button {
+  height: 100%;
+  width: 100%;
+}
+
+.myList_button {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  justify-content: center;
+  align-content: center;
+}
+
+.myList_status_dropdown {
+  display: none;
+  position: absolute;
+  width: 7vw;
+  background-color: white;
+  font-size: 0.7vw;
+  min-height: 1.2vw;
+  text-align: center;
+  align-content: center;
+  color: black;
+  box-sizing: border-box;
+  left: -2.5vw;
+  top: 2.2vw;
+  font-weight: 600;
+  padding: 0.2vw 0;
+}
+
+.myList_container:hover i{
+  font-size: 1.85vw;
+  transition: font-size 0.3s;
+}
+
+.myList_container:hover .myList_status_dropdown {
+  display: block;
+}
+
 .overlay_darken {
   width: 100%;
   height: 100%;
@@ -677,13 +739,23 @@ html:not([data-scroll='0']) {
   flex-direction: column;
   justify-content: flex-end;
 }
+.browse_row_item_container:hover .myList_container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
 .row_item_play_button {
   display: flex;
-    margin-bottom: 0.5vw;
+  margin-bottom: 0.5vw;
 }
 
 .row_item_play_button i{
-  font-size: 1.4vw;
+  font-size: 1.7vw;
+}
+
+.overlay_darken:hover i {
+  color: rgba(229,9,20, 1);
 }
 
 .row_item_overlay_details {
@@ -692,6 +764,7 @@ html:not([data-scroll='0']) {
   justify-content: flex-start;
   background: rgba(0, 0, 0, 0.2);
   border-radius: 1px;
+  align-content: center;
 }
 
 .row_item_overlay_mat_rating {
@@ -699,20 +772,20 @@ html:not([data-scroll='0']) {
   border: 1px solid whitesmoke;
   font-size: 0.7vw;
   text-align: center;
-  font-weight: 500;
+  font-weight: 600;
   border-radius: 1px;
 }
 
 .row_item_overlay_duration {
-  font-size: 0.8vw;
+  font-size: 0.9vw;
   text-align: center;
   padding: 0 0.5vw 0 1vw;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .row_item_overlay_title {
   font-size: 0.9vw;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 0.5vw;
   background: rgba(0, 0, 0, 0.15);
   border-radius: 1px;
@@ -768,7 +841,7 @@ html:not([data-scroll='0']) {
 }
 
 .row_item_drop_down:hover i {
-  background-color: #e50914;
+  color: #e50914;
 }
 
 .show_row_item_content {
@@ -843,28 +916,32 @@ html:not([data-scroll='0']) {
   padding-right: 1vw;
 }
 
+.item_content_buttons_container {
+  display: flex;
+  justify-content: flex-start;
+}
+
 .item_content_play_button_container {
-  height: 2.8vw;
-  width: 10vw;
+  height: 2.6vw;
+  width: 7vw;
   display: flex;
   justify-content: flex-start;
   text-align: center;
   line-height: 1.9em;
   background-color: rgba(229,9,20, 0.85);
     border-width: 0;
-    border-radius: .2vw;
+    border-radius: .1vw;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
     box-sizing: border-box;
-    font-size: 1.5vw;
+    font-size: 1vw;
+    font-weight: 600;
     cursor: pointer;
     color: white;
+    margin-right: 1vw;
 }
 
-// .item_content_play_button_container .link {
-//   width: 100%;
-// }
 .item_content_play_button_container a {
   display: flex;
   justify-content: center;
@@ -876,23 +953,60 @@ html:not([data-scroll='0']) {
   box-shadow: 0 0.6vw 1vw -0.4vw rgba(0,0,0,.35);
   background-color: rgba(229,9,20, 1);
     color: white;
-    // height: 1.2vw;
-    border-radius: .2vw;
+    border-radius: .1vw;
     transform: scale(1.1);
 }
 
 .item_content_play_button_text {
   display: flex;
   background: transparent;
+  align-items: center;
 }
 
 .item_content_play_button_container .item_content_play_button {
-  // background-image: url('play_icon_3000.png');
-  height: 2.8vw;
-  width: 2.8vw;
-  // background-size: cover;
+  width: 2.2vw;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.item_content_myList_button_container {
+  height: 2.7vw;
+  width: 9vw;
+  display: flex;
+  justify-content: flex-start;
+  text-align: center;
+  line-height: 1.9em;
+  background-color: transparent;
+    border: 1.2px solid #333;
+    border-radius: .1vw;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    box-sizing: border-box;
+    font-size: 1vw;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+}
+
+.item_content_myList_button_container:hover {
+    transform: scale(1.08);
+    transition: transform 0.1s;
+}
+
+.item_content_myList_button_container .item_content_play_button {
+  display: flex;
+  padding-right: 0.5vw;
+  justify-content: center;
+  align-items: center;
+}
+
+.item_content_myList_button_container button {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
   align-items: center;
 }
 
@@ -931,4 +1045,11 @@ html:not([data-scroll='0']) {
 .item_content_image .link {
   width: 100%;
   height: 100%;
+}
+
+.myList_index_title {
+  width: 100%;
+  padding-left: 4%;
+  font-size: 3vw;
+  font-weight: 600;
 }

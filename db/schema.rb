@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_05_073136) do
+ActiveRecord::Schema.define(version: 2019_08_07_002040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 2019_08_05_073136) do
     t.integer "media_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["profile_id", "media_id"], name: "index_my_lists_on_profile_id_and_media_id", unique: true
   end
 
   create_table "profiles", force: :cascade do |t|

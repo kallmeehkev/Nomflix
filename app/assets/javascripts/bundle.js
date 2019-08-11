@@ -101,7 +101,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_root_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/root.jsx */ "./frontend/components/root.jsx");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
+/* harmony import */ var _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/my_list_actions */ "./frontend/actions/my_list_actions.js");
+/* harmony import */ var _util_profile_api_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./util/profile_api_util */ "./frontend/util/profile_api_util.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -136,6 +140,11 @@ document.addEventListener('DOMContentLoaded', function () {
     store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])();
   }
 
+  window.getState = store.getState;
+  window.dispatch = store.dispatch;
+  window.createMyList = _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_4__["createMyList"];
+  window.deleteMyList = _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_4__["deleteMyList"];
+  window.fetchProfile = _util_profile_api_util__WEBPACK_IMPORTED_MODULE_5__["fetchProfile"];
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
     store: store
   }), root);
@@ -147,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
 /*!********************************************!*\
   !*** ./frontend/actions/errors_actions.js ***!
   \********************************************/
-/*! exports provided: CLEAR_SESSION_ERRORS, CLEAR_PROFILE_ERRORS, CLEAR_MEDIUM_ERRORS, clearSessionErrors, clearProfileErrors, clearMediumErrors */
+/*! exports provided: CLEAR_SESSION_ERRORS, CLEAR_PROFILE_ERRORS, CLEAR_MEDIUM_ERRORS, CLEAR_MYLIST_ERRORS, clearSessionErrors, clearProfileErrors, clearMediumErrors, clearMyListErrors */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -155,12 +164,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_SESSION_ERRORS", function() { return CLEAR_SESSION_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_PROFILE_ERRORS", function() { return CLEAR_PROFILE_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_MEDIUM_ERRORS", function() { return CLEAR_MEDIUM_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_MYLIST_ERRORS", function() { return CLEAR_MYLIST_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearSessionErrors", function() { return clearSessionErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearProfileErrors", function() { return clearProfileErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearMediumErrors", function() { return clearMediumErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearMyListErrors", function() { return clearMyListErrors; });
 var CLEAR_SESSION_ERRORS = "CLEAR_SESSION_ERRORS";
 var CLEAR_PROFILE_ERRORS = "CLEAR_PROFILE_ERRORS";
 var CLEAR_MEDIUM_ERRORS = "CLEAR_MEDIUM_ERRORS";
+var CLEAR_MYLIST_ERRORS = "CLEAR_MYLIST_ERRORS";
 var clearSessionErrors = function clearSessionErrors() {
   return function (dispatch) {
     return dispatch({
@@ -179,6 +191,13 @@ var clearMediumErrors = function clearMediumErrors() {
   return function (dispatch) {
     return dispatch({
       type: CLEAR_MEDIUM_ERRORS
+    });
+  };
+};
+var clearMyListErrors = function clearMyListErrors() {
+  return function (dispatch) {
+    return dispatch({
+      type: CLEAR_MYLIST_ERRORS
     });
   };
 };
@@ -342,6 +361,67 @@ var fetchMedium = function fetchMedium(id) {
 
 /***/ }),
 
+/***/ "./frontend/actions/my_list_actions.js":
+/*!*********************************************!*\
+  !*** ./frontend/actions/my_list_actions.js ***!
+  \*********************************************/
+/*! exports provided: RECEIVE_MYLIST, RECEIVE_MYLIST_ERRORS, REMOVE_MYLIST, receiveMyList, receiveMyListErrors, removeMyList, createMyList, deleteMyList */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_MYLIST", function() { return RECEIVE_MYLIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_MYLIST_ERRORS", function() { return RECEIVE_MYLIST_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_MYLIST", function() { return REMOVE_MYLIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveMyList", function() { return receiveMyList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveMyListErrors", function() { return receiveMyListErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeMyList", function() { return removeMyList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createMyList", function() { return createMyList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteMyList", function() { return deleteMyList; });
+/* harmony import */ var _util_my_list_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/my_list_api_util */ "./frontend/util/my_list_api_util.js");
+
+var RECEIVE_MYLIST = "RECEIVE_MYLIST";
+var RECEIVE_MYLIST_ERRORS = "RECEIVE_MYLIST_ERRORS";
+var REMOVE_MYLIST = "REMOVE_MYLIST";
+var receiveMyList = function receiveMyList(myList) {
+  return {
+    type: RECEIVE_MYLIST,
+    myList: myList
+  };
+};
+var receiveMyListErrors = function receiveMyListErrors(errors) {
+  return {
+    type: RECEIVE_MYLIST_ERRORS,
+    errors: errors
+  };
+};
+var removeMyList = function removeMyList(myListId) {
+  return {
+    type: REMOVE_MYLIST,
+    myListId: myListId
+  };
+};
+var createMyList = function createMyList(myList) {
+  return function (dispatch) {
+    return _util_my_list_api_util__WEBPACK_IMPORTED_MODULE_0__["createMyList"](myList).then(function (myList) {
+      return dispatch(receiveMyList(myList));
+    }, function (errors) {
+      return dispatch(receiveMyListErrors(Object.values(errors.responseJSON)));
+    });
+  };
+};
+var deleteMyList = function deleteMyList(id) {
+  return function (dispatch) {
+    return _util_my_list_api_util__WEBPACK_IMPORTED_MODULE_0__["deleteMyList"](id).then(function (myList) {
+      return dispatch(removeMyList(myList.id));
+    }, function (errors) {
+      return dispatch(receiveMyListErrors(Object.values(errors.responseJSON)));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/profile_actions.js":
 /*!*********************************************!*\
   !*** ./frontend/actions/profile_actions.js ***!
@@ -384,10 +464,10 @@ var receiveProfiles = function receiveProfiles(profiles) {
     profiles: profiles
   };
 };
-var receiveProfile = function receiveProfile(profile) {
+var receiveProfile = function receiveProfile(payload) {
   return {
     type: RECEIVE_PROFILE,
-    profile: profile
+    payload: payload
   };
 };
 var removeProfile = function removeProfile(profileId) {
@@ -425,8 +505,8 @@ var fetchProfiles = function fetchProfiles() {
 };
 var fetchProfile = function fetchProfile(id) {
   return function (dispatch) {
-    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchProfile"](id).then(function (profile) {
-      return dispatch(receiveProfile(profile));
+    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchProfile"](id).then(function (payload) {
+      return dispatch(receiveProfile(payload));
     }, function (errors) {
       return dispatch(receiveProfileErrors(Object.values(errors.responseJSON)));
     });
@@ -434,9 +514,9 @@ var fetchProfile = function fetchProfile(id) {
 };
 var createProfile = function createProfile(profile) {
   return function (dispatch) {
-    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["createProfile"](profile).then(function (profile) {
-      dispatch(receiveProfile(profile));
-      dispatch(receiveCurrentProfile(profile));
+    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["createProfile"](profile).then(function (payload) {
+      dispatch(receiveProfile(payload));
+      dispatch(receiveCurrentProfile(payload.profile.id));
     }, function (errors) {
       return dispatch(receiveProfileErrors(Object.values(errors.responseJSON)));
     });
@@ -444,8 +524,8 @@ var createProfile = function createProfile(profile) {
 };
 var updateProfile = function updateProfile(profile) {
   return function (dispatch) {
-    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["updateProfile"](profile).then(function (profile) {
-      return dispatch(receiveProfile(profile));
+    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["updateProfile"](profile).then(function (payload) {
+      return dispatch(receiveProfile(payload));
     }, function (errors) {
       return dispatch(receiveProfileErrors(Object.values(errors.responseJSON)));
     });
@@ -462,8 +542,8 @@ var deleteProfile = function deleteProfile(id) {
 };
 var setCurrentProfile = function setCurrentProfile(id) {
   return function (dispatch) {
-    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["setCurrentProfile"](id).then(function (profile) {
-      return dispatch(receiveCurrentProfile(profile.id));
+    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["setCurrentProfile"](id).then(function (payload) {
+      return dispatch(receiveCurrentProfile(payload.profile.id));
     }, function (errors) {
       return dispatch(receiveProfileErrors(Object.values(errors.responseJSON)));
     });
@@ -471,8 +551,8 @@ var setCurrentProfile = function setCurrentProfile(id) {
 };
 var unSetCurrentProfile = function unSetCurrentProfile(id) {
   return function (dispatch) {
-    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["unSetCurrentProfile"](id).then(function (profile) {
-      return dispatch(removeCurrentProfile(profile.id));
+    return _util_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["unSetCurrentProfile"](id).then(function (payload) {
+      return dispatch(removeCurrentProfile(payload.profile.id));
     }, function (errors) {
       return dispatch(receiveProfileErrors(Object.values(errors.responseJSON)));
     });
@@ -606,6 +686,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _splash_splash_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./splash/splash_container */ "./frontend/components/splash/splash_container.js");
 /* harmony import */ var _watch_media_show_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./watch/media_show_container */ "./frontend/components/watch/media_show_container.js");
 /* harmony import */ var _genre_genre_show_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./genre/genre_show_container */ "./frontend/components/genre/genre_show_container.js");
+/* harmony import */ var _mylist_mylist_index_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./mylist/mylist_index_container */ "./frontend/components/mylist/mylist_index_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -633,6 +714,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var Browse =
 /*#__PURE__*/
 function (_React$Component) {
@@ -644,56 +726,59 @@ function (_React$Component) {
     _classCallCheck(this, Browse);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Browse).call(this, props));
-    _this.state = _this.props.media;
+
+    _this.props.fetchGenres();
+
+    _this.props.fetchMediaGenres();
+
     return _this;
   }
 
   _createClass(Browse, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.fetchGenres();
-      this.props.fetchMediaGenres();
-      this.setState(this.props.media);
-    }
-  }, {
     key: "render",
     value: function render() {
-      if (this.props.media[12] || this.props.mediaGenres[140]) {
-        var _this$props = this.props,
-            genres = _this$props.genres,
-            mediaGenres = _this$props.mediaGenres;
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
-          exact: true,
-          path: "/",
-          component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_5__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
-          exact: true,
-          path: "/login",
-          component: _session_form_session_page__WEBPACK_IMPORTED_MODULE_2__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
-          exact: true,
-          path: "/signup",
-          component: _session_form_session_page__WEBPACK_IMPORTED_MODULE_2__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
-          path: "/watch/:mediaId",
-          component: _watch_media_show_container__WEBPACK_IMPORTED_MODULE_6__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
-          path: "/browse/genre/:genreId",
-          component: _genre_genre_show_container__WEBPACK_IMPORTED_MODULE_7__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
-          exact: true,
-          path: "/browse",
-          component: _gallery_gallery_index_container__WEBPACK_IMPORTED_MODULE_4__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-          render: function render() {
-            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
-              to: "/browse"
-            });
-          }
-        })));
-      } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Welcome to Nomflix");
-      }
+      // if (this.props.media[12] || this.props.mediaGenres[140]) {
+      //     let {genres, mediaGenres} = this.props;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
+        exact: true,
+        path: "/",
+        component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_5__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
+        exact: true,
+        path: "/login",
+        component: _session_form_session_page__WEBPACK_IMPORTED_MODULE_2__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
+        exact: true,
+        path: "/signup",
+        component: _session_form_session_page__WEBPACK_IMPORTED_MODULE_2__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
+        path: "/watch/:mediaId",
+        component: _watch_media_show_container__WEBPACK_IMPORTED_MODULE_6__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
+        path: "/browse/genre/:genreId",
+        component: _genre_genre_show_container__WEBPACK_IMPORTED_MODULE_7__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
+        exact: true,
+        path: "/browse",
+        component: _gallery_gallery_index_container__WEBPACK_IMPORTED_MODULE_4__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
+        exact: true,
+        path: "/browse/my-list",
+        component: _mylist_mylist_index_container__WEBPACK_IMPORTED_MODULE_8__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        render: function render() {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+            to: "/browse"
+          });
+        }
+      }))); // } 
+      // else {
+      //     return (
+      //         <div>
+      //             Welcome to Nomflix
+      //         </div>
+      //     )
+      // }
     }
   }]);
 
@@ -913,9 +998,14 @@ function (_React$Component) {
   }
 
   _createClass(GalleryFPVideo, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this._isMounted = true;
+    }
+  }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      if (prevProps.genreId !== this.props.genreId) {
+      if (prevProps.genreId !== this.props.genreId && prevProps.pageType === 'genreShow') {
         // let video = this.props.fetchRandVideo(this.props.genreId)
         // this.setState({video: video})
         this.setState({
@@ -924,10 +1014,16 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this._isMounted = false;
+    }
+  }, {
     key: "render",
     value: function render() {
-      var randFPVideo = this.props.media[this.state.randId];
-      if (randFPVideo === undefined) return null;
+      var randFPVideo = this.props.media[this.state.randId] || {
+        id: 0
+      };
 
       if (randFPVideo.id !== 0 || this.props.browseVid.id !== 0) {
         var video = this.props.pageType === 'genreShow' ? randFPVideo : this.props.browseVid;
@@ -1064,7 +1160,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../nav_bar/gallery_nav_bar_container */ "./frontend/components/nav_bar/gallery_nav_bar_container.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _gallery_show_row_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gallery_show_row_container */ "./frontend/components/gallery/gallery_show_row_container.jsx");
+/* harmony import */ var _gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gallery_show_row_container.js */ "./frontend/components/gallery/gallery_show_row_container.js");
 /* harmony import */ var _gallery_fp_video_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./gallery_fp_video_container */ "./frontend/components/gallery/gallery_fp_video_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -1117,12 +1213,13 @@ function (_React$Component) {
           return i < 6;
         });
         var showRowsFirstSix = genresArrlimit6.map(function (genre) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
             genre: genre,
-            key: genre.id
+            key: genre.id,
+            pageType: "genre"
           });
         });
-        var showOneRow = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        var showOneRow = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
           genre: this.props.genres[4],
           key: 1
         });
@@ -1138,7 +1235,7 @@ function (_React$Component) {
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_body"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_fp_video_container"
         }, "Gallery frontpage vid"), "Gallery Index");
       }
@@ -1249,10 +1346,25 @@ function (_React$Component) {
     };
     _this.mouseEnter = _this.mouseEnter.bind(_assertThisInitialized(_this));
     _this.mouseLeave = _this.mouseLeave.bind(_assertThisInitialized(_this));
+    _this.addToMyList = _this.addToMyList.bind(_assertThisInitialized(_this));
+    _this.removeFromMyList = _this.removeFromMyList.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(GalleryShowItem, [{
+    key: "addToMyList",
+    value: function addToMyList() {
+      this.props.createMyList({
+        profile_id: this.props.profileId,
+        media_id: this.props.video.id
+      });
+    }
+  }, {
+    key: "removeFromMyList",
+    value: function removeFromMyList() {
+      this.props.deleteMyList(this.props.myList.id);
+    }
+  }, {
     key: "mouseEnter",
     value: function mouseEnter() {
       this.setState({
@@ -1282,6 +1394,25 @@ function (_React$Component) {
       var style = {
         backgroundImage: 'url(' + video.thumbnailUrl + ')'
       };
+      var addVideo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.addToMyList
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "myList_button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-plus-circle"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "myList_status_dropdown"
+      }, "ADD TO MY LIST")));
+      var removeVideo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.removeFromMyList
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "myList_button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far fa-check-circle"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "myList_status_dropdown"
+      }, "REMOVE FROM MY LIST")));
+      var myListStatus = this.props.addedToMyList ? removeVideo : addVideo;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "browse_row_item_container ".concat(this.props.active)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1311,7 +1442,9 @@ function (_React$Component) {
         className: "row_item_overlay_mat_rating"
       }, video.maturityRating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row_item_overlay_duration"
-      }, Math.floor(video.duration / 60000), "m"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, Math.floor(video.duration / 60000), "m")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "myList_container"
+      }, myListStatus)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.props.handleOpen,
         className: "row_item_drop_down"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
@@ -1331,6 +1464,53 @@ function (_React$Component) {
 
 /***/ }),
 
+/***/ "./frontend/components/gallery/gallery_show_item_container.js":
+/*!********************************************************************!*\
+  !*** ./frontend/components/gallery/gallery_show_item_container.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _gallery_show_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gallery_show_item */ "./frontend/components/gallery/gallery_show_item.jsx");
+/* harmony import */ var _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/my_list_actions */ "./frontend/actions/my_list_actions.js");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+
+
+
+
+
+var msp = function msp(state, ownProps) {
+  var video = ownProps.video,
+      handleOpen = ownProps.handleOpen,
+      active = ownProps.active;
+  return {
+    video: video,
+    handleOpen: handleOpen,
+    active: active,
+    profileId: state.ui.currentProfileId,
+    addedToMyList: !!Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["myListsHashByMediaId"])(state)[video.id],
+    myList: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["myListsHashByMediaId"])(state)[video.id] || {}
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    createMyList: function createMyList(myList) {
+      return dispatch(Object(_actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__["createMyList"])(myList));
+    },
+    deleteMyList: function deleteMyList(id) {
+      return dispatch(Object(_actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__["deleteMyList"])(id));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_gallery_show_item__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
 /***/ "./frontend/components/gallery/gallery_show_row.jsx":
 /*!**********************************************************!*\
   !*** ./frontend/components/gallery/gallery_show_row.jsx ***!
@@ -1342,8 +1522,8 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _gallery_show_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gallery_show_item */ "./frontend/components/gallery/gallery_show_item.jsx");
-/* harmony import */ var _gallery_show_row_item_content__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./gallery_show_row_item_content */ "./frontend/components/gallery/gallery_show_row_item_content.jsx");
+/* harmony import */ var _gallery_show_item_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gallery_show_item_container */ "./frontend/components/gallery/gallery_show_item_container.js");
+/* harmony import */ var _gallery_show_row_item_content_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./gallery_show_row_item_content_container */ "./frontend/components/gallery/gallery_show_row_item_content_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1394,7 +1574,7 @@ function (_React$Component) {
   _createClass(GalleryShowRow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      if (this.props.genreVideos[0].duration === 0) {
+      if (this.props.pageType === "genre" && this.props.genreVideos[0].duration === 0) {
         this.props.fetchGenre(this.props.genre.id);
       }
     } // mouseEnter() {
@@ -1424,22 +1604,44 @@ function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      if (this.props.genreVideos[this.props.genreVideos.length - 1]) {
-        var videos = this.props.genreVideos.map(function (video, i) {
-          var active = _this2.state.open && _this2.state.videoIdx === i ? "active" : "";
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
-            video: video,
-            key: i + _this2.props.genre.id * 10,
-            handleOpen: function handleOpen() {
-              return _this2.handleOpen(i);
-            },
-            active: active
-          });
-        });
-        var rowTitle = this.props.genreShow ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Trending Now for ", this.props.genre.name) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.genre.name);
-        var style = {
-          width: "".concat(videos.length * 18.4, "vw") // width: `300%`,
+      var videosExist = !!this.props.genreVideos.length || !!this.props.myListVideos.length;
 
+      if (videosExist) {
+        var displayVideos;
+        var rowTitle;
+        var content;
+
+        if (this.props.pageType === "genre") {
+          displayVideos = this.props.genreVideos.map(function (video, i) {
+            var active = _this2.state.open && _this2.state.videoIdx === i ? "active" : "";
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_item_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+              video: video,
+              key: i + _this2.props.genre.id * 10,
+              handleOpen: function handleOpen() {
+                return _this2.handleOpen(i);
+              },
+              active: active
+            });
+          });
+          rowTitle = this.props.genreShow ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Trending Now for ", this.props.genre.name) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.genre.name);
+          content = this.props.genreVideos[this.state.videoIdx];
+        } else if (this.props.pageType === "myList") {
+          displayVideos = this.props.myListVideos.map(function (video, i) {
+            var active = _this2.state.open && _this2.state.videoIdx === i ? "active" : "";
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_item_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+              video: video,
+              key: i,
+              handleOpen: function handleOpen() {
+                return _this2.handleOpen(i);
+              },
+              active: active
+            });
+          });
+          content = this.props.myListVideos[this.state.videoIdx];
+        }
+
+        var style = {
+          width: "".concat(displayVideos.length * 18.4, "vw")
         };
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_row_container"
@@ -1450,10 +1652,10 @@ function (_React$Component) {
           style: style
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_row_slider_wrapper"
-        }, videos)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, displayVideos)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: this.state.open ? "show_row_item_content active" : "show_row_item_content"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row_item_content__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          content: this.props.genreVideos[this.state.videoIdx],
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row_item_content_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          content: content,
           handleClose: this.handleClose
         })));
       } else {
@@ -1469,10 +1671,10 @@ function (_React$Component) {
 
 /***/ }),
 
-/***/ "./frontend/components/gallery/gallery_show_row_container.jsx":
-/*!********************************************************************!*\
-  !*** ./frontend/components/gallery/gallery_show_row_container.jsx ***!
-  \********************************************************************/
+/***/ "./frontend/components/gallery/gallery_show_row_container.js":
+/*!*******************************************************************!*\
+  !*** ./frontend/components/gallery/gallery_show_row_container.js ***!
+  \*******************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1488,10 +1690,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state, ownProps) {
-  return {
-    genreVideos: _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["genreVideos"](state, ownProps.genre.id),
-    genre: ownProps.genre
-  };
+  if (ownProps.pageType === "genre") {
+    return {
+      genreVideos: _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["genreVideos"](state, ownProps.genre.id),
+      genre: ownProps.genre,
+      pageType: ownProps.pageType,
+      myListVideos: []
+    };
+  } else {
+    return {
+      genreVideos: [],
+      myListVideos: ownProps.myListVideos,
+      pageType: ownProps.pageType
+    };
+  }
 };
 
 var mdp = function mdp(dispatch) {
@@ -1518,54 +1730,180 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
-var GalleryShowRowItemContent = function GalleryShowRowItemContent(props) {
-  var style = {
-    backgroundImage: 'url(' + props.content.thumbnailUrl + ')'
-  };
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_details"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_title"
-  }, props.content.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_MR_duration"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_MR"
-  }, props.content.maturityRating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_duration"
-  }, Math.floor(props.content.duration / 60000), "m")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_description"
-  }, props.content.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_play_button_container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/watch/".concat(props.content.id)
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_play_button"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fas fa-play"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_play_button_text"
-  }, "Play"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_gradient"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "item_content_image",
-    style: style
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/watch/".concat(props.content.id)
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "link"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    onClick: props.handleClose
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fas fa-times"
-  }))));
-};
+
+var GalleryShowRowItemContent =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(GalleryShowRowItemContent, _React$Component);
+
+  function GalleryShowRowItemContent(props) {
+    var _this;
+
+    _classCallCheck(this, GalleryShowRowItemContent);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GalleryShowRowItemContent).call(this, props));
+    _this.addToMyList = _this.addToMyList.bind(_assertThisInitialized(_this));
+    _this.removeFromMyList = _this.removeFromMyList.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(GalleryShowRowItemContent, [{
+    key: "addToMyList",
+    value: function addToMyList() {
+      this.props.createMyList({
+        profile_id: this.props.profileId,
+        media_id: this.props.content.id
+      });
+    }
+  }, {
+    key: "removeFromMyList",
+    value: function removeFromMyList() {
+      this.props.deleteMyList(this.props.myList.id);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          content = _this$props.content,
+          handleClose = _this$props.handleClose;
+      var style = {
+        backgroundImage: 'url(' + content.thumbnailUrl + ')'
+      };
+      var addVideo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_myList_button_container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.addToMyList
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-plus"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button_text"
+      }, "MY LIST")));
+      var removeVideo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_myList_button_container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.removeFromMyList
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-check"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button_text"
+      }, "MY LIST")));
+      var myListStatus = this.props.addedToMyList ? removeVideo : addVideo;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_details"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_title"
+      }, content.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_MR_duration"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_MR"
+      }, content.maturityRating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_duration"
+      }, Math.floor(content.duration / 60000), "m")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_description"
+      }, content.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_buttons_container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button_container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/watch/".concat(content.id)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-play"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button_text"
+      }, "PLAY"))), myListStatus)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_gradient"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_image",
+        style: style
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/watch/".concat(content.id)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "link"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: handleClose
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-times"
+      }))));
+    }
+  }]);
+
+  return GalleryShowRowItemContent;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (GalleryShowRowItemContent);
+
+/***/ }),
+
+/***/ "./frontend/components/gallery/gallery_show_row_item_content_container.js":
+/*!********************************************************************************!*\
+  !*** ./frontend/components/gallery/gallery_show_row_item_content_container.js ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _gallery_show_row_item_content__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gallery_show_row_item_content */ "./frontend/components/gallery/gallery_show_row_item_content.jsx");
+/* harmony import */ var _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/my_list_actions */ "./frontend/actions/my_list_actions.js");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+
+
+
+
+
+var msp = function msp(state, ownProps) {
+  var content = ownProps.content,
+      handleClose = ownProps.handleClose;
+  return {
+    content: content,
+    handleClose: handleClose,
+    addedToMyList: !!Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["myListsHashByMediaId"])(state)[content.id],
+    myList: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["myListsHashByMediaId"])(state)[content.id] || {},
+    profileId: state.ui.currentProfileId
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    createMyList: function createMyList(myList) {
+      return dispatch(Object(_actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__["createMyList"])(myList));
+    },
+    deleteMyList: function deleteMyList(id) {
+      return dispatch(Object(_actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__["deleteMyList"])(id));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_gallery_show_row_item_content__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -1582,7 +1920,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../nav_bar/gallery_nav_bar_container */ "./frontend/components/nav_bar/gallery_nav_bar_container.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _gallery_gallery_show_row_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../gallery/gallery_show_row_container */ "./frontend/components/gallery/gallery_show_row_container.jsx");
+/* harmony import */ var _gallery_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../gallery/gallery_show_row_container.js */ "./frontend/components/gallery/gallery_show_row_container.js");
 /* harmony import */ var _gallery_gallery_fp_video_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../gallery/gallery_fp_video_container */ "./frontend/components/gallery/gallery_fp_video_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -1613,23 +1951,42 @@ var GenreShow =
 function (_React$Component) {
   _inherits(GenreShow, _React$Component);
 
-  function GenreShow() {
+  function GenreShow(props) {
+    var _this;
+
     _classCallCheck(this, GenreShow);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(GenreShow).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GenreShow).call(this, props));
+    _this.state = {
+      genreId: _this.props.match.params.genreId
+    };
+    return _this;
   }
 
   _createClass(GenreShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      // this.props.fetchGenres();
-      // this.props.fetchMediaGenres();
-      this.props.fetchGenre(this.props.match.params.genreId);
+      var videosFetched = !!this.props.genreVideos[0];
+
+      if (!videosFetched) {
+        this.props.fetchGenre(this.props.match.params.genreId);
+      }
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      if (prevProps.match.params.genreId !== this.props.match.params.genreId) {
+      var isNewGenre = prevProps.match.params.genreId !== this.props.match.params.genreId;
+
+      if (isNewGenre) {
+        // this.props.fetchGenre(this.props.match.params.genreId);
+        this.setState({
+          genreId: this.props.match.params.genreId
+        });
+      }
+
+      var videosFetched = !!this.props.genreVideos[0];
+
+      if (!videosFetched && isNewGenre) {
         this.props.fetchGenre(this.props.match.params.genreId);
       }
     }
@@ -1637,10 +1994,11 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       if (this.props.genres[12] && this.props.mediaGenres[140]) {
-        var showOneRow = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_gallery_show_row_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        var showOneRow = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
           genre: this.props.genre,
           key: 1,
-          genreShow: true
+          genreShow: true,
+          pageType: "genre"
         });
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_body"
@@ -1691,8 +2049,8 @@ var msp = function msp(state, ownProps) {
   return {
     genres: state.entities.genres,
     mediaGenres: state.entities.mediaGenres,
-    genre: state.entities.genres[ownProps.match.params.genreId] // genreVideos: Selectors.genreVideos(state, ownProps.match.params.genreId),
-    //need children components to render page after genres and mediaGenres have been fetched
+    genre: state.entities.genres[ownProps.match.params.genreId],
+    genreVideos: _reducers_selectors__WEBPACK_IMPORTED_MODULE_1__["genreVideos"](state, ownProps.match.params.genreId) || [] //need children components to render page after genres and mediaGenres have been fetched
 
   };
 };
@@ -1738,6 +2096,134 @@ var nineteen_URL = window.nineteenURL; // delete window.netflix_background_8_URL
 
 /***/ }),
 
+/***/ "./frontend/components/mylist/mylist_index.jsx":
+/*!*****************************************************!*\
+  !*** ./frontend/components/mylist/mylist_index.jsx ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../nav_bar/gallery_nav_bar_container */ "./frontend/components/nav_bar/gallery_nav_bar_container.js");
+/* harmony import */ var _gallery_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../gallery/gallery_show_row_container.js */ "./frontend/components/gallery/gallery_show_row_container.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var MyListIndex =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(MyListIndex, _React$Component);
+
+  function MyListIndex() {
+    _classCallCheck(this, MyListIndex);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(MyListIndex).apply(this, arguments));
+  }
+
+  _createClass(MyListIndex, [{
+    key: "render",
+    value: function render() {
+      var videos = this.props.videos;
+      var rows = [];
+      var container = [];
+
+      for (var i = 0; i < videos.length; i++) {
+        container.push(videos[i]);
+
+        if (container.length === 5) {
+          rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            myListVideos: container,
+            key: i,
+            pageType: "myList"
+          }));
+          container = [];
+        } else if (i === videos.length - 1) {
+          rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            myListVideos: container,
+            key: i,
+            pageType: "myList"
+          }));
+          container = [];
+        }
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "browse_body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        path: this.props.match.path
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "myList_index_title"
+      }, "My List"), rows);
+    }
+  }]);
+
+  return MyListIndex;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (MyListIndex);
+
+/***/ }),
+
+/***/ "./frontend/components/mylist/mylist_index_container.js":
+/*!**************************************************************!*\
+  !*** ./frontend/components/mylist/mylist_index_container.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _mylist_index_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mylist_index.jsx */ "./frontend/components/mylist/mylist_index.jsx");
+/* harmony import */ var _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/my_list_actions */ "./frontend/actions/my_list_actions.js");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+
+
+
+
+
+var msp = function msp(state, ownProps) {
+  return {
+    videos: _reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["myListsVideos"](state)
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    deleteMylist: function deleteMylist(id) {
+      return dispatch(Object(_actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__["deleteMyList"])(id));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_mylist_index_jsx__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
 /***/ "./frontend/components/nav_bar/gallery_nav_bar_container.js":
 /*!******************************************************************!*\
   !*** ./frontend/components/nav_bar/gallery_nav_bar_container.js ***!
@@ -1763,7 +2249,7 @@ var msp = function msp(_ref) {
   return {
     currentUser: entities.users[session.id],
     navType: 'gallery',
-    currentProfileId: ui.currentProfileId || 1,
+    currentProfileId: ui.currentProfileId || 2,
     fetchedProfile: entities.profiles[ui.currentProfileId] || {},
     genres: Object.values(entities.genres)
   };
@@ -1940,7 +2426,10 @@ function (_React$Component) {
         }));
         var home = this.props.path === "/browse" ? "Home" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/browse"
-        }, "Home"); //need logic for classNames browse nav bar.  if on profile page or not.  apply on pinning and main
+        }, "Home");
+        var myList = this.props.path === "/browse/my-list" ? "My List" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: "/browse/my-list"
+        }, "My List"); //need logic for classNames browse nav bar.  if on profile page or not.  apply on pinning and main
 
         var genres = this.props.genres;
         var firstFourGenres = [];
@@ -1992,7 +2481,9 @@ function (_React$Component) {
           className: "genres_vertical_container"
         }, secondFourGenres), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "genres_vertical_container"
-        }, thirdFourGenres))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, thirdFourGenres)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "main_nav_bar_left_controls_home"
+        }, myList)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_nav_bar_profile_pic browse_dropdown"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: this.props.fetchedProfile.photoUrl,
@@ -2316,7 +2807,7 @@ function (_React$Component) {
       e.preventDefault();
       var user = Object.assign({}, this.state);
       this.props.processForm(user).then(function () {
-        return _this2.props.setCurrentProfile(1);
+        return _this2.props.setCurrentProfile(2);
       });
     }
   }, {
@@ -2338,7 +2829,7 @@ function (_React$Component) {
         password: "password"
       };
       this.props.login(demoUser).then(function () {
-        return _this4.props.setCurrentProfile(1);
+        return _this4.props.setCurrentProfile(2);
       }); //.then(() => this.props.history.push('/browse'));
     }
   }, {
@@ -2772,6 +3263,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _media_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./media_reducer */ "./frontend/reducers/media_reducer.js");
 /* harmony import */ var _genres_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./genres_reducer */ "./frontend/reducers/genres_reducer.js");
 /* harmony import */ var _media_genres_reducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./media_genres_reducer */ "./frontend/reducers/media_genres_reducer.js");
+/* harmony import */ var _my_lists_reducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./my_lists_reducer */ "./frontend/reducers/my_lists_reducer.js");
+
 
 
 
@@ -2783,7 +3276,8 @@ var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers
   profiles: _profiles_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
   media: _media_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
   genres: _genres_reducer__WEBPACK_IMPORTED_MODULE_4__["default"],
-  mediaGenres: _media_genres_reducer__WEBPACK_IMPORTED_MODULE_5__["default"]
+  mediaGenres: _media_genres_reducer__WEBPACK_IMPORTED_MODULE_5__["default"],
+  myLists: _my_lists_reducer__WEBPACK_IMPORTED_MODULE_6__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (entitiesReducer);
 
@@ -2802,6 +3296,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_errors_reducer */ "./frontend/reducers/session_errors_reducer.js");
 /* harmony import */ var _profile_errors_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./profile_errors_reducer */ "./frontend/reducers/profile_errors_reducer.js");
 /* harmony import */ var _medium_errors_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./medium_errors_reducer */ "./frontend/reducers/medium_errors_reducer.js");
+/* harmony import */ var _my_list_errors_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./my_list_errors_reducer */ "./frontend/reducers/my_list_errors_reducer.js");
+
 
 
 
@@ -2809,7 +3305,8 @@ __webpack_require__.r(__webpack_exports__);
 var errorsReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
   profile: _profile_errors_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
-  medium: _medium_errors_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
+  medium: _medium_errors_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
+  myList: _my_list_errors_reducer__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (errorsReducer);
 
@@ -2909,6 +3406,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _actions_medium_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/medium_actions */ "./frontend/actions/medium_actions.js");
 /* harmony import */ var _actions_genre_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/genre_actions */ "./frontend/actions/genre_actions.js");
+/* harmony import */ var _actions_profile_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/profile_actions */ "./frontend/actions/profile_actions.js");
+
 
 
 
@@ -2930,6 +3429,10 @@ var mediaReducer = function mediaReducer() {
 
     case _actions_genre_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_GENRE"]:
       newState = Object(lodash__WEBPACK_IMPORTED_MODULE_0__["merge"])({}, oldState, action.payload.media);
+      return newState;
+
+    case _actions_profile_actions__WEBPACK_IMPORTED_MODULE_3__["RECEIVE_PROFILE"]:
+      newState = Object(lodash__WEBPACK_IMPORTED_MODULE_0__["merge"])({}, oldState, action.payload.listedMedia);
       return newState;
 
     default:
@@ -2978,6 +3481,90 @@ var mediumErrorsReducer = function mediumErrorsReducer() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (mediumErrorsReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/my_list_errors_reducer.js":
+/*!*****************************************************!*\
+  !*** ./frontend/reducers/my_list_errors_reducer.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/my_list_actions */ "./frontend/actions/my_list_actions.js");
+/* harmony import */ var _actions_errors_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/errors_actions */ "./frontend/actions/errors_actions.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+
+var myListErrorsReducer = function myListErrorsReducer() {
+  var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(oldState);
+  var newState = Object(lodash__WEBPACK_IMPORTED_MODULE_2__["merge"])({}, oldState);
+
+  switch (action.type) {
+    case _actions_errors_actions__WEBPACK_IMPORTED_MODULE_1__["CLEAR_MYLIST_ERRORS"]:
+      return [];
+
+    case _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_MYLIST_ERRORS"]:
+      newState = action.errors;
+      return newState;
+
+    default:
+      return oldState;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (myListErrorsReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/my_lists_reducer.js":
+/*!***********************************************!*\
+  !*** ./frontend/reducers/my_lists_reducer.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/my_list_actions */ "./frontend/actions/my_list_actions.js");
+/* harmony import */ var _actions_profile_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/profile_actions */ "./frontend/actions/profile_actions.js");
+
+
+
+
+var myListsReducer = function myListsReducer() {
+  var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(oldState);
+  var newState = Object(lodash__WEBPACK_IMPORTED_MODULE_0__["merge"])({}, oldState);
+
+  switch (action.type) {
+    case _actions_profile_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_PROFILE"]:
+      if (action.payload.myLists) return action.payload.myLists;
+      return oldState;
+
+    case _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_MYLIST"]:
+      newState[action.myList.id] = action.myList;
+
+    case _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_1__["REMOVE_MYLIST"]:
+      delete newState[action.myListId];
+      return newState;
+
+    default:
+      return oldState;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (myListsReducer);
 
 /***/ }),
 
@@ -3050,7 +3637,7 @@ var profilesReducer = function profilesReducer() {
       return action.profiles;
 
     case _actions_profile_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_PROFILE"]:
-      newState[action.profile.id] = action.profile;
+      newState[action.payload.profile.id] = action.payload.profile;
       return newState;
 
     case _actions_profile_actions__WEBPACK_IMPORTED_MODULE_1__["REMOVE_PROFILE"]:
@@ -3099,7 +3686,7 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 /*!****************************************!*\
   !*** ./frontend/reducers/selectors.js ***!
   \****************************************/
-/*! exports provided: defaultTenVideos, firstTenVideos, genreVideos, randGenreVideo, randGenreVideoId, randVideo */
+/*! exports provided: defaultTenVideos, firstTenVideos, genreVideos, randGenreVideo, randGenreVideoId, randVideo, myListsHashByMediaId, myListsVideos */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3110,6 +3697,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "randGenreVideo", function() { return randGenreVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "randGenreVideoId", function() { return randGenreVideoId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "randVideo", function() { return randVideo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "myListsHashByMediaId", function() { return myListsHashByMediaId; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "myListsVideos", function() { return myListsVideos; });
 var defaultTenVideos = function defaultTenVideos(state) {
   var newArr = [];
   var defaultVideo = {};
@@ -3176,6 +3765,20 @@ var randVideo = function randVideo(state, genreId) {
   });
   if (mediaGenres.length === 0) return 0;
   return state.entities.media[mediaGenres[Math.floor(Math.random() * mediaGenres.length)].mediaId];
+};
+var myListsHashByMediaId = function myListsHashByMediaId(state) {
+  var hash = {};
+  Object.values(state.entities.myLists).forEach(function (myList) {
+    hash[myList.mediaId] = myList;
+  });
+  return hash;
+};
+var myListsVideos = function myListsVideos(state) {
+  var myListsHash = myListsHashByMediaId(state);
+  var videos = Object.keys(myListsHash).map(function (mediaId) {
+    return state.entities.media[mediaId];
+  });
+  return videos;
 };
 
 /***/ }),
@@ -3361,7 +3964,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_1__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"]));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_1__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_3___default.a));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
@@ -3441,6 +4044,36 @@ var fetchMedium = function fetchMedium(id) {
   return $.ajax({
     method: 'GET',
     url: "api/media/".concat(id)
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/my_list_api_util.js":
+/*!*******************************************!*\
+  !*** ./frontend/util/my_list_api_util.js ***!
+  \*******************************************/
+/*! exports provided: createMyList, deleteMyList */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createMyList", function() { return createMyList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteMyList", function() { return deleteMyList; });
+var createMyList = function createMyList(myList) {
+  return $.ajax({
+    method: 'POST',
+    url: "api/my_lists",
+    data: {
+      my_list: myList
+    }
+  });
+};
+var deleteMyList = function deleteMyList(id) {
+  return $.ajax({
+    method: 'DELETE',
+    url: "api/my_lists/".concat(id) // data: { id }
+
   });
 };
 

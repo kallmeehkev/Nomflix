@@ -4,13 +4,15 @@ import profilesReducer from './profiles_reducer';
 import mediaReducer from './media_reducer';
 import genresReducer from './genres_reducer';
 import mediaGenresReducer from './media_genres_reducer';
+import myListsReducer from './my_lists_reducer';
 
 const entitiesReducer = combineReducers({
     users: usersReducer,
     profiles: profilesReducer,
     media: mediaReducer,
     genres: genresReducer,
-    mediaGenres: mediaGenresReducer
+    mediaGenres: mediaGenresReducer,
+    myLists: myListsReducer,
 })
 
 export default entitiesReducer;
