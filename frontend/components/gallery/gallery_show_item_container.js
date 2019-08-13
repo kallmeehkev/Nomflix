@@ -4,7 +4,7 @@ import { createMyList, deleteMyList } from '../../actions/my_list_actions';
 import { myListsHashByMediaId } from '../../reducers/selectors';
 
 const msp = (state, ownProps) => {
-    let { video, handleOpen, active, style } = ownProps;
+    let { video, handleOpen, active, translate, hoverOff } = ownProps;
     return {
         video: video,
         handleOpen: handleOpen,
@@ -12,7 +12,8 @@ const msp = (state, ownProps) => {
         profileId: state.ui.currentProfileId,
         addedToMyList: !!myListsHashByMediaId(state)[video.id],
         myList: myListsHashByMediaId(state)[video.id] || {},
-        style: style || {},
+        translate: translate || {},
+        hoverOff: hoverOff,
     }
 }
 

@@ -22,7 +22,7 @@ class GalleryShowRow extends React.Component {
     }    
 
     componentDidMount() {
-        if (this.props.pageType === "genre" && this.props.genreVideos[0].duration === 0) {
+        if (this.props.pageType === "genre") {
             this.props.fetchGenre(this.props.genre.id)
         }
     }
@@ -71,13 +71,20 @@ class GalleryShowRow extends React.Component {
             let buttonRight;
             if (this.props.pageType === "genre") {
                 displayVideos = this.props.genreVideos.map((video, i) => {
-                    let style = {
-                        transform: 'translateX('+ this.state.rowIdx * -92 +'vw)',
-                        transition: 'transform 1s',
-                    };
-                    // debugger
                     let activeItem = (this.state.open && this.state.videoIdx === i) ? "active" : ""
-                    return <GalleryShowItemContainer video={video} key={i + (this.props.genre.id * 10)} handleOpen={() => this.handleOpen(i)} active={activeItem} style={style}/>
+                    let translate = activeItem === "active" ? 
+                        {
+                            transform: 'translateX(' + this.state.rowIdx * -92 + 'vw) translateY(-1vw)',
+                            transition: 'transform 1s',
+                            outline: '2px solid white'
+                        }
+                    :
+                        {
+                            transform: 'translateX('+ this.state.rowIdx * -92 +'vw)',
+                            transition: 'transform 1s',
+                        }
+                    let hoverOff = this.state.open;
+                    return <GalleryShowItemContainer video={video} key={i + (this.props.genre.id * 10)} handleOpen={() => this.handleOpen(i)} active={activeItem} translate={translate} hoverOff={hoverOff}/>
                 })
                 rowTitle = this.props.genreShow ? <div>Trending Now for {this.props.genre.name}</div> : <div>{this.props.genre.name}</div>
                 content = this.props.genreVideos[this.state.videoIdx];

@@ -1391,7 +1391,10 @@ function (_React$Component) {
         mediaUrl: ""
       };
       var video = this.props.video ? this.props.video : defaultVideo;
-      var backgroundImage = {
+      var backgroundImage = this.props.hoverOff ? {
+        transform: 'scale(1.0)',
+        backgroundImage: 'url(' + video.thumbnailUrl + ')'
+      } : {
         backgroundImage: 'url(' + video.thumbnailUrl + ')'
       };
       var addVideo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -1415,7 +1418,7 @@ function (_React$Component) {
       var myListStatus = this.props.addedToMyList ? removeVideo : addVideo;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "browse_row_item_container ".concat(this.props.active),
-        style: this.props.style
+        style: this.props.translate
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onMouseEnter: this.mouseEnter,
         onMouseLeave: this.mouseLeave,
@@ -1487,7 +1490,8 @@ var msp = function msp(state, ownProps) {
   var video = ownProps.video,
       handleOpen = ownProps.handleOpen,
       active = ownProps.active,
-      style = ownProps.style;
+      translate = ownProps.translate,
+      hoverOff = ownProps.hoverOff;
   return {
     video: video,
     handleOpen: handleOpen,
@@ -1495,7 +1499,8 @@ var msp = function msp(state, ownProps) {
     profileId: state.ui.currentProfileId,
     addedToMyList: !!Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["myListsHashByMediaId"])(state)[video.id],
     myList: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["myListsHashByMediaId"])(state)[video.id] || {},
-    style: style || {}
+    translate: translate || {},
+    hoverOff: hoverOff
   };
 };
 
@@ -1580,7 +1585,7 @@ function (_React$Component) {
   _createClass(GalleryShowRow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      if (this.props.pageType === "genre" && this.props.genreVideos[0].duration === 0) {
+      if (this.props.pageType === "genre") {
         this.props.fetchGenre(this.props.genre.id);
       }
     } // mouseEnter() {
@@ -1652,12 +1657,16 @@ function (_React$Component) {
 
         if (this.props.pageType === "genre") {
           displayVideos = this.props.genreVideos.map(function (video, i) {
-            var style = {
+            var activeItem = _this2.state.open && _this2.state.videoIdx === i ? "active" : "";
+            var translate = activeItem === "active" ? {
+              transform: 'translateX(' + _this2.state.rowIdx * -92 + 'vw) translateY(-1vw)',
+              transition: 'transform 1s',
+              outline: '2px solid white'
+            } : {
               transform: 'translateX(' + _this2.state.rowIdx * -92 + 'vw)',
               transition: 'transform 1s'
-            }; // debugger
-
-            var activeItem = _this2.state.open && _this2.state.videoIdx === i ? "active" : "";
+            };
+            var hoverOff = _this2.state.open;
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_item_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
               video: video,
               key: i + _this2.props.genre.id * 10,
@@ -1665,7 +1674,8 @@ function (_React$Component) {
                 return _this2.handleOpen(i);
               },
               active: activeItem,
-              style: style
+              translate: translate,
+              hoverOff: hoverOff
             });
           });
           rowTitle = this.props.genreShow ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Trending Now for ", this.props.genre.name) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.genre.name);
