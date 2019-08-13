@@ -1391,7 +1391,7 @@ function (_React$Component) {
         mediaUrl: ""
       };
       var video = this.props.video ? this.props.video : defaultVideo;
-      var style = {
+      var backgroundImage = {
         backgroundImage: 'url(' + video.thumbnailUrl + ')'
       };
       var addVideo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -1414,12 +1414,13 @@ function (_React$Component) {
       }, "REMOVE FROM MY LIST")));
       var myListStatus = this.props.addedToMyList ? removeVideo : addVideo;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "browse_row_item_container ".concat(this.props.active)
+        className: "browse_row_item_container ".concat(this.props.active),
+        style: this.props.style
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onMouseEnter: this.mouseEnter,
         onMouseLeave: this.mouseLeave,
         className: "browse_row_item_content " + (this.state.isMouseInside ? 'browse_row_transform' : ''),
-        style: style
+        style: backgroundImage
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "b"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -1485,14 +1486,16 @@ __webpack_require__.r(__webpack_exports__);
 var msp = function msp(state, ownProps) {
   var video = ownProps.video,
       handleOpen = ownProps.handleOpen,
-      active = ownProps.active;
+      active = ownProps.active,
+      style = ownProps.style;
   return {
     video: video,
     handleOpen: handleOpen,
     active: active,
     profileId: state.ui.currentProfileId,
     addedToMyList: !!Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["myListsHashByMediaId"])(state)[video.id],
-    myList: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["myListsHashByMediaId"])(state)[video.id] || {}
+    myList: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["myListsHashByMediaId"])(state)[video.id] || {},
+    style: style || ""
   };
 };
 
@@ -1564,10 +1567,13 @@ function (_React$Component) {
 
     _this.state = {
       videoIdx: 0,
-      open: false
+      open: false,
+      rowIdx: 0
     };
     _this.handleOpen = _this.handleOpen.bind(_assertThisInitialized(_this));
     _this.handleClose = _this.handleClose.bind(_assertThisInitialized(_this));
+    _this.handleArrowRight = _this.handleArrowRight.bind(_assertThisInitialized(_this));
+    _this.handleArrowLeft = _this.handleArrowLeft.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1584,6 +1590,38 @@ function (_React$Component) {
     //     this.setState({ isMouseInside: false });
     // }
 
+  }, {
+    key: "handleArrowRight",
+    value: function handleArrowRight() {
+      var genreVideos = this.props.genreVideos;
+
+      if (this.state.rowIdx === genreVideos.length / 5 - 1) {
+        this.setState({
+          rowIdx: 0
+        });
+      } else {
+        var currentRowIdx = this.state.rowIdx;
+        this.setState({
+          rowIdx: currentRowIdx + 1
+        });
+      }
+    }
+  }, {
+    key: "handleArrowLeft",
+    value: function handleArrowLeft() {
+      var genreVideos = this.props.genreVideos;
+
+      if (this.state.rowIdx === 0) {
+        this.setState({
+          rowIdx: genreVideos.length / 5 - 1
+        });
+      } else {
+        var currentRowIdx = this.state.rowIdx;
+        this.setState({
+          rowIdx: currentRowIdx - 1
+        });
+      }
+    }
   }, {
     key: "handleOpen",
     value: function handleOpen(i) {
@@ -1613,34 +1651,40 @@ function (_React$Component) {
 
         if (this.props.pageType === "genre") {
           displayVideos = this.props.genreVideos.map(function (video, i) {
-            var active = _this2.state.open && _this2.state.videoIdx === i ? "active" : "";
+            var style = {
+              transform: 'translateX(' + _this2.state.rowIdx * -92 + 'vw)',
+              transition: 'transform 1s'
+            }; // debugger
+
+            var activeItem = _this2.state.open && _this2.state.videoIdx === i ? "active" : "";
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_item_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
               video: video,
               key: i + _this2.props.genre.id * 10,
               handleOpen: function handleOpen() {
                 return _this2.handleOpen(i);
               },
-              active: active
+              active: activeItem,
+              style: style
             });
           });
           rowTitle = this.props.genreShow ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Trending Now for ", this.props.genre.name) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.genre.name);
           content = this.props.genreVideos[this.state.videoIdx];
         } else if (this.props.pageType === "myList") {
           displayVideos = this.props.myListVideos.map(function (video, i) {
-            var active = _this2.state.open && _this2.state.videoIdx === i ? "active" : "";
+            var activeItem = _this2.state.open && _this2.state.videoIdx === i ? "active" : "";
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_item_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
               video: video,
               key: i,
               handleOpen: function handleOpen() {
                 return _this2.handleOpen(i);
               },
-              active: active
+              active: activeItem
             });
           });
           content = this.props.myListVideos[this.state.videoIdx];
         }
 
-        var style = {
+        var width = {
           width: "".concat(displayVideos.length * 18.4, "vw")
         };
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1649,10 +1693,15 @@ function (_React$Component) {
           className: "browse_row_title"
         }, rowTitle)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_row_slider",
-          style: style
+          style: width
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_row_slider_wrapper"
-        }, displayVideos)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, displayVideos), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "browse_row_click_right",
+          onClick: this.handleArrowRight
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-chevron-right"
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: this.state.open ? "show_row_item_content active" : "show_row_item_content"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row_item_content_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
           content: content,

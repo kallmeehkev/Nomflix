@@ -583,7 +583,34 @@ html:not([data-scroll='0']) {
   margin: 0;
   padding: 0 4%;
   height: 100%;
+  display: flex;
 }
+
+.browse_row_click_right {
+  position: absolute;
+  height: 14.67vw;
+  width: 4%;
+  left: 96vw;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,0);
+}
+
+.browse_row_click_right:hover {
+  background-color: rgba(0,0,0,0.4);
+}
+
+.browse_row_click_right i {
+  font-size: 4vw;
+  display: none;
+}
+
+.browse_row_click_right:hover i {
+  display: flex;
+}
+
 
 .browse_row_slider_wrapper {
   display: flex;
@@ -602,9 +629,9 @@ html:not([data-scroll='0']) {
   position: relative;
   white-space: normal;
   vertical-align: top;
-  margin: 0 2px;
-  width: 18.4vw;
-  height: 15vw;
+  margin: 0 0.2vw;
+  width: 18vw;
+  height: 14.67vw;
 }
 
 .side_block {
@@ -625,24 +652,24 @@ html:not([data-scroll='0']) {
   justify-content: flex-start;
 }
 
-.browse_row_item_content_expanded {
-  
+.browse_row_item_container:hover {
+  z-index: 3;
 }
 
-.browse_row_item_container:hover {
+.browse_row_item_content:hover {
   transform: scale(1.35);
   -webkit-transition: transform 400ms ease-in-out;
-    -moz-transition: transform 400ms ease-in-out;
-    -o-transition: transform 400ms ease-in-out;
-    transition: transform 400ms ease-in-out;
-    z-index: 3;
-    border: 2.5px solid white;
+  -moz-transition: transform 400ms ease-in-out;
+  -o-transition: transform 400ms ease-in-out;
+  transition: transform 400ms ease-in-out;
+  border: 2.5px solid white;
+  box-sizing: border-box;
   position: relative;
 }
 
-.browse_row_item_container:hover .side_block {
-  display: block;
-}
+// .browse_row_item_container:hover .side_block {
+//   display: block;
+// }
 
 
 .browse_row_item_content .b {
@@ -699,6 +726,7 @@ html:not([data-scroll='0']) {
   position: relative;
   justify-content: center;
   align-content: center;
+  margin-top: 0.35vw;
 }
 
 .myList_status_dropdown {
@@ -737,7 +765,7 @@ html:not([data-scroll='0']) {
 .browse_row_item_container:hover .row_item_overlay {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 .browse_row_item_container:hover .myList_container {
   display: flex;
@@ -748,6 +776,7 @@ html:not([data-scroll='0']) {
 .row_item_play_button {
   display: flex;
   margin-bottom: 0.5vw;
+  margin-top: 4.7vw;
 }
 
 .row_item_play_button i{

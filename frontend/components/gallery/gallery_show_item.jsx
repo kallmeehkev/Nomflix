@@ -42,7 +42,7 @@ class GalleryShowItem extends React.Component {
             mediaUrl: ""
         }
         let video = this.props.video ? this.props.video : defaultVideo;
-        const style = {
+        const backgroundImage = {
             backgroundImage: 'url(' + video.thumbnailUrl + ')',
         };
         let addVideo = <button onClick={this.addToMyList}>
@@ -54,11 +54,10 @@ class GalleryShowItem extends React.Component {
                 <div className="myList_status_dropdown">REMOVE FROM MY LIST</div>
             </div></button>;
         let myListStatus = this.props.addedToMyList ? removeVideo : addVideo;
-
         return (
-            <div className={`browse_row_item_container ${this.props.active}`}>
+            <div className={`browse_row_item_container ${this.props.active}`} style={this.props.style}>
                 {/* <div className="side_block"></div> */}
-                <div onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} className={"browse_row_item_content " + (this.state.isMouseInside ? 'browse_row_transform' : '')} style={style}>
+                <div onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} className={"browse_row_item_content " + (this.state.isMouseInside ? 'browse_row_transform' : '')} style={backgroundImage}>
                         <div className="b">
                             <Link to={`/watch/${video.id}`}>
                                 <div className="browse_row_item_link">
