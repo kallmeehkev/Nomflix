@@ -12,7 +12,7 @@ const msp = (state, ownProps) => {
         profileId: state.ui.currentProfileId,
         addedToMyList: !!myListsHashByMediaId(state)[video.id],
         myList: myListsHashByMediaId(state)[video.id] || {},
-        style: style || "",
+        style: style || {},
     }
 }
 

@@ -68,6 +68,7 @@ class GalleryShowRow extends React.Component {
             let displayVideos;
             let rowTitle;
             let content;
+            let buttonRight;
             if (this.props.pageType === "genre") {
                 displayVideos = this.props.genreVideos.map((video, i) => {
                     let style = {
@@ -80,6 +81,7 @@ class GalleryShowRow extends React.Component {
                 })
                 rowTitle = this.props.genreShow ? <div>Trending Now for {this.props.genre.name}</div> : <div>{this.props.genre.name}</div>
                 content = this.props.genreVideos[this.state.videoIdx];
+                buttonRight = <button className="browse_row_click_right" onClick={this.handleArrowRight}><i className="fas fa-chevron-right"></i></button>
             } else if (this.props.pageType === "myList") {
                 displayVideos = this.props.myListVideos.map((video, i) => {
                     let activeItem = (this.state.open && this.state.videoIdx === i) ? "active" : ""
@@ -98,7 +100,7 @@ class GalleryShowRow extends React.Component {
                             <div className="browse_row_slider_wrapper">
                                 {displayVideos}
                             </div>
-                        <button className="browse_row_click_right" onClick={this.handleArrowRight}><i className="fas fa-chevron-right"></i></button>
+                        {buttonRight}
                         </div>
                     {/* </div> */}
                     <div className={this.state.open ? "show_row_item_content active" : "show_row_item_content"}>

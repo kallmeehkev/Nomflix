@@ -1495,7 +1495,7 @@ var msp = function msp(state, ownProps) {
     profileId: state.ui.currentProfileId,
     addedToMyList: !!Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["myListsHashByMediaId"])(state)[video.id],
     myList: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["myListsHashByMediaId"])(state)[video.id] || {},
-    style: style || ""
+    style: style || {}
   };
 };
 
@@ -1648,6 +1648,7 @@ function (_React$Component) {
         var displayVideos;
         var rowTitle;
         var content;
+        var buttonRight;
 
         if (this.props.pageType === "genre") {
           displayVideos = this.props.genreVideos.map(function (video, i) {
@@ -1669,6 +1670,12 @@ function (_React$Component) {
           });
           rowTitle = this.props.genreShow ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Trending Now for ", this.props.genre.name) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.genre.name);
           content = this.props.genreVideos[this.state.videoIdx];
+          buttonRight = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            className: "browse_row_click_right",
+            onClick: this.handleArrowRight
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "fas fa-chevron-right"
+          }));
         } else if (this.props.pageType === "myList") {
           displayVideos = this.props.myListVideos.map(function (video, i) {
             var activeItem = _this2.state.open && _this2.state.videoIdx === i ? "active" : "";
@@ -1696,12 +1703,7 @@ function (_React$Component) {
           style: width
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_row_slider_wrapper"
-        }, displayVideos), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          className: "browse_row_click_right",
-          onClick: this.handleArrowRight
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-          className: "fas fa-chevron-right"
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, displayVideos), buttonRight), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: this.state.open ? "show_row_item_content active" : "show_row_item_content"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row_item_content_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
           content: content,

@@ -530,7 +530,7 @@ html:not([data-scroll='0']) {
 .browse_row_container {
   display: flex;
   flex-direction: column;
-  padding: 0.5vw 0;
+  padding-bottom: 2.2vw;
   margin: 0;
   position: relative;
   z-index: 1;
@@ -543,6 +543,7 @@ html:not([data-scroll='0']) {
   bottom: 0;
   display: flex;
   flex-direction: column;
+  padding-bottom: 0.5vw;
 }
 
 .browse_row_title {
@@ -621,8 +622,6 @@ html:not([data-scroll='0']) {
 }
 
 .browse_row_item_container {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: content-box;
   z-index: 2;
   display: flex;
@@ -631,7 +630,7 @@ html:not([data-scroll='0']) {
   vertical-align: top;
   margin: 0 0.2vw;
   width: 18vw;
-  height: 14.67vw;
+  height: 10.125vw;
 }
 
 .side_block {
@@ -645,11 +644,12 @@ html:not([data-scroll='0']) {
   position: relative;
   width: 100%;
   height: 100%;
-  background-size: cover;
+  background-size: 102% 133%;
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  background-position: center;
 }
 
 .browse_row_item_container:hover {
@@ -657,7 +657,7 @@ html:not([data-scroll='0']) {
 }
 
 .browse_row_item_content:hover {
-  transform: scale(1.35);
+  transform: scale(1.5);
   -webkit-transition: transform 400ms ease-in-out;
   -moz-transition: transform 400ms ease-in-out;
   -o-transition: transform 400ms ease-in-out;
@@ -675,10 +675,10 @@ html:not([data-scroll='0']) {
 .browse_row_item_content .b {
   width: 100%;
   background-color: transparent;
-  height: 70%;
+  height: 75%;
   margin: 0;
   z-index: 2;
-  padding-bottom: 2vw;
+  /* padding-bottom: 2vw; */
 }
 
 .browse_row_item_link {
@@ -712,6 +712,7 @@ html:not([data-scroll='0']) {
   height: 2vw;
   width: 2vw;
   transition: font-size 1s;
+  top: 2.5vw;
 }
 
 .myList_container button {
@@ -726,7 +727,6 @@ html:not([data-scroll='0']) {
   position: relative;
   justify-content: center;
   align-content: center;
-  margin-top: 0.35vw;
 }
 
 .myList_status_dropdown {
@@ -759,15 +759,15 @@ html:not([data-scroll='0']) {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.2);
-  padding-bottom: 2.8vw;
+  padding-bottom: 16%;
 }
 
-.browse_row_item_container:hover .row_item_overlay {
+.browse_row_item_content:hover .row_item_overlay {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
-.browse_row_item_container:hover .myList_container {
+.browse_row_item_content:hover .myList_container {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -776,7 +776,7 @@ html:not([data-scroll='0']) {
 .row_item_play_button {
   display: flex;
   margin-bottom: 0.5vw;
-  margin-top: 4.7vw;
+  margin-top: 2.5vw;
 }
 
 .row_item_play_button i{
@@ -822,13 +822,13 @@ html:not([data-scroll='0']) {
 
 .row_item_drop_down {
   display: flex;
-  height: 30%;
+  height: 25%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.3));
   z-index: 2;
-  bottom: 0.1vw;
+  bottom: 0vw;
   position: absolute;
   width: 100%;
 }
