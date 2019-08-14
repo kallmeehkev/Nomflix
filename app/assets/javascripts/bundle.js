@@ -966,9 +966,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -991,9 +991,14 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(GalleryFPVideo).call(this, props)); // this.state = {video: null}
 
+    var videoId = _this.props.pageType === "genreShow" ? _this.props.randId : _this.props.browseVid.id;
     _this.state = {
-      randId: _this.props.randId
+      randId: _this.props.randId,
+      addedToMyList: !!_this.props.myListsHashByMediaId[videoId],
+      myList: _this.props.myListsHashByMediaId[videoId] || {}
     };
+    _this.addToMyList = _this.addToMyList.bind(_assertThisInitialized(_this));
+    _this.removeFromMyList = _this.removeFromMyList.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1004,12 +1009,28 @@ function (_React$Component) {
     }
   }, {
     key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      if (prevProps.genreId !== this.props.genreId && prevProps.pageType === 'genreShow') {
-        // let video = this.props.fetchRandVideo(this.props.genreId)
-        // this.setState({video: video})
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (prevProps.pageType === 'genreShow' && prevState.addedToMyList !== !!this.props.myListsHashByMediaId[this.state.randId]) {
         this.setState({
-          randId: this.props.randId
+          addedToMyList: !!this.props.myListsHashByMediaId[this.state.randId],
+          myList: this.props.myListsHashByMediaId[this.state.randId]
+        });
+      }
+
+      if (prevProps.genreId !== this.props.genreId && prevProps.pageType === 'genreShow') {
+        debugger;
+        this.setState({
+          randId: this.props.randId,
+          addedToMyList: !!this.props.myListsHashByMediaId[this.props.randId],
+          myList: this.props.myListsHashByMediaId[this.props.randId]
+        });
+      }
+
+      if (prevProps.pageType !== 'genreShow' && Object.values(prevProps.myListsHashByMediaId).length !== Object.values(this.props.myListsHashByMediaId).length) {
+        this.setState({
+          randId: this.props.randId,
+          addedToMyList: !!this.props.myListsHashByMediaId[this.props.browseVid.id],
+          myList: this.props.myListsHashByMediaId[this.props.browseVid.id]
         });
       }
     }
@@ -1019,11 +1040,58 @@ function (_React$Component) {
       this._isMounted = false;
     }
   }, {
+    key: "addToMyList",
+    value: function addToMyList() {
+      if (this.props.pageType === "genreShow") {
+        this.props.createMyList({
+          profile_id: this.props.profileId,
+          media_id: this.state.randId
+        });
+      } else {
+        this.props.createMyList({
+          profile_id: this.props.profileId,
+          media_id: this.props.browseVid.id
+        });
+      }
+    }
+  }, {
+    key: "removeFromMyList",
+    value: function removeFromMyList() {
+      if (this.props.pageType === "genreShow") {
+        this.props.deleteMyList(this.state.myList.id);
+      } else {
+        this.props.deleteMyList(this.props.myListsHashByMediaId[this.props.browseVid.id].id);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var randFPVideo = this.props.media[this.state.randId] || {
         id: 0
       };
+      var addVideo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "play_button_container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.addToMyList
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-plus"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button_text"
+      }, "MY LIST")));
+      var removeVideo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "play_button_container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.removeFromMyList
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-check"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button_text"
+      }, "MY LIST")));
+      var myListStatus = this.state.addedToMyList ? removeVideo : addVideo;
 
       if (randFPVideo.id !== 0 || this.props.browseVid.id !== 0) {
         var video = this.props.pageType === 'genreShow' ? randFPVideo : this.props.browseVid;
@@ -1074,7 +1142,9 @@ function (_React$Component) {
           className: "browse_side_section_controls"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_fp_video_title"
-        }, video.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        }, video.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_fp_video_buttons_container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "play_button_container"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "link"
@@ -1086,7 +1156,7 @@ function (_React$Component) {
           className: "fas fa-play"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "play_button_text"
-        }, "Play"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "Play")))), myListStatus), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_fp_video_description"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_animate_load__WEBPACK_IMPORTED_MODULE_3__["default"], {
           description: description
@@ -1117,6 +1187,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_medium_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/medium_actions */ "./frontend/actions/medium_actions.js");
 /* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
 /* harmony import */ var _gallery_fp_video__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gallery_fp_video */ "./frontend/components/gallery/gallery_fp_video.jsx");
+/* harmony import */ var _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/my_list_actions */ "./frontend/actions/my_list_actions.js");
+
+
 
 
 
@@ -1131,7 +1204,9 @@ var msp = function msp(state, ownProps) {
       id: 0
     },
     genre: state.entities.genres[ownProps.genreId],
-    media: state.entities.media
+    media: state.entities.media,
+    myListsHashByMediaId: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["myListsHashByMediaId"])(state),
+    profileId: state.ui.currentProfileId
   };
 };
 
@@ -1139,6 +1214,12 @@ var mdp = function mdp(dispatch) {
   return {
     fetchMedium: function fetchMedium(id) {
       return dispatch(Object(_actions_medium_actions__WEBPACK_IMPORTED_MODULE_1__["fetchMedium"])(id));
+    },
+    createMyList: function createMyList(myList) {
+      return dispatch(Object(_actions_my_list_actions__WEBPACK_IMPORTED_MODULE_4__["createMyList"])(myList));
+    },
+    deleteMyList: function deleteMyList(id) {
+      return dispatch(Object(_actions_my_list_actions__WEBPACK_IMPORTED_MODULE_4__["deleteMyList"])(id));
     }
   };
 };

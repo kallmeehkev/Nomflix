@@ -457,6 +457,11 @@ html:not([data-scroll='0']) {
   text-shadow: -1px -1px 3px white, 1px -1px 3px white, -1px 1px 3px white, 1px 1px 3px white;
 }
 
+.browse_fp_video_buttons_container {
+  display: flex;
+  justify-content: flex-start;
+}
+
 .play_button_container {
   height: 2.8vw;
   width: 10vw;
@@ -474,6 +479,7 @@ html:not([data-scroll='0']) {
     font-size: 1.2vw;
     font-weight: 600;
     cursor: pointer;
+    margin-right: 1vw;
 }
 
 .play_button_container .link {
