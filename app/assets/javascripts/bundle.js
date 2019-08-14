@@ -1297,14 +1297,487 @@ var mdp = function mdp(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/gallery/gallery_show_item.jsx":
+/*!***********************************************************!*\
+  !*** ./frontend/components/gallery/gallery_show_item.jsx ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var GalleryShowItem =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(GalleryShowItem, _React$Component);
+
+  function GalleryShowItem(props) {
+    var _this;
+
+    _classCallCheck(this, GalleryShowItem);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GalleryShowItem).call(this, props)); // this.state = {
+    //     isMouseInside: false
+    // }
+    // this.mouseEnter = this.mouseEnter.bind(this);
+    // this.mouseLeave = this.mouseLeave.bind(this);
+
+    _this.addToMyList = _this.addToMyList.bind(_assertThisInitialized(_this));
+    _this.removeFromMyList = _this.removeFromMyList.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(GalleryShowItem, [{
+    key: "addToMyList",
+    value: function addToMyList() {
+      this.props.createMyList({
+        profile_id: this.props.profileId,
+        media_id: this.props.video.id
+      });
+    }
+  }, {
+    key: "removeFromMyList",
+    value: function removeFromMyList() {
+      this.props.deleteMyList(this.props.myList.id);
+    } // mouseEnter() {
+    //     this.setState({ isMouseInside: true });
+    // }
+    // mouseLeave() {
+    //     this.setState({ isMouseInside: false });
+    // }
+
+  }, {
+    key: "render",
+    value: function render() {
+      var defaultVideo = {
+        id: 0,
+        description: "",
+        title: "",
+        duration: 0,
+        maturityRating: "PG",
+        thumbnailUrl: "",
+        mediaUrl: ""
+      };
+      var video = this.props.video ? this.props.video : defaultVideo;
+      var backgroundImage = this.props.hoverOff ? {
+        transform: 'scale(1.0)',
+        backgroundImage: 'url(' + video.thumbnailUrl + ')'
+      } : {
+        backgroundImage: 'url(' + video.thumbnailUrl + ')'
+      };
+      var addVideo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.addToMyList
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "myList_button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-plus-circle"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "myList_status_dropdown"
+      }, "ADD TO MY LIST")));
+      var removeVideo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.removeFromMyList
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "myList_button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far fa-check-circle"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "myList_status_dropdown"
+      }, "REMOVE FROM MY LIST")));
+      var myListStatus = this.props.addedToMyList ? removeVideo : addVideo;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "browse_row_item_container ".concat(this.props.active),
+        style: this.props.translate
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onMouseEnter: this.props.mouseEnter,
+        onMouseLeave: this.props.mouseLeave,
+        className: "browse_row_item_content",
+        style: backgroundImage
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "b"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/watch/".concat(video.id)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "browse_row_item_link"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "overlay_darken"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row_item_overlay"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row_item_play_button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far fa-play-circle"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row_item_overlay_title"
+      }, video.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row_item_overlay_details"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row_item_overlay_mat_rating"
+      }, video.maturityRating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row_item_overlay_duration"
+      }, Math.floor(video.duration / 60000), "m")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "myList_container"
+      }, myListStatus)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.props.handleOpen,
+        className: "row_item_drop_down"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-chevron-down"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row_item_border_arrow"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-caret-down"
+      })));
+    }
+  }]);
+
+  return GalleryShowItem;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (GalleryShowItem);
+
+/***/ }),
+
+/***/ "./frontend/components/gallery/gallery_show_item_container.js":
+/*!********************************************************************!*\
+  !*** ./frontend/components/gallery/gallery_show_item_container.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _gallery_show_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gallery_show_item */ "./frontend/components/gallery/gallery_show_item.jsx");
+/* harmony import */ var _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/my_list_actions */ "./frontend/actions/my_list_actions.js");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+
+
+
+
+
+var msp = function msp(state, ownProps) {
+  var video = ownProps.video,
+      handleOpen = ownProps.handleOpen,
+      active = ownProps.active,
+      translate = ownProps.translate,
+      hoverOff = ownProps.hoverOff,
+      mouseEnter = ownProps.mouseEnter,
+      mouseLeave = ownProps.mouseLeave;
+  return {
+    video: video,
+    handleOpen: handleOpen,
+    active: active,
+    profileId: state.ui.currentProfileId,
+    addedToMyList: !!Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["myListsHashByMediaId"])(state)[video.id],
+    myList: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["myListsHashByMediaId"])(state)[video.id] || {},
+    translate: translate || {},
+    hoverOff: hoverOff,
+    mouseEnter: mouseEnter,
+    mouseLeave: mouseLeave
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    createMyList: function createMyList(myList) {
+      return dispatch(Object(_actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__["createMyList"])(myList));
+    },
+    deleteMyList: function deleteMyList(id) {
+      return dispatch(Object(_actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__["deleteMyList"])(id));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_gallery_show_item__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
 /***/ "./frontend/components/gallery/gallery_show_row.jsx":
 /*!**********************************************************!*\
   !*** ./frontend/components/gallery/gallery_show_row.jsx ***!
   \**********************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/kevinla/Documents/Coding/a:A/Nomflix/frontend/components/gallery/gallery_show_row.jsx: Unexpected token (91:38)\n\n\u001b[0m \u001b[90m 89 | \u001b[39m                            }\u001b[0m\n\u001b[0m \u001b[90m 90 | \u001b[39m                        } \u001b[36melse\u001b[39m \u001b[36mif\u001b[39m ({\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 91 | \u001b[39m                            translate \u001b[33m=\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m                                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 92 | \u001b[39m                                transform\u001b[33m:\u001b[39m \u001b[32m'translateX('\u001b[39m \u001b[33m+\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mstate\u001b[33m.\u001b[39mrowIdx \u001b[33m*\u001b[39m \u001b[33m-\u001b[39m\u001b[35m92\u001b[39m \u001b[33m+\u001b[39m \u001b[32m'vw)'\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 93 | \u001b[39m                                transition\u001b[33m:\u001b[39m \u001b[32m'transform 0.4s'\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 94 | \u001b[39m                            }\u001b[0m\n    at Object.raise (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:6344:17)\n    at Object.unexpected (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:7659:16)\n    at Object.parseMaybeAssign (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:8242:12)\n    at Object.parseExpression (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:8148:23)\n    at Object.parseHeaderExpression (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:10057:22)\n    at Object.parseIfStatement (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:10141:22)\n    at Object.parseStatementContent (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:9833:21)\n    at Object.parseStatement (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:9788:17)\n    at Object.parseIfStatement (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:10143:51)\n    at Object.parseStatementContent (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:9833:21)\n    at Object.parseStatement (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:9788:17)\n    at Object.parseIfStatement (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:10143:51)\n    at Object.parseStatementContent (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:9833:21)\n    at Object.parseStatement (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:9788:17)\n    at Object.parseBlockOrModuleBlockBody (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:10364:25)\n    at Object.parseBlockBody (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:10351:10)\n    at Object.parseBlock (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:10335:10)\n    at Object.parseStatementContent (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:9864:21)\n    at Object.parseStatement (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:9788:17)\n    at Object.parseIfStatement (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:10142:28)\n    at Object.parseStatementContent (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:9833:21)\n    at Object.parseStatement (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:9788:17)\n    at Object.parseIfStatement (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:10143:51)\n    at Object.parseStatementContent (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:9833:21)\n    at Object.parseStatement (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:9788:17)\n    at Object.parseBlockOrModuleBlockBody (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:10364:25)\n    at Object.parseBlockBody (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:10351:10)\n    at Object.parseBlock (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:10335:10)\n    at Object.parseFunctionBody (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:9408:24)\n    at Object.parseArrowExpression (/Users/kevinla/Documents/Coding/a:A/Nomflix/node_modules/@babel/parser/lib/index.js:9349:10)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _gallery_show_item_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gallery_show_item_container */ "./frontend/components/gallery/gallery_show_item_container.js");
+/* harmony import */ var _gallery_show_row_item_content_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./gallery_show_row_item_content_container */ "./frontend/components/gallery/gallery_show_row_item_content_container.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var GalleryShowRow =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(GalleryShowRow, _React$Component);
+
+  function GalleryShowRow(props) {
+    var _this;
+
+    _classCallCheck(this, GalleryShowRow);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GalleryShowRow).call(this, props));
+    _this.state = {
+      videoIdx: 0,
+      open: false,
+      rowIdx: 0,
+      isMouseInside: false,
+      hoveredVideoIdx: 0
+    };
+    _this.mouseEnter = _this.mouseEnter.bind(_assertThisInitialized(_this));
+    _this.mouseLeave = _this.mouseLeave.bind(_assertThisInitialized(_this));
+    _this.handleOpen = _this.handleOpen.bind(_assertThisInitialized(_this));
+    _this.handleClose = _this.handleClose.bind(_assertThisInitialized(_this));
+    _this.handleArrowRight = _this.handleArrowRight.bind(_assertThisInitialized(_this));
+    _this.handleArrowLeft = _this.handleArrowLeft.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(GalleryShowRow, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      if (this.props.pageType === "genre") {
+        this.props.fetchGenre(this.props.genre.id);
+      }
+    }
+  }, {
+    key: "mouseEnter",
+    value: function mouseEnter(i) {
+      this.setState({
+        isMouseInside: true,
+        hoveredVideoIdx: i
+      });
+    }
+  }, {
+    key: "mouseLeave",
+    value: function mouseLeave() {
+      this.setState({
+        isMouseInside: false
+      });
+    }
+  }, {
+    key: "handleArrowRight",
+    value: function handleArrowRight() {
+      var genreVideos = this.props.genreVideos;
+
+      if (this.state.rowIdx === genreVideos.length / 5 - 1) {
+        this.setState({
+          rowIdx: 0
+        });
+      } else {
+        var currentRowIdx = this.state.rowIdx;
+        this.setState({
+          rowIdx: currentRowIdx + 1
+        });
+      }
+    }
+  }, {
+    key: "handleArrowLeft",
+    value: function handleArrowLeft() {
+      var genreVideos = this.props.genreVideos;
+
+      if (this.state.rowIdx === 0) {
+        this.setState({
+          rowIdx: genreVideos.length / 5 - 1
+        });
+      } else {
+        var currentRowIdx = this.state.rowIdx;
+        this.setState({
+          rowIdx: currentRowIdx - 1
+        });
+      }
+    }
+  }, {
+    key: "handleOpen",
+    value: function handleOpen(i) {
+      this.setState({
+        videoIdx: i,
+        open: true
+      });
+    }
+  }, {
+    key: "handleClose",
+    value: function handleClose() {
+      this.setState({
+        open: false
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var videosExist = !!this.props.genreVideos.length || !!this.props.myListVideos.length;
+
+      if (videosExist) {
+        var displayVideos, rowTitle, content, buttonRight, buttonLeft, translate;
+        var hoverOff = this.state.open;
+
+        if (this.props.pageType === "genre") {
+          displayVideos = this.props.genreVideos.map(function (video, i) {
+            var activeItem = _this2.state.open && _this2.state.videoIdx === i ? "active" : "";
+
+            if (activeItem === "active") {
+              translate = {
+                transform: 'translateX(' + _this2.state.rowIdx * -92 + 'vw)          translateY(-1vw)',
+                transition: 'transform 0.4s ease-in-out',
+                outline: '2px solid white'
+              };
+            } else if (activeItem !== "active" && !_this2.state.open && _this2.state.isMouseInside) {
+              if (i > _this2.state.hoveredVideoIdx) {
+                translate = {
+                  transform: 'translateX(' + (_this2.state.rowIdx * -92 + 4) + 'vw)',
+                  transition: 'transform 0.4s ease-in-out' // debugger
+
+                };
+              } else if (i < _this2.state.hoveredVideoIdx) {
+                translate = {
+                  transform: 'translateX(' + (_this2.state.rowIdx * -92 - 4) + 'vw)',
+                  transition: 'transform 0.4s ease-in-out'
+                };
+              } else {
+                translate = {
+                  transform: 'translateX(' + _this2.state.rowIdx * -92 + 'vw)',
+                  transition: 'transform 0.4s ease-in-out'
+                };
+              }
+            } // let translate = activeItem === "active" ? 
+            // {
+            //     transform: 'translateX(' + this.state.rowIdx * -92 + 'vw) translateY(-1vw)',
+            //     transition: 'transform 1s',
+            //     outline: '2px solid white'
+            // }
+            // :
+            else {
+                translate = {
+                  transform: 'translateX(' + _this2.state.rowIdx * -92 + 'vw)',
+                  transition: 'transform 0.8s ease-in-out'
+                };
+              }
+
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_item_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+              video: video,
+              key: i + _this2.props.genre.id * 10,
+              handleOpen: function handleOpen() {
+                return _this2.handleOpen(i);
+              },
+              active: activeItem,
+              translate: translate,
+              hoverOff: hoverOff,
+              mouseEnter: function mouseEnter() {
+                return _this2.mouseEnter(i);
+              },
+              mouseLeave: _this2.mouseLeave
+            });
+          });
+          rowTitle = this.props.genreShow ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Trending Now for ", this.props.genre.name) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.genre.name);
+          content = this.props.genreVideos[this.state.videoIdx];
+
+          if (this.state.rowIdx !== this.props.genreVideos.length / 5 - 1) {
+            buttonRight = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+              className: "browse_row_click_right",
+              onClick: this.handleArrowRight
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+              className: "fas fa-chevron-right"
+            }));
+          }
+
+          if (this.state.rowIdx !== 0) {
+            buttonLeft = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+              className: "browse_row_click_left",
+              onClick: this.handleArrowLeft
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+              className: "fas fa-chevron-left"
+            }));
+          }
+        } else if (this.props.pageType === "myList") {
+          displayVideos = this.props.myListVideos.map(function (video, i) {
+            var activeItem = _this2.state.open && _this2.state.videoIdx === i ? "active" : "";
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_item_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+              video: video,
+              key: i,
+              handleOpen: function handleOpen() {
+                return _this2.handleOpen(i);
+              },
+              active: activeItem,
+              hoverOff: hoverOff
+            });
+          });
+          content = this.props.myListVideos[this.state.videoIdx];
+        }
+
+        var width = {
+          width: "".concat(displayVideos.length * 18.4, "vw")
+        };
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_row_container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "browse_row_title"
+        }, rowTitle)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_row_slider",
+          style: width
+        }, buttonLeft, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_row_slider_wrapper"
+        }, displayVideos), buttonRight), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: this.state.open ? "show_row_item_content active" : "show_row_item_content"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row_item_content_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          content: content,
+          handleClose: this.handleClose
+        })));
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "GalleryShowRow");
+      }
+    }
+  }]);
+
+  return GalleryShowRow;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (GalleryShowRow);
 
 /***/ }),
 
@@ -1352,6 +1825,195 @@ var mdp = function mdp(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_gallery_show_row__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/gallery/gallery_show_row_item_content.jsx":
+/*!***********************************************************************!*\
+  !*** ./frontend/components/gallery/gallery_show_row_item_content.jsx ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var GalleryShowRowItemContent =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(GalleryShowRowItemContent, _React$Component);
+
+  function GalleryShowRowItemContent(props) {
+    var _this;
+
+    _classCallCheck(this, GalleryShowRowItemContent);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GalleryShowRowItemContent).call(this, props));
+    _this.addToMyList = _this.addToMyList.bind(_assertThisInitialized(_this));
+    _this.removeFromMyList = _this.removeFromMyList.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(GalleryShowRowItemContent, [{
+    key: "addToMyList",
+    value: function addToMyList() {
+      this.props.createMyList({
+        profile_id: this.props.profileId,
+        media_id: this.props.content.id
+      });
+    }
+  }, {
+    key: "removeFromMyList",
+    value: function removeFromMyList() {
+      this.props.deleteMyList(this.props.myList.id);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          content = _this$props.content,
+          handleClose = _this$props.handleClose;
+      var style = {
+        backgroundImage: 'url(' + content.thumbnailUrl + ')'
+      };
+      var addVideo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_myList_button_container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.addToMyList
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-plus"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button_text"
+      }, "MY LIST")));
+      var removeVideo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_myList_button_container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.removeFromMyList
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-check"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button_text"
+      }, "MY LIST")));
+      var myListStatus = this.props.addedToMyList ? removeVideo : addVideo;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_details"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_title"
+      }, content.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_MR_duration"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_MR"
+      }, content.maturityRating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_duration"
+      }, Math.floor(content.duration / 60000), "m")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_description"
+      }, content.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_buttons_container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button_container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/watch/".concat(content.id)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-play"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_play_button_text"
+      }, "PLAY"))), myListStatus)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_gradient"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_image",
+        style: style
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/watch/".concat(content.id)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "link"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: handleClose
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-times"
+      }))));
+    }
+  }]);
+
+  return GalleryShowRowItemContent;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (GalleryShowRowItemContent);
+
+/***/ }),
+
+/***/ "./frontend/components/gallery/gallery_show_row_item_content_container.js":
+/*!********************************************************************************!*\
+  !*** ./frontend/components/gallery/gallery_show_row_item_content_container.js ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _gallery_show_row_item_content__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gallery_show_row_item_content */ "./frontend/components/gallery/gallery_show_row_item_content.jsx");
+/* harmony import */ var _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/my_list_actions */ "./frontend/actions/my_list_actions.js");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+
+
+
+
+
+var msp = function msp(state, ownProps) {
+  var content = ownProps.content,
+      handleClose = ownProps.handleClose;
+  return {
+    content: content,
+    handleClose: handleClose,
+    addedToMyList: !!Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["myListsHashByMediaId"])(state)[content.id],
+    myList: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["myListsHashByMediaId"])(state)[content.id] || {},
+    profileId: state.ui.currentProfileId
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    createMyList: function createMyList(myList) {
+      return dispatch(Object(_actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__["createMyList"])(myList));
+    },
+    deleteMyList: function deleteMyList(id) {
+      return dispatch(Object(_actions_my_list_actions__WEBPACK_IMPORTED_MODULE_2__["deleteMyList"])(id));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_gallery_show_row_item_content__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 

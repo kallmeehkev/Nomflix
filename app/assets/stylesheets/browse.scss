@@ -608,7 +608,7 @@ html:not([data-scroll='0']) {
   display: none;
 }
 
-.browse_row_click_right:hover i {
+.browse_row_slider:hover .browse_row_click_right i {
   display: flex;
 }
 
@@ -633,7 +633,7 @@ html:not([data-scroll='0']) {
   display: none;
 }
 
-.browse_row_click_left:hover i {
+.browse_row_slider:hover .browse_row_click_left i {
   display: flex;
 }
 
@@ -675,10 +675,10 @@ html:not([data-scroll='0']) {
   justify-content: flex-start;
   background-position: center;
   transform: scale(1.0);
-    -webkit-transition: transform 400ms ease-in-out;
-  -moz-transition: transform 400ms ease-in-out;
-  -o-transition: transform 400ms ease-in-out;
-  transition: transform 400ms ease-in-out;
+    -webkit-transition: transform 600ms ease-in-out;
+  -moz-transition: transform 600ms ease-in-out;
+  -o-transition: transform 600ms ease-in-out;
+  transition: transform 600ms ease-in-out;
 }
 
 .browse_row_item_container:hover {

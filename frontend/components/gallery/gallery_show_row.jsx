@@ -71,7 +71,7 @@ class GalleryShowRow extends React.Component {
                     let activeItem = (this.state.open && this.state.videoIdx === i) ? "active" : ""
                     if (activeItem === "active") {
                             translate = { transform: 'translateX(' + this.state.rowIdx * -92 + 'vw)          translateY(-1vw)',
-                                transition: 'transform 0.4s',
+                                transition: 'transform 0.4s ease-in-out',
                                 outline: '2px solid white'
                             }
                     
@@ -87,10 +87,10 @@ class GalleryShowRow extends React.Component {
                                 transform: 'translateX(' + (this.state.rowIdx * -92 - 4) + 'vw)',
                                 transition: 'transform 0.4s ease-in-out',
                             }
-                        } else if ({
+                        } else {
                             translate = {
                                 transform: 'translateX(' + this.state.rowIdx * -92 + 'vw)',
-                                transition: 'transform 0.4s',
+                                transition: 'transform 0.4s ease-in-out',
                             }
                         }
                     }
@@ -104,7 +104,7 @@ class GalleryShowRow extends React.Component {
                     else {
                         translate = {
                             transform: 'translateX('+ this.state.rowIdx * -92 +'vw)',
-                            transition: 'transform 1s',
+                            transition: 'transform 0.8s ease-in-out',
                         }
                     }
                     return <GalleryShowItemContainer video={video} key={i + (this.props.genre.id * 10)} handleOpen={() => this.handleOpen(i)} active={activeItem} translate={translate} hoverOff={hoverOff} mouseEnter={() => this.mouseEnter(i)} mouseLeave={ this.mouseLeave}/>
