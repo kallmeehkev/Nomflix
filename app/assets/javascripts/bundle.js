@@ -1072,25 +1072,27 @@ function (_React$Component) {
       var addVideo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "play_button_container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.addToMyList
+        onClick: this.addToMyList,
+        className: "link"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "item_content_play_button"
+        className: "play_button"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-plus"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "item_content_play_button_text"
-      }, "MY LIST")));
+        className: "play_button_text"
+      }, "My List")));
       var removeVideo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "play_button_container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.removeFromMyList
+        onClick: this.removeFromMyList,
+        className: "link"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "item_content_play_button"
+        className: "play_button"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-check"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "item_content_play_button_text"
-      }, "MY LIST")));
+        className: "play_button_text"
+      }, "My List")));
       var myListStatus = this.state.addedToMyList ? removeVideo : addVideo;
 
       if (randFPVideo.id !== 0 || this.props.browseVid.id !== 0) {

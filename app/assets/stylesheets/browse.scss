@@ -484,6 +484,9 @@ html:not([data-scroll='0']) {
 
 .play_button_container .link {
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .play_button_container a {
   display: flex;

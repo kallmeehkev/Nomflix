@@ -70,10 +70,10 @@ class GalleryFPVideo extends React.Component {
 
     render() {
         const randFPVideo = this.props.media[this.state.randId] || {id: 0};
-        let addVideo = <div className="play_button_container"><button onClick={this.addToMyList}>
-            <div className="item_content_play_button"><i className="fas fa-plus"></i></div><div className="item_content_play_button_text">MY LIST</div></button></div>;
-        let removeVideo = <div className="play_button_container"><button onClick={this.removeFromMyList}>
-            <div className="item_content_play_button"><i className="fas fa-check"></i></div><div className="item_content_play_button_text">MY LIST
+        let addVideo = <div className="play_button_container"><button onClick={this.addToMyList} className="link">
+            <div className="play_button"><i className="fas fa-plus"></i></div><div className="play_button_text">My List</div></button></div>;
+        let removeVideo = <div className="play_button_container"><button onClick={this.removeFromMyList} className="link">
+            <div className="play_button"><i className="fas fa-check"></i></div><div className="play_button_text">My List
             </div></button></div>;
         let myListStatus = this.state.addedToMyList ? removeVideo : addVideo;
         if (randFPVideo.id !== 0 || this.props.browseVid.id !== 0) {
