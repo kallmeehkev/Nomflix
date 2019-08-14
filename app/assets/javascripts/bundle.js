@@ -1742,21 +1742,57 @@ function (_React$Component) {
           outline: '2px solid white'
         };
       } else if (activeItem !== "active" && !this.state.open && this.state.isMouseInside) {
-        if (i > this.state.hoveredVideoIdx) {
-          translate = {
-            transform: 'translateX(' + (this.state.rowIdx * -92 + 4) + 'vw)',
-            transition: 'transform 0.4s ease-in-out'
-          };
-        } else if (i < this.state.hoveredVideoIdx) {
-          translate = {
-            transform: 'translateX(' + (this.state.rowIdx * -92 - 4) + 'vw)',
-            transition: 'transform 0.4s ease-in-out'
-          };
+        if (this.state.hoveredVideoIdx % 5 === 0) {
+          if (i > this.state.hoveredVideoIdx) {
+            translate = {
+              transform: 'translateX(' + (this.state.rowIdx * -92 + 9.4) + 'vw)',
+              transition: 'transform 0.4s ease-in-out'
+            };
+          } else if (i < this.state.hoveredVideoIdx) {
+            translate = {
+              transform: 'translateX(' + this.state.rowIdx * -92 + 'vw)',
+              transition: 'transform 0.4s ease-in-out'
+            };
+          } else {
+            translate = {
+              transform: 'translateX(' + (this.state.rowIdx * -92 + 4.6) + 'vw)',
+              transition: 'transform 0.4s ease-in-out'
+            };
+          }
+        } else if (this.state.hoveredVideoIdx % 5 === 4) {
+          if (i > this.state.hoveredVideoIdx) {
+            translate = {
+              transform: 'translateX(' + this.state.rowIdx * -92 + 'vw)',
+              transition: 'transform 0.4s ease-in-out'
+            };
+          } else if (i < this.state.hoveredVideoIdx) {
+            translate = {
+              transform: 'translateX(' + (this.state.rowIdx * -92 - 9.4) + 'vw)',
+              transition: 'transform 0.4s ease-in-out'
+            };
+          } else {
+            translate = {
+              transform: 'translateX(' + (this.state.rowIdx * -92 - 4.6) + 'vw)',
+              transition: 'transform 0.4s ease-in-out'
+            };
+          }
         } else {
-          translate = {
-            transform: 'translateX(' + this.state.rowIdx * -92 + 'vw)',
-            transition: 'transform 0.4s ease-in-out'
-          };
+          if (i > this.state.hoveredVideoIdx) {
+            translate = {
+              transform: 'translateX(' + (this.state.rowIdx * -92 + 4.6) + 'vw)',
+              transition: 'transform 0.4s ease-in-out'
+            };
+          } else if (i < this.state.hoveredVideoIdx) {
+            translate = {
+              transform: 'translateX(' + (this.state.rowIdx * -92 - 4.6) + 'vw)',
+              transition: 'transform 0.4s ease-in-out'
+            };
+          } else {
+            translate = {
+              transform: 'translateX(' + this.state.rowIdx * -92 + 'vw)',
+              transition: 'transform 0.4s ease-in-out'
+            };
+          }
         }
       } else {
         translate = {
