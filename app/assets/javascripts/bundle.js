@@ -1670,10 +1670,18 @@ function (_React$Component) {
   }, {
     key: "mouseEnter",
     value: function mouseEnter(i) {
-      this.setState({
-        isMouseInside: true,
-        hoveredVideoIdx: i
-      });
+      if (this.state.open) {
+        this.setState({
+          isMouseInside: true,
+          hoveredVideoIdx: i,
+          videoIdx: i
+        });
+      } else {
+        this.setState({
+          isMouseInside: true,
+          hoveredVideoIdx: i
+        });
+      }
     }
   }, {
     key: "mouseLeave",

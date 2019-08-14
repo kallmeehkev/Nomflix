@@ -27,7 +27,11 @@ class GalleryShowRow extends React.Component {
     }
     
     mouseEnter(i) {
-        this.setState({ isMouseInside: true, hoveredVideoIdx: i });
+        if (this.state.open) {
+            this.setState({ isMouseInside: true, hoveredVideoIdx: i, videoIdx: i });
+        } else {
+            this.setState({ isMouseInside: true, hoveredVideoIdx: i });
+        }
     }
     mouseLeave() {
         this.setState({ isMouseInside: false });
