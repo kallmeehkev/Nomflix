@@ -68,63 +68,53 @@ class GalleryShowRow extends React.Component {
     handleTranslate(i) {
         let translate;
         let activeItem = (this.state.open && this.state.videoIdx === i) ? "active" : ""
+        let inactiveDropdownAndHovered = (activeItem !== "active" && !this.state.open && this.state.isMouseInside);
         if (activeItem === "active") {
             translate = {
                 transform: 'translateX(' + this.state.rowIdx * -92 + 'vw) translateY(-1vw)',
-                transition: 'transform 0.4s ease-in-out',
                 outline: '2px solid white'
             }
-
-        } else if (activeItem !== "active" && !this.state.open && this.state.isMouseInside) {
+        } else if (inactiveDropdownAndHovered) {
             if (this.state.hoveredVideoIdx % 5 === 0) {
                 if (i > this.state.hoveredVideoIdx) {
                     translate = {
                         transform: 'translateX(' + (this.state.rowIdx * -92 + 9.4) + 'vw)',
-                        transition: 'transform 0.4s ease-in-out',
                     }
                 } else if (i < this.state.hoveredVideoIdx) {
                     translate = {
                         transform: 'translateX(' + (this.state.rowIdx * -92) + 'vw)',
-                        transition: 'transform 0.4s ease-in-out',
                     }
                 } else {
                     translate = {
                         transform: 'translateX(' + (this.state.rowIdx * -92 + 4.6) + 'vw)',
-                        transition: 'transform 0.4s ease-in-out',
                     }
                 }
             } else if (this.state.hoveredVideoIdx % 5 === 4) {
                 if (i > this.state.hoveredVideoIdx) {
                     translate = {
                         transform: 'translateX(' + (this.state.rowIdx * -92) + 'vw)',
-                        transition: 'transform 0.4s ease-in-out',
                     }
                 } else if (i < this.state.hoveredVideoIdx) {
                     translate = {
                         transform: 'translateX(' + (this.state.rowIdx * -92 - 9.4) + 'vw)',
-                        transition: 'transform 0.4s ease-in-out',
                     }
                 } else {
                     translate = {
                         transform: 'translateX(' + (this.state.rowIdx * -92 - 4.6) + 'vw)',
-                        transition: 'transform 0.4s ease-in-out',
                     }
                 }
             } else {
                 if (i > this.state.hoveredVideoIdx) {
                     translate = {
                         transform: 'translateX(' + (this.state.rowIdx * -92 + 4.6) + 'vw)',
-                        transition: 'transform 0.4s ease-in-out',
                     }
                 } else if (i < this.state.hoveredVideoIdx) {
                     translate = {
                         transform: 'translateX(' + (this.state.rowIdx * -92 - 4.6) + 'vw)',
-                        transition: 'transform 0.4s ease-in-out',
                     }
                 } else {
                     translate = {
                         transform: 'translateX(' + this.state.rowIdx * -92 + 'vw)',
-                        transition: 'transform 0.4s ease-in-out',
                     }
                 }
             }
@@ -132,9 +122,10 @@ class GalleryShowRow extends React.Component {
         else {
             translate = {
                 transform: 'translateX(' + this.state.rowIdx * -92 + 'vw)',
-                transition: 'transform 0.8s ease-in-out',
             }
         }
+        translate.transition = (activeItem === "active" || inactiveDropdownAndHovered) ?
+        'transform 0.5s ease-in-out' : 'transform 0.8s ease-in-out';
         return translate;
     }
 
@@ -185,13 +176,10 @@ class GalleryShowRow extends React.Component {
                     </div>
                 </div>
             )
-            
         }
         else {
             return (
-                <div>
-                    GalleryShowRow
-                </div>
+                <div>GalleryShowRow</div>
             )
         }
     }

@@ -136,6 +136,13 @@ html:not([data-scroll='0']) {
     z-index: 5;
     }
 
+  .genre_tag_container {
+    background-color: rgba(0, 0, 0, 1);
+    width: 100%;
+    border-radius: 0;
+    transition: background-color width .25s;
+  }
+
 }
 
 .browse_logout {
@@ -396,22 +403,24 @@ html:not([data-scroll='0']) {
 
 .genre_tag_container {
     padding-left: 4%;
-    position: absolute;
-    top: 7vw;
+    position: sticky;
+    top: 6.5vw;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    background: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.2);
     padding-right: 1vw;
     border-radius: 3px;
+    height: 2.8vw;
+    z-index: 3;
 }
 
 .genre_tag_text {
   font-size: 1.6vw;
   opacity: 0.8;
   padding-right: 1vw;
-  padding-bottom: 0.5vh;
+  // padding-bottom: 0.5vh;
 }
 
 .genre_tag_arrow {
@@ -423,7 +432,7 @@ html:not([data-scroll='0']) {
   font-size: 2vw;
   font-weight: 600;
   padding-left: 1vw;
-  padding-bottom: 0.5vh;
+  // padding-bottom: 0.5vh;
 }
 
 .browse_fp_video_side_section {
@@ -684,10 +693,10 @@ html:not([data-scroll='0']) {
   justify-content: flex-start;
   background-position: center;
   transform: scale(1.0);
-    -webkit-transition: transform 600ms ease-in-out;
-  -moz-transition: transform 600ms ease-in-out;
-  -o-transition: transform 600ms ease-in-out;
-  transition: transform 600ms ease-in-out;
+    -webkit-transition: transform 800ms ease-in-out;
+  -moz-transition: transform 800ms ease-in-out;
+  -o-transition: transform 800ms ease-in-out;
+  transition: transform 800ms ease-in-out;
 }
 
 .browse_row_item_container:hover {
@@ -696,10 +705,10 @@ html:not([data-scroll='0']) {
 
 .browse_row_item_content:hover {
   transform: scale(1.5);
-  -webkit-transition: transform 400ms ease-in-out;
-  -moz-transition: transform 400ms ease-in-out;
-  -o-transition: transform 400ms ease-in-out;
-  transition: transform 400ms ease-in-out;
+  -webkit-transition: transform 500ms ease-in-out;
+  -moz-transition: transform 500ms ease-in-out;
+  -o-transition: transform 500ms ease-in-out;
+  transition: transform 500ms ease-in-out;
   outline: 2.5px solid white;
   box-sizing: border-box;
   position: relative;
