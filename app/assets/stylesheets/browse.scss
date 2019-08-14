@@ -674,6 +674,11 @@ html:not([data-scroll='0']) {
   flex-direction: column;
   justify-content: flex-start;
   background-position: center;
+  transform: scale(1.0);
+    -webkit-transition: transform 400ms ease-in-out;
+  -moz-transition: transform 400ms ease-in-out;
+  -o-transition: transform 400ms ease-in-out;
+  transition: transform 400ms ease-in-out;
 }
 
 .browse_row_item_container:hover {

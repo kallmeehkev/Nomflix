@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 class GalleryShowItem extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            isMouseInside: false
-        }
-        this.mouseEnter = this.mouseEnter.bind(this);
-        this.mouseLeave = this.mouseLeave.bind(this);
+        // this.state = {
+        //     isMouseInside: false
+        // }
+        // this.mouseEnter = this.mouseEnter.bind(this);
+        // this.mouseLeave = this.mouseLeave.bind(this);
         this.addToMyList = this.addToMyList.bind(this);
         this.removeFromMyList = this.removeFromMyList.bind(this);
     }
@@ -24,12 +24,12 @@ class GalleryShowItem extends React.Component {
         this.props.deleteMyList(this.props.myList.id);
     }
 
-    mouseEnter() {
-        this.setState({ isMouseInside: true });
-    }
-    mouseLeave() {
-        this.setState({ isMouseInside: false });
-    }
+    // mouseEnter() {
+    //     this.setState({ isMouseInside: true });
+    // }
+    // mouseLeave() {
+    //     this.setState({ isMouseInside: false });
+    // }
 
     render() {
         let defaultVideo = {
@@ -63,7 +63,7 @@ class GalleryShowItem extends React.Component {
         return (
             <div className={`browse_row_item_container ${this.props.active}`} style={this.props.translate}>
                 {/* <div className="side_block"></div> */}
-                <div onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} className={"browse_row_item_content " + (this.state.isMouseInside ? 'browse_row_transform' : '')} style={backgroundImage}>
+                <div onMouseEnter={this.props.mouseEnter} onMouseLeave={this.props.mouseLeave} className="browse_row_item_content" style={backgroundImage}>
                         <div className="b">
                             <Link to={`/watch/${video.id}`}>
                                 <div className="browse_row_item_link">
@@ -83,7 +83,7 @@ class GalleryShowItem extends React.Component {
                                 {myListStatus}
                             </div>
                         </div>
-                        <button onClick={this.props.handleOpen}className="row_item_drop_down"><i className="fas fa-chevron-down"></i></button>
+                        <button onClick={this.props.handleOpen} className="row_item_drop_down"><i className="fas fa-chevron-down"></i></button>
                 </div>
                 {/* <div className="side_block"></div> */}
                 <div className="row_item_border_arrow"><i className="fas fa-caret-down"></i></div>

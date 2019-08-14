@@ -4,7 +4,7 @@ import { createMyList, deleteMyList } from '../../actions/my_list_actions';
 import { myListsHashByMediaId } from '../../reducers/selectors';
 
 const msp = (state, ownProps) => {
-    let { video, handleOpen, active, translate, hoverOff } = ownProps;
+    let { video, handleOpen, active, translate, hoverOff, mouseEnter, mouseLeave } = ownProps;
     return {
         video: video,
         handleOpen: handleOpen,
@@ -14,6 +14,8 @@ const msp = (state, ownProps) => {
         myList: myListsHashByMediaId(state)[video.id] || {},
         translate: translate || {},
         hoverOff: hoverOff,
+        mouseEnter: mouseEnter,
+        mouseLeave: mouseLeave,
     }
 }
 

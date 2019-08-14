@@ -5,16 +5,15 @@ import GalleryShowRowItemContentContainer from './gallery_show_row_item_content_
 class GalleryShowRow extends React.Component {
     constructor(props) {
         super(props)
-        // this.state = {
-        //     isMouseInside: false
-        // }
-        // this.mouseEnter = this.mouseEnter.bind(this)
-        // this.mouseLeave = this.mouseLeave.bind(this)
         this.state = {
             videoIdx: 0,
             open: false,
             rowIdx: 0,
+            isMouseInside: false,
+            hoveredVideoIdx: 0,
         }
+        this.mouseEnter = this.mouseEnter.bind(this)
+        this.mouseLeave = this.mouseLeave.bind(this)
         this.handleOpen = this.handleOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleArrowRight = this.handleArrowRight.bind(this);
@@ -27,12 +26,12 @@ class GalleryShowRow extends React.Component {
         }
     }
     
-    // mouseEnter() {
-    //     this.setState({ isMouseInside: true });
-    // }
-    // mouseLeave() {
-    //     this.setState({ isMouseInside: false });
-    // }
+    mouseEnter(i) {
+        this.setState({ isMouseInside: true, hoveredVideoIdx: i });
+    }
+    mouseLeave() {
+        this.setState({ isMouseInside: false });
+    }
 
     handleArrowRight() {
         let {genreVideos} = this.props;
@@ -65,23 +64,50 @@ class GalleryShowRow extends React.Component {
     render() {
         let videosExist = !!this.props.genreVideos.length || !!this.props.myListVideos.length;
         if (videosExist) {
-            let displayVideos, rowTitle, content, buttonRight, buttonLeft;
+            let displayVideos, rowTitle, content, buttonRight, buttonLeft, translate;
             let hoverOff = this.state.open;
             if (this.props.pageType === "genre") {
                 displayVideos = this.props.genreVideos.map((video, i) => {
                     let activeItem = (this.state.open && this.state.videoIdx === i) ? "active" : ""
-                    let translate = activeItem === "active" ? 
-                        {
-                            transform: 'translateX(' + this.state.rowIdx * -92 + 'vw) translateY(-1vw)',
-                            transition: 'transform 1s',
-                            outline: '2px solid white'
+                    if (activeItem === "active") {
+                            translate = { transform: 'translateX(' + this.state.rowIdx * -92 + 'vw)          translateY(-1vw)',
+                                transition: 'transform 0.4s',
+                                outline: '2px solid white'
+                            }
+                    
+                    } else if (activeItem !== "active" && !this.state.open && this.state.isMouseInside) {
+                        if (i > this.state.hoveredVideoIdx) {
+                            translate = {
+                                transform: 'translateX(' + (this.state.rowIdx * -92 + 4) + 'vw)',
+                                transition: 'transform 0.4s ease-in-out',
+                            }
+                            // debugger
+                        } else if (i < this.state.hoveredVideoIdx) {
+                            translate = {
+                                transform: 'translateX(' + (this.state.rowIdx * -92 - 4) + 'vw)',
+                                transition: 'transform 0.4s ease-in-out',
+                            }
+                        } else if ({
+                            translate = {
+                                transform: 'translateX(' + this.state.rowIdx * -92 + 'vw)',
+                                transition: 'transform 0.4s',
+                            }
                         }
-                    :
-                        {
+                    }
+                    // let translate = activeItem === "active" ? 
+                        // {
+                        //     transform: 'translateX(' + this.state.rowIdx * -92 + 'vw) translateY(-1vw)',
+                        //     transition: 'transform 1s',
+                        //     outline: '2px solid white'
+                        // }
+                    // :
+                    else {
+                        translate = {
                             transform: 'translateX('+ this.state.rowIdx * -92 +'vw)',
                             transition: 'transform 1s',
                         }
-                    return <GalleryShowItemContainer video={video} key={i + (this.props.genre.id * 10)} handleOpen={() => this.handleOpen(i)} active={activeItem} translate={translate} hoverOff={hoverOff}/>
+                    }
+                    return <GalleryShowItemContainer video={video} key={i + (this.props.genre.id * 10)} handleOpen={() => this.handleOpen(i)} active={activeItem} translate={translate} hoverOff={hoverOff} mouseEnter={() => this.mouseEnter(i)} mouseLeave={ this.mouseLeave}/>
                 })
                 rowTitle = this.props.genreShow ? <div>Trending Now for {this.props.genre.name}</div> : <div>{this.props.genre.name}</div>
                 content = this.props.genreVideos[this.state.videoIdx];
