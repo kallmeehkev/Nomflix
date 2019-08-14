@@ -612,6 +612,30 @@ html:not([data-scroll='0']) {
   display: flex;
 }
 
+.browse_row_click_left {
+  position: absolute;
+  height: 10.125vw;
+  width: 4%;
+  left: 0;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,0);
+}
+
+.browse_row_click_left:hover {
+  background-color: rgba(0,0,0,0.4);
+}
+
+.browse_row_click_left i {
+  font-size: 4vw;
+  display: none;
+}
+
+.browse_row_click_left:hover i {
+  display: flex;
+}
 
 .browse_row_slider_wrapper {
   display: flex;

@@ -1650,10 +1650,8 @@ function (_React$Component) {
       var videosExist = !!this.props.genreVideos.length || !!this.props.myListVideos.length;
 
       if (videosExist) {
-        var displayVideos;
-        var rowTitle;
-        var content;
-        var buttonRight;
+        var displayVideos, rowTitle, content, buttonRight, buttonLeft;
+        var hoverOff = this.state.open;
 
         if (this.props.pageType === "genre") {
           displayVideos = this.props.genreVideos.map(function (video, i) {
@@ -1666,7 +1664,6 @@ function (_React$Component) {
               transform: 'translateX(' + _this2.state.rowIdx * -92 + 'vw)',
               transition: 'transform 1s'
             };
-            var hoverOff = _this2.state.open;
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_item_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
               video: video,
               key: i + _this2.props.genre.id * 10,
@@ -1680,12 +1677,24 @@ function (_React$Component) {
           });
           rowTitle = this.props.genreShow ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Trending Now for ", this.props.genre.name) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.genre.name);
           content = this.props.genreVideos[this.state.videoIdx];
-          buttonRight = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-            className: "browse_row_click_right",
-            onClick: this.handleArrowRight
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-            className: "fas fa-chevron-right"
-          }));
+
+          if (this.state.rowIdx !== this.props.genreVideos.length / 5 - 1) {
+            buttonRight = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+              className: "browse_row_click_right",
+              onClick: this.handleArrowRight
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+              className: "fas fa-chevron-right"
+            }));
+          }
+
+          if (this.state.rowIdx !== 0) {
+            buttonLeft = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+              className: "browse_row_click_left",
+              onClick: this.handleArrowLeft
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+              className: "fas fa-chevron-left"
+            }));
+          }
         } else if (this.props.pageType === "myList") {
           displayVideos = this.props.myListVideos.map(function (video, i) {
             var activeItem = _this2.state.open && _this2.state.videoIdx === i ? "active" : "";
@@ -1695,7 +1704,8 @@ function (_React$Component) {
               handleOpen: function handleOpen() {
                 return _this2.handleOpen(i);
               },
-              active: activeItem
+              active: activeItem,
+              hoverOff: hoverOff
             });
           });
           content = this.props.myListVideos[this.state.videoIdx];
@@ -1711,7 +1721,7 @@ function (_React$Component) {
         }, rowTitle)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_row_slider",
           style: width
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, buttonLeft, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_row_slider_wrapper"
         }, displayVideos), buttonRight), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: this.state.open ? "show_row_item_content active" : "show_row_item_content"

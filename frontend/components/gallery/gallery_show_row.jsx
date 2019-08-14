@@ -65,10 +65,8 @@ class GalleryShowRow extends React.Component {
     render() {
         let videosExist = !!this.props.genreVideos.length || !!this.props.myListVideos.length;
         if (videosExist) {
-            let displayVideos;
-            let rowTitle;
-            let content;
-            let buttonRight;
+            let displayVideos, rowTitle, content, buttonRight, buttonLeft;
+            let hoverOff = this.state.open;
             if (this.props.pageType === "genre") {
                 displayVideos = this.props.genreVideos.map((video, i) => {
                     let activeItem = (this.state.open && this.state.videoIdx === i) ? "active" : ""
@@ -83,16 +81,20 @@ class GalleryShowRow extends React.Component {
                             transform: 'translateX('+ this.state.rowIdx * -92 +'vw)',
                             transition: 'transform 1s',
                         }
-                    let hoverOff = this.state.open;
                     return <GalleryShowItemContainer video={video} key={i + (this.props.genre.id * 10)} handleOpen={() => this.handleOpen(i)} active={activeItem} translate={translate} hoverOff={hoverOff}/>
                 })
                 rowTitle = this.props.genreShow ? <div>Trending Now for {this.props.genre.name}</div> : <div>{this.props.genre.name}</div>
                 content = this.props.genreVideos[this.state.videoIdx];
-                buttonRight = <button className="browse_row_click_right" onClick={this.handleArrowRight}><i className="fas fa-chevron-right"></i></button>
+                if (this.state.rowIdx !== this.props.genreVideos.length / 5 - 1) {
+                    buttonRight = <button className="browse_row_click_right" onClick={this.handleArrowRight}><i className="fas fa-chevron-right"></i></button>
+                }
+                if (this.state.rowIdx !== 0) {
+                    buttonLeft = <button className="browse_row_click_left" onClick={this.handleArrowLeft}><i className="fas fa-chevron-left"></i></button>
+                }
             } else if (this.props.pageType === "myList") {
                 displayVideos = this.props.myListVideos.map((video, i) => {
                     let activeItem = (this.state.open && this.state.videoIdx === i) ? "active" : ""
-                    return <GalleryShowItemContainer video={video} key={i} handleOpen={() => this.handleOpen(i)} active={activeItem} />
+                    return <GalleryShowItemContainer video={video} key={i} handleOpen={() => this.handleOpen(i)} active={activeItem} hoverOff={hoverOff}/>
                 })
                 content = this.props.myListVideos[this.state.videoIdx];
             }
@@ -104,10 +106,11 @@ class GalleryShowRow extends React.Component {
                     <h2><span className="browse_row_title">{rowTitle}</span></h2>
                     {/* <div className="browse_row_content"> */}
                         <div className="browse_row_slider" style={width}>
+                            {buttonLeft}
                             <div className="browse_row_slider_wrapper">
                                 {displayVideos}
                             </div>
-                        {buttonRight}
+                            {buttonRight}
                         </div>
                     {/* </div> */}
                     <div className={this.state.open ? "show_row_item_content active" : "show_row_item_content"}>
