@@ -61,6 +61,43 @@ class GalleryShowRow extends React.Component {
         this.setState({open: false})
     }
 
+    handleTranslate(i) {
+        let translate;
+        let activeItem = (this.state.open && this.state.videoIdx === i) ? "active" : ""
+        if (activeItem === "active") {
+            translate = {
+                transform: 'translateX(' + this.state.rowIdx * -92 + 'vw) translateY(-1vw)',
+                transition: 'transform 0.4s ease-in-out',
+                outline: '2px solid white'
+            }
+
+        } else if (activeItem !== "active" && !this.state.open && this.state.isMouseInside) {
+            if (i > this.state.hoveredVideoIdx) {
+                translate = {
+                    transform: 'translateX(' + (this.state.rowIdx * -92 + 4) + 'vw)',
+                    transition: 'transform 0.4s ease-in-out',
+                }
+            } else if (i < this.state.hoveredVideoIdx) {
+                translate = {
+                    transform: 'translateX(' + (this.state.rowIdx * -92 - 4) + 'vw)',
+                    transition: 'transform 0.4s ease-in-out',
+                }
+            } else {
+                translate = {
+                    transform: 'translateX(' + this.state.rowIdx * -92 + 'vw)',
+                    transition: 'transform 0.4s ease-in-out',
+                }
+            }
+        }
+        else {
+            translate = {
+                transform: 'translateX(' + this.state.rowIdx * -92 + 'vw)',
+                transition: 'transform 0.8s ease-in-out',
+            }
+        }
+        return translate;
+    }
+
     render() {
         let videosExist = !!this.props.genreVideos.length || !!this.props.myListVideos.length;
         if (videosExist) {
@@ -69,44 +106,7 @@ class GalleryShowRow extends React.Component {
             if (this.props.pageType === "genre") {
                 displayVideos = this.props.genreVideos.map((video, i) => {
                     let activeItem = (this.state.open && this.state.videoIdx === i) ? "active" : ""
-                    if (activeItem === "active") {
-                            translate = { transform: 'translateX(' + this.state.rowIdx * -92 + 'vw)          translateY(-1vw)',
-                                transition: 'transform 0.4s ease-in-out',
-                                outline: '2px solid white'
-                            }
-                    
-                    } else if (activeItem !== "active" && !this.state.open && this.state.isMouseInside) {
-                        if (i > this.state.hoveredVideoIdx) {
-                            translate = {
-                                transform: 'translateX(' + (this.state.rowIdx * -92 + 4) + 'vw)',
-                                transition: 'transform 0.4s ease-in-out',
-                            }
-                            // debugger
-                        } else if (i < this.state.hoveredVideoIdx) {
-                            translate = {
-                                transform: 'translateX(' + (this.state.rowIdx * -92 - 4) + 'vw)',
-                                transition: 'transform 0.4s ease-in-out',
-                            }
-                        } else {
-                            translate = {
-                                transform: 'translateX(' + this.state.rowIdx * -92 + 'vw)',
-                                transition: 'transform 0.4s ease-in-out',
-                            }
-                        }
-                    }
-                    // let translate = activeItem === "active" ? 
-                        // {
-                        //     transform: 'translateX(' + this.state.rowIdx * -92 + 'vw) translateY(-1vw)',
-                        //     transition: 'transform 1s',
-                        //     outline: '2px solid white'
-                        // }
-                    // :
-                    else {
-                        translate = {
-                            transform: 'translateX('+ this.state.rowIdx * -92 +'vw)',
-                            transition: 'transform 0.8s ease-in-out',
-                        }
-                    }
+                    translate = this.handleTranslate(i);
                     return <GalleryShowItemContainer video={video} key={i + (this.props.genre.id * 10)} handleOpen={() => this.handleOpen(i)} active={activeItem} translate={translate} hoverOff={hoverOff} mouseEnter={() => this.mouseEnter(i)} mouseLeave={ this.mouseLeave}/>
                 })
                 rowTitle = this.props.genreShow ? <div>Trending Now for {this.props.genre.name}</div> : <div>{this.props.genre.name}</div>
@@ -119,8 +119,9 @@ class GalleryShowRow extends React.Component {
                 }
             } else if (this.props.pageType === "myList") {
                 displayVideos = this.props.myListVideos.map((video, i) => {
-                    let activeItem = (this.state.open && this.state.videoIdx === i) ? "active" : ""
-                    return <GalleryShowItemContainer video={video} key={i} handleOpen={() => this.handleOpen(i)} active={activeItem} hoverOff={hoverOff}/>
+                    let activeItem = (this.state.open && this.state.videoIdx === i) ? "active" : "";
+                    translate = this.handleTranslate(i)
+                    return <GalleryShowItemContainer video={video} key={i} handleOpen={() => this.handleOpen(i)} active={activeItem} translate={translate} hoverOff={hoverOff} mouseEnter={() => this.mouseEnter(i)} mouseLeave={this.mouseLeave} />
                 })
                 content = this.props.myListVideos[this.state.videoIdx];
             }

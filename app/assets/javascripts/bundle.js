@@ -1647,6 +1647,44 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "handleTranslate",
+    value: function handleTranslate(i) {
+      var translate;
+      var activeItem = this.state.open && this.state.videoIdx === i ? "active" : "";
+
+      if (activeItem === "active") {
+        translate = {
+          transform: 'translateX(' + this.state.rowIdx * -92 + 'vw) translateY(-1vw)',
+          transition: 'transform 0.4s ease-in-out',
+          outline: '2px solid white'
+        };
+      } else if (activeItem !== "active" && !this.state.open && this.state.isMouseInside) {
+        if (i > this.state.hoveredVideoIdx) {
+          translate = {
+            transform: 'translateX(' + (this.state.rowIdx * -92 + 4) + 'vw)',
+            transition: 'transform 0.4s ease-in-out'
+          };
+        } else if (i < this.state.hoveredVideoIdx) {
+          translate = {
+            transform: 'translateX(' + (this.state.rowIdx * -92 - 4) + 'vw)',
+            transition: 'transform 0.4s ease-in-out'
+          };
+        } else {
+          translate = {
+            transform: 'translateX(' + this.state.rowIdx * -92 + 'vw)',
+            transition: 'transform 0.4s ease-in-out'
+          };
+        }
+      } else {
+        translate = {
+          transform: 'translateX(' + this.state.rowIdx * -92 + 'vw)',
+          transition: 'transform 0.8s ease-in-out'
+        };
+      }
+
+      return translate;
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -1660,45 +1698,7 @@ function (_React$Component) {
         if (this.props.pageType === "genre") {
           displayVideos = this.props.genreVideos.map(function (video, i) {
             var activeItem = _this2.state.open && _this2.state.videoIdx === i ? "active" : "";
-
-            if (activeItem === "active") {
-              translate = {
-                transform: 'translateX(' + _this2.state.rowIdx * -92 + 'vw)          translateY(-1vw)',
-                transition: 'transform 0.4s ease-in-out',
-                outline: '2px solid white'
-              };
-            } else if (activeItem !== "active" && !_this2.state.open && _this2.state.isMouseInside) {
-              if (i > _this2.state.hoveredVideoIdx) {
-                translate = {
-                  transform: 'translateX(' + (_this2.state.rowIdx * -92 + 4) + 'vw)',
-                  transition: 'transform 0.4s ease-in-out' // debugger
-
-                };
-              } else if (i < _this2.state.hoveredVideoIdx) {
-                translate = {
-                  transform: 'translateX(' + (_this2.state.rowIdx * -92 - 4) + 'vw)',
-                  transition: 'transform 0.4s ease-in-out'
-                };
-              } else {
-                translate = {
-                  transform: 'translateX(' + _this2.state.rowIdx * -92 + 'vw)',
-                  transition: 'transform 0.4s ease-in-out'
-                };
-              }
-            } // let translate = activeItem === "active" ? 
-            // {
-            //     transform: 'translateX(' + this.state.rowIdx * -92 + 'vw) translateY(-1vw)',
-            //     transition: 'transform 1s',
-            //     outline: '2px solid white'
-            // }
-            // :
-            else {
-                translate = {
-                  transform: 'translateX(' + _this2.state.rowIdx * -92 + 'vw)',
-                  transition: 'transform 0.8s ease-in-out'
-                };
-              }
-
+            translate = _this2.handleTranslate(i);
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_item_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
               video: video,
               key: i + _this2.props.genre.id * 10,
@@ -1737,6 +1737,7 @@ function (_React$Component) {
         } else if (this.props.pageType === "myList") {
           displayVideos = this.props.myListVideos.map(function (video, i) {
             var activeItem = _this2.state.open && _this2.state.videoIdx === i ? "active" : "";
+            translate = _this2.handleTranslate(i);
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_item_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
               video: video,
               key: i,
@@ -1744,7 +1745,12 @@ function (_React$Component) {
                 return _this2.handleOpen(i);
               },
               active: activeItem,
-              hoverOff: hoverOff
+              translate: translate,
+              hoverOff: hoverOff,
+              mouseEnter: function mouseEnter() {
+                return _this2.mouseEnter(i);
+              },
+              mouseLeave: _this2.mouseLeave
             });
           });
           content = this.props.myListVideos[this.state.videoIdx];
