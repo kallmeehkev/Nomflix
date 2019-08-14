@@ -132,7 +132,7 @@ html:not([data-scroll='0']) {
 		top: 0;
 		background-color: black;
     box-shadow: 0 0 .5em rgba(0, 0, 0, .5);
-    transition: background-color .25s;
+    transition: background-color 0.5s;
     z-index: 5;
     }
 
@@ -140,7 +140,7 @@ html:not([data-scroll='0']) {
     background-color: rgba(0, 0, 0, 1);
     width: 100%;
     border-radius: 0;
-    transition: background-color width .25s;
+    transition: background-color 0.6s;
   }
 
 }
@@ -404,7 +404,7 @@ html:not([data-scroll='0']) {
 .genre_tag_container {
     padding-left: 4%;
     position: sticky;
-    top: 6.5vw;
+    top: 55px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
