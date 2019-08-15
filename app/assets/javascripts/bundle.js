@@ -2209,9 +2209,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -2235,8 +2235,11 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(GenreShow).call(this, props));
     _this.state = {
-      genreId: _this.props.match.params.genreId
+      genreId: _this.props.match.params.genreId,
+      activeRowIdx: 0,
+      open: false
     };
+    _this.handleActiveRow = _this.handleActiveRow.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2268,14 +2271,29 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "handleActiveRow",
+    value: function handleActiveRow(i) {
+      this.setState({
+        activeRowIdx: i,
+        open: true
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       if (this.props.genres[12] && this.props.mediaGenres[140]) {
+        var rowActive = this.state.open && 0 === this.state.activeRowIdx;
         var showOneRow = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
           genre: this.props.genre,
           key: 1,
           genreShow: true,
-          pageType: "genre"
+          pageType: "genre",
+          rowActive: rowActive,
+          handleActiveRow: function handleActiveRow() {
+            return _this2.handleActiveRow(0);
+          }
         });
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_body"

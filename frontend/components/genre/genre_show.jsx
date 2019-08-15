@@ -6,7 +6,12 @@ import GalleryFPVideoContainer from '../gallery/gallery_fp_video_container';
 class GenreShow extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {genreId: this.props.match.params.genreId}
+        this.state = {
+            genreId: this.props.match.params.genreId,
+            activeRowIdx: 0,
+            open: false,
+        }
+        this.handleActiveRow = this.handleActiveRow.bind(this);
     }
     componentDidMount() {
         let videosFetched = !!this.props.genreVideos[0]
@@ -27,9 +32,15 @@ class GenreShow extends React.Component {
         }
     }
 
+    handleActiveRow(i) {
+        this.setState({ activeRowIdx: i, open: true })
+    }
+
     render() {
         if (this.props.genres[12] && this.props.mediaGenres[140]) {
-            let showOneRow = <GalleryShowRowContainer genre={this.props.genre} key={1} genreShow={true} pageType="genre"/>
+            let rowActive = (this.state.open && (0 === this.state.activeRowIdx));
+            let showOneRow = <GalleryShowRowContainer genre={this.props.genre} key={1} genreShow={true} pageType="genre"
+                rowActive={rowActive} handleActiveRow={() => this.handleActiveRow(0)}/>
             return (
                 <div className="browse_body">
                     <GalleryNavBarContainer path={this.props.match.path} />
