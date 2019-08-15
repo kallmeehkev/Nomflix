@@ -17,7 +17,7 @@ class SessionForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         const user = Object.assign({}, this.state);
-        this.props.processForm(user).then(() => this.props.setCurrentProfile(2));
+        this.props.processForm(user).then(() => this.props.setCurrentProfile(1));
     }
 
     update(field) {
@@ -26,7 +26,7 @@ class SessionForm extends React.Component {
 
     demoLogin() {
         const demoUser = { email: "user@email.com", password: "password" }
-        this.props.login(demoUser).then(() => this.props.setCurrentProfile(2))//.then(() => this.props.history.push('/browse'));
+        this.props.login(demoUser).then(() => this.props.setCurrentProfile(1))//.then(() => this.props.history.push('/browse'));
     }
 
     componentWillUnmount() {

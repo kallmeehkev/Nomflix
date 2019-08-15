@@ -101,11 +101,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_root_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/root.jsx */ "./frontend/components/root.jsx");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
-/* harmony import */ var _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/my_list_actions */ "./frontend/actions/my_list_actions.js");
-/* harmony import */ var _util_profile_api_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./util/profile_api_util */ "./frontend/util/profile_api_util.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
 
 
 
@@ -140,11 +136,6 @@ document.addEventListener('DOMContentLoaded', function () {
     store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])();
   }
 
-  window.getState = store.getState;
-  window.dispatch = store.dispatch;
-  window.createMyList = _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_4__["createMyList"];
-  window.deleteMyList = _actions_my_list_actions__WEBPACK_IMPORTED_MODULE_4__["deleteMyList"];
-  window.fetchProfile = _util_profile_api_util__WEBPACK_IMPORTED_MODULE_5__["fetchProfile"];
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
     store: store
   }), root);
@@ -2579,7 +2570,7 @@ var msp = function msp(_ref) {
   return {
     currentUser: entities.users[session.id],
     navType: 'gallery',
-    currentProfileId: ui.currentProfileId || 2,
+    currentProfileId: ui.currentProfileId || 1,
     fetchedProfile: entities.profiles[ui.currentProfileId] || {},
     genres: Object.values(entities.genres)
   };
@@ -3137,7 +3128,7 @@ function (_React$Component) {
       e.preventDefault();
       var user = Object.assign({}, this.state);
       this.props.processForm(user).then(function () {
-        return _this2.props.setCurrentProfile(2);
+        return _this2.props.setCurrentProfile(1);
       });
     }
   }, {
@@ -3159,7 +3150,7 @@ function (_React$Component) {
         password: "password"
       };
       this.props.login(demoUser).then(function () {
-        return _this4.props.setCurrentProfile(2);
+        return _this4.props.setCurrentProfile(1);
       }); //.then(() => this.props.history.push('/browse'));
     }
   }, {
