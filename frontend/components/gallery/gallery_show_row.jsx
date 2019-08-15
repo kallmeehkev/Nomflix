@@ -26,6 +26,12 @@ class GalleryShowRow extends React.Component {
         }
     }
     
+    componentDidUpdate(prevProps) {
+        if (prevProps.rowActive !== this.props.rowActive) {
+            this.setState({open: this.props.rowActive})
+        }
+    }
+
     mouseEnter(i) {
         if (this.state.open) {
             this.setState({ isMouseInside: true, hoveredVideoIdx: i, videoIdx: i });
@@ -138,7 +144,7 @@ class GalleryShowRow extends React.Component {
                 displayVideos = this.props.genreVideos.map((video, i) => {
                     let activeItem = (this.state.open && this.state.videoIdx === i) ? "active" : ""
                     translate = this.handleTranslate(i);
-                    return <GalleryShowItemContainer video={video} key={i + (this.props.genre.id * 10)} handleOpen={() => this.handleOpen(i)} active={activeItem} translate={translate} hoverOff={hoverOff} mouseEnter={() => this.mouseEnter(i)} mouseLeave={ this.mouseLeave}/>
+                    return <GalleryShowItemContainer video={video} key={i + (this.props.genre.id * 10)} handleOpen={() => this.handleOpen(i)} active={activeItem} translate={translate} hoverOff={hoverOff} mouseEnter={() => this.mouseEnter(i)} mouseLeave={ this.mouseLeave} handleActiveRow={this.props.handleActiveRow}/>
                 })
                 rowTitle = this.props.genreShow ? <div>Trending Now for {this.props.genre.name}</div> : <div>{this.props.genre.name}</div>
                 content = this.props.genreVideos[this.state.videoIdx];

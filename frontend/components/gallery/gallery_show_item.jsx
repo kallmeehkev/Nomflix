@@ -11,6 +11,7 @@ class GalleryShowItem extends React.Component {
         // this.mouseLeave = this.mouseLeave.bind(this);
         this.addToMyList = this.addToMyList.bind(this);
         this.removeFromMyList = this.removeFromMyList.bind(this);
+        this.handleOpen = this.handleOpen.bind(this);
     }
 
     addToMyList() {
@@ -30,6 +31,11 @@ class GalleryShowItem extends React.Component {
     // mouseLeave() {
     //     this.setState({ isMouseInside: false });
     // }
+
+    handleOpen() {
+        this.props.handleOpen();
+        this.props.handleActiveRow();
+    }
 
     render() {
         let defaultVideo = {
@@ -83,7 +89,7 @@ class GalleryShowItem extends React.Component {
                                 {myListStatus}
                             </div>
                         </div>
-                        <button onClick={this.props.handleOpen} className="row_item_drop_down"><i className="fas fa-chevron-down"></i></button>
+                        <button onClick={this.handleOpen} className="row_item_drop_down"><i className="fas fa-chevron-down"></i></button>
                 </div>
                 {/* <div className="side_block"></div> */}
                 <div className="row_item_border_arrow"><i className="fas fa-caret-down"></i></div>

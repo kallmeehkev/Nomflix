@@ -5,18 +5,33 @@ import GalleryShowRowContainer from './gallery_show_row_container.js';
 import GalleryFPVideoContainer from './gallery_fp_video_container';
 
 class GalleryIndex extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            activeRowIdx: 0,
+            open: false,
+        }
+        this.handleActiveRow = this.handleActiveRow.bind(this);
+    }
+
     componentDidMount() {
         // this.props.fetchGenres();
         // this.props.fetchMediaGenres();
         this.props.fetchMedium(14);
     }
 
+    handleActiveRow(i) {
+        this.setState({activeRowIdx: i, open: true})
+    }
+
     render() {
         if (this.props.genres[12] && this.props.mediaGenres[140]) {
             let genresArr = Object.values(this.props.genres);
             let genresArrlimit6 = genresArr.filter( (genre, i) => i < 6) 
-            let showRowsFirstSix = genresArrlimit6.map( (genre) => {
-                return <GalleryShowRowContainer genre={genre} key={genre.id} pageType="genre"/> 
+            let showRowsFirstSix = genresArrlimit6.map( (genre, i) => {
+                let rowActive = (this.state.open && (i === this.state.activeRowIdx))
+                return <GalleryShowRowContainer genre={genre} key={genre.id} pageType="genre" rowActive={rowActive}
+                handleActiveRow={()=>this.handleActiveRow(i)}/> 
             })
             let showOneRow = <GalleryShowRowContainer genre={this.props.genres[4]} key={1} />
             return (

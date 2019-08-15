@@ -9,7 +9,9 @@ const msp = (state, ownProps) => {
             genreVideos: Selectors.genreVideos(state, ownProps.genre.id),
             genre: ownProps.genre,
             pageType: ownProps.pageType,
-            myListVideos: []
+            myListVideos: [],
+            rowActive: ownProps.rowActive,
+            handleActiveRow: ownProps.handleActiveRow,
         }
     } else {
         return {

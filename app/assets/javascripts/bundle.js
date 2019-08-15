@@ -1255,9 +1255,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -1274,10 +1274,18 @@ var GalleryIndex =
 function (_React$Component) {
   _inherits(GalleryIndex, _React$Component);
 
-  function GalleryIndex() {
+  function GalleryIndex(props) {
+    var _this;
+
     _classCallCheck(this, GalleryIndex);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(GalleryIndex).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GalleryIndex).call(this, props));
+    _this.state = {
+      activeRowIdx: 0,
+      open: false
+    };
+    _this.handleActiveRow = _this.handleActiveRow.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(GalleryIndex, [{
@@ -1288,18 +1296,33 @@ function (_React$Component) {
       this.props.fetchMedium(14);
     }
   }, {
+    key: "handleActiveRow",
+    value: function handleActiveRow(i) {
+      this.setState({
+        activeRowIdx: i,
+        open: true
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       if (this.props.genres[12] && this.props.mediaGenres[140]) {
         var genresArr = Object.values(this.props.genres);
         var genresArrlimit6 = genresArr.filter(function (genre, i) {
           return i < 6;
         });
-        var showRowsFirstSix = genresArrlimit6.map(function (genre) {
+        var showRowsFirstSix = genresArrlimit6.map(function (genre, i) {
+          var rowActive = _this2.state.open && i === _this2.state.activeRowIdx;
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
             genre: genre,
             key: genre.id,
-            pageType: "genre"
+            pageType: "genre",
+            rowActive: rowActive,
+            handleActiveRow: function handleActiveRow() {
+              return _this2.handleActiveRow(i);
+            }
           });
         });
         var showOneRow = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -1431,6 +1454,7 @@ function (_React$Component) {
 
     _this.addToMyList = _this.addToMyList.bind(_assertThisInitialized(_this));
     _this.removeFromMyList = _this.removeFromMyList.bind(_assertThisInitialized(_this));
+    _this.handleOpen = _this.handleOpen.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1453,6 +1477,12 @@ function (_React$Component) {
     //     this.setState({ isMouseInside: false });
     // }
 
+  }, {
+    key: "handleOpen",
+    value: function handleOpen() {
+      this.props.handleOpen();
+      this.props.handleActiveRow();
+    }
   }, {
     key: "render",
     value: function render() {
@@ -1524,7 +1554,7 @@ function (_React$Component) {
       }, Math.floor(video.duration / 60000), "m")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "myList_container"
       }, myListStatus)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.props.handleOpen,
+        onClick: this.handleOpen,
         className: "row_item_drop_down"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-chevron-down"
@@ -1568,7 +1598,8 @@ var msp = function msp(state, ownProps) {
       translate = ownProps.translate,
       hoverOff = ownProps.hoverOff,
       mouseEnter = ownProps.mouseEnter,
-      mouseLeave = ownProps.mouseLeave;
+      mouseLeave = ownProps.mouseLeave,
+      handleActiveRow = ownProps.handleActiveRow;
   return {
     video: video,
     handleOpen: handleOpen,
@@ -1579,7 +1610,8 @@ var msp = function msp(state, ownProps) {
     translate: translate || {},
     hoverOff: hoverOff,
     mouseEnter: mouseEnter,
-    mouseLeave: mouseLeave
+    mouseLeave: mouseLeave,
+    handleActiveRow: handleActiveRow
   };
 };
 
@@ -1665,6 +1697,15 @@ function (_React$Component) {
     value: function componentDidMount() {
       if (this.props.pageType === "genre") {
         this.props.fetchGenre(this.props.genre.id);
+      }
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.rowActive !== this.props.rowActive) {
+        this.setState({
+          open: this.props.rowActive
+        });
       }
     }
   }, {
@@ -1829,7 +1870,8 @@ function (_React$Component) {
               mouseEnter: function mouseEnter() {
                 return _this2.mouseEnter(i);
               },
-              mouseLeave: _this2.mouseLeave
+              mouseLeave: _this2.mouseLeave,
+              handleActiveRow: _this2.props.handleActiveRow
             });
           });
           rowTitle = this.props.genreShow ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Trending Now for ", this.props.genre.name) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.genre.name);
@@ -1929,7 +1971,9 @@ var msp = function msp(state, ownProps) {
       genreVideos: _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["genreVideos"](state, ownProps.genre.id),
       genre: ownProps.genre,
       pageType: ownProps.pageType,
-      myListVideos: []
+      myListVideos: [],
+      rowActive: ownProps.rowActive,
+      handleActiveRow: ownProps.handleActiveRow
     };
   } else {
     return {
