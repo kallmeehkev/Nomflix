@@ -29,24 +29,20 @@ class GalleryIndex extends React.Component {
             let genresArr = Object.values(this.props.genres);
             let genresArrlimit6 = genresArr.filter( (genre, i) => i < 6) 
             let showRowsFirstSix = genresArrlimit6.map( (genre, i) => {
-                let rowActive = (this.state.open && (i === this.state.activeRowIdx))
+                let rowActive = (this.state.open && (i === this.state.activeRowIdx));
                 return <GalleryShowRowContainer genre={genre} key={genre.id} pageType="genre" rowActive={rowActive}
                 handleActiveRow={()=>this.handleActiveRow(i)}/> 
             })
-            let showOneRow = <GalleryShowRowContainer genre={this.props.genres[4]} key={1} />
             return (
                 <div className="browse_body">
                     <GalleryNavBarContainer path={this.props.match.path}/>
                     <GalleryFPVideoContainer genreId={5} pageType="browse" browseVid={this.props.fpVideo} />
-
                     {showRowsFirstSix}
-                    {/* {showOneRow} */}
                 </div>
             )
         } else {
             return (
                 <div className="browse_body">
-                    {/* <GalleryNavBarContainer /> */}
                     <div className="browse_fp_video_container">Gallery frontpage vid</div>
                     Gallery Index
                 </div>

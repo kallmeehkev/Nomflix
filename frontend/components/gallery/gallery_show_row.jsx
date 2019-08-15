@@ -158,7 +158,7 @@ class GalleryShowRow extends React.Component {
                 displayVideos = this.props.myListVideos.map((video, i) => {
                     let activeItem = (this.state.open && this.state.videoIdx === i) ? "active" : "";
                     translate = this.handleTranslate(i)
-                    return <GalleryShowItemContainer video={video} key={i} handleOpen={() => this.handleOpen(i)} active={activeItem} translate={translate} hoverOff={hoverOff} mouseEnter={() => this.mouseEnter(i)} mouseLeave={this.mouseLeave} />
+                    return <GalleryShowItemContainer video={video} key={i} handleOpen={() => this.handleOpen(i)} active={activeItem} translate={translate} hoverOff={hoverOff} mouseEnter={() => this.mouseEnter(i)} mouseLeave={this.mouseLeave} handleActiveRow={this.props.handleActiveRow}/>
                 })
                 content = this.props.myListVideos[this.state.videoIdx];
             }

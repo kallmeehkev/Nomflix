@@ -18,6 +18,8 @@ const msp = (state, ownProps) => {
             genreVideos: [],
             myListVideos: ownProps.myListVideos,
             pageType: ownProps.pageType,
+            rowActive: ownProps.rowActive,
+            handleActiveRow: ownProps.handleActiveRow,
         }
     }
 }

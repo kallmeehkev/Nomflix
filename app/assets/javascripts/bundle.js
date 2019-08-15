@@ -1325,10 +1325,6 @@ function (_React$Component) {
             }
           });
         });
-        var showOneRow = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          genre: this.props.genres[4],
-          key: 1
-        });
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_body"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -1910,7 +1906,8 @@ function (_React$Component) {
               mouseEnter: function mouseEnter() {
                 return _this2.mouseEnter(i);
               },
-              mouseLeave: _this2.mouseLeave
+              mouseLeave: _this2.mouseLeave,
+              handleActiveRow: _this2.props.handleActiveRow
             });
           });
           content = this.props.myListVideos[this.state.videoIdx];
@@ -1979,7 +1976,9 @@ var msp = function msp(state, ownProps) {
     return {
       genreVideos: [],
       myListVideos: ownProps.myListVideos,
-      pageType: ownProps.pageType
+      pageType: ownProps.pageType,
+      rowActive: ownProps.rowActive,
+      handleActiveRow: ownProps.handleActiveRow
     };
   }
 };
@@ -2398,9 +2397,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -2416,36 +2415,71 @@ var MyListIndex =
 function (_React$Component) {
   _inherits(MyListIndex, _React$Component);
 
-  function MyListIndex() {
+  function MyListIndex(props) {
+    var _this;
+
     _classCallCheck(this, MyListIndex);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(MyListIndex).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(MyListIndex).call(this, props));
+    _this.state = {
+      activeRowIdx: 0,
+      open: false
+    };
+    _this.handleActiveRow = _this.handleActiveRow.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(MyListIndex, [{
+    key: "handleActiveRow",
+    value: function handleActiveRow(i) {
+      this.setState({
+        activeRowIdx: i,
+        open: true
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var videos = this.props.videos;
       var rows = [];
       var container = [];
+      var rowActive;
 
       for (var i = 0; i < videos.length; i++) {
         container.push(videos[i]);
 
         if (container.length === 5) {
-          rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
-            myListVideos: container,
-            key: i,
-            pageType: "myList"
-          }));
-          container = [];
+          (function () {
+            var rowIdx = Math.floor(i / 5);
+            rowActive = _this2.state.open && rowIdx === _this2.state.activeRowIdx;
+            rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
+              myListVideos: container,
+              key: i,
+              pageType: "myList",
+              rowActive: rowActive,
+              handleActiveRow: function handleActiveRow() {
+                return _this2.handleActiveRow(rowIdx);
+              }
+            }));
+            container = [];
+          })();
         } else if (i === videos.length - 1) {
-          rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
-            myListVideos: container,
-            key: i,
-            pageType: "myList"
-          }));
-          container = [];
+          (function () {
+            var rowIdx = Math.floor(i / 5);
+            rowActive = _this2.state.open && rowIdx === _this2.state.activeRowIdx;
+            rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
+              myListVideos: container,
+              key: i,
+              pageType: "myList",
+              rowActive: rowActive,
+              handleActiveRow: function handleActiveRow() {
+                return _this2.handleActiveRow(rowIdx);
+              }
+            }));
+            container = [];
+          })();
         }
       }
 
