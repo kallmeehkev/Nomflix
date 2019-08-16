@@ -728,48 +728,46 @@ function (_React$Component) {
   _createClass(Browse, [{
     key: "render",
     value: function render() {
-      // if (this.props.media[12] || this.props.mediaGenres[140]) {
-      //     let {genres, mediaGenres} = this.props;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
-        exact: true,
-        path: "/",
-        component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_5__["default"]
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
-        exact: true,
-        path: "/login",
-        component: _session_form_session_page__WEBPACK_IMPORTED_MODULE_2__["default"]
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
-        exact: true,
-        path: "/signup",
-        component: _session_form_session_page__WEBPACK_IMPORTED_MODULE_2__["default"]
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
-        path: "/watch/:mediaId",
-        component: _watch_media_show_container__WEBPACK_IMPORTED_MODULE_6__["default"]
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
-        path: "/browse/genre/:genreId",
-        component: _genre_genre_show_container__WEBPACK_IMPORTED_MODULE_7__["default"]
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
-        exact: true,
-        path: "/browse",
-        component: _gallery_gallery_index_container__WEBPACK_IMPORTED_MODULE_4__["default"]
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
-        exact: true,
-        path: "/browse/my-list",
-        component: _mylist_mylist_index_container__WEBPACK_IMPORTED_MODULE_8__["default"]
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-        render: function render() {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
-            to: "/browse"
-          });
-        }
-      }))); // } 
-      // else {
-      //     return (
-      //         <div>
-      //             Welcome to Nomflix
-      //         </div>
-      //     )
-      // }
+      if (this.props.media[12] || this.props.mediaGenres[140]) {
+        var _this$props = this.props,
+            genres = _this$props.genres,
+            mediaGenres = _this$props.mediaGenres;
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
+          exact: true,
+          path: "/",
+          component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_5__["default"]
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
+          exact: true,
+          path: "/login",
+          component: _session_form_session_page__WEBPACK_IMPORTED_MODULE_2__["default"]
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
+          exact: true,
+          path: "/signup",
+          component: _session_form_session_page__WEBPACK_IMPORTED_MODULE_2__["default"]
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
+          path: "/watch/:mediaId",
+          component: _watch_media_show_container__WEBPACK_IMPORTED_MODULE_6__["default"]
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
+          path: "/browse/genre/:genreId",
+          component: _genre_genre_show_container__WEBPACK_IMPORTED_MODULE_7__["default"]
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
+          exact: true,
+          path: "/browse",
+          component: _gallery_gallery_index_container__WEBPACK_IMPORTED_MODULE_4__["default"]
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
+          exact: true,
+          path: "/browse/my-list",
+          component: _mylist_mylist_index_container__WEBPACK_IMPORTED_MODULE_8__["default"]
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+          render: function render() {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+              to: "/browse"
+            });
+          }
+        })));
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Welcome to Nomflix");
+      }
     }
   }]);
 
@@ -1244,6 +1242,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gallery_show_row_container.js */ "./frontend/components/gallery/gallery_show_row_container.js");
 /* harmony import */ var _gallery_fp_video_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./gallery_fp_video_container */ "./frontend/components/gallery/gallery_fp_video_container.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_5__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1268,6 +1268,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var GalleryIndex =
 /*#__PURE__*/
 function (_React$Component) {
@@ -1281,22 +1282,73 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(GalleryIndex).call(this, props));
     _this.state = {
       activeRowIdx: 0,
-      open: false
+      open: false,
+      genreRows: [],
+      genresFetched: 0
     };
     _this.handleActiveRow = _this.handleActiveRow.bind(_assertThisInitialized(_this));
+    _this.checkIfNeedsMoreContent = _this.checkIfNeedsMoreContent.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(GalleryIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      var _this2 = this;
+
       // this.props.fetchGenres();
       // this.props.fetchMediaGenres();
       this.props.fetchMedium(14);
+      document.addEventListener('scroll', _.throttle(this.checkIfNeedsMoreContent, 300), {
+        passive: true
+      });
+      var genresArr = Object.values(this.props.genres);
+      var genresArrlimit2 = genresArr.filter(function (genre, i) {
+        return i < 2;
+      });
+      var that = this;
+      var showRowsFirstTwo = genresArrlimit2.map(function (genre, i) {
+        var rowActive = that.state.open && that.state.genresFetched + i === that.state.activeRowIdx;
+        debugger;
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          genre: genre,
+          key: genre.id,
+          pageType: "genre",
+          rowActive: rowActive,
+          handleActiveRow: function handleActiveRow() {
+            return _this2.handleActiveRow(_this2.state.genresFetched + i);
+          }
+        });
+      });
+      this.setState({
+        genreRows: showRowsFirstTwo,
+        genresFetched: 2
+      });
+    }
+  }, {
+    key: "checkIfNeedsMoreContent",
+    value: function checkIfNeedsMoreContent() {
+      var pixelsFromWindowBottomToBottom = 0 + document.documentElement.scrollHeight - window.scrollY - window.screen.height; // if (pixelsFromWindowBottomToBottom < 200) {
+      //     // Here it would go an ajax request
+      //     let genresArr = Object.values(this.props.genres);
+      //     let genresArrlimit2 = genresArr.filter((genre, i) => {
+      //         let bottomLimit = this.state.genresFetched % 12;
+      //          return (i >= bottomLimit && i < bottomLimit + 2)  
+      //     })
+      //     let twoMoreRows = genresArrlimit2.map((genre, i) => {
+      //         let rowActive = (this.state.open && (this.state.genresFetched + i === this.state.activeRowIdx));
+      //         return <GalleryShowRowContainer genre={genre} key={genre.id} pageType="genre" rowActive={rowActive}
+      //             handleActiveRow={() => this.handleActiveRow(this.state.genresFetched + i)} />
+      //     })
+      //     let currentRows = this.state.genreRows;
+      //     let currentlyFetched = this.state.genresFetched;
+      //     this.setState({ genreRows: currentRows.concat(twoMoreRows), genresFetched: currentlyFetched + 2 });
+      // }
     }
   }, {
     key: "handleActiveRow",
     value: function handleActiveRow(i) {
+      debugger;
       this.setState({
         activeRowIdx: i,
         open: true
@@ -1305,25 +1357,14 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       if (this.props.genres[12] && this.props.mediaGenres[140]) {
-        var genresArr = Object.values(this.props.genres);
-        var genresArrlimit6 = genresArr.filter(function (genre, i) {
-          return i < 6;
-        });
-        var showRowsFirstSix = genresArrlimit6.map(function (genre, i) {
-          var rowActive = _this2.state.open && i === _this2.state.activeRowIdx;
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
-            genre: genre,
-            key: genre.id,
-            pageType: "genre",
-            rowActive: rowActive,
-            handleActiveRow: function handleActiveRow() {
-              return _this2.handleActiveRow(i);
-            }
-          });
-        });
+        // let genresArr = Object.values(this.props.genres);
+        // let genresArrlimit6 = genresArr.filter( (genre, i) => i < 6) 
+        // let showRowsFirstSix = genresArrlimit6.map( (genre, i) => {
+        //     let rowActive = (this.state.open && (i === this.state.activeRowIdx));
+        //     return <GalleryShowRowContainer genre={genre} key={genre.id} pageType="genre" rowActive={rowActive}
+        //     handleActiveRow={()=>this.handleActiveRow(i)}/> 
+        // })
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_body"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -1332,7 +1373,7 @@ function (_React$Component) {
           genreId: 5,
           pageType: "browse",
           browseVid: this.props.fpVideo
-        }), showRowsFirstSix);
+        }), this.state.genreRows);
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_body"
@@ -4301,7 +4342,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_1__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"]));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_1__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_3___default.a));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);

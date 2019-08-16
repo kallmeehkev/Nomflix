@@ -16,8 +16,8 @@ class Browse extends React.Component {
     }
 
     render() {
-        // if (this.props.media[12] || this.props.mediaGenres[140]) {
-        //     let {genres, mediaGenres} = this.props;
+        if (this.props.media[12] || this.props.mediaGenres[140]) {
+            let {genres, mediaGenres} = this.props;
             return (
                 <div>
                     <Switch>
@@ -32,15 +32,15 @@ class Browse extends React.Component {
                     </Switch>
                 </div>
             )
-        // } 
+        } 
         
-        // else {
-        //     return (
-        //         <div>
-        //             Welcome to Nomflix
-        //         </div>
-        //     )
-        // }
+        else {
+            return (
+                <div>
+                    Welcome to Nomflix
+                </div>
+            )
+        }
             
     }
 }
