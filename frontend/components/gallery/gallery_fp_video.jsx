@@ -97,7 +97,11 @@ class GalleryFPVideo extends React.Component {
             return (
                 <div className="browse_fp_video_container">
                     <div className="browse_fp_video" style={fpVideoStyle}>
-                        <div className="browse_fp_background_gradient"></div>
+                        <div className="browse_fp_background_gradient1"></div>
+                        <div className="browse_fp_background_gradient2"></div>
+                        <div className="browse_fp_background_gradient3"></div>
+                        <div className="browse_fp_background_gradient4"></div>
+                        <div className="browse_fp_background_gradient5"></div>
                         <div className="browse_fp_topleft_gradient"></div>
                     </div>
                     <span className="browse_fp_video_maturity_rating">

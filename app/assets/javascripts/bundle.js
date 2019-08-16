@@ -1122,7 +1122,15 @@ function (_React$Component) {
           className: "browse_fp_video",
           style: fpVideoStyle
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "browse_fp_background_gradient"
+          className: "browse_fp_background_gradient1"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_fp_background_gradient2"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_fp_background_gradient3"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_fp_background_gradient4"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "browse_fp_background_gradient5"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_fp_topleft_gradient"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -2107,7 +2115,15 @@ function (_React$Component) {
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "item_content_play_button_text"
       }, "PLAY"))), myListStatus)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "item_content_gradient"
+        className: "item_content_gradient1"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_gradient2"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_gradient3"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_gradient4"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "item_content_gradient5"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "item_content_image",
         style: style

@@ -47,7 +47,11 @@ class GalleryShowRowItemContent extends React.Component {
                         {myListStatus}
                     </div>
                 </div>
-                <div className="item_content_gradient"></div>
+                <div className="item_content_gradient1"></div>
+                <div className="item_content_gradient2"></div>
+                <div className="item_content_gradient3"></div>
+                <div className="item_content_gradient4"></div>
+                <div className="item_content_gradient5"></div>
                 <div className="item_content_image" style={style}>
                     <Link to={`/watch/${content.id}`}><div className="link"></div></Link>
                     <button onClick={handleClose}>
