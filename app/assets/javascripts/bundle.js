@@ -1294,8 +1294,6 @@ function (_React$Component) {
   _createClass(GalleryIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
-
       // this.props.fetchGenres();
       // this.props.fetchMediaGenres();
       this.props.fetchMedium(14);
@@ -1303,52 +1301,52 @@ function (_React$Component) {
         passive: true
       });
       var genresArr = Object.values(this.props.genres);
-      var genresArrlimit2 = genresArr.filter(function (genre, i) {
-        return i < 2;
-      });
-      var that = this;
-      var showRowsFirstTwo = genresArrlimit2.map(function (genre, i) {
-        var rowActive = that.state.open && that.state.genresFetched + i === that.state.activeRowIdx;
-        debugger;
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          genre: genre,
-          key: genre.id,
-          pageType: "genre",
-          rowActive: rowActive,
-          handleActiveRow: function handleActiveRow() {
-            return _this2.handleActiveRow(_this2.state.genresFetched + i);
-          }
-        });
-      });
+      var genresArrlimit3 = genresArr.filter(function (genre, i) {
+        return i < 3;
+      }); // let that = this;
+      // let showRowsFirstTwo = genresArrlimit2.map((genre, i) => {
+      //     let numCurrentlyFetched = that.state.genresFetched;
+      //     let rowActive = (that.state.open && (i === that.state.activeRowIdx));
+      //     return <GalleryShowRowContainer genre={genre} key={genre.id} pageType="genre" rowActive={rowActive} i={i} open={that.state.open} activeRowIdx={that.state.activeRowIdx}
+      //         handleActiveRow={() => this.handleActiveRow(numCurrentlyFetched + i)} /> 
+      // })
+
       this.setState({
-        genreRows: showRowsFirstTwo,
-        genresFetched: 2
+        genreRows: genresArrlimit3,
+        genresFetched: 3
       });
     }
   }, {
     key: "checkIfNeedsMoreContent",
     value: function checkIfNeedsMoreContent() {
-      var pixelsFromWindowBottomToBottom = 0 + document.documentElement.scrollHeight - window.scrollY - window.screen.height; // if (pixelsFromWindowBottomToBottom < 200) {
-      //     // Here it would go an ajax request
-      //     let genresArr = Object.values(this.props.genres);
-      //     let genresArrlimit2 = genresArr.filter((genre, i) => {
-      //         let bottomLimit = this.state.genresFetched % 12;
-      //          return (i >= bottomLimit && i < bottomLimit + 2)  
-      //     })
-      //     let twoMoreRows = genresArrlimit2.map((genre, i) => {
-      //         let rowActive = (this.state.open && (this.state.genresFetched + i === this.state.activeRowIdx));
-      //         return <GalleryShowRowContainer genre={genre} key={genre.id} pageType="genre" rowActive={rowActive}
-      //             handleActiveRow={() => this.handleActiveRow(this.state.genresFetched + i)} />
-      //     })
-      //     let currentRows = this.state.genreRows;
-      //     let currentlyFetched = this.state.genresFetched;
-      //     this.setState({ genreRows: currentRows.concat(twoMoreRows), genresFetched: currentlyFetched + 2 });
-      // }
+      var _this2 = this;
+
+      var pixelsFromWindowBottomToBottom = 0 + document.documentElement.scrollHeight - window.scrollY - window.screen.height;
+
+      if (pixelsFromWindowBottomToBottom < 200) {
+        // Here it would go an ajax request
+        var genresArr = Object.values(this.props.genres);
+        var genresArrlimit3 = genresArr.filter(function (genre, i) {
+          var bottomLimit = _this2.state.genresFetched % 12;
+          return i >= bottomLimit && i < bottomLimit + 3;
+        });
+        var threeMoreRows = genresArrlimit3; // let twoMoreRows = genresArrlimit2.map((genre, i) => {
+        //     let rowActive = (this.state.open && (this.state.genresFetched + i === this.state.activeRowIdx));
+        //     return <GalleryShowRowContainer genre={genre} key={genre.id} pageType="genre" rowActive={rowActive}
+        //         handleActiveRow={() => this.handleActiveRow(this.state.genresFetched + i)} />
+        // })
+
+        var currentRows = this.state.genreRows;
+        var currentlyFetched = this.state.genresFetched;
+        this.setState({
+          genreRows: currentRows.concat(threeMoreRows),
+          genresFetched: currentlyFetched + 3
+        });
+      }
     }
   }, {
     key: "handleActiveRow",
     value: function handleActiveRow(i) {
-      debugger;
       this.setState({
         activeRowIdx: i,
         open: true
@@ -1357,6 +1355,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       if (this.props.genres[12] && this.props.mediaGenres[140]) {
         // let genresArr = Object.values(this.props.genres);
         // let genresArrlimit6 = genresArr.filter( (genre, i) => i < 6) 
@@ -1365,6 +1365,18 @@ function (_React$Component) {
         //     return <GalleryShowRowContainer genre={genre} key={genre.id} pageType="genre" rowActive={rowActive}
         //     handleActiveRow={()=>this.handleActiveRow(i)}/> 
         // })
+        var genreRows = this.state.genreRows.map(function (genre, i) {
+          var rowActive = _this3.state.open && i === _this3.state.activeRowIdx;
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            genre: genre,
+            key: genre.id,
+            pageType: "genre",
+            rowActive: rowActive,
+            handleActiveRow: function handleActiveRow() {
+              return _this3.handleActiveRow(i);
+            }
+          });
+        });
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_body"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -1373,7 +1385,7 @@ function (_React$Component) {
           genreId: 5,
           pageType: "browse",
           browseVid: this.props.fpVideo
-        }), this.state.genreRows);
+        }), genreRows);
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_body"
