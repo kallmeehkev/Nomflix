@@ -9,5 +9,6 @@ Rails.application.routes.draw do
     resources :genres, only: [:index, :show]
     resources :media_genres, only: [:index, :show]
     resources :my_lists, only: [:create, :destroy]
+    resources :search, only: [:index]
   end
 end
