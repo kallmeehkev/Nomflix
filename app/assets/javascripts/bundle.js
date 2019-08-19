@@ -1433,7 +1433,7 @@ function (_React$Component) {
           var rowActive = _this3.state.open && i === _this3.state.activeRowIdx;
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
             genre: genre,
-            key: genre.id,
+            key: i,
             pageType: "genre",
             rowActive: rowActive,
             handleActiveRow: function handleActiveRow() {

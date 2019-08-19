@@ -76,7 +76,7 @@ class GalleryIndex extends React.Component {
             // })
             let genreRows = this.state.genreRows.map( (genre, i) => {
                 let rowActive = (this.state.open && (i === this.state.activeRowIdx));
-                return <GalleryShowRowContainer genre={genre} key={genre.id} pageType="genre" rowActive={rowActive}
+                return <GalleryShowRowContainer genre={genre} key={i} pageType="genre" rowActive={rowActive}
                 handleActiveRow={()=>this.handleActiveRow(i)}/> 
             })
             return (
