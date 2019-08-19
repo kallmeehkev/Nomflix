@@ -35,6 +35,10 @@ class GalleryIndex extends React.Component {
         this.setState({genreRows: genresArrlimit3, genresFetched: 3});
     }
 
+    componentWillUnmount() {
+        document.removeEventListener('scroll', _.throttle(this.checkIfNeedsMoreContent, 300), { passive: true });
+    }
+
     checkIfNeedsMoreContent() {
         let pixelsFromWindowBottomToBottom = 0 + document.documentElement.scrollHeight - window.scrollY - window.screen.height;
 
