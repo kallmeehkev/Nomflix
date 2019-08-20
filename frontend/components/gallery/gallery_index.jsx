@@ -81,7 +81,7 @@ class GalleryIndex extends React.Component {
             })
             return (
                 <div className="browse_body">
-                    <GalleryNavBarContainer path={this.props.match.path}/>
+                    {/* <GalleryNavBarContainer path={this.props.match.path}/> */}
                     <GalleryFPVideoContainer genreId={5} pageType="browse" browseVid={this.props.fpVideo} />
                     {/* {showRowsFirstSix} */}
                     {genreRows}

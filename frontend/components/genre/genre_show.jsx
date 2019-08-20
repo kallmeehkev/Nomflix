@@ -43,7 +43,7 @@ class GenreShow extends React.Component {
                 rowActive={rowActive} handleActiveRow={() => this.handleActiveRow(0)}/>
             return (
                 <div className="browse_body">
-                    <GalleryNavBarContainer path={this.props.match.path} />
+                    {/* <GalleryNavBarContainer path={this.props.match.path} /> */}
                     <GalleryFPVideoContainer genreId={Number(this.props.match.params.genreId)} pageType="genreShow"/>
                     {showOneRow}
                 </div>
@@ -52,7 +52,7 @@ class GenreShow extends React.Component {
         else {
             return (
                 <div className="browse_body">
-                    <GalleryNavBarContainer />
+                    {/* <GalleryNavBarContainer /> */}
                     <div className="browse_fp_video_container">Genre frontpage vid</div>
                     Genre Show
                 </div>

@@ -41,7 +41,7 @@ class MyListIndex extends React.Component {
         }
         return (
             <div className="browse_body">
-                <GalleryNavBarContainer path={this.props.match.path} />
+                {/* <GalleryNavBarContainer path={this.props.match.path} /> */}
                 <div className="myList_index_title">My List</div>
                 {rows}
             </div>

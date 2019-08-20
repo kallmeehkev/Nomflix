@@ -53,9 +53,9 @@ class NavBar extends React.Component  {
 
     render() {
         if (this.props.currentUser) { //logged in
-            let logo = this.props.path === "/browse" ? <button onClick={this.scrollToTop}><img src={Images.nomflix_logo_URL} className="browse_splash_logo" /></button> : <Link to="/browse"><img src={Images.nomflix_logo_URL} className="browse_splash_logo" /></Link>
-            let home = this.props.path === "/browse" ? <button onClick={this.scrollToTop}>Home</button> : <Link to="/browse">Home</Link>;
-            let myList = this.props.path === "/browse/my-list" ? "My List" : <Link to="/browse/my-list">My List</Link>;
+            let logo = this.props.location.pathname === "/browse" ? <button onClick={this.scrollToTop}><img src={Images.nomflix_logo_URL} className="browse_splash_logo" /></button> : <Link to="/browse"><img src={Images.nomflix_logo_URL} className="browse_splash_logo" /></Link>
+            let home = this.props.location.pathname === "/browse" ? <button onClick={this.scrollToTop}>Home</button> : <Link to="/browse">Home</Link>;
+            let myList = this.props.location.pathname === "/browse/my-list" ? "My List" : <Link to="/browse/my-list">My List</Link>;
             //need logic for classNames browse nav bar.  if on profile page or not.  apply on pinning and main
             let {genres} = this.props
             let firstFourGenres = [];

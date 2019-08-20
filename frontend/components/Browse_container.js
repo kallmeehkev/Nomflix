@@ -4,6 +4,7 @@ import { fetchMediaGenres } from '../actions/media_genre_actions';
 import Browse from './Browse';
 
 const msp = state => ({
+    currentUser: state.session.id,
     media: state.entities.media,
     mediaGenres: state.entities.mediaGenres,
 })

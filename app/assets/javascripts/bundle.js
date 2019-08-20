@@ -735,6 +735,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _watch_media_show_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./watch/media_show_container */ "./frontend/components/watch/media_show_container.js");
 /* harmony import */ var _genre_genre_show_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./genre/genre_show_container */ "./frontend/components/genre/genre_show_container.js");
 /* harmony import */ var _mylist_mylist_index_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./mylist/mylist_index_container */ "./frontend/components/mylist/mylist_index_container.js");
+/* harmony import */ var _nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./nav_bar/gallery_nav_bar_container */ "./frontend/components/nav_bar/gallery_nav_bar_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -752,6 +753,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -789,7 +791,8 @@ function (_React$Component) {
         var _this$props = this.props,
             genres = _this$props.genres,
             mediaGenres = _this$props.mediaGenres;
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
+        var loggedInNavBar = this.props.currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_9__["default"], null) : null;
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, loggedInNavBar, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
           exact: true,
           path: "/",
           component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_5__["default"]
@@ -855,6 +858,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var msp = function msp(state) {
   return {
+    currentUser: state.session.id,
     media: state.entities.media,
     mediaGenres: state.entities.mediaGenres
   };
@@ -1443,9 +1447,7 @@ function (_React$Component) {
         });
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_body"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          path: this.props.match.path
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_fp_video_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_fp_video_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
           genreId: 5,
           pageType: "browse",
           browseVid: this.props.fpVideo
@@ -2421,16 +2423,14 @@ function (_React$Component) {
         });
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_body"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          path: this.props.match.path
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_gallery_fp_video_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_gallery_fp_video_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
           genreId: Number(this.props.match.params.genreId),
           pageType: "genreShow"
         }), showOneRow);
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_body"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_fp_video_container"
         }, "Genre frontpage vid"), "Genre Show");
       }
@@ -2627,9 +2627,7 @@ function (_React$Component) {
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "browse_body"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        path: this.props.match.path
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "myList_index_title"
       }, "My List"), rows);
     }
@@ -2688,9 +2686,11 @@ var mdp = function mdp(dispatch) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _nav_bar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./nav_bar */ "./frontend/components/nav_bar/nav_bar.jsx");
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var _actions_profile_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/profile_actions */ "./frontend/actions/profile_actions.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _nav_bar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./nav_bar */ "./frontend/components/nav_bar/nav_bar.jsx");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _actions_profile_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/profile_actions */ "./frontend/actions/profile_actions.js");
+
 
 
 
@@ -2712,18 +2712,18 @@ var msp = function msp(_ref) {
 var mdp = function mdp(dispatch) {
   return {
     logout: function logout(user) {
-      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["logout"])(user));
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["logout"])(user));
     },
     unSetCurrentProfile: function unSetCurrentProfile(profileId) {
-      return dispatch(Object(_actions_profile_actions__WEBPACK_IMPORTED_MODULE_3__["unSetCurrentProfile"])(profileId));
+      return dispatch(Object(_actions_profile_actions__WEBPACK_IMPORTED_MODULE_4__["unSetCurrentProfile"])(profileId));
     },
     fetchProfile: function fetchProfile(profileId) {
-      return dispatch(Object(_actions_profile_actions__WEBPACK_IMPORTED_MODULE_3__["fetchProfile"])(profileId));
+      return dispatch(Object(_actions_profile_actions__WEBPACK_IMPORTED_MODULE_4__["fetchProfile"])(profileId));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_nav_bar__WEBPACK_IMPORTED_MODULE_1__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_nav_bar__WEBPACK_IMPORTED_MODULE_2__["default"])));
 
 /***/ }),
 
@@ -2877,7 +2877,7 @@ function (_React$Component) {
     value: function render() {
       if (this.props.currentUser) {
         //logged in
-        var logo = this.props.path === "/browse" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        var logo = this.props.location.pathname === "/browse" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: this.scrollToTop
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: _images__WEBPACK_IMPORTED_MODULE_3__["nomflix_logo_URL"],
@@ -2888,12 +2888,12 @@ function (_React$Component) {
           src: _images__WEBPACK_IMPORTED_MODULE_3__["nomflix_logo_URL"],
           className: "browse_splash_logo"
         }));
-        var home = this.props.path === "/browse" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        var home = this.props.location.pathname === "/browse" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: this.scrollToTop
         }, "Home") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/browse"
         }, "Home");
-        var myList = this.props.path === "/browse/my-list" ? "My List" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        var myList = this.props.location.pathname === "/browse/my-list" ? "My List" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/browse/my-list"
         }, "My List"); //need logic for classNames browse nav bar.  if on profile page or not.  apply on pinning and main
 

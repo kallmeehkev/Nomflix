@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withRouter } from "react-router";
 import NavBar from './nav_bar';
 import { logout } from '../../actions/session_actions';
 import { unSetCurrentProfile, fetchProfile } from '../../actions/profile_actions';
@@ -17,4 +18,4 @@ const mdp = dispatch => ({
     fetchProfile: (profileId) => dispatch(fetchProfile(profileId))
 })
 
-export default connect(msp, mdp)(NavBar)
+export default withRouter(connect(msp, mdp)(NavBar));
