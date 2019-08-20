@@ -2811,6 +2811,7 @@ function (_React$Component) {
     _this.debounce = _this.debounce.bind(_assertThisInitialized(_this));
     _this.storeScroll = _this.storeScroll.bind(_assertThisInitialized(_this));
     _this.logout = _this.logout.bind(_assertThisInitialized(_this));
+    _this.scrollToTop = _this.scrollToTop.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2831,6 +2832,13 @@ function (_React$Component) {
           fn.apply(void 0, params);
         });
       };
+    }
+  }, {
+    key: "scrollToTop",
+    value: function scrollToTop() {
+      document.body.scrollTop = 0; // For Safari
+
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     }
   }, {
     key: "storeScroll",
@@ -2869,16 +2877,20 @@ function (_React$Component) {
     value: function render() {
       if (this.props.currentUser) {
         //logged in
-        var logo = this.props.path === "/browse" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        var logo = this.props.path === "/browse" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.scrollToTop
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: _images__WEBPACK_IMPORTED_MODULE_3__["nomflix_logo_URL"],
           className: "browse_splash_logo"
-        }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/browse"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: _images__WEBPACK_IMPORTED_MODULE_3__["nomflix_logo_URL"],
           className: "browse_splash_logo"
         }));
-        var home = this.props.path === "/browse" ? "Home" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        var home = this.props.path === "/browse" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.scrollToTop
+        }, "Home") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/browse"
         }, "Home");
         var myList = this.props.path === "/browse/my-list" ? "My List" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {

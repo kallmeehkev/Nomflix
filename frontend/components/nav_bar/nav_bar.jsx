@@ -11,6 +11,7 @@ class NavBar extends React.Component  {
         this.debounce = this.debounce.bind(this);
         this.storeScroll = this.storeScroll.bind(this);
         this.logout = this.logout.bind(this);
+        this.scrollToTop = this.scrollToTop.bind(this);
     }
 
     debounce(fn) {
@@ -23,6 +24,11 @@ class NavBar extends React.Component  {
                 fn(...params);
             });
         }
+    }
+
+    scrollToTop() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     }
 
     storeScroll() {
@@ -47,8 +53,8 @@ class NavBar extends React.Component  {
 
     render() {
         if (this.props.currentUser) { //logged in
-            let logo = this.props.path === "/browse" ? <img src={Images.nomflix_logo_URL} className="browse_splash_logo" /> : <Link to="/browse"><img src={Images.nomflix_logo_URL} className="browse_splash_logo" /></Link>
-            let home = this.props.path === "/browse" ? "Home" : <Link to="/browse">Home</Link>;
+            let logo = this.props.path === "/browse" ? <button onClick={this.scrollToTop}><img src={Images.nomflix_logo_URL} className="browse_splash_logo" /></button> : <Link to="/browse"><img src={Images.nomflix_logo_URL} className="browse_splash_logo" /></Link>
+            let home = this.props.path === "/browse" ? <button onClick={this.scrollToTop}>Home</button> : <Link to="/browse">Home</Link>;
             let myList = this.props.path === "/browse/my-list" ? "My List" : <Link to="/browse/my-list">My List</Link>;
             //need logic for classNames browse nav bar.  if on profile page or not.  apply on pinning and main
             let {genres} = this.props
