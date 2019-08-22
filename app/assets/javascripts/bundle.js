@@ -571,20 +571,23 @@ var unSetCurrentProfile = function unSetCurrentProfile(id) {
 /*!********************************************!*\
   !*** ./frontend/actions/search_actions.js ***!
   \********************************************/
-/*! exports provided: RECEIVE_SEARCH_RESULTS, RECEIVE_SEARCH_ERRORS, receiveSearchResults, receiveSearchErrors, fetchSearchResults */
+/*! exports provided: RECEIVE_SEARCH_RESULTS, RECEIVE_SEARCH_ERRORS, CLEAR_SEARCH_RESULTS, receiveSearchResults, receiveSearchErrors, clearSearchResults, fetchSearchResults */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SEARCH_RESULTS", function() { return RECEIVE_SEARCH_RESULTS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SEARCH_ERRORS", function() { return RECEIVE_SEARCH_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_SEARCH_RESULTS", function() { return CLEAR_SEARCH_RESULTS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveSearchResults", function() { return receiveSearchResults; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveSearchErrors", function() { return receiveSearchErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearSearchResults", function() { return clearSearchResults; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSearchResults", function() { return fetchSearchResults; });
 /* harmony import */ var _util_search_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/search_api_util */ "./frontend/util/search_api_util.js");
 
 var RECEIVE_SEARCH_RESULTS = "RECEIVE_SEARCH_RESULTS";
 var RECEIVE_SEARCH_ERRORS = "RECEIVE_SEARCH_ERRORS";
+var CLEAR_SEARCH_RESULTS = "CLEAR_SEARCH_RESULTS";
 var receiveSearchResults = function receiveSearchResults(results) {
   return {
     type: RECEIVE_SEARCH_RESULTS,
@@ -595,6 +598,11 @@ var receiveSearchErrors = function receiveSearchErrors(errors) {
   return {
     type: RECEIVE_SEARCH_ERRORS,
     errors: errors
+  };
+};
+var clearSearchResults = function clearSearchResults() {
+  return {
+    type: CLEAR_SEARCH_RESULTS
   };
 };
 var fetchSearchResults = function fetchSearchResults(input) {
@@ -736,6 +744,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _genre_genre_show_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./genre/genre_show_container */ "./frontend/components/genre/genre_show_container.js");
 /* harmony import */ var _mylist_mylist_index_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./mylist/mylist_index_container */ "./frontend/components/mylist/mylist_index_container.js");
 /* harmony import */ var _nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./nav_bar/gallery_nav_bar_container */ "./frontend/components/nav_bar/gallery_nav_bar_container.js");
+/* harmony import */ var _search_page_search_page_index_container__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./search_page/search_page_index_container */ "./frontend/components/search_page/search_page_index_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -753,6 +762,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -818,6 +828,10 @@ function (_React$Component) {
           exact: true,
           path: "/browse/my-list",
           component: _mylist_mylist_index_container__WEBPACK_IMPORTED_MODULE_8__["default"]
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
+          exact: true,
+          path: "/search",
+          component: _search_page_search_page_index_container__WEBPACK_IMPORTED_MODULE_10__["default"]
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           render: function render() {
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
@@ -2009,7 +2023,7 @@ function (_React$Component) {
               className: "fas fa-chevron-left"
             }));
           }
-        } else if (this.props.pageType === "myList") {
+        } else if (this.props.pageType === "myList" || this.props.pageType === "search") {
           displayVideos = this.props.myListVideos.map(function (video, i) {
             var activeItem = _this2.state.open && _this2.state.videoIdx === i ? "active" : "";
             translate = _this2.handleTranslate(i);
@@ -2585,10 +2599,13 @@ function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var videos = this.props.videos;
+      var _this$props = this.props,
+          videos = _this$props.videos,
+          pageType = _this$props.pageType;
       var rows = [];
       var container = [];
       var rowActive;
+      var title = pageType === "myList" ? "My List" : "Search Results";
 
       for (var i = 0; i < videos.length; i++) {
         container.push(videos[i]);
@@ -2600,7 +2617,7 @@ function (_React$Component) {
             rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
               myListVideos: container,
               key: i,
-              pageType: "myList",
+              pageType: pageType,
               rowActive: rowActive,
               handleActiveRow: function handleActiveRow() {
                 return _this2.handleActiveRow(rowIdx);
@@ -2615,7 +2632,7 @@ function (_React$Component) {
             rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
               myListVideos: container,
               key: i,
-              pageType: "myList",
+              pageType: pageType,
               rowActive: rowActive,
               handleActiveRow: function handleActiveRow() {
                 return _this2.handleActiveRow(rowIdx);
@@ -2630,7 +2647,7 @@ function (_React$Component) {
         className: "browse_body"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "myList_index_title"
-      }, "My List"), rows);
+      }, title), rows);
     }
   }]);
 
@@ -2661,7 +2678,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var msp = function msp(state, ownProps) {
   return {
-    videos: _reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["myListsVideos"](state)
+    videos: _reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["myListsVideos"](state),
+    pageType: "myList"
   };
 };
 
@@ -3119,17 +3137,13 @@ function (_React$Component) {
     _this.update = _this.update.bind(_assertThisInitialized(_this));
     _this.handleClear = _this.handleClear.bind(_assertThisInitialized(_this));
     _this.handleExpand = _this.handleExpand.bind(_assertThisInitialized(_this));
-    _this.handleFetchResults = _this.handleFetchResults.bind(_assertThisInitialized(_this)); // this.debounceEvent = this.debounceEvent.bind(this);
-
+    _this.handleFetchResults = _this.handleFetchResults.bind(_assertThisInitialized(_this));
+    _this.search = Object(lodash__WEBPACK_IMPORTED_MODULE_2__["debounce"])(function (text) {
+      _this.handleFetchResults(text);
+    }, 400);
+    _this.search = _this.search.bind(_assertThisInitialized(_this));
     return _this;
-  } // debounceEvent(...args) {
-  //     this.debouncedEvent = debounce(...args);
-  //     return e => {
-  //         e.persist();
-  //         return this.debouncedEvent(e);
-  //     }
-  // }
-
+  }
 
   _createClass(Search, [{
     key: "update",
@@ -3162,27 +3176,35 @@ function (_React$Component) {
     }
   }, {
     key: "handleFetchResults",
-    value: function handleFetchResults() {
+    value: function handleFetchResults(text) {
       var _this3 = this;
 
-      return Object(lodash__WEBPACK_IMPORTED_MODULE_2__["debounce"])(function () {
-        _this3.props.fetchSearchResults(_this3.state).then(function () {
+      var input = {
+        input: text
+      };
+
+      if (text !== "") {
+        this.props.fetchSearchResults(input).then(function () {
           return _this3.props.history.push('/search');
         });
-      }, 200);
+      }
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps, prevState) {
-      if (prevState.input !== this.state.input) {
-        this.handleFetchResults();
-      } else if (prevState.input !== "" && this.state.input === "") {
+      // if (prevState.input !== this.state.input) {
+      //     // this.handleFetchResults();
+      // }
+      if (prevState.input !== "" && this.state.input === "") {
+        this.props.clearSearchResults();
         this.props.history.push('/browse');
       }
     }
   }, {
     key: "render",
     value: function render() {
+      var _this4 = this;
+
       var value = this.state.input === "" ? "Titles, descriptions, genres" : this.state.input;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "search_container"
@@ -3199,6 +3221,9 @@ function (_React$Component) {
         value: this.state.input,
         placeholder: "Titles, descriptions, genres",
         onChange: this.update('input'),
+        onKeyUp: function onKeyUp(e) {
+          return _this4.search(e.target.value);
+        },
         className: "search_form_input"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "search_form_input_clear_button",
@@ -3244,6 +3269,9 @@ var mdp = function mdp(dispatch) {
   return {
     fetchSearchResults: function fetchSearchResults(input) {
       return dispatch(Object(_actions_search_actions__WEBPACK_IMPORTED_MODULE_3__["fetchSearchResults"])(input));
+    },
+    clearSearchResults: function clearSearchResults() {
+      return dispatch(Object(_actions_search_actions__WEBPACK_IMPORTED_MODULE_3__["clearSearchResults"])());
     }
   };
 };
@@ -3349,6 +3377,37 @@ var Root = function Root(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Root);
+
+/***/ }),
+
+/***/ "./frontend/components/search_page/search_page_index_container.js":
+/*!************************************************************************!*\
+  !*** ./frontend/components/search_page/search_page_index_container.js ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _mylist_mylist_index_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../mylist/mylist_index.jsx */ "./frontend/components/mylist/mylist_index.jsx");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+
+
+
+
+var msp = function msp(state, ownProps) {
+  return {
+    videos: _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["searchResultVideos"](state),
+    pageType: "search"
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {};
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_mylist_mylist_index_jsx__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -4420,6 +4479,9 @@ var searchReducer = function searchReducer() {
       newState = Object.keys(action.results);
       return newState;
 
+    case _actions_search_actions__WEBPACK_IMPORTED_MODULE_1__["CLEAR_SEARCH_RESULTS"]:
+      return [];
+
     default:
       return oldState;
   }
@@ -4433,7 +4495,7 @@ var searchReducer = function searchReducer() {
 /*!****************************************!*\
   !*** ./frontend/reducers/selectors.js ***!
   \****************************************/
-/*! exports provided: defaultTenVideos, firstTenVideos, genreVideos, randGenreVideo, randGenreVideoId, randVideo, myListsHashByMediaId, myListsVideos */
+/*! exports provided: defaultTenVideos, firstTenVideos, genreVideos, randGenreVideo, randGenreVideoId, randVideo, myListsHashByMediaId, myListsVideos, searchResultVideos */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4446,6 +4508,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "randVideo", function() { return randVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "myListsHashByMediaId", function() { return myListsHashByMediaId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "myListsVideos", function() { return myListsVideos; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchResultVideos", function() { return searchResultVideos; });
 var defaultTenVideos = function defaultTenVideos(state) {
   var newArr = [];
   var defaultVideo = {};
@@ -4524,6 +4587,13 @@ var myListsVideos = function myListsVideos(state) {
   var myListsHash = myListsHashByMediaId(state);
   var videos = Object.keys(myListsHash).map(function (mediaId) {
     return state.entities.media[mediaId];
+  });
+  return videos;
+};
+var searchResultVideos = function searchResultVideos(state) {
+  var videos = [];
+  state.entities.searchResults.forEach(function (videoId) {
+    videos.push(state.entities.media[videoId]);
   });
   return videos;
 };

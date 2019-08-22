@@ -6,6 +6,7 @@ import * as Selectors from '../../reducers/selectors';
 const msp = (state, ownProps) => {
     return {
         videos: Selectors.myListsVideos(state),
+        pageType: "myList"
     }
 }
 

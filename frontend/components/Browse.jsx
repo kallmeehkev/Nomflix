@@ -8,6 +8,7 @@ import MediaShowContainer from './watch/media_show_container';
 import GenreShowContainer from './genre/genre_show_container';
 import MyListIndexContainer from './mylist/mylist_index_container';
 import GalleryNavBarContainer from './nav_bar/gallery_nav_bar_container';
+import SearchPageIndexContainer from './search_page/search_page_index_container';
 
 class Browse extends React.Component {
     constructor(props) {
@@ -31,6 +32,7 @@ class Browse extends React.Component {
                         <ProtectedRoute path="/browse/genre/:genreId" component={GenreShowContainer} />
                         <ProtectedRoute exact path="/browse" component={GalleryIndexContainer} />
                         <ProtectedRoute exact path="/browse/my-list" component={MyListIndexContainer} />
+                        <ProtectedRoute exact path="/search" component={SearchPageIndexContainer} />
                         <Route render={() => (<Redirect to="/browse" />)} />
                     </Switch>
                 </div>

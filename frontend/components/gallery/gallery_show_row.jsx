@@ -154,7 +154,7 @@ class GalleryShowRow extends React.Component {
                 if (this.state.rowIdx !== 0) {
                     buttonLeft = <button className="browse_row_click_left" onClick={this.handleArrowLeft}><i className="fas fa-chevron-left"></i></button>
                 }
-            } else if (this.props.pageType === "myList") {
+            } else if (this.props.pageType === "myList" || this.props.pageType === "search") {
                 displayVideos = this.props.myListVideos.map((video, i) => {
                     let activeItem = (this.state.open && this.state.videoIdx === i) ? "active" : "";
                     translate = this.handleTranslate(i)

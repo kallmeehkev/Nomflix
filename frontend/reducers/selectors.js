@@ -82,3 +82,11 @@ export const myListsVideos = (state) => {
     })
     return videos;
 }
+
+export const searchResultVideos = state => {
+    let videos = [];
+    state.entities.searchResults.forEach( videoId => {
+        videos.push(state.entities.media[videoId]);
+    })
+    return videos;
+}
