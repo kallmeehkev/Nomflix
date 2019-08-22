@@ -91,14 +91,16 @@ class NavBar extends React.Component  {
                                 </div>
                                 <div className="main_nav_bar_left_controls_home">{myList}</div>
                             </div>
-                            <SearchContainer/>
-                            <div className="browse_nav_bar_profile_pic browse_dropdown">
-                                <img src={this.props.fetchedProfile.photoUrl} className="browse_dropbtn"/>
-                                <i className="fas fa-caret-down down"></i>
-                                <div className="browse_dropdown-content">
-                                    <div className="browse_dropdown-arrow"><div><i className="fas fa-caret-up"></i></div></div>
-                                    <div className="browse_dropdown-list">
-                                        <button onClick={this.logout}>Sign out of Nomflix</button>
+                            <div className="main_browse_nav_bar_right">
+                                <SearchContainer/>
+                                <div className="browse_nav_bar_profile_pic browse_dropdown">
+                                    <img src={this.props.fetchedProfile.photoUrl} className="browse_dropbtn"/>
+                                    <i className="fas fa-caret-down down"></i>
+                                    <div className="browse_dropdown-content">
+                                        <div className="browse_dropdown-arrow"><div><i className="fas fa-caret-up"></i></div></div>
+                                        <div className="browse_dropdown-list">
+                                            <button onClick={this.logout}>Sign out of Nomflix</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

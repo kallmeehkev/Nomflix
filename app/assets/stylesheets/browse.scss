@@ -75,6 +75,13 @@
   width: 35%;
 }
 
+.main_browse_nav_bar_right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .main_browse_nav_bar_left a {
   display: flex;
   justify-content: center;
@@ -198,7 +205,7 @@ html:not([data-scroll='0']) {
   right: 0;
   min-height: 100px;
   max-width: 25vw;
-  top: 1.75vw;
+  top: 40px;
 }
 
 .browse_dropdown-arrow {

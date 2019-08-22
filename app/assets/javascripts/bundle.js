@@ -2971,7 +2971,9 @@ function (_React$Component) {
           className: "genres_vertical_container"
         }, thirdFourGenres)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "main_nav_bar_left_controls_home"
-        }, myList)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_search_container__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, myList)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "main_browse_nav_bar_right"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_search_container__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_nav_bar_profile_pic browse_dropdown"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: this.props.fetchedProfile.photoUrl,
@@ -2988,7 +2990,7 @@ function (_React$Component) {
           className: "browse_dropdown-list"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: this.logout
-        }, "Sign out of Nomflix")))))));
+        }, "Sign out of Nomflix"))))))));
       } else {
         switch (this.props.navType) {
           case 'login':
