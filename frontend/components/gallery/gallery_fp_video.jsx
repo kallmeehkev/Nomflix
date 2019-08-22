@@ -22,13 +22,13 @@ class GalleryFPVideo extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
+        if (this._isMounted) {
         if (prevProps.pageType === 'genreShow' && prevState.addedToMyList !== !!this.props.myListsHashByMediaId[this.state.randId]) {
             this.setState({ addedToMyList: !!this.props.myListsHashByMediaId[this.state.randId],
                 myList: this.props.myListsHashByMediaId[this.state.randId]
             })
         }
         if (prevProps.genreId !== this.props.genreId && prevProps.pageType === 'genreShow') {
-            debugger
             this.setState({randId: this.props.randId,
                 addedToMyList: !!this.props.myListsHashByMediaId[this.props.randId],
                 myList: this.props.myListsHashByMediaId[this.props.randId]})
@@ -40,6 +40,7 @@ class GalleryFPVideo extends React.Component {
                 myList: this.props.myListsHashByMediaId[this.props.browseVid.id]
             })
         }
+    }
     }
 
     componentWillUnmount() {

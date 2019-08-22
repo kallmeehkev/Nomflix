@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import NavBarIcon from './nav_bar_icon'
 import * as Images from '../images';
 //source for scrolling effect: https://pqina.nl/blog/applying-styles-based-on-the-user-scroll-position-with-smart-css/
-
+import SearchContainer from './search_container';
 
 class NavBar extends React.Component  {
     constructor(props) {
@@ -91,6 +91,7 @@ class NavBar extends React.Component  {
                                 </div>
                                 <div className="main_nav_bar_left_controls_home">{myList}</div>
                             </div>
+                            <SearchContainer/>
                             <div className="browse_nav_bar_profile_pic browse_dropdown">
                                 <img src={this.props.fetchedProfile.photoUrl} className="browse_dropbtn"/>
                                 <i className="fas fa-caret-down down"></i>
