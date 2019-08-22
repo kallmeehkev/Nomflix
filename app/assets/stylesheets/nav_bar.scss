@@ -19,14 +19,14 @@
     width: 22vw;
     border: 1px solid white;
     background-color: rgba(0,0,0,0.7);
-    height: 2.0vw;
+    height: 2.5vw;
 }
 
 .search_button {
     display:flex;
     justify-content: center;
     align-items: center;
-    margin: 0.3vw;
+    margin: 0.3vw 0.8vw 0.3vw 0.5vw;
 }
 .search_form {
     display: flex;
@@ -38,7 +38,7 @@
 }
 
 .fa-search {
-    font-size: 1.3vw;
+    font-size: 1.5vw;
 }
 
 .search_form_input {
@@ -46,7 +46,7 @@
 }
 
 .search_form_input_clear_button {
-    margin-right: 0.3vw;
-    font-size: 1.4vw;
+    margin-right: 0.5vw;
+    font-size: 1.5vw;
 }
 
