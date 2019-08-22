@@ -13,6 +13,11 @@ import SearchPageIndexContainer from './search_page/search_page_index_container'
 class Browse extends React.Component {
     constructor(props) {
         super(props)
+        // this.props.fetchGenres();
+        // this.props.fetchMediaGenres();
+    }
+
+    componentDidMount() {
         this.props.fetchGenres();
         this.props.fetchMediaGenres();
     }
@@ -20,7 +25,7 @@ class Browse extends React.Component {
     render() {
         if (this.props.media[12] || this.props.mediaGenres[140]) {
             let {genres, mediaGenres} = this.props;
-            let loggedInNavBar = this.props.currentUser ? <GalleryNavBarContainer /> : null;
+            let loggedInNavBar = this.props.currentUser && !this.props.location.pathname.includes("watch") ? <GalleryNavBarContainer /> : null;
             return (
                 <div>
                     {loggedInNavBar}

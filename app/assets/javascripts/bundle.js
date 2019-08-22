@@ -781,27 +781,26 @@ function (_React$Component) {
   _inherits(Browse, _React$Component);
 
   function Browse(props) {
-    var _this;
-
     _classCallCheck(this, Browse);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Browse).call(this, props));
-
-    _this.props.fetchGenres();
-
-    _this.props.fetchMediaGenres();
-
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(Browse).call(this, props)); // this.props.fetchGenres();
+    // this.props.fetchMediaGenres();
   }
 
   _createClass(Browse, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchGenres();
+      this.props.fetchMediaGenres();
+    }
+  }, {
     key: "render",
     value: function render() {
       if (this.props.media[12] || this.props.mediaGenres[140]) {
         var _this$props = this.props,
             genres = _this$props.genres,
             mediaGenres = _this$props.mediaGenres;
-        var loggedInNavBar = this.props.currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_9__["default"], null) : null;
+        var loggedInNavBar = this.props.currentUser && !this.props.location.pathname.includes("watch") ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_9__["default"], null) : null;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, loggedInNavBar, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
           exact: true,
           path: "/",
@@ -864,7 +863,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_genre_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/genre_actions */ "./frontend/actions/genre_actions.js");
 /* harmony import */ var _actions_media_genre_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/media_genre_actions */ "./frontend/actions/media_genre_actions.js");
-/* harmony import */ var _Browse__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Browse */ "./frontend/components/Browse.jsx");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _Browse__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Browse */ "./frontend/components/Browse.jsx");
+
 
 
 
@@ -889,7 +890,7 @@ var mdp = function mdp(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_Browse__WEBPACK_IMPORTED_MODULE_3__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_Browse__WEBPACK_IMPORTED_MODULE_4__["default"])));
 
 /***/ }),
 
