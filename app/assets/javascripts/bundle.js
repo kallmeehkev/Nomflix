@@ -3139,8 +3139,9 @@ function (_React$Component) {
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.update = _this.update.bind(_assertThisInitialized(_this));
     _this.handleClear = _this.handleClear.bind(_assertThisInitialized(_this));
-    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
+    _this.handleExpand = _this.handleExpand.bind(_assertThisInitialized(_this));
     _this.handleFetchResults = _this.handleFetchResults.bind(_assertThisInitialized(_this));
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     _this.search = Object(lodash__WEBPACK_IMPORTED_MODULE_2__["debounce"])(function (text) {
       _this.handleFetchResults(text);
     }, 400);
@@ -3172,10 +3173,22 @@ function (_React$Component) {
     }
   }, {
     key: "handleClick",
-    value: function handleClick() {
-      var state = this.state.active;
+    value: function handleClick(e) {
+      e.stopPropagation();
+
+      if (this.node.contains(e.target)) {
+        return;
+      } else {
+        this.setState({
+          active: false
+        });
+      }
+    }
+  }, {
+    key: "handleExpand",
+    value: function handleExpand() {
       this.setState({
-        active: !state
+        active: true
       });
     }
   }, {
@@ -3192,6 +3205,16 @@ function (_React$Component) {
           return _this3.props.history.push('/search');
         });
       }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      document.addEventListener('mousedown', this.handleClick, false);
+    }
+  }, {
+    key: "componentWillUnMount",
+    value: function componentWillUnMount() {
+      document.removeEventListener('mousedown', this.handleClick, false);
     }
   }, {
     key: "componentDidUpdate",
@@ -3213,13 +3236,15 @@ function (_React$Component) {
       var expanded = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "search_box"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.handleClick,
         className: "search_button"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-search"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit,
-        className: "search_form"
+        className: "search_form",
+        ref: function ref(node) {
+          return _this4.node = node;
+        }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.input,
@@ -3236,7 +3261,7 @@ function (_React$Component) {
         className: "fas fa-times"
       }))));
       var compressed = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.handleClick,
+        onClick: this.handleExpand,
         className: "search_button"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-search"

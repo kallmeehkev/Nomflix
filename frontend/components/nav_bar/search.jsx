@@ -11,8 +11,9 @@ class Search extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.update = this.update.bind(this);
         this.handleClear = this.handleClear.bind(this);
-        this.handleClick = this.handleClick.bind(this);
+        this.handleExpand = this.handleExpand.bind(this);
         this.handleFetchResults = this.handleFetchResults.bind(this);
+        this.handleClick = this.handleClick.bind(this);
         this.search = debounce( (text) => {
             this.handleFetchResults(text);
         }, 400)
@@ -34,9 +35,17 @@ class Search extends React.Component {
         this.setState({input: ""});
     }
 
-    handleClick() {
-        let state = this.state.active;
-        this.setState({active: !state});
+    handleClick(e) {
+        e.stopPropagation();
+        if (this.node.contains(e.target)) {
+            return;
+        } else {
+            this.setState({active: false});
+        }
+    }
+
+    handleExpand() {
+        this.setState({active: true});
     }
 
     handleFetchResults(text) {
@@ -45,6 +54,14 @@ class Search extends React.Component {
             this.props.fetchSearchResults(input)
                 .then(() => this.props.history.push('/search'))
         }
+    }
+
+    componentDidMount() {
+        document.addEventListener('mousedown', this.handleClick, false);
+    }
+
+    componentWillUnMount() {
+        document.removeEventListener('mousedown', this.handleClick, false);
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -61,16 +78,16 @@ class Search extends React.Component {
         let value = this.state.input === "" ? "Titles, descriptions, genres" : this.state.input
         let expanded = 
         <div className="search_box">
-                <button onClick={this.handleClick} className="search_button"><i className="fas fa-search"></i></button>
-                <form onSubmit={this.handleSubmit} className="search_form">
-                {/* <div className="search_form_box"> */}
-                <input type="text" value={this.state.input} placeholder="Titles, descriptions, genres" onChange={this.update('input')} onKeyUp={e => this.search(e.target.value)} className="search_form_input" />
-                {/* <input type="submit" value={this.props.formType} /> */}
-                <button className="search_form_input_clear_button" onClick={this.handleClear}><i className="fas fa-times"></i></button>
-                {/* </div> */}
+                {/* <button onClick={this.handleExpand} className="search_button"><i className="fas fa-search"></i></button> */}
+                <button className="search_button"><i className="fas fa-search"></i></button>
+                <form onSubmit={this.handleSubmit} className="search_form" ref={node => this.node = node}>
+                    <input type="text" value={this.state.input} placeholder="Titles, descriptions, genres" 
+                    onChange={this.update('input')} onKeyUp={e => this.search(e.target.value)} 
+                    className="search_form_input" />
+                    <button className="search_form_input_clear_button" onClick={this.handleClear}><i className="fas fa-times"></i></button>
                 </form>
         </div>
-        let compressed = <button onClick={this.handleClick} className="search_button"><i className="fas fa-search"></i></button>
+        let compressed = <button onClick={this.handleExpand} className="search_button"><i className="fas fa-search"></i></button>
         let search = this.state.active ? expanded : compressed;
         let containerState = this.state.active ? "search_container active" : "search_container";
         return(
