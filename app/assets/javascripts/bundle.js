@@ -3139,7 +3139,7 @@ function (_React$Component) {
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.update = _this.update.bind(_assertThisInitialized(_this));
     _this.handleClear = _this.handleClear.bind(_assertThisInitialized(_this));
-    _this.handleExpand = _this.handleExpand.bind(_assertThisInitialized(_this));
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     _this.handleFetchResults = _this.handleFetchResults.bind(_assertThisInitialized(_this));
     _this.search = Object(lodash__WEBPACK_IMPORTED_MODULE_2__["debounce"])(function (text) {
       _this.handleFetchResults(text);
@@ -3171,10 +3171,11 @@ function (_React$Component) {
       });
     }
   }, {
-    key: "handleExpand",
-    value: function handleExpand() {
+    key: "handleClick",
+    value: function handleClick() {
+      var state = this.state.active;
       this.setState({
-        active: true
+        active: !state
       });
     }
   }, {
@@ -3209,10 +3210,10 @@ function (_React$Component) {
       var _this4 = this;
 
       var value = this.state.input === "" ? "Titles, descriptions, genres" : this.state.input;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "search_container"
+      var expanded = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "search_box"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.handleExpand,
+        onClick: this.handleClick,
         className: "search_button"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-search"
@@ -3234,6 +3235,17 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-times"
       }))));
+      var compressed = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.handleClick,
+        className: "search_button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-search"
+      }));
+      var search = this.state.active ? expanded : compressed;
+      var containerState = this.state.active ? "search_container active" : "search_container";
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: containerState
+      }, search);
     }
   }]);
 

@@ -11,7 +11,7 @@ class Search extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.update = this.update.bind(this);
         this.handleClear = this.handleClear.bind(this);
-        this.handleExpand = this.handleExpand.bind(this);
+        this.handleClick = this.handleClick.bind(this);
         this.handleFetchResults = this.handleFetchResults.bind(this);
         this.search = debounce( (text) => {
             this.handleFetchResults(text);
@@ -34,8 +34,9 @@ class Search extends React.Component {
         this.setState({input: ""});
     }
 
-    handleExpand() {
-        this.setState({active: true});
+    handleClick() {
+        let state = this.state.active;
+        this.setState({active: !state});
     }
 
     handleFetchResults(text) {
@@ -58,17 +59,23 @@ class Search extends React.Component {
 
     render() {
         let value = this.state.input === "" ? "Titles, descriptions, genres" : this.state.input
-
-        return(
-            <div className="search_container">
-                <button onClick={this.handleExpand} className="search_button"><i className="fas fa-search"></i></button>
+        let expanded = 
+        <div className="search_box">
+                <button onClick={this.handleClick} className="search_button"><i className="fas fa-search"></i></button>
                 <form onSubmit={this.handleSubmit} className="search_form">
-                    {/* <div className="search_form_box"> */}
-                        <input type="text" value={this.state.input} placeholder="Titles, descriptions, genres" onChange={this.update('input')} onKeyUp={e => this.search(e.target.value)} className="search_form_input"/>
-                    {/* <input type="submit" value={this.props.formType} /> */}
-                        <button className="search_form_input_clear_button" onClick={this.handleClear}><i className="fas fa-times"></i></button>
-                    {/* </div> */}
+                {/* <div className="search_form_box"> */}
+                <input type="text" value={this.state.input} placeholder="Titles, descriptions, genres" onChange={this.update('input')} onKeyUp={e => this.search(e.target.value)} className="search_form_input" />
+                {/* <input type="submit" value={this.props.formType} /> */}
+                <button className="search_form_input_clear_button" onClick={this.handleClear}><i className="fas fa-times"></i></button>
+                {/* </div> */}
                 </form>
+        </div>
+        let compressed = <button onClick={this.handleClick} className="search_button"><i className="fas fa-search"></i></button>
+        let search = this.state.active ? expanded : compressed;
+        let containerState = this.state.active ? "search_container active" : "search_container";
+        return(
+            <div className={containerState}>
+                {search}
             </div>
         )
     }
