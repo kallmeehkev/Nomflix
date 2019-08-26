@@ -9,6 +9,7 @@ import GenreShowContainer from './genre/genre_show_container';
 import MyListIndexContainer from './mylist/mylist_index_container';
 import GalleryNavBarContainer from './nav_bar/gallery_nav_bar_container';
 import SearchPageIndexContainer from './search_page/search_page_index_container';
+import Modal from './modal/modal';
 
 class Browse extends React.Component {
     constructor(props) {

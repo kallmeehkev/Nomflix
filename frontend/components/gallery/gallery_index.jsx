@@ -21,6 +21,9 @@ class GalleryIndex extends React.Component {
     componentDidMount() {
         // this.props.fetchGenres();
         // this.props.fetchMediaGenres();
+        if (this.props.currentProfileId) {
+            this.props.openModal('profile');
+        }
         this.props.fetchMedium(14);
         document.addEventListener('scroll', _.throttle(this.checkIfNeedsMoreContent, 300), { passive: true });
         let genresArr = Object.values(this.props.genres);
@@ -36,7 +39,7 @@ class GalleryIndex extends React.Component {
     }
 
     componentWillUnmount() {
-        document.removeEventListener('scroll', _.throttle(this.checkIfNeedsMoreContent, 300), { passive: true });
+        document.removeEventListener('scroll', _.throttle(this.checkIfNeedsMoreContent, 200), { passive: true });
     }
 
     checkIfNeedsMoreContent() {
