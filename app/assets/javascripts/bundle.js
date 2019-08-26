@@ -832,7 +832,7 @@ function (_React$Component) {
             genres = _this$props.genres,
             mediaGenres = _this$props.mediaGenres;
         var loggedInNavBar = this.props.currentUser && !this.props.location.pathname.includes("watch") ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_9__["default"], null) : null;
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, loggedInNavBar, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, loggedInNavBar, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_11__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
           exact: true,
           path: "/",
           component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_5__["default"]
@@ -1404,7 +1404,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       // this.props.fetchGenres();
       // this.props.fetchMediaGenres();
-      if (this.props.currentProfileId) {
+      if (!this.props.currentProfileId) {
         this.props.openModal('profile');
       }
 
@@ -1442,7 +1442,7 @@ function (_React$Component) {
 
       var pixelsFromWindowBottomToBottom = 0 + document.documentElement.scrollHeight - window.scrollY - window.screen.height;
 
-      if (pixelsFromWindowBottomToBottom < 200) {
+      if (pixelsFromWindowBottomToBottom < 200 && !this.props.modal) {
         // Here it would go an ajax request
         var genresArr = Object.values(this.props.genres);
         var genresArrlimit3 = genresArr.filter(function (genre, i) {
@@ -1549,7 +1549,8 @@ var msp = function msp(state, ownProps) {
     genres: state.entities.genres,
     mediaGenres: state.entities.mediaGenres,
     fpVideo: state.entities.media[14] || {},
-    currentProfileId: state.ui.currentProfileId
+    currentProfileId: state.ui.currentProfileId,
+    modal: state.ui.modal
   };
 };
 
@@ -2586,7 +2587,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _profile_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./profile_modal */ "./frontend/components/modal/profile_modal.jsx");
-/* harmony import */ var _profile_modal__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_profile_modal__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
@@ -2610,7 +2610,7 @@ function Modal(_ref) {
     //   component = <SignupFormContainer />;
     //   break;
     case 'profile':
-      component = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profile_modal__WEBPACK_IMPORTED_MODULE_3___default.a, null);
+      component = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profile_modal__WEBPACK_IMPORTED_MODULE_3__["default"], null);
       break;
 
     default:
@@ -2618,14 +2618,11 @@ function Modal(_ref) {
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "modal-background",
-    onClick: closeModal
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "modal-child",
+    className: "modal_background",
     onClick: function onClick(e) {
       return e.stopPropagation();
     }
-  }, component));
+  }, component);
 }
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -2650,10 +2647,117 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 /*!*****************************************************!*\
   !*** ./frontend/components/modal/profile_modal.jsx ***!
   \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var _actions_profile_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/profile_actions */ "./frontend/actions/profile_actions.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
+
+
+
+
+var ProfileModal =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(ProfileModal, _React$Component);
+
+  function ProfileModal(props) {
+    var _this;
+
+    _classCallCheck(this, ProfileModal);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ProfileModal).call(this, props));
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
+    _this.scrollToTop = _this.scrollToTop.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(ProfileModal, [{
+    key: "handleClick",
+    value: function handleClick(e) {
+      e.stopPropagation();
+      this.props.closeModal();
+      this.props.setCurrentProfile(1);
+      this.scrollToTop();
+    }
+  }, {
+    key: "scrollToTop",
+    value: function scrollToTop() {
+      document.body.scrollTop = 0; // For Safari
+
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var profiles = this.props.profiles;
+      var thumbnail = profiles[0] ? profiles[0].photoUrl : "";
+      var name = profiles[0] ? profiles[0].name : "";
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: this.handleClick,
+        className: "profile_modal_container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile_modal_box"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile_modal_title"
+      }, "Who's watching?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile_modal_thumbnails_container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile_modal_thumbnail_box"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: thumbnail,
+        className: "profile_modal_thumbnail"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile_modal_name"
+      }, name)))));
+    }
+  }]);
+
+  return ProfileModal;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    profiles: Object.values(state.entities.profiles)
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    closeModal: function closeModal() {
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_1__["closeModal"])());
+    },
+    setCurrentProfile: function setCurrentProfile(profileId) {
+      return dispatch(Object(_actions_profile_actions__WEBPACK_IMPORTED_MODULE_2__["setCurrentProfile"])(profileId));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(ProfileModal));
 
 /***/ }),
 
@@ -3694,7 +3798,7 @@ function (_React$Component) {
       var user = Object.assign({}, this.state);
       this.props.processForm(user).then(function () {
         return _this2.props.setCurrentProfile(1);
-      });
+      }); //need to adjust once modal is worked out
     }
   }, {
     key: "update",
@@ -3708,15 +3812,11 @@ function (_React$Component) {
   }, {
     key: "demoLogin",
     value: function demoLogin() {
-      var _this4 = this;
-
       var demoUser = {
         email: "user@email.com",
         password: "password"
       };
-      this.props.login(demoUser).then(function () {
-        return _this4.props.setCurrentProfile(1);
-      }); //.then(() => this.props.history.push('/browse'));
+      this.props.login(demoUser); //.then(() => this.props.setCurrentProfile(1))
     }
   }, {
     key: "componentWillUnmount",

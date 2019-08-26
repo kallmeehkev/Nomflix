@@ -12,6 +12,7 @@ const msp = (state, ownProps) => {
         mediaGenres: state.entities.mediaGenres,
         fpVideo: state.entities.media[14] || {},
         currentProfileId: state.ui.currentProfileId,
+        modal: state.ui.modal
     }
 }
 

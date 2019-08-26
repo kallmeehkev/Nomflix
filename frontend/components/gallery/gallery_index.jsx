@@ -21,7 +21,7 @@ class GalleryIndex extends React.Component {
     componentDidMount() {
         // this.props.fetchGenres();
         // this.props.fetchMediaGenres();
-        if (this.props.currentProfileId) {
+        if (!this.props.currentProfileId) {
             this.props.openModal('profile');
         }
         this.props.fetchMedium(14);
@@ -45,7 +45,7 @@ class GalleryIndex extends React.Component {
     checkIfNeedsMoreContent() {
         let pixelsFromWindowBottomToBottom = 0 + document.documentElement.scrollHeight - window.scrollY - window.screen.height;
 
-        if (pixelsFromWindowBottomToBottom < 200) {
+        if (pixelsFromWindowBottomToBottom < 200 && !this.props.modal) {
             // Here it would go an ajax request
             let genresArr = Object.values(this.props.genres);
             let genresArrlimit3 = genresArr.filter((genre, i) => {

@@ -30,6 +30,7 @@ class Browse extends React.Component {
             return (
                 <div>
                     {loggedInNavBar}
+                    <Modal />
                     <Switch>
                         <AuthRoute exact path="/" component={SplashContainer} />
                         <AuthRoute exact path="/login" component={SessionPage} />
