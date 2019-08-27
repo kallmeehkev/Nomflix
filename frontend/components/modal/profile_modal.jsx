@@ -28,12 +28,12 @@ class ProfileModal extends React.Component {
         let thumbnail = (profiles[0]) ? profiles[0].photoUrl : "";
         let name = (profiles[0]) ? profiles[0].name : "";
         return(
-            <div onClick={this.handleClick} className="profile_modal_container">
+            <div className="profile_modal_container">
                 <div className="profile_modal_box">
                     <div className="profile_modal_title">Who's watching?</div>
                     <div className="profile_modal_thumbnails_container">
                         <div className="profile_modal_thumbnail_box">
-                            <img src={thumbnail} className="profile_modal_thumbnail"/>
+                            <button onClick={this.handleClick}><img src={thumbnail} className="profile_modal_thumbnail" /></button>
                             <div className="profile_modal_name">{name}</div> 
                         </div>
                     </div>

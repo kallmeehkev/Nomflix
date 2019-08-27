@@ -2718,7 +2718,6 @@ function (_React$Component) {
       var thumbnail = profiles[0] ? profiles[0].photoUrl : "";
       var name = profiles[0] ? profiles[0].name : "";
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        onClick: this.handleClick,
         className: "profile_modal_container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile_modal_box"
@@ -2728,10 +2727,12 @@ function (_React$Component) {
         className: "profile_modal_thumbnails_container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile_modal_thumbnail_box"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.handleClick
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: thumbnail,
         className: "profile_modal_thumbnail"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile_modal_name"
       }, name)))));
     }
