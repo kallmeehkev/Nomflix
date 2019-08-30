@@ -23,24 +23,26 @@ class GalleryFPVideo extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (this._isMounted) {
-        if (prevProps.pageType === 'genreShow' && prevState.addedToMyList !== !!this.props.myListsHashByMediaId[this.state.randId]) {
-            this.setState({ addedToMyList: !!this.props.myListsHashByMediaId[this.state.randId],
-                myList: this.props.myListsHashByMediaId[this.state.randId]
-            })
+            if (prevProps.pageType === 'genreShow' && prevState.addedToMyList !== !!this.props.myListsHashByMediaId[this.state.randId]) {
+                this.setState({ addedToMyList: !!this.props.myListsHashByMediaId[this.state.randId],
+                    myList: this.props.myListsHashByMediaId[this.state.randId]
+                })
+            }
+
+            if (prevProps.genreId !== this.props.genreId && prevProps.pageType === 'genreShow') {
+                this.setState({randId: this.props.randId,
+                    addedToMyList: !!this.props.myListsHashByMediaId[this.props.randId],
+                    myList: this.props.myListsHashByMediaId[this.props.randId]})
+            }
+
+            if (prevProps.pageType !== 'genreShow' && Object.values(prevProps.myListsHashByMediaId).length !== Object.values(this.props.myListsHashByMediaId).length) {
+                this.setState({
+                    randId: this.props.randId,
+                    addedToMyList: !!this.props.myListsHashByMediaId[this.props.browseVid.id],
+                    myList: this.props.myListsHashByMediaId[this.props.browseVid.id]
+                })
+            }
         }
-        if (prevProps.genreId !== this.props.genreId && prevProps.pageType === 'genreShow') {
-            this.setState({randId: this.props.randId,
-                addedToMyList: !!this.props.myListsHashByMediaId[this.props.randId],
-                myList: this.props.myListsHashByMediaId[this.props.randId]})
-        }
-        if (prevProps.pageType !== 'genreShow' && Object.values(prevProps.myListsHashByMediaId).length !== Object.values(this.props.myListsHashByMediaId).length) {
-            this.setState({
-                randId: this.props.randId,
-                addedToMyList: !!this.props.myListsHashByMediaId[this.props.browseVid.id],
-                myList: this.props.myListsHashByMediaId[this.props.browseVid.id]
-            })
-        }
-    }
     }
 
     componentWillUnmount() {
@@ -70,17 +72,22 @@ class GalleryFPVideo extends React.Component {
     }
 
     render() {
+
         const randFPVideo = this.props.media[this.state.randId] || {id: 0};
+        
         let addVideo = <div className="play_button_container"><button onClick={this.addToMyList} className="link">
             <div className="play_button"><i className="fas fa-plus"></i></div><div className="play_button_text">My List</div></button></div>;
         let removeVideo = <div className="play_button_container"><button onClick={this.removeFromMyList} className="link">
             <div className="play_button"><i className="fas fa-check"></i></div><div className="play_button_text">My List
             </div></button></div>;
         let myListStatus = this.state.addedToMyList ? removeVideo : addVideo;
+
         if (randFPVideo.id !== 0 || this.props.browseVid.id !== 0) {
+
             let video = this.props.pageType === 'genreShow' ? randFPVideo : this.props.browseVid
             let fpVideoStyle = { backgroundImage: 'url(' + video.thumbnailUrl + ')' };
             let genreTag = "";
+
             if (this.props.pageType === 'genreShow') {
                 genreTag = (<div className="genre_tag_container">
                     <div className="genre_tag_text">Genre</div>
@@ -95,6 +102,7 @@ class GalleryFPVideo extends React.Component {
             } else {
                 description = ""
             }
+
             return (
                 <div className="browse_fp_video_container">
                     <div className="browse_fp_video" style={fpVideoStyle}>
