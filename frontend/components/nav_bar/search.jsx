@@ -90,7 +90,7 @@ class Search extends React.Component {
             </div>
         let compressed = <button onClick={this.handleExpand} className="search_button"><i className="fas fa-search"></i></button>
         let search = this.state.active ? expanded : compressed;
-        let containerState = this.state.active ? "search_container active" : "search_container";
+        let containerState = this.state.active ? "search_container active_search" : "search_container";
         return(
             <div className={containerState}>
                 {search}

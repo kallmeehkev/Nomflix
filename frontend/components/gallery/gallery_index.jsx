@@ -19,8 +19,6 @@ class GalleryIndex extends React.Component {
     }
 
     componentDidMount() {
-        // this.props.fetchGenres();
-        // this.props.fetchMediaGenres();
         if (!this.props.currentProfileId) {
             this.props.openModal('profile');
         }

@@ -1402,8 +1402,6 @@ function (_React$Component) {
   _createClass(GalleryIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      // this.props.fetchGenres();
-      // this.props.fetchMediaGenres();
       if (!this.props.currentProfileId) {
         this.props.openModal('profile');
       }
@@ -3499,7 +3497,7 @@ function (_React$Component) {
         className: "fas fa-search"
       }));
       var search = this.state.active ? expanded : compressed;
-      var containerState = this.state.active ? "search_container active" : "search_container";
+      var containerState = this.state.active ? "search_container active_search" : "search_container";
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: containerState
       }, search);
