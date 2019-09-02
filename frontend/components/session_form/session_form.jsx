@@ -17,7 +17,7 @@ class SessionForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         const user = Object.assign({}, this.state);
-        this.props.processForm(user).then(() => this.props.setCurrentProfile(1)); //need to adjust once modal is worked out
+        this.props.processForm(user)  //.then(() => this.props.setCurrentProfile(1)); 
     }
 
     update(field) {

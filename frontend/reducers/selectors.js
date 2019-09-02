@@ -90,3 +90,7 @@ export const searchResultVideos = state => {
     })
     return videos;
 }
+
+export const randomProfileThumbnail = () => {
+    
+}

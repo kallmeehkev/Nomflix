@@ -54,9 +54,11 @@
 .profile_modal_thumbnail {
     width: 7.5vw;
     height: 7.5vw;
+    border: 3px solid rgb(32, 32, 32);
 }
 .profile_modal_thumbnail:hover {
     cursor: pointer;
+    border: 3px solid white;
 }
 
 .profile_modal_name {

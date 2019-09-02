@@ -3791,21 +3791,17 @@ function (_React$Component) {
   _createClass(SessionForm, [{
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      var _this2 = this;
-
       e.preventDefault();
       var user = Object.assign({}, this.state);
-      this.props.processForm(user).then(function () {
-        return _this2.props.setCurrentProfile(1);
-      }); //need to adjust once modal is worked out
+      this.props.processForm(user); //.then(() => this.props.setCurrentProfile(1)); 
     }
   }, {
     key: "update",
     value: function update(field) {
-      var _this3 = this;
+      var _this2 = this;
 
       return function (e) {
-        return _this3.setState(_defineProperty({}, field, e.target.value));
+        return _this2.setState(_defineProperty({}, field, e.target.value));
       };
     }
   }, {
@@ -4830,7 +4826,7 @@ var searchReducer = function searchReducer() {
 /*!****************************************!*\
   !*** ./frontend/reducers/selectors.js ***!
   \****************************************/
-/*! exports provided: defaultTenVideos, firstTenVideos, genreVideos, randGenreVideo, randGenreVideoId, randVideo, myListsHashByMediaId, myListsVideos, searchResultVideos */
+/*! exports provided: defaultTenVideos, firstTenVideos, genreVideos, randGenreVideo, randGenreVideoId, randVideo, myListsHashByMediaId, myListsVideos, searchResultVideos, randomProfileThumbnail */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4844,6 +4840,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "myListsHashByMediaId", function() { return myListsHashByMediaId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "myListsVideos", function() { return myListsVideos; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchResultVideos", function() { return searchResultVideos; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "randomProfileThumbnail", function() { return randomProfileThumbnail; });
 var defaultTenVideos = function defaultTenVideos(state) {
   var newArr = [];
   var defaultVideo = {};
@@ -4932,6 +4929,7 @@ var searchResultVideos = function searchResultVideos(state) {
   });
   return videos;
 };
+var randomProfileThumbnail = function randomProfileThumbnail() {};
 
 /***/ }),
 

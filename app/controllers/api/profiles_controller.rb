@@ -4,6 +4,7 @@ class Api::ProfilesController < ApplicationController
     def create
         @profile = Profile.new(profile_params)
         @profile.user_id = current_user.id
+        @profile.photo.attach(params[:thumbnail])
         if @profile.save
             set_current_profile(@profile)
             render :show
@@ -48,6 +49,6 @@ class Api::ProfilesController < ApplicationController
 
 private
     def profile_params
-        params.require(:profile).permit(:name, :maturity_preference, :set, :unset)
+        params.require(:profile).permit(:name, :maturity_preference, :set, :unset, :thumbnail)
     end
 end
