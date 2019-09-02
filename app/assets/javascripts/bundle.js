@@ -2730,6 +2730,17 @@ function (_React$Component) {
       var profiles = this.props.profiles;
       var thumbnail = profiles[0] ? profiles[0].photoUrl : "";
       var name = profiles[0] ? profiles[0].name : "";
+      var profileModalBox;
+      var createProfileModalBox;
+
+      if (this.state.profileFormOpen) {
+        profileModalBox = "profile_modal_box";
+        createProfileModalBox = "create_profile_modal_box active";
+      } else {
+        profileModalBox = "profile_modal_box active";
+        createProfileModalBox = "create_profile_modal_box";
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile_modal_container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2738,7 +2749,7 @@ function (_React$Component) {
         src: _images__WEBPACK_IMPORTED_MODULE_5__["nomflix_logo_URL"],
         className: "browse_splash_logo"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "profile_modal_box"
+        className: profileModalBox
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile_modal_title"
       }, "Who's watching?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2755,13 +2766,16 @@ function (_React$Component) {
       }, name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile_modal_thumbnail_box"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.handleSelectProfile
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: thumbnail,
+        onClick: this.handleCreateProfile
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile_modal_thumbnail"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-plus-circle"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile_modal_name"
-      }, name)))));
+      }, "Add Profile")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: createProfileModalBox
+      }));
     }
   }]);
 
