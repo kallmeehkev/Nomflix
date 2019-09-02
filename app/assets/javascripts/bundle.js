@@ -2655,6 +2655,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
 /* harmony import */ var _actions_profile_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/profile_actions */ "./frontend/actions/profile_actions.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+/* harmony import */ var _images__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../images */ "./frontend/components/images.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2678,6 +2680,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
 var ProfileModal =
 /*#__PURE__*/
 function (_React$Component) {
@@ -2689,18 +2693,29 @@ function (_React$Component) {
     _classCallCheck(this, ProfileModal);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProfileModal).call(this, props));
-    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
+    _this.state = {
+      profileFormOpen: false
+    };
+    _this.handleSelectProfile = _this.handleSelectProfile.bind(_assertThisInitialized(_this));
     _this.scrollToTop = _this.scrollToTop.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(ProfileModal, [{
-    key: "handleClick",
-    value: function handleClick(e) {
+    key: "handleSelectProfile",
+    value: function handleSelectProfile(e) {
       e.stopPropagation();
       this.props.closeModal();
       this.props.setCurrentProfile(1);
       this.scrollToTop();
+    }
+  }, {
+    key: "handleCreateProfile",
+    value: function handleCreateProfile(e) {
+      e.stopPropagation();
+      this.setState({
+        profileFormOpen: true
+      });
     }
   }, {
     key: "scrollToTop",
@@ -2718,6 +2733,11 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile_modal_container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal_splash_logo_container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: _images__WEBPACK_IMPORTED_MODULE_5__["nomflix_logo_URL"],
+        className: "browse_splash_logo"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile_modal_box"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile_modal_title"
@@ -2726,7 +2746,16 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile_modal_thumbnail_box"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.handleClick
+        onClick: this.handleSelectProfile
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: thumbnail,
+        className: "profile_modal_thumbnail"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile_modal_name"
+      }, name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile_modal_thumbnail_box"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.handleSelectProfile
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: thumbnail,
         className: "profile_modal_thumbnail"
@@ -4929,7 +4958,10 @@ var searchResultVideos = function searchResultVideos(state) {
   });
   return videos;
 };
-var randomProfileThumbnail = function randomProfileThumbnail() {};
+var thumbnailArr = ["https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon1.png", "https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon2.png", "https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon3.png", "https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon4.png", "https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon5.png", "https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon6.png", "https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon7.png", "https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon8.png", "https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon9.png", "https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon10.png", "https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon11.png", "https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon12.png"];
+var randomProfileThumbnail = function randomProfileThumbnail() {
+  return thumbnailArr[Math.floor(Math.random() * thumbnailArr.length)];
+};
 
 /***/ }),
 

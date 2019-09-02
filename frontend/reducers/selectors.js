@@ -91,6 +91,21 @@ export const searchResultVideos = state => {
     return videos;
 }
 
+const thumbnailArr = [
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon1.png",
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon2.png",
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon3.png",
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon4.png",
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon5.png",
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon6.png",
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon7.png",
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon8.png",
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon9.png",
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon10.png",
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon11.png",
+"https://nomflix-seed.s3-us-west-1.amazonaws.com/profilephotos/netflixProfileIcon12.png"
+]
+
 export const randomProfileThumbnail = () => {
-    
+    return thumbnailArr[Math.floor(Math.random() * thumbnailArr.length)]
 }
