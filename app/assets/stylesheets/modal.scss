@@ -43,7 +43,7 @@
 .create_profile_modal_box {
     display: none;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 }
 
@@ -97,4 +97,22 @@
     font-size: 1.5vw;
     font-weight: 600;
     margin: 1vw;
+}
+
+.create_profile_modal_box h1 {
+    font-size: 4vw;
+}
+
+.create_profile_modal_box h2 {
+    font-size: 1.3vw;
+    color: #666;
+    margin: 1vw 0;
+}
+
+.create_profile_form_box {
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }

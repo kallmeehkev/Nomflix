@@ -2659,6 +2659,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _images__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../images */ "./frontend/components/images.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -2694,14 +2696,27 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProfileModal).call(this, props));
     _this.state = {
-      profileFormOpen: false
+      profileFormOpen: false,
+      randomThumbnail: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_4__["randomProfileThumbnail"])(),
+      input: ""
     };
     _this.handleSelectProfile = _this.handleSelectProfile.bind(_assertThisInitialized(_this));
     _this.scrollToTop = _this.scrollToTop.bind(_assertThisInitialized(_this));
+    _this.update = _this.update.bind(_assertThisInitialized(_this));
+    _this.handleCreateProfile = _this.handleCreateProfile.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(ProfileModal, [{
+    key: "update",
+    value: function update(type) {
+      var _this2 = this;
+
+      return function (e) {
+        _this2.setState(_defineProperty({}, type, e.target.value));
+      };
+    }
+  }, {
     key: "handleSelectProfile",
     value: function handleSelectProfile(e) {
       e.stopPropagation();
@@ -2729,6 +2744,7 @@ function (_React$Component) {
     value: function render() {
       var profiles = this.props.profiles;
       var thumbnail = profiles[0] ? profiles[0].photoUrl : "";
+      var randomThumbnail = Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_4__["randomProfileThumbnail"])();
       var name = profiles[0] ? profiles[0].name : "";
       var profileModalBox;
       var createProfileModalBox;
@@ -2775,7 +2791,19 @@ function (_React$Component) {
         className: "profile_modal_name"
       }, "Add Profile")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: createProfileModalBox
-      }));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Add Profile"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Add a profile for another person watching Nomflix."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "create_profile_form_box"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: randomThumbnail,
+        className: "profile_modal_thumbnail"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        onChange: this.update('input'),
+        placeholder: "Name",
+        className: "create_profile_input"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "create_profile_button_box"
+      })));
     }
   }]);
 

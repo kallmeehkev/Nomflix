@@ -12,9 +12,19 @@ class ProfileModal extends React.Component {
         super(props);
         this.state = {
             profileFormOpen: false,
+            randomThumbnail: randomProfileThumbnail(),
+            input: "",
         }
         this.handleSelectProfile = this.handleSelectProfile.bind(this);
         this.scrollToTop = this.scrollToTop.bind(this);
+        this.update = this.update.bind(this);
+        this.handleCreateProfile = this.handleCreateProfile.bind(this);
+    }
+
+    update(type) {
+        return (e) => {
+            this.setState({ [type]: e.target.value })
+        }
     }
 
     handleSelectProfile(e) {
@@ -39,6 +49,7 @@ class ProfileModal extends React.Component {
     render() {
         let {profiles} = this.props
         let thumbnail = (profiles[0]) ? profiles[0].photoUrl : "";
+        let randomThumbnail = randomProfileThumbnail();
         let name = (profiles[0]) ? profiles[0].name : "";
         let profileModalBox;
         let createProfileModalBox;
@@ -66,7 +77,16 @@ class ProfileModal extends React.Component {
                     </div>
                 </div>
                 <div className={createProfileModalBox}>
+                    <h1>Add Profile</h1>
+                    <h2>Add a profile for another person watching Nomflix.</h2>
+                    <div className="create_profile_form_box">
+                        <img src={randomThumbnail} className="profile_modal_thumbnail" />
+                        <input type="text" onChange={this.update('input')} placeholder="Name"
+                            className="create_profile_input"/>
+                    </div>
+                    <div className="create_profile_button_box">
 
+                    </div>
                 </div>
             </div>
         )
