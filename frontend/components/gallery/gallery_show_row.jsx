@@ -168,7 +168,6 @@ class GalleryShowRow extends React.Component {
             return (
                 <div className="browse_row_container">
                     <h2><span className="browse_row_title">{rowTitle}</span></h2>
-                    {/* <div className="browse_row_content"> */}
                         <div className="browse_row_slider" style={width}>
                             {buttonLeft}
                             <div className="browse_row_slider_wrapper">
@@ -176,7 +175,6 @@ class GalleryShowRow extends React.Component {
                             </div>
                             {buttonRight}
                         </div>
-                    {/* </div> */}
                     <div className={this.state.open ? "show_row_item_content active" : "show_row_item_content"}>
                         <GalleryShowRowItemContentContainer content={content} handleClose={this.handleClose}/>
                     </div>
