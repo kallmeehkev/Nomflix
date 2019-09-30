@@ -1,8 +1,8 @@
 import React from 'react';
-import GalleryNavBarContainer from '../nav_bar/gallery_nav_bar_container';
 import { Link } from 'react-router-dom';
 import GalleryShowRowContainer from '../gallery/gallery_show_row_container.js';
 import GalleryFPVideoContainer from '../gallery/gallery_fp_video_container';
+
 class GenreShow extends React.Component {
     constructor(props) {
         super(props)
@@ -43,7 +43,6 @@ class GenreShow extends React.Component {
                 rowActive={rowActive} handleActiveRow={() => this.handleActiveRow(0)}/>
             return (
                 <div className="browse_body">
-                    {/* <GalleryNavBarContainer path={this.props.match.path} /> */}
                     <GalleryFPVideoContainer genreId={Number(this.props.match.params.genreId)} pageType="genreShow"/>
                     {showOneRow}
                 </div>
@@ -52,7 +51,6 @@ class GenreShow extends React.Component {
         else {
             return (
                 <div className="browse_body">
-                    {/* <GalleryNavBarContainer /> */}
                     <div className="browse_fp_video_container">Genre frontpage vid</div>
                     Genre Show
                 </div>
