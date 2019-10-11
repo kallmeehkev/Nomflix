@@ -14,8 +14,6 @@ import Modal from './modal/modal';
 class Browse extends React.Component {
     constructor(props) {
         super(props)
-        // this.props.fetchGenres();
-        // this.props.fetchMediaGenres();
     }
 
     componentDidMount() {
