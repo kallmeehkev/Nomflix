@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Route, Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
+import LoginForm from './login_form';
 
 class SessionForm extends React.Component {
     constructor(props) {
@@ -46,19 +47,34 @@ class SessionForm extends React.Component {
             authRouteText = "Already a user?";
             authRoute = <Link to="/login">Log in here</Link>;
         }
-
-
+        // let loginForm = 
+        //   <LoginForm 
+        //     formType={formType}
+            
+        //     />
         let loginForm = (
             <div className="login_body">
                 <div className="login_form">
                     <div className="login_form_content">
                         <h1>{formType}</h1>
                         <form onSubmit={this.handleSubmit}>
-                            <div >
-                                <input type="email" value={this.state.email} placeholder="Email" onChange={this.update('email')} className="login_form_input a" />
+                            <div>
+                                <input  
+                                  type="email" 
+                                  value={this.state.email} 
+                                  placeholder="Email" 
+                                  onChange={this.update('email')} 
+                                  className="login_form_input a" 
+                                />
                             </div>
-                            <div >
-                                <input type="password" value={this.state.password} placeholder="Password" onChange={this.update('password')} className="login_form_input b" />
+                            <div>
+                                <input 
+                                  type="password" 
+                                  value={this.state.password} 
+                                  placeholder="Password" 
+                                  onChange={this.update('password')} 
+                                  className="login_form_input b" 
+                                  />
                             </div>
                             <input type="submit" value={formType} className="login_form_buttons not_demo_button" />
                         </form>
@@ -102,9 +118,6 @@ class SessionForm extends React.Component {
                 </div>
             </div>
         )
-
-
-
         form = (this.props.match.path === '/login' ? loginForm : signupForm);
         return (
             <div>{form}</div>

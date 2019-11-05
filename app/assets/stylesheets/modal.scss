@@ -36,10 +36,6 @@
     justify-content: center;
 }
 
-.profile_modal_box .active {
-    display: flex;
-}
-
 .create_profile_modal_box {
     display: none;
     flex-direction: column;
@@ -47,7 +43,7 @@
     justify-content: center;
 }
 
-.create_profile_modal_box .active {
+.active {
     display: flex;
 }
 

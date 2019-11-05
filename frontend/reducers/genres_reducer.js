@@ -13,3 +13,4 @@ const genresReducer = (oldState = { 1: { name: "" } }, action) => {
 }
 
 export default genresReducer;
+

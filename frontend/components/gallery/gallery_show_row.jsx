@@ -81,7 +81,7 @@ class GalleryShowRow extends React.Component {
                 outline: '2px solid white'
             }
         } else if (inactiveDropdownAndHovered) {
-            if (this.state.hoveredVideoIdx % 5 === 0) {
+            if (this.state.hoveredVideoIdx % 5 === 0) { //leftmost shown video is hovered
                 if (i > this.state.hoveredVideoIdx) {
                     translate = {
                         transform: 'translateX(' + (this.state.rowIdx * -92 + 9.4) + 'vw)',
@@ -95,7 +95,7 @@ class GalleryShowRow extends React.Component {
                         transform: 'translateX(' + (this.state.rowIdx * -92 + 4.6) + 'vw)',
                     }
                 }
-            } else if (this.state.hoveredVideoIdx % 5 === 4) {
+            } else if (this.state.hoveredVideoIdx % 5 === 4) { //rightmost shown video is hovered
                 if (i > this.state.hoveredVideoIdx) {
                     translate = {
                         transform: 'translateX(' + (this.state.rowIdx * -92) + 'vw)',
@@ -109,8 +109,8 @@ class GalleryShowRow extends React.Component {
                         transform: 'translateX(' + (this.state.rowIdx * -92 - 4.6) + 'vw)',
                     }
                 }
-            } else {
-                if (i > this.state.hoveredVideoIdx) {
+            } else {  //any other 3 in the middle are hovered
+                if (i > this.state.hoveredVideoIdx) { 
                     translate = {
                         transform: 'translateX(' + (this.state.rowIdx * -92 + 4.6) + 'vw)',
                     }
@@ -188,13 +188,13 @@ class GalleryShowRow extends React.Component {
             return (
                 <div className="browse_row_container">
                     <h2><span className="browse_row_title">{rowTitle}</span></h2>
-                        <div className="browse_row_slider" style={width}>
-                            {buttonLeft}
-                            <div className="browse_row_slider_wrapper">
-                                {displayVideos}
-                            </div>
-                            {buttonRight}
+                    <div className="browse_row_slider" style={width}>
+                        {buttonLeft}
+                        <div className="browse_row_slider_wrapper">
+                            {displayVideos}
                         </div>
+                        {buttonRight}
+                    </div>
                     <div className={this.state.open ? "show_row_item_content active" : "show_row_item_content"}>
                         <GalleryShowRowItemContentContainer 
                           content={content} 

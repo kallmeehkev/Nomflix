@@ -35,7 +35,6 @@ class GalleryIndex extends React.Component {
         let pixelsFromWindowBottomToBottom = 0 + document.documentElement.scrollHeight - window.scrollY - window.screen.height;
 
         if (pixelsFromWindowBottomToBottom < 200 && !this.props.modal) {
-            // Here it would go an ajax request
             let genresArr = Object.values(this.props.genres);
             let genresArrlimit3 = genresArr.filter((genre, i) => {
                 let bottomLimit = this.state.genresFetched % 12;

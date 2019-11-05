@@ -47,10 +47,10 @@ class ProfileModal extends React.Component {
     }
 
     render() {
-        let {profiles} = this.props
+        let {profiles} = this.props;
         let thumbnail = (profiles[0]) ? profiles[0].photoUrl : "";
-        let randomThumbnail = randomProfileThumbnail();
-        let name = (profiles[0]) ? profiles[0].name : "";
+        let {randomThumbnail} = this.state;
+        let name = profiles[0].name;
         let profileModalBox;
         let createProfileModalBox;
         if (this.state.profileFormOpen) {

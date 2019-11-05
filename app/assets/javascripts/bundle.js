@@ -727,26 +727,12 @@ var logout = function logout(user) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _session_form_session_page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./session_form/session_page */ "./frontend/components/session_form/session_page.jsx");
-/* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.jsx");
-/* harmony import */ var _gallery_gallery_index_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./gallery/gallery_index_container */ "./frontend/components/gallery/gallery_index_container.js");
-/* harmony import */ var _splash_splash_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./splash/splash_container */ "./frontend/components/splash/splash_container.js");
-/* harmony import */ var _watch_media_show_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./watch/media_show_container */ "./frontend/components/watch/media_show_container.js");
-/* harmony import */ var _genre_genre_show_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./genre/genre_show_container */ "./frontend/components/genre/genre_show_container.js");
-/* harmony import */ var _Browse_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Browse_container */ "./frontend/components/Browse_container.js");
-
-
-
-
-
-
-
+/* harmony import */ var _Browse_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Browse_container */ "./frontend/components/Browse_container.js");
 
 
 
 var App = function App() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Browse_container__WEBPACK_IMPORTED_MODULE_8__["default"], null));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Browse_container__WEBPACK_IMPORTED_MODULE_1__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -814,8 +800,7 @@ function (_React$Component) {
   function Browse(props) {
     _classCallCheck(this, Browse);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Browse).call(this, props)); // this.props.fetchGenres();
-    // this.props.fetchMediaGenres();
+    return _possibleConstructorReturn(this, _getPrototypeOf(Browse).call(this, props));
   }
 
   _createClass(Browse, [{
@@ -1413,14 +1398,7 @@ function (_React$Component) {
       var genresArr = Object.values(this.props.genres);
       var genresArrlimit3 = genresArr.filter(function (genre, i) {
         return i < 3;
-      }); // let that = this;
-      // let showRowsFirstTwo = genresArrlimit2.map((genre, i) => {
-      //     let numCurrentlyFetched = that.state.genresFetched;
-      //     let rowActive = (that.state.open && (i === that.state.activeRowIdx));
-      //     return <GalleryShowRowContainer genre={genre} key={genre.id} pageType="genre" rowActive={rowActive} i={i} open={that.state.open} activeRowIdx={that.state.activeRowIdx}
-      //         handleActiveRow={() => this.handleActiveRow(numCurrentlyFetched + i)} /> 
-      // })
-
+      });
       this.setState({
         genreRows: genresArrlimit3,
         genresFetched: 3
@@ -1441,18 +1419,12 @@ function (_React$Component) {
       var pixelsFromWindowBottomToBottom = 0 + document.documentElement.scrollHeight - window.scrollY - window.screen.height;
 
       if (pixelsFromWindowBottomToBottom < 200 && !this.props.modal) {
-        // Here it would go an ajax request
         var genresArr = Object.values(this.props.genres);
         var genresArrlimit3 = genresArr.filter(function (genre, i) {
           var bottomLimit = _this2.state.genresFetched % 12;
           return i >= bottomLimit && i < bottomLimit + 3;
         });
-        var threeMoreRows = genresArrlimit3; // let twoMoreRows = genresArrlimit2.map((genre, i) => {
-        //     let rowActive = (this.state.open && (this.state.genresFetched + i === this.state.activeRowIdx));
-        //     return <GalleryShowRowContainer genre={genre} key={genre.id} pageType="genre" rowActive={rowActive}
-        //         handleActiveRow={() => this.handleActiveRow(this.state.genresFetched + i)} />
-        // })
-
+        var threeMoreRows = genresArrlimit3;
         var currentRows = this.state.genreRows;
         var currentlyFetched = this.state.genresFetched;
         this.setState({
@@ -1475,13 +1447,6 @@ function (_React$Component) {
       var _this3 = this;
 
       if (this.props.genres[12] && this.props.mediaGenres[140]) {
-        // let genresArr = Object.values(this.props.genres);
-        // let genresArrlimit6 = genresArr.filter( (genre, i) => i < 6) 
-        // let showRowsFirstSix = genresArrlimit6.map( (genre, i) => {
-        //     let rowActive = (this.state.open && (i === this.state.activeRowIdx));
-        //     return <GalleryShowRowContainer genre={genre} key={genre.id} pageType="genre" rowActive={rowActive}
-        //     handleActiveRow={()=>this.handleActiveRow(i)}/> 
-        // })
         var genreRows = this.state.genreRows.map(function (genre, i) {
           var rowActive = _this3.state.open && i === _this3.state.activeRowIdx;
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -1616,12 +1581,7 @@ function (_React$Component) {
 
     _classCallCheck(this, GalleryShowItem);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(GalleryShowItem).call(this, props)); // this.state = {
-    //     isMouseInside: false
-    // }
-    // this.mouseEnter = this.mouseEnter.bind(this);
-    // this.mouseLeave = this.mouseLeave.bind(this);
-
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GalleryShowItem).call(this, props));
     _this.addToMyList = _this.addToMyList.bind(_assertThisInitialized(_this));
     _this.removeFromMyList = _this.removeFromMyList.bind(_assertThisInitialized(_this));
     _this.handleOpen = _this.handleOpen.bind(_assertThisInitialized(_this));
@@ -1640,13 +1600,7 @@ function (_React$Component) {
     key: "removeFromMyList",
     value: function removeFromMyList() {
       this.props.deleteMyList(this.props.myList.id);
-    } // mouseEnter() {
-    //     this.setState({ isMouseInside: true });
-    // }
-    // mouseLeave() {
-    //     this.setState({ isMouseInside: false });
-    // }
-
+    }
   }, {
     key: "handleOpen",
     value: function handleOpen() {
@@ -1962,6 +1916,7 @@ function (_React$Component) {
         };
       } else if (inactiveDropdownAndHovered) {
         if (this.state.hoveredVideoIdx % 5 === 0) {
+          //leftmost shown video is hovered
           if (i > this.state.hoveredVideoIdx) {
             translate = {
               transform: 'translateX(' + (this.state.rowIdx * -92 + 9.4) + 'vw)'
@@ -1976,6 +1931,7 @@ function (_React$Component) {
             };
           }
         } else if (this.state.hoveredVideoIdx % 5 === 4) {
+          //rightmost shown video is hovered
           if (i > this.state.hoveredVideoIdx) {
             translate = {
               transform: 'translateX(' + this.state.rowIdx * -92 + 'vw)'
@@ -1990,6 +1946,7 @@ function (_React$Component) {
             };
           }
         } else {
+          //any other 3 in the middle are hovered
           if (i > this.state.hoveredVideoIdx) {
             translate = {
               transform: 'translateX(' + (this.state.rowIdx * -92 + 4.6) + 'vw)'
@@ -2377,10 +2334,9 @@ var mdp = function mdp(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _nav_bar_gallery_nav_bar_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../nav_bar/gallery_nav_bar_container */ "./frontend/components/nav_bar/gallery_nav_bar_container.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _gallery_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../gallery/gallery_show_row_container.js */ "./frontend/components/gallery/gallery_show_row_container.js");
-/* harmony import */ var _gallery_gallery_fp_video_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../gallery/gallery_fp_video_container */ "./frontend/components/gallery/gallery_fp_video_container.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _gallery_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../gallery/gallery_show_row_container.js */ "./frontend/components/gallery/gallery_show_row_container.js");
+/* harmony import */ var _gallery_gallery_fp_video_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../gallery/gallery_fp_video_container */ "./frontend/components/gallery/gallery_fp_video_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2398,7 +2354,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -2467,7 +2422,7 @@ function (_React$Component) {
 
       if (this.props.genres[12] && this.props.mediaGenres[140]) {
         var rowActive = this.state.open && 0 === this.state.activeRowIdx;
-        var showOneRow = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        var showOneRow = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_gallery_show_row_container_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
           genre: this.props.genre,
           key: 1,
           genreShow: true,
@@ -2479,7 +2434,7 @@ function (_React$Component) {
         });
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_body"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_gallery_fp_video_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_gallery_gallery_fp_video_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
           genreId: Number(this.props.match.params.genreId),
           pageType: "genreShow"
         }), showOneRow);
@@ -2601,12 +2556,6 @@ function Modal(_ref) {
   var component;
 
   switch (modal) {
-    // case 'login':
-    //   component = <LoginFormContainer />;
-    //   break;
-    // case 'signup':
-    //   component = <SignupFormContainer />;
-    //   break;
     case 'profile':
       component = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profile_modal__WEBPACK_IMPORTED_MODULE_3__["default"], null);
       break;
@@ -2744,8 +2693,8 @@ function (_React$Component) {
     value: function render() {
       var profiles = this.props.profiles;
       var thumbnail = profiles[0] ? profiles[0].photoUrl : "";
-      var randomThumbnail = Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_4__["randomProfileThumbnail"])();
-      var name = profiles[0] ? profiles[0].name : "";
+      var randomThumbnail = this.state.randomThumbnail;
+      var name = profiles[0].name;
       var profileModalBox;
       var createProfileModalBox;
 
@@ -3752,6 +3701,25 @@ var mdp = function mdp(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/session_form/login_form.jsx":
+/*!*********************************************************!*\
+  !*** ./frontend/components/session_form/login_form.jsx ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var LoginForm = function LoginForm(props) {};
+
+/* harmony default export */ __webpack_exports__["default"] = (LoginForm);
+
+/***/ }),
+
 /***/ "./frontend/components/session_form/login_form_container.js":
 /*!******************************************************************!*\
   !*** ./frontend/components/session_form/login_form_container.js ***!
@@ -3814,6 +3782,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _login_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./login_form */ "./frontend/components/session_form/login_form.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -3833,6 +3802,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -3912,7 +3882,11 @@ function (_React$Component) {
         authRoute = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/login"
         }, "Log in here");
-      }
+      } // let loginForm = 
+      //   <LoginForm 
+      //     formType={formType}
+      //     />
+
 
       var loginForm = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "login_body"
@@ -48497,7 +48471,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
