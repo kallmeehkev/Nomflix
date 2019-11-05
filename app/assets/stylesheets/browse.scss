@@ -600,15 +600,16 @@ html:not([data-scroll='0']) {
 }
 
 .browse_row_title {
-  justify-content: flex-end;
+  display: flex;
+  justify-content: space-between;
   color: #e5e5e5;
   font-weight: 700;
   margin: 0 4% 0 4%;
   text-decoration: none;
-  display: inline-block;
   min-width: 6em;
   padding: 0 2px;
   bottom: 0;
+  align-items: center;
 }
 
 .browse_row_title div {
@@ -1203,4 +1204,20 @@ html:not([data-scroll='0']) {
   padding-left: 4%;
   font-size: 3vw;
   font-weight: 600;
+}
+
+.row_status_bar_container {
+  display: inline-block;
+  right: 0;
+  justify-content: flex-end;
+}
+
+.row_status_bar {
+  height: 4px;
+  width: 10px;
+  background-color: rgba(119, 119, 119, 0.7);
+}
+
+.row_status_bar.active {
+  background-color: white;
 }

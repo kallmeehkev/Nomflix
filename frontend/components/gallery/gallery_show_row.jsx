@@ -1,6 +1,7 @@
 import React from 'react';
 import GalleryShowItemContainer from './gallery_show_item_container';
 import GalleryShowRowItemContentContainer from './gallery_show_row_item_content_container';
+import StatusBar from './row_status_bar';
 
 class GalleryShowRow extends React.Component {
     constructor(props) {
@@ -138,7 +139,7 @@ class GalleryShowRow extends React.Component {
     render() {
         let videosExist = !!this.props.genreVideos.length || !!this.props.myListVideos.length;
         if (videosExist) {
-            let displayVideos, rowTitle, content, buttonRight, buttonLeft, translate;
+            let displayVideos, rowTitle, content, buttonRight, buttonLeft, translate, statusBar;
             let hoverOff = this.state.open;
             if (this.props.pageType === "genre") {
                 displayVideos = this.props.genreVideos.map((video, i) => {
@@ -156,8 +157,9 @@ class GalleryShowRow extends React.Component {
                             handleActiveRow={this.props.handleActiveRow}
                             />
                 })
-                rowTitle = this.props.genreShow ? <div>Trending Now for {this.props.genre.name}</div> : <div>{this.props.genre.name}</div>
+                rowTitle = this.props.genreShow ? <div>Trending Now for {this.props.genre.name}</div> : <span>{this.props.genre.name}</span>
                 content = this.props.genreVideos[this.state.videoIdx];
+                statusBar = <StatusBar numVideos={displayVideos.length} activeRow={this.state.rowIdx} />
                 if (this.state.rowIdx !== this.props.genreVideos.length / 5 - 1) {
                     buttonRight = <button className="browse_row_click_right" onClick={this.handleArrowRight}><i className="fas fa-chevron-right"></i></button>
                 }
@@ -187,7 +189,12 @@ class GalleryShowRow extends React.Component {
             }
             return (
                 <div className="browse_row_container">
-                    <h2><span className="browse_row_title">{rowTitle}</span></h2>
+                    <h2>
+                      <span className="browse_row_title">
+                        {rowTitle}
+                        {statusBar}
+                      </span>
+                    </h2>
                     <div className="browse_row_slider" style={width}>
                         {buttonLeft}
                         <div className="browse_row_slider_wrapper">

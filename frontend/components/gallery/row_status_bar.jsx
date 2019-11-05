@@ -7,8 +7,8 @@ const StatusBar = ({numVideos, activeRow}) => {
     bars.push(bar)
   }
   return (
-    <span>
-      <div></div>
+    <span className="row_status_bar_container">
+      {bars}
     </span>
   );
 }

@@ -1767,6 +1767,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _gallery_show_item_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gallery_show_item_container */ "./frontend/components/gallery/gallery_show_item_container.js");
 /* harmony import */ var _gallery_show_row_item_content_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./gallery_show_row_item_content_container */ "./frontend/components/gallery/gallery_show_row_item_content_container.js");
+/* harmony import */ var _row_status_bar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./row_status_bar */ "./frontend/components/gallery/row_status_bar.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1784,6 +1785,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1978,7 +1980,7 @@ function (_React$Component) {
       var videosExist = !!this.props.genreVideos.length || !!this.props.myListVideos.length;
 
       if (videosExist) {
-        var displayVideos, rowTitle, content, buttonRight, buttonLeft, translate;
+        var displayVideos, rowTitle, content, buttonRight, buttonLeft, translate, statusBar;
         var hoverOff = this.state.open;
 
         if (this.props.pageType === "genre") {
@@ -2001,8 +2003,12 @@ function (_React$Component) {
               handleActiveRow: _this2.props.handleActiveRow
             });
           });
-          rowTitle = this.props.genreShow ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Trending Now for ", this.props.genre.name) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.genre.name);
+          rowTitle = this.props.genreShow ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Trending Now for ", this.props.genre.name) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, this.props.genre.name);
           content = this.props.genreVideos[this.state.videoIdx];
+          statusBar = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_row_status_bar__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            numVideos: displayVideos.length,
+            activeRow: this.state.rowIdx
+          });
 
           if (this.state.rowIdx !== this.props.genreVideos.length / 5 - 1) {
             buttonRight = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -2051,7 +2057,7 @@ function (_React$Component) {
           className: "browse_row_container"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "browse_row_title"
-        }, rowTitle)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, rowTitle, statusBar)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "browse_row_slider",
           style: width
         }, buttonLeft, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2320,6 +2326,42 @@ var mdp = function mdp(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_gallery_show_row_item_content__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/gallery/row_status_bar.jsx":
+/*!********************************************************!*\
+  !*** ./frontend/components/gallery/row_status_bar.jsx ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var StatusBar = function StatusBar(_ref) {
+  var numVideos = _ref.numVideos,
+      activeRow = _ref.activeRow;
+  var bars = [];
+
+  for (var i = 0; i < numVideos / 5; i++) {
+    var bar = i === activeRow ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "row_status_bar active"
+    }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "row_status_bar"
+    });
+    bars.push(bar);
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "row_status_bar_container"
+  }, bars);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (StatusBar);
 
 /***/ }),
 
@@ -48471,7 +48513,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
